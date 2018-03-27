@@ -29,4 +29,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Change Feature Promotion Button text on Desktop
   screenSize >= tabletSize ? fpBtnSwap() : "";
+
+  console.log('testing');
 });
