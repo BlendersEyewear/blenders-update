@@ -1,0 +1,63 @@
+<a name="pagecontent" id="pagecontent"></a>
+
+{% comment %}
+  If heading text is filled out, show collection banner with text overlay, if not, show original image with '--has-image' collection banner
+{% endcomment %}
+{%if section.settings.heading != '' %}
+  <div class="collection_banner collection_banner--reatil" style="background-image:url('{{ section.settings.marquee | img_url: '2600x' }}');">
+    <img src="{{ 'banner-ghost.png' | asset_url }}" class="ghost" />
+
+    <h1 class="collection_banner_title">{{ section.settings.heading }}</h1>
+
+    {%if section.settings.subheading != '' %}
+      <h4 class="collection_banner_description">{{ section.settings.subheading }}</h4>
+    {% endif %}
+  </div>
+{% else %}
+
+  <div class="collection_banner collection_banner--has-image collection_banner--reatil">
+    <img src="{{ 'banner-ghost.png' | asset_url }}" class="ghost" />
+    <img class="collection_banner_img" src="{{ section.settings.marquee | img_url: '2600x' }}" />
+  </div>
+{% endif %}
+
+<div class="sixteen columns page clearfix">
+  {%if section.settings.heading == '' %}
+    <h1>
+      STORE LOCATOR
+    </h1>
+  {% endif %}
+
+  </div></div>{% include 'hypervisual' %}<div class="container"><div class="sixteen columns page clearfix">
+
+  <div>
+    {% include 'page-multi-column', content: page.content %}
+  </div>
+</div>
+
+
+{% schema %}
+
+{
+  "name": "Dealers",
+  "class": "dealers",
+  "settings": [ 
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Page Heading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Page Subheading"
+    },
+    {
+      "type": "image_picker",
+      "id": "marquee",
+      "label": "Marquee Image"
+    }
+  ]
+}
+
+{% endschema %}
