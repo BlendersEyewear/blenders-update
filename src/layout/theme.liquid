@@ -197,14 +197,56 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
     {% assign feature_image = true %}
   {% elsif template contains "banner" %}
     {% assign feature_image = true %}
+  {% elsif template contains "details" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "faq" %}
+    {% assign feature_image = true %}
+  {% elsif template contains "search" %}
+    {% assign feature_image = true %}
   {% else %}
     {% assign feature_image = false %}
   {% endif %}
+
+  <noscript>
+    <style>
+      .product_section .product_form {
+        opacity: 1;
+      }
+
+      .multi_select,
+      form .select {
+        display: block !important;
+      }
+    </style>
+  </noscript>
 
   <body class="{{ template | replace: '.', '-' | handle }}" data-money-format="{{ shop.money_format }}">
 
     
     {% section 'header' %}
+
+    <div class="mega-menu-container">
+      {% if settings.mega_menu_1 %}
+        {% section 'mega-menu-1' %}
+      {% endif %}
+
+      {% if settings.mega_menu_2 %}
+        {% section 'mega-menu-2' %}
+      {% endif %}
+
+      {% if settings.mega_menu_3 %}
+        {% section 'mega-menu-3' %}
+      {% endif %}
+
+      {% if settings.mega_menu_4 %}
+        {% section 'mega-menu-4' %}
+      {% endif %}
+
+      {% if settings.mega_menu_5 %}
+        {% section 'mega-menu-5' %}
+      {% endif %}
+
+    </div>
 
     {% comment %} Add Ultimate Special Offers Notification if on Cart page {% endcomment %}
     {% if template == 'cart'%} <div id="saso-notifications" class="saso-notifications--cart"></div> {% endif %}

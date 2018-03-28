@@ -1,7 +1,7 @@
 {% if section.settings.enabled %}
   <div class="container {% if section.settings.hide_on_mobile %}hide-section-on-mobile{% endif %}">
     <div class="sixteen columns">
-      <div class="homepage_content section {{ section.settings.text_alignment }} clearfix">
+      <div class="homepage_content section {{ section.settings.text_alignment }} clearfix custom-rich-text">
         {% if section.settings.image %}
           {{ section.settings.image | img_url: '1180x', scale: 2 | img_tag: section.settings.image.alt, 'lazyload transition-in' }}
         {% endif %}

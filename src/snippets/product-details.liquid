@@ -1,5 +1,5 @@
 {% assign collection_handles = product.collections | map: 'handle' %}
-<!--<div class="thumbnail-overlay">
+<div class="thumbnail-overlay">
   <a href="{{ product.url | within: collection }}" itemprop="url" class="hidden-product-link">{{ product.title }}</a>
   <div class="info">
     {% if settings.thumbnail_hover_enabled and settings.quick_shop_enabled %}
@@ -11,20 +11,17 @@
       {% include 'quick-shop-button' %}
     {% endif %}
   </div>
-</div>-->
+</div>
 <div class="banner_holder">
-  {% if settings.sale_banner_enabled and product.compare_at_price_max > product.price %}
-    <div class="sale_banner thumbnail_banner">{{ 'collections.general.sale' | t }}</div>
+  {% if product.available %}
+    {% if settings.sale_banner_enabled and product.compare_at_price_max > product.price %}
+      <div class="sale_banner thumbnail_banner">{{ 'collections.general.sale' | t }}</div>
+    {% endif %}
   {% endif %}
-  {% comment %}
-  {% if product.tags contains "Polarized" %}
-    <div class="new_banner thumbnail_banner">P</div>
-  {% endif %}
-  {% endcomment %}
   {% if collection_handles contains 'new' %}
     <div class="new_banner thumbnail_banner">{{ 'collections.general.new' | t }}</div>
   {% endif %}
   {% if collection_handles contains 'pre-order' %}
-    <div class="new_banner thumbnail_banner">{{ 'collections.general.pre_order' | t }}</div>
+    <div class="preorder_banner thumbnail_banner">{{ 'collections.general.pre_order' | t }}</div>
   {% endif %}
 </div>

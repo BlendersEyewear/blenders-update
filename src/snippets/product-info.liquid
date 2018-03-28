@@ -1,10 +1,5 @@
 <div class="product-details">
   <span class="title" itemprop="name">{{ product.title }}</span>
-  {% if product.metafields.custom_fields["product_subtitle"] != blank %}
-	<div class="custom-field custom-field__product-subtitle custom-field__type--text">
-	<div class="custom-field--value">{{ product.metafields.custom_fields["product_subtitle"] }}</div>
-	</div>
-  {% endif %}
   {% if settings.enable_shopify_collection_badges and settings.enable_shopify_review_comments %}
     <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
   {% endif %}
@@ -15,13 +10,7 @@
   {% if collection_handles contains 'coming-soon' %}
     <span class="modal_price">{{ 'collections.general.coming_soon' | t }}</span>
   {% else %}
-    <span class="price {% if product.compare_at_price_max > product.price %}sale{% endif %}" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-      <meta itemprop="price" content="{{ product.price_min | money_without_currency }}" />
-      <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
-      <meta itemprop="seller" content="{{ shop.name | escape }}" />
-      <meta itemprop="availability" content="{% if product.available %}in_stock{% else %}out_of_stock{% endif %}" />
-      <meta itemprop="itemCondition" content="New" />
-
+    <span class="price {% if product.compare_at_price_max > product.price %}sale{% endif %}">
       {% if product.available %}
         {% if product.price_varies and product.price_min > 0 %}
           <small><em>{{ 'products.general.from' | t }}</em></small>
@@ -40,12 +29,5 @@
         </span>
       {% endif %}
     </span>
-  <!-- Yotpo Star Rating -->
-  <div style="text-align: center">
-     <div class="yotpo bottomLine" style="display:inline-block"
-          data-product-id="{{ product.id }}">
-     </div>
-   </div>
-	<!-- End of Yotpo Star Rating -->
   {% endif %}
 </div>

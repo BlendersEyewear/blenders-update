@@ -5,7 +5,8 @@
                 gallery-arrows--{{ settings.quick_shop_gallery_arrows }}
                 {% if settings.quick_shop_product_thumbs %}{{settings.quick_shop_thumbnail_position}}{% endif %}
                 {% if settings.quick_shop_product_images_position == 'right' %}align-gallery-right{% endif %} slideshow_animation--{{ settings.quick_shop_slideshow_animation }}">
-      <div class="gallery product_gallery js-gallery-modal"
+      <div  class="gallery product_gallery js-gallery-modal"
+            data-zoom="{{ settings.quick_shop_zoom }}"
       >
       </div>
       {% if settings.quick_shop_product_thumbs %}
@@ -33,6 +34,9 @@
         <span class="sold_out js-sold-out"></span>
         <span class="current_price js-current-price"><span class="money"></span></span>
         <span class="was_price js-was-price"><span class="money"></span></span>
+        {% if settings.quick_shop_display_savings %}
+          <span class="sale savings js-savings"></span>
+        {% endif %}
       </p>
       <span class="js-notify-form"></span>
 

@@ -9822,6 +9822,10 @@ select.currencies,
   font-family: 'proxima-nova', 'Roboto', Helvetica, sans-serif !important;
 }
 
+.headline, .empty_cart, .promo_banner, .title{
+  font-family: 'proxima-nova', 'Roboto', Helvetica, sans-serif !important;
+}
+
 
 #tracktorOrderForm {
   text-align: center;
@@ -10938,9 +10942,20 @@ $transparent: rgba(0,0,0,0.0);
     #shopmessage-checkbox{display: none !important}
   }
 
-/// ======================================================================
+/// ============================================================================================
+//  HOME PAGE STUFF
+/// ============================================================================================
+//    Make buttons transparent with white outlines
+// ----------------------------------------------------------
+.featured-promotions .feature-section .feature-details .button {
+  background: transparent;
+  border: 1px solid white;
+}
+
+
+/// ============================================================================================
 // Front page / front-page Below Fold Collection Features Imprvement
-// =======================================================================
+// =============================================================================================
 // mobile first
 
 // CUSTOM HEADER VARS --------------------
@@ -11002,6 +11017,14 @@ $headerDesktopLargeUp: 1280px;
     padding: 0;
   }
 
+}
+
+// Make overlay work
+.custom-front-page-styles-div--2.custom-front-page-figure.custom-front-page-figure--1:hover{
+  background: red !important;
+  .link-promo{
+    background: rgba(67,80,90,0.5)
+  }
 }
 
 // .index.container.promotions-grid-full_width.featured-promotions.promo-per-row-2.clearfix.feature-section,
@@ -11226,13 +11249,12 @@ $headerDesktopLargeUp: 1280px;
 @include respond-to('medium'){
 
   // Top Promotions
-  .js-featured-promotions.featured-promotions.promo-per-row-3 {
+  .custom-front-page-styles-div.custom-front-page-styles-div--3{
 
-    figure.feature-section.section-1.promo-1.title-overlay-true,
-    figure.feature-section.section-2.promo-2.title-overlay-true,
-    figure.feature-section.section-3.promo-3.title-overlay-true {
-        max-height: calc(100vw - 60px);
-        padding: 0;
+    .custom-front-page-figure {
+        max-height: calc(100vw - 20px);
+        padding: 0 10px !important;
+        margin: 0 0 10px !important;
 
         // Inner Div
         .feature-inner.feature-style--square {
@@ -11243,24 +11265,48 @@ $headerDesktopLargeUp: 1280px;
         .feature-inner.feature-style--square > img {
             transform: translateY(-2rem);
         }
+
+
+        // Move button to bottom of div
+        .feature-wrap{
+          position: static;
+          margin: 0;
+          padding: 0;
+        }
+
+        // Make Buttons white and bottom of screen
+        .feature-details > .button{
+          font-weight: 600;
+          box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+          -webkit-appearance: none;
+          min-height: auto;
+          line-height: 1;
+          padding: 10px 5px;
+          display: block;
+          font-size: 1.125rem;
+          margin-top: 0;
+          border: none;
+          background: white;
+          color: black;
+        }
     }
 
     // Moving Images on specific promos in mobile
     // Image 1
-    figure.feature-section.section-1.promo-1.title-overlay-true{
+    figure.custom-front-page-figure--1{
       .feature-inner.feature-style--square > img{
         transform: translateY(-3.5rem);
       }
     }
     // Image 2
-    figure.feature-section.section-2.promo-2.title-overlay-true{
+    figure.custom-front-page-figure--2{
       .feature-inner.feature-style--square > img{
         transform: translateY(-4rem);
       }
     }
 
     // Image 3
-    figure.feature-section.section-3.promo-3.title-overlay-true{
+    figure.custom-front-page-figure--3{
       .feature-inner.feature-style--square > img{
         transform: translateY(-7rem);
       }
@@ -11426,10 +11472,15 @@ $headerDesktopLargeUp: 1280px;
   font-weight: bold;
 }
 
+@include respond-to('medium'){
+  // Remove 'MENU' span from mobile header
+  span.menu_title{
+    display: none !important;
+  }
 
-//    Make buttons transparent with white outlines
-// ----------------------------------------------------------
-.featured-promotions .feature-section .feature-details .button {
-  background: transparent;
-  border: 1px solid white;
+  // Move/nudge search icon a bit
+  #header .top_bar .icon-search {
+    top: 15px;
+    right: 51px;
+  }
 }

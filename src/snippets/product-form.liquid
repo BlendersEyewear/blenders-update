@@ -1,13 +1,3 @@
-<script>
-  fbq('track', 'ViewContent', {
-    content_ids: '{{ product.id }}',
-    content_type: 'product',
-    em: '{{ customer.email }}',
-    ph: '{{ customer.phone }}',
-    fn: '{{ customer.first_name }}'
-  });
-</script>
-
 {% if product.available %}
   {% assign variant = product.selected_or_first_available_variant %}
 
@@ -20,7 +10,11 @@
         data-select-id="product-select-{{ product.id }}{{ product-form }}{{ section.id }}{{ block.id }}"
         data-enable-state="{% if template contains 'product' %}true{% else %}false{% endif %}"
         data-product="{{ product | json | escape }}"
-        data-product-id="{{ product.id }}">
+        {% if settings.limit_quantity or settings.display_inventory_left %}
+          data-variant-inventory='[{%- for v in product.variants -%}{"id":{{v.id}},"inventory_quantity":{{v.inventory_quantity}},"inventory_management":"{{v.inventory_management}}","inventory_policy":"{{v.inventory_policy}}"}{% if forloop.last == false %},{% endif %}{%- endfor -%}]'
+        {% endif %}
+        data-product-id="{{ product.id }}"
+        >
 
     {% if product.options.size > 1 %}
       <div class="select">
@@ -61,8 +55,9 @@
               {{ 'products.product.items_left_count.other' | t }}
             {% endif %}
           {% endcapture %}
-
-          <p><em>{{ variant.inventory_quantity }} {{ items_left_text }}</em></p>
+          {% if variant.inventory_quantity <= settings.inventory_threshold %}
+            {{ variant.inventory_quantity }} {{ items_left_text }}
+          {% endif %}
         {% endif %}
       </div>
     {% endif %}
@@ -71,7 +66,7 @@
       <div class="left product-quantity-box">
         <label for="quantity">{{ 'products.product.quantity' | t }}</label>
         <span class="ss-icon product-minus js-change-quantity" data-func="minus"><span class="icon-minus"></span></span>
-        <input type="number" min="1" size="2" class="quantity" name="quantity" id="quantity" value="1" />
+        <input type="number" min="1" size="2" class="quantity" name="quantity" id="quantity" value="1" {% if settings.limit_quantity and variant.inventory_management != blank and variant.inventory_policy == "deny" %}max="{{ variant.inventory_quantity }}"{% endif %} />
         <span class="ss-icon product-plus js-change-quantity" data-func="plus"><span class="icon-plus"></span></span>
       </div>
     {% endif %}
@@ -83,16 +78,12 @@
       {% endif %}
 
       {% capture add_to_cart_label %}{% if collection_handles contains 'pre-order' %}{{ 'collections.general.pre_order' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endif %}{% endcapture %}
-      <button id="add-to-cart" type="submit" name="add" class="action_button add_to_cart" data-label={{ add_to_cart_label | json }}>
-
+      <button type="submit" name="add" class="action_button add_to_cart" data-label={{ add_to_cart_label | json }}>
         <span class="text">{{ add_to_cart_label }}</span>
         <svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32" class="checkmark">
           <path fill="none" stroke="{{ settings.btn_text_color }}" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"/>
         </svg>
-
       </button>
-      <div id="shopmessage-checkbox" style="width:175px;margin:0 auto;"></div>
     </div>
   </form>
-
 {% endif %}

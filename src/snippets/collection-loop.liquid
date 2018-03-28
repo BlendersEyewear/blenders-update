@@ -16,9 +16,9 @@
     {% capture link_title %}{{ link.title | escape }}{% endcapture %}
 
     {% if sidebar %}
-      <div class="{% if collections_per_row == "2" %}six columns {% cycle 'alpha', 'omega' %}{% elsif collections_per_row == "3" %}four columns {% cycle 'alpha', '', 'omega' %}{% else %}three columns {% cycle 'alpha', '', '', 'omega' %}{% endif %} thumbnail {% cycle 'even', 'odd' %}">
+      <div class="{% if collections_per_row == 2 %}six columns {% cycle 'alpha', 'omega' %}{% elsif collections_per_row == 3 %}four columns {% cycle 'alpha', '', 'omega' %}{% else %}three columns {% cycle 'alpha', '', '', 'omega' %}{% endif %} thumbnail {% cycle 'even', 'odd' %} align-height--false">
     {% else %}
-      <div class="{% if collections_per_row == "2" %}eight columns {% cycle 'alpha', 'omega' %}{% elsif collections_per_row == "3" %}one-third column {% cycle 'alpha', '', 'omega' %}{% else %}four columns {% cycle 'alpha', '', '', 'omega' %}{% endif %} thumbnail {% cycle 'even', 'odd' %}">
+      <div class="{% if collections_per_row == 2 %}eight columns {% cycle 'alpha', 'omega' %}{% elsif collections_per_row == 3 %}one-third column {% cycle 'alpha', '', 'omega' %}{% else %}four columns {% cycle 'alpha', '', '', 'omega' %}{% endif %} thumbnail {% cycle 'even', 'odd' %} align-height--false">
     {% endif %}
 
       <div class="product-wrap">
@@ -28,71 +28,45 @@
                 <img  src="{{ link_item.image.src | img_url: '100x' }}"
                       class="lazyload {{ settings.image_loading_style }}"
                       alt="{{ link_title }}"
+                      style="max-width: {{- link_item.image.width -}}px;"
                       data-sizes="auto"
-                      data-src="{{ link_item.image.src | img_url: '580x' }}"
-                      {% if collections_per_row == "2" %}
-                        data-srcset=" {{ link_item.image.src | img_url: '1160x'}} 1160w,
-                                      {{ link_item.image.src | img_url: '728x'}} 728w,
-                                      {{ link_item.image.src | img_url: '580x' }} 580w,
-                                      {{ link_item.image.src | img_url: '364x' }} 364w"
-                      {% elsif collections_per_row == "3" %}
-                        data-srcset=" {{ link_item.image.src | img_url: '760x'}} 760w,
-                                      {{ link_item.image.src | img_url: '472x'}} 472w,
-                                      {{ link_item.image.src | img_url: '380x' }} 380w,
-                                      {{ link_item.image.src | img_url: '236x' }} 236w"
-                      {% elsif collections_per_row == "4" %}
-                        data-srcset=" {{ link_item.image.src | img_url: '560x'}} 560w,
-                                      {{ link_item.image.src | img_url: '344x'}} 344w,
-                                      {{ link_item.image.src | img_url: '280x' }} 280w,
-                                      {{ link_item.image.src | img_url: '172x' }} 172w"
-                      {% endif %}
+                      data-src="{{ link_item.image.src | img_url: '1160x' }}"
+                      data-srcset=" {{ link_item.image.src | img_url: '1160x' }} 1160w,
+                                    {{ link_item.image.src | img_url: '728x' }} 728w,
+                                    {{ link_item.image.src | img_url: '580x' }} 580w,
+                                    {{ link_item.image.src | img_url: '344x' }} 344w,
+                                    {{ link_item.image.src | img_url: '280x' }} 280w,
+                                    {{ link_item.image.src | img_url: '172x' }} 172w"
                       />
               {% else %}
-                <img  src="{{ link_item.products.first.featured_image | product_img_url: '100x' }}"
+                <img  src="{{ link_item.products.first.featured_image | img_url: '100x' }}"
                       class="lazyload {{ settings.image_loading_style }}"
                       alt="{{ link_title }}"
+                      style="max-width: {{- link_item.products.first.featured_image.width -}}px;"
                       data-sizes="auto"
-                      data-src="{{ link_item.products.first.featured_image | product_img_url: '580x' }}"
-                      {% if collections_per_row == "2" %}
-                        data-srcset=" {{ link_item.products.first.featured_image | product_img_url: '1160x'}} 1160w,
-                                      {{ link_item.products.first.featured_image | product_img_url: '728x'}} 728w,
-                                      {{ link_item.products.first.featured_image | product_img_url: '580x' }} 580w,
-                                      {{ link_item.products.first.featured_image | product_img_url: '364x' }} 364w"
-                      {% elsif collections_per_row == "3" %}
-                        data-srcset=" {{ link_item.products.first.featured_image | product_img_url: '760x'}} 760w,
-                                      {{ link_item.products.first.featured_image | product_img_url: '472x'}} 472w,
-                                      {{ link_item.products.first.featured_image | product_img_url: '380x' }} 380w,
-                                      {{ link_item.products.first.featured_image | product_img_url: '236x' }} 236w"
-                      {% elsif collections_per_row == "4" %}
-                        data-srcset=" {{ link_item.products.first.featured_image | product_img_url: '560x'}} 560w,
-                                      {{ link_item.products.first.featured_image | product_img_url: '344x'}} 344w,
-                                      {{ link_item.products.first.featured_image | product_img_url: '280x' }} 280w,
-                                      {{ link_item.products.first.featured_image | product_img_url: '172x' }} 172w"
-                      {% endif %}
+                      data-cool="true"
+                      data-src="{{ link_item.products.first.featured_image | img_url: '1160x' }}"
+                      data-srcset=" {{ link_item.products.first.featured_image | img_url: '1160x'}} 1160w,
+                                    {{ link_item.products.first.featured_image | img_url: '728x' }} 728w,
+                                    {{ link_item.products.first.featured_image | img_url: '580x' }} 580w,
+                                    {{ link_item.products.first.featured_image | img_url: '344x' }} 344w,
+                                    {{ link_item.products.first.featured_image | img_url: '280x' }} 280w,
+                                    {{ link_item.products.first.featured_image | img_url: '172x' }} 172w"
                       />
               {% endif %}
             {% elsif link.type == 'product_link' %}
               <img  src="{{ link_item.featured_image | product_img_url: '100x' }}"
                     alt="{{ link_title }}"
                     class="lazyload {{ settings.image_loading_style }}"
+                    style="max-width: {{- link_item.featured_image.width -}}px;"
                     data-sizes="auto"
-                    data-src="{{ link_item.featured_image | product_img_url: '580x' }}"
-                    {% if collections_per_row == "2" %}
-                      data-srcset=" {{ link_item.featured_image | product_img_url: '1160x'}} 1160w,
-                                    {{ link_item.featured_image | product_img_url: '728x'}} 728w,
-                                    {{ link_item.featured_image | product_img_url: '580x' }} 580w,
-                                    {{ link_item.featured_image | product_img_url: '364x' }} 364w"
-                    {% elsif collections_per_row == "3" %}
-                      data-srcset=" {{ link_item.featured_image | product_img_url: '760x'}} 760w,
-                                    {{ link_item.featured_image | product_img_url: '472x'}} 472w,
-                                    {{ link_item.featured_image | product_img_url: '380x' }} 380w,
-                                    {{ link_item.featured_image | product_img_url: '236x' }} 236w"
-                    {% elsif collections_per_row == "4" %}
-                      data-srcset=" {{ link_item.featured_image | product_img_url: '560x'}} 560w,
-                                    {{ link_item.featured_image | product_img_url: '344x'}} 344w,
-                                    {{ link_item.featured_image | product_img_url: '280x' }} 280w,
-                                    {{ link_item.featured_image | product_img_url: '172x' }} 172w"
-                    {% endif %}
+                    data-src="{{ link_item.featured_image | product_img_url: '1160x' }}"
+                    data-srcset=" {{ link_item.featured_image | product_img_url: '1160x' }} 1160w,
+                                  {{ link_item.featured_image | product_img_url: '728x' }} 728w,
+                                  {{ link_item.featured_image | product_img_url: '560x' }} 560w,
+                                  {{ link_item.featured_image | product_img_url: '344x' }} 344w,
+                                  {{ link_item.featured_image | product_img_url: '280x' }} 280w,
+                                  {{ link_item.featured_image | product_img_url: '172x' }} 172w"
                      />
             {% elsif link.type == 'page_link' %}
               {% if link_item.content contains "<img" %}
@@ -111,24 +85,15 @@
                 <img  src="{{ link_item.articles.first.image | img_url: '100x' }}"
                       alt="{{ link_title }}"
                       class="lazyload {{ settings.image_loading_style }}"
+                      style="max-width: {{- link_item.articles.first.image.width -}}px;"
                       data-sizes="auto"
                       data-src="{{ link_item.articles.first.image | img_url: '580x' }}"
-                    {% if collections_per_row == "2" %}
-                      data-srcset=" {{ link_item.articles.first.image | img_url: '1160x'}} 1160w,
-                                    {{ link_item.articles.first.image | img_url: '728x'}} 728w,
+                      data-srcset=" {{ link_item.articles.first.image | img_url: '1160x' }} 1160w,
+                                    {{ link_item.articles.first.image | img_url: '728x' }} 728w,
                                     {{ link_item.articles.first.image | img_url: '580x' }} 580w,
-                                    {{ link_item.articles.first.image | img_url: '364x' }} 364w"
-                    {% elsif collections_per_row == "3" %}
-                      data-srcset=" {{ link_item.articles.first.image | img_url: '760x'}} 760w,
-                                    {{ link_item.articles.first.image | img_url: '472x'}} 472w,
-                                    {{ link_item.articles.first.image | img_url: '380x' }} 380w,
-                                    {{ link_item.articles.first.image | img_url: '236x' }} 236w"
-                    {% elsif collections_per_row == "4" %}
-                      data-srcset=" {{ link_item.articles.first.image | img_url: '560x'}} 560w,
-                                    {{ link_item.articles.first.image | img_url: '344x'}} 344w,
+                                    {{ link_item.articles.first.image | img_url: '344x' }} 344w,
                                     {{ link_item.articles.first.image | img_url: '280x' }} 280w,
                                     {{ link_item.articles.first.image | img_url: '172x' }} 172w"
-                    {% endif %}
                   />
               {% elsif link_item.articles.first.content contains "<img" %}
                 {% assign src = link_item.articles.first.content | split: 'src="' %}
@@ -163,11 +128,11 @@
         </div>
       </div>
 
-      {% if collections_per_row == "2" %}
+      {% if collections_per_row == 2 %}
         {% cycle '', new_row %}
-      {% elsif collections_per_row == "3" %}
+      {% elsif collections_per_row == 3 %}
         {% cycle '', '', new_row %}
-      {% elsif collections_per_row == "4" %}
+      {% elsif collections_per_row == 4 %}
         {% cycle '', '', '', new_row %}
       {% endif %}
 

@@ -2,8 +2,7 @@
   {% capture list %}
     {% for image in product.images %}
       {% comment %}Loop through images only once{% endcomment %}
-      {{ image.id }}`~`{{ image.alt }}`~`{{ image | product_img_url: '100x' }}`~`{{ image | product_img_url: '200x' }}`~`{{ image | product_img_url: '400x' }}`~`{{ image | product_img_url: '600x' }}`~`{{ image | product_img_url: '800x' }}`~`{{ image | product_img_url: '1200x' }}`~`{{ image | product_img_url: '2000x' }}
-      {% if forloop.last == false %}^{% endif %}
+      {{ image.id }}`~`{{ image.alt }}`~`{{ image | product_img_url: '100x' }}`~`{{ image | product_img_url: '200x' }}`~`{{ image | product_img_url: '400x' }}`~`{{ image | product_img_url: '600x' }}`~`{{ image | product_img_url: '800x' }}`~`{{ image | product_img_url: '1200x' }}`~`{{ image | product_img_url: '2000x' }}`~`{{-image.width-}}px`~`{{-image.height-}}px{% if forloop.last == false %}^{% endif %}
     {% endfor %}
   {% endcapture %}
   {% assign image_list = list | split: "^" %}
@@ -16,6 +15,7 @@
   <div class="product_gallery product-{{ product.id }}-gallery
               {% if product.images.size > 1 %} multi-image {% endif %}
               {% if product.images.size <= 1 %} single-image {% endif %}
+              {% if settings.slideshow_button_style != true %}light-button{% endif %}
               "
       data-zoom="{{ section.settings.activate_zoom }}"
       data-autoplay="{{ section.settings.activate_autoplay }}">
@@ -31,15 +31,17 @@
         {% capture image_800x %}{{ image[6] }}{% endcapture %}
         {% capture image_1200x %}{{ image[7] }}{% endcapture %}
         {% capture image_2000x %}{{ image[8] }}{% endcapture %}
-        <div class="gallery-cell" data-thumb="{{ image_large }}" data-title="{% if image_alt contains 'youtube' or image_alt contains 'vimeo' %}{{ product.title }}{% else %}{{ image_alt | escape }}{% endif %}">
+        {% capture original_image_width %}{{- image[9] -}}{% endcapture %}
+        {% capture original_image_height %}{{- image[10] -}}{% endcapture %}
+        <div class="gallery-cell" data-thumb="{{ image_large }}" data-title="{% if image_alt contains 'youtube' or image_alt contains 'vimeo' %}{{ product.title }}{% else %}{{ image_alt | escape }}{% endif %}" data-image-height="{{ original_image_height | strip }}" data-image-width="{{ original_image_width | strip }}">
           {% if image_alt contains 'youtube' or image_alt contains 'vimeo' %}
             {% assign src = image_alt | split: 'src="' %}
             {% assign src = src[1] | split: '"' | first %}
 
             {% if src contains '?' %}
-              {% assign src = src | append: '&amp;autoplay=1' %}
+              {% assign src = src | append: '&amp;autoplay=1&amp;rel=0' %}
             {% else %}
-              {% assign src = src | append: '?autoplay=1' %}
+              {% assign src = src | append: '?autoplay=1&amp;rel=0' %}
             {% endif %}
 
             <div>
@@ -49,31 +51,34 @@
             </div>
           {% else %}
             {% if template != 'index' and section.settings.enable_product_lightbox %}
-              <a href="{{ image_800x }}" class="lightbox" rel="gallery" data-fancybox-group="gallery">
+              <a href="{{ image_800x }}" class="lightbox" rel="gallery" data-fancybox-group="gallery" data-lightbox-zoom="{{ section.settings.activate_zoom }}" >
             {% endif %}
             {% if image_width == 'full' %}
-              <img  src="{{ image_1200x }}"
-                    alt="{{ image_alt | escape }}"
-                    class=" lazyload {{ settings.image_loading_style }}"
-                    data-index="{{ forloop.index0 }}"
-                    data-image-id="{{ image_id }}"
-                     />
+              <div class="image__container" style="max-width: {{original_image_width}}">
+                <img  src="{{ image_1200x }}"
+                      alt="{{ image_alt | escape }}"
+                      class=" lazyload {{ settings.image_loading_style }}"
+                      data-index="{{ forloop.index0 }}"
+                      data-image-id="{{ image_id }}"
+                       />
+              </div>
             {% else %}
-              <img  src="{{ image_100x }}"
-                    alt="{{ image_alt | escape }}"
-                    class=" lazyload {{ settings.image_loading_style }}"
-                    data-index="{{ forloop.index0 }}"
-                    data-image-id="{{ image_id }}"
-                    data-sizes="auto"
-                    data-src="{{ image_2000x }}"
-                    data-srcset=" {{ image_200x }} 200w,
-                                  {{ image_400x }} 400w,
-                                  {{ image_600x }} 600w,
-                                  {{ image_800x }} 800w,
-                                  {{ image_1200x }} 1200w,
-                                  {{ image_2000x }} 2000w"
-
-                     />
+              <div class="image__container" style="max-width: {{original_image_width}}">
+                <img  src="{{ image_100x }}"
+                      alt="{{ image_alt | escape }}"
+                      class=" lazyload {{ settings.image_loading_style }}"
+                      data-index="{{ forloop.index0 }}"
+                      data-image-id="{{ image_id }}"
+                      data-sizes="auto"
+                      data-src="{{ image_2000x }}"
+                      srcset=" {{ image_200x }} 200w,
+                                    {{ image_400x }} 400w,
+                                    {{ image_600x }} 600w,
+                                    {{ image_800x }} 800w,
+                                    {{ image_1200x }} 1200w,
+                                    {{ image_2000x }} 2000w"
+                       />
+              </div>
             {% endif %}
             {% if template != 'index' and section.settings.enable_product_lightbox %}
               </a>
