@@ -9647,6 +9647,10 @@ $delay: 0;
 */
 
 
+/* #Custom Styles
+================================================== */
+
+
 /*======================================================================================================================================
 ========================================================================================================================================
      #Custom Styles
@@ -10295,9 +10299,9 @@ img.collection_banner_img{
 }
   
 
-// --------------------------------
+// --------------------------------------------------
 // LANDING PAGES ------------------
-// --------------------------------
+// --------------------------------------------------
 
 //  Landing Page Vars
 $landingLightGray: rgba(0,0,0,0.1);
@@ -10934,9 +10938,10 @@ $transparent: rgba(0,0,0,0.0);
     #shopmessage-checkbox{display: none !important}
   }
 
-/// ========================================
-// Below Fold Collection Features Imprvement
-// =========================================
+/// ======================================================================
+// Front page / front-page Below Fold Collection Features Imprvement
+// =======================================================================
+// mobile first
 
 // CUSTOM HEADER VARS --------------------
 $mobItemPadding: 20px 16px;
@@ -10953,6 +10958,8 @@ $headerTabletUp: 769px;
 $headerDesktopUp: 960px;
 $headerDesktopLargeUp: 1280px;
 
+// Use the class 'custom-front-page-styles-container' for container div of section
+// Use the class 'custom-front-page-styles' for inner div
 
 // On Home page
 .index.promo-per-row-2.clearfix{
@@ -10961,7 +10968,8 @@ $headerDesktopLargeUp: 1280px;
   }
 }
 
-.index.container.promotions-grid-full_width.featured-promotions.promo-per-row-2.clearfix, .featured-promotions.promo-per-row-2.clearfix{
+// Desktop - section / features container
+.custom-front-page-styles-div--2{
   padding: 0 30px !important;
   @include flexbox();
   @include justify-content(center);
@@ -10974,120 +10982,161 @@ $headerDesktopLargeUp: 1280px;
     display: none;
   }
 
+  figure.custom-front-page-figure{
+    padding: 0;
+  }
+
+  // make feature-overlay positioned relatively and allow for bottom white corner
+  .custom-front-page-figure .feature-overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+            transform: translateY(0);
+  }
+
+  .custom-front-page-figure .feature-wrap{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+  }
+
 }
 
-.index.container.promotions-grid-full_width.featured-promotions.promo-per-row-2.clearfix.feature-section,
-.index.featured-promotions.promo-per-row-2.clearfix.feature-section{
+// .index.container.promotions-grid-full_width.featured-promotions.promo-per-row-2.clearfix.feature-section,
+// .index.featured-promotions.promo-per-row-2.clearfix.feature-section{
+  .custom-front-page-styles-div--2{
     max-width: 100% !important;
     width: 100% !important;
     margin: 0 0 15px !important;
     display: block;
+
+    // Each box
+    .custom-front-page-figure{
+      padding: 0 !important;
+    }
 }
 
-@media screen and (max-width: $headerTabletDown){
-  .featured-promotions.promo-per-row-2, .featured-promotions.promo-per-row-2.clearfix{
+@include respond-to('medium'){
+  .custom-front-page-styles-div--2{
     padding: 0 30px !important;
   }
 }
 
-@media screen and (min-width: $headerTabletUp){
-  .featured-promotions.promo-per-row-2, .featured-promotions.promo-per-row-2.clearfix{
-    padding: 0 10px !important;
-    @include flexbox();
-    @include justify-content(space-between);
-    @include align-items(flex-end);
-    @include flex-direction(row);
-    @include flex-wrap(nowrap);
-    margin: -20px auto 0;
+.custom-front-page-styles-div--2{
+  padding: 0 10px !important;
+  @include flexbox();
+  @include justify-content(space-between);
+  @include align-items(flex-end);
+  @include flex-direction(row);
+  @include flex-wrap(nowrap);
+  margin: -20px auto 0;
 
-    .feature-section {
-        max-width: calc(50% - 15px) !important;
-        margin: 0;
-        display: block;
-    }
+  .custom-front-page-figure {
+      max-width: calc(50% - 15px) !important;
+      margin: 0;
+      display: block;
+  }
 
-    .feature-section.section-1.promo-1, .feature-section.section-2.promo-2{
-      max-width: calc(50% - 15px)  !important;
-      margin: 30px 0 0;
-      position: relative;
-    }
+  figure.custom-front-page-figure--1,
+  figure.custom-front-page-figure--2{
+    max-width: calc(50% - 15px)  !important;
+    margin: 30px 0 0;
+    padding: 0;
+    position: relative;
+  }
 
 
-    .feature-section.section-1.promo-1 > a,
-    .feature-section.section-2.promo-2 > a{
-      position: static;
-    }
+  .feature-section.section-1.promo-1 > a,
+  .feature-section.section-2.promo-2 > a{
+    position: static;
+  }
 
-    // Featured Promotions 'buttons'
-    .feature-section.section-1.promo-1 h2.title.title-below,
-    .feature-section.section-2.promo-2 h2.title.title-below{
-      position: absolute;
-      z-index: 3;
-      bottom: 0.75rem;
-      left: 1.25rem;
-      width: auto;
-      max-width: 100%;
-      min-width: 12rem;
+  // Featured Promotions 'buttons'
+  .feature-section.section-1.promo-1 h2.title.title-below,
+  .feature-section.section-2.promo-2 h2.title.title-below{
+    position: absolute;
+    z-index: 3;
+    bottom: 0.75rem;
+    left: 1.25rem;
+    width: auto;
+    max-width: 100%;
+    min-width: 12rem;
 
-      color: white;
-      border: 1px solid white;
-      padding: 8px;
-      line-height: 1;
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: .1em;
-    }
+    color: white;
+    border: 1px solid white;
+    padding: 8px;
+    line-height: 1;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+  }
 
-    // 'NEW' Tag - Desktop
-    .feature-section.section-1.promo-1 h2.title.title-below:after,
-    .feature-section.section-2.promo-2 h2.title.title-below:after{
-      content: 'New';
-      position: absolute;
-      display: inline-block;
-      color: black;
-      background: white;
-      font-size: 1rem;
-      font-weight: 600;
-      font-variant-caps: all-small-caps;
-      text-align: center;
-      padding: 4px 5px;
-      letter-spacing: .1em;
-      width: auto;
-      z-index: 3;
-      top: -32px;
-      left: -1px;
-    }
+  // 'NEW' Tag - Desktop
+  .feature-section.section-1.promo-1 h2.title.title-below:after,
+  .feature-section.section-2.promo-2 h2.title.title-below:after{
+    content: 'New';
+    position: absolute;
+    display: inline-block;
+    color: black;
+    background: white;
+    font-size: 1rem;
+    font-weight: 600;
+    font-variant-caps: all-small-caps;
+    text-align: center;
+    padding: 4px 5px;
+    margin: 0;
+    letter-spacing: .1em;
+    width: auto;
+    height: auto;
+    z-index: 3;
+    top: -32px;
+    left: -1px;
+  }
+
+}
+
+// Tablet Down - Mobile Styles - Collapse on Mobile
+@include respond-to('medium'){
+  .custom-front-page-styles-div.custom-front-page-styles-div--2{
+      padding: 0 30px !important;
+      @include flexbox();
+      @include justify-content(center);
+      @include align-items(flex-start);
+      @include flex-direction(row);
+      @include flex-wrap(wrap);
+  }
+
+  figure.custom-front-page-figure{
+    width: 100%;
+    max-width: 100% !important;
+    margin: 0 0 10px;
   }
 }
 
 // Make them collapse on Tablet
 @include respond-to('medium'){
-  .index.feature-section.section-.promo-1.title-overlay-false, 
-  .index.feature-section.section-2.promo-2.title-overlay-false{
+  .custom-front-page-styles-div{
     width: 100% !important;
+    max-width: 100% !important;
     padding: 0 !important;
   }
 }
-// @media screen and (max-width: 480px){
-//   .index.feature-section.section-.promo-1.title-overlay-false, 
-//   .index.feature-section.section-2.promo-2.title-overlay-false{
-//     width: 100% !important;
-//     padding: 0 !important;
-//   } 
-// } 
 
 
-.container.promotions-grid-full_width {
-/*   width: 100%; */
+.container.promotions-grid-full_width.custom-front-promotions-section {
   padding-top: 0;
 
-  .featured-promotions.promo-per-row-2 {
-    .feature-section {
+  // .featured-promotions.promo-per-row-2
+  .custom-front-page-styles-div--2{
+    figure.custom-front-page-figure {
 
       // Make FPs stack on Tablet down
       @include respond-to('medium'){
         width: 100%;
-        margin: 0 0 20px;
+        max-width: 100% !important;
+        margin: 0 0 20px !important;
         position: relative;
 
         // Make sure the actual buttons don't show
@@ -11130,6 +11179,8 @@ $headerDesktopLargeUp: 1280px;
           letter-spacing: .1em;
           line-height: 1;
           width: auto;
+          height: auto;
+          margin: 0;
           z-index: 3;
           text-shadow: none;
           top: -24px;
@@ -11144,16 +11195,6 @@ $headerDesktopLargeUp: 1280px;
       }
     }
   }
-  // .featured-promotions.promo-per-row-3 {
-  //   .feature-section {
-  //     width: 33.333333%;
-  //     margin: 0;
-  //     @include respond-to('medium'){
-  //       width: calc(100% - 40px);
-  //       margin: 10px 20px;
-  //     }
-  //   }
-  // }
 
 }
 
@@ -11179,9 +11220,9 @@ $headerDesktopLargeUp: 1280px;
 }
 
 
-// ==============================================================
+// =======================================================================================================================
 // Make first three featured promos on Home page square on mobile
-// ==============================================================
+// =======================================================================================================================
 @include respond-to('medium'){
 
   // Top Promotions
@@ -11384,7 +11425,6 @@ $headerDesktopLargeUp: 1280px;
 .promo_banner > p{
   font-weight: bold;
 }
-
 
 
 //    Make buttons transparent with white outlines

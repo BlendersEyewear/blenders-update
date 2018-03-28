@@ -9,11 +9,11 @@
 {% assign title_on_image = section.settings.promo_text_on_image_enabled %}
 
 {% if section.blocks.size > 0 %}
-  <div class="container promotions-grid-{{ featured_promos_grid }}">
-    <div  class="js-featured-promotions featured-promotions promo-per-row-{{ featured_promos_per_row }} clearfix"
+  <div class="container promotions-grid-{{ featured_promos_grid }} {% if section.settings.custom_styling == true %}custom-front-page-styles-container{% endif %}">
+    <div  class="js-featured-promotions featured-promotions promo-per-row-{{ featured_promos_per_row }} clearfix {% if section.settings.custom_styling == true %}custom-front-page-styles-div custom-front-page-styles-div--{{ featured_promos_per_row }}{% endif %}"
           data-promo-animation="{{ section.settings.featured_links_animation }}">
         {% for block in section.blocks %}
-          <figure class="feature-section section-{{ forloop.index }} promo-{{ forloop.index }} title-overlay-{{ title_on_image }} {% if section.settings.featured_links_animation != blank %}promo-animation--true{% endif %}" {{ block.shopify_attributes }}>
+          <figure class="feature-section section-{{ forloop.index }} promo-{{ forloop.index }} title-overlay-{{ title_on_image }} {% if section.settings.featured_links_animation != blank %}promo-animation--true{% endif %} {% if section.settings.custom_styling == true %}custom-front-page-figure custom-front-page-figure--{{ forloop.index }}{% endif %}" {{ block.shopify_attributes }}>
               <div class="feature-inner feature-style--{{ section.settings.feature_style }} ">
                 {% if block.settings.image != nil %}
                     <img  src="{{ block.settings.image | img_url: '100x' }}"
@@ -147,6 +147,12 @@
       "id": "promo_text_on_image_enabled",
       "label": "Show title on image",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "custom_styling",
+      "label": "Custom Blenders Styling?",
+      "default": false
     }
   ],
   "blocks": [
