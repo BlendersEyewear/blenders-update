@@ -9795,7 +9795,11 @@ $delay: 0;
           align-self: $align;
 }
 
-body, h1, h2, h3, h4, h5, h5, p, a{
+body, h1, h2, h3, h4, h5, h5, h6, p, a{
+  font-family: 'proxima-nova', 'Roboto', Helvetica, sans-serif !important;
+}
+
+.search_form input, .search_form input:active, .search_form input:focus, .logo{
   font-family: 'proxima-nova', 'Roboto', Helvetica, sans-serif !important;
 }
 
@@ -9818,7 +9822,8 @@ input.action_button[type="button"] {
 #header span.menu_title,
 .menu a span,
 select.currencies,
-.mini_cart span{
+.mini_cart span,
+.cart_content{
   font-family: 'proxima-nova', 'Roboto', Helvetica, sans-serif !important;
 }
 
@@ -9938,7 +9943,8 @@ p.modal_price {
 }
 
 .product-quantity-box + .inline_purchase {
-    margin-top: 6.5px;
+  // Edited by Adam - commented out
+    // margin-top: 6.5px;
 }
 
 .fs-image-container a {
@@ -11483,4 +11489,88 @@ $headerDesktopLargeUp: 1280px;
     top: 15px;
     right: 51px;
   }
+}
+
+
+
+// ------------------------------------------------------------------------------------------
+//    Product Page
+// ------------------------------------------------------------------------------------------
+
+
+// Size Chart link
+a.size_chart {
+    background: #f1f1f1;
+    padding:  5px 10px;
+    display:  block;
+    transition: all .15s ease-in-out;
+  }
+  
+  a.size_chart:hover,
+  a.size_chart:focus{
+    color: black;
+    background: #f7f7f7;
+}
+
+.size_chart .icon-right-arrow:before {
+    font-size: .75rem;
+}
+
+
+// Tabs
+ul.tabs {
+    font-variant-caps: all-small-caps;
+    letter-spacing: .05em;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+ul.tabs-content>li.active {
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+// Yatpo
+.product .yotpo-container {
+    margin: 1rem 0;
+}
+
+//  'reviews' element
+.product .yotpo .text-m {
+    padding-left: .35rem;
+    letter-spacing: .05em;
+}
+
+// Price area
+p.modal_price {
+    margin: 1rem 0;
+}
+
+
+
+// ------------------------------------------------------------------------------------------
+//    Mega Menu
+// ------------------------------------------------------------------------------------------
+
+.dropdown_column ul.dropdown_title {
+    display: none;
+}
+
+// Capitalize under image captions
+.dropdown_content a p,
+.mobile-mega-menu a p {
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+
+.dropdown_column__menu > ul > li > a {
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+.dropdown_column__menu > ul > li > a:hover,
+.dropdown_column__menu > ul > li > a:focus, {
+    text-transform: uppercase;
+    letter-spacing: .05em;
 }

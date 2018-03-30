@@ -96,7 +96,7 @@
       <div class="sixteen columns row footer_credits">
         <p class="credits">
           &copy; {{ "now" | date: "%Y" }} {{ shop.name | link_to: '/' }}.
-          {{ section.settings.copyright_text }}
+          {% comment %} {{ section.settings.copyright_text }} -- removed by Adam {% endcomment %}
           {% if section.settings.display_designed_by %}
             {{ 'layout.general.designer_credits_html' | t }}
           {% endif %}
