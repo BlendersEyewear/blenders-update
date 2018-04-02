@@ -1,0 +1,407 @@
+<a name="pagecontent" id="pagecontent"></a>
+{% comment %} <div id="saso-notifications" class="mobile-only saso-notifications--mobile"></div> {% endcomment %}
+
+    <div class="section clearfix">
+      <div class="sixteen columns">
+        <h1 class="cart-title">{{ 'cart.general.title' | t }}</h1>
+        	
+        	
+          <div class="shippingmessage">
+        	    {% if cart.total_price >= 4000 %}
+     		        <div class="shipping-notice shipping-notice--free">Sweet! You scored Free Shipping…</div>
+ 			        {% elsif cart.total_price < 4000 %}
+       		      <div class="shipping-notice">Add more items to get Free Shipping! All orders over $40 ship Free.</div>
+			        {% endif %}
+          </div>
+        
+          <form action="/cart" method="post" id="cart_form">
+            <div class="top-cart-checkout">
+              {% if cart.item_count > 0 %}
+          <input type="submit" class="action_button add_to_cart" id="checkout" name="checkout" value="{{ 'cart.general.checkout' | t }}" />
+        {% endif %}
+            </div>
+    </form>
+         <div class="feature_divider"></div>
+
+{% comment %} <!-- Start Cart Mobile Upsell --> {% endcomment %}
+   <div class="mobile-upsell">  
+      
+    {% for item in cart.items %}
+	    {% if item.product.type == "Sunglasses" %}
+        {% assign sunglasses_in_cart = true %}
+  	  {% endif %}
+    {% endfor %}
+      
+    {% for item in cart.items %}
+	    {% if item.product.type == "Soft Pouches" %}
+        {% assign sunglasses_in_cart = false %}
+  	  {% endif %}
+    {% endfor %}
+
+		{% if sunglasses_in_cart %}
+		  {% include 'mobile-upsell' %}
+    {% endif %}
+
+    </div>
+{% comment %} <!-- End Cart Mobile Upsell --> {% endcomment %}
+       
+    </div>
+</div>
+{% comment %} End section {% endcomment %}
+
+    {% if cart.item_count == 0 %}
+      <div class="sixteen columns">
+        <div class="section clearfix">
+          <div class="six columns offset-by-five">
+            <p class="quote">{{ 'cart.general.continue_browsing_html' | t }}</p>
+
+            <a href="/collections/all-sunglasses-blenders-eyewear" class="action_button continue-button add_to_cart">{{ 'cart.general.continue_shopping_link_html' | t }}</a>
+          </div>
+          <br class="clear" />
+        </div>
+      </div>
+    {% else %}
+
+  <form action="/cart" method="post" id="cart_form">
+    <div class="section clearfix">
+
+    {% comment %} Create Savings Variable - Added by Adam - 2/8/18 {% endcomment %}
+      <div class="ten columns">
+        {% assign total_saving = 0 %}
+        {% for item in cart.items %}
+        {% if item.variant.compare_at_price > item.variant.price %}
+          {% assign saving = item.variant.compare_at_price | minus: item.variant.price | times: item.quantity %}
+            {% assign total_saving = saving | plus: total_saving %}
+          {% endif %}
+          <div class="section clearfix">
+            <div class="three columns alpha">
+              <a href="{{ item.url }}" title="{{ item.title | escape }}" class="cart_page_image">
+                <img  src="{{ item | img_url: '100x' }}"
+                      alt="{{ item.title | escape }}"
+                      class="lazyload {{ settings.image_loading_style }}"
+                      data-sizes="auto"
+                      data-src="{{ item | img_url: '900x' }}"
+                      data-srcset=" {{ item | img_url: '480x' }} 300w,
+                                    {{ item | img_url: '600x' }} 600w,
+                                    {{ item | img_url: '900x' }} 900w"
+                       />
+              </a>
+            </div>
+
+            <div class="seven columns omega cart_content_info">
+              <h3>
+                <a href="{{ item.url }}">{{ item.product.title }}</a>
+              </h3>
+              <p class="cart-item-saso">
+                <span class="saso-cart-item-discount-notes" data-key="{{item.key}}"></span>
+                <span class="saso-cart-item-upsell-notes" data-key="{{item.key}}"></span>
+              </p>
+
+              {% unless item.variant.title contains "Title" %}
+                <p class="meta">
+                  {% for option in item.product.options %}
+                    <span class="label">{{ option }}:</span> <span>{{ item.variant.options[forloop.index0] }}</span><br />
+                  {% endfor %}
+                </p>
+              {% endunless %}
+
+              {% if item.properties %}
+                <p>
+                  {% for p in item.properties %}
+                    {% unless p.last == blank %}
+                      {% if p.last contains '/uploads/' %}
+                        <div>
+                          {{ p.first }}: <a class="lightbox" href="{{ p.last }}">{{ 'cart.general.uploaded_file' | t }}</a>
+                        </div>
+                      {% else %}
+                        <div>
+                          {{ p.first }}: {{ p.last }}
+                        </div>
+                      {% endif %}
+                    {% endunless %}
+                  {% endfor %}
+                </p>
+              {% endif %}
+
+
+              {% comment %}
+              <p class="modal_price">
+                {% if item.price > 0 %}
+                  <span class="money">
+                    <span class="saso-cart-item-price" data-key="{{item.key}}">{{ item.price | money }}</span>
+                  </span>
+                {% else %}
+                  {{ settings.free_price_text }}
+                {% endif %}
+              </p>
+              {% endcomment %}
+
+              {% comment %} Show new price and old price - Added by Adam - 2/8/18 {% endcomment %}
+              <p class="modal_price modal_price_cart">
+                {% if item.price > 0 %}
+
+                  <span class="money {% if item.price < item.variant.compare_at_price %}sale{% endif %}">{{ item.price | money }}</span>
+                
+                {% else %}
+
+                  {{ settings.free_price_text }}
+
+                {% endif %}
+
+                {% if item.price < item.variant.compare_at_price %}
+                
+                  <span class="money was_price">{{ item.variant.compare_at_price | money }}</span>
+                  <span class="sale savings">{{ item.variant.compare_at_price | minus: item.price | times: 100 | divided_by: item.variant.compare_at_price }}% Off</span>
+                {% endif %}
+              </p>
+
+              {% comment %} Quanity Changer {% endcomment %}
+              <div class="product-quantity-box left">
+                <span class="ss-icon product-minus js-change-quantity" data-func="minus"><span class="icon-minus"></span></span>
+                <input type="number" min="0" size="2" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" data-line-id="{{ forloop.index }}" />
+                <span class="ss-icon product-plus js-change-quantity" data-func="plus"><span class="icon-plus"></span></span>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="five columns offset-by-one side-cart-area">
+        <div class="section clearfix">
+          <div class="subtotal">
+            <h2>
+              {{ 'cart.general.subtotal' | t }}
+            </h2>
+
+            {% comment %} edited by Adam - 2/13/18 {% endcomment %}
+            <p class="subtotal_amount_p">
+              <span class="subtotal_amount">
+                <span class="money">
+                  <span class="saso-cart-original-total">{{ cart.total_price | money }}</span>
+                </span>
+              </span>
+              {% comment %}
+              <small id="estimated-shipping" style="display:none">
+                + <em>
+                <span class="money">{{ 0 | money }}</span> {{ 'cart.shipping_calculator.estimated_shipping' | t }}
+              </em></small>
+              {% endcomment %}
+            </p>
+
+            <!-- need to comment out -->
+            {% comment %} <p class="cart_savings sale">
+              {% if total_saving > 0 %}
+                <span>Total Savings: </span>
+                <span class="money">{{ total_saving | money }}</span>
+              {% endif %}
+            </p> {% endcomment %}
+
+            <div class="saso-summary"></div>
+
+            <div class="saso-cart-total"></div>
+
+            {% if settings.show_multiple_currencies %}
+              <p>
+                <small>
+                  {{ 'cart.general.orders_processed_in_currency_html' | t: currency: shop.currency }}
+                </small>
+              </p>
+            {% endif %}
+
+            {% if section.settings.display_special_instructions %}
+              <label for="note">{{ 'cart.general.note' | t: shop_name: shop.name }}:</label>
+              <textarea id="note" name="note" rows="2">{{ cart.note }}</textarea>
+            {% endif %}
+
+            {% if section.settings.display_tos_checkbox %}
+              <p>
+                <input type="checkbox" class="tos_agree" id="cart_agree" required />
+                  <label class="tos_label" for="cart_agree">
+                    {{ 'cart.general.agree_to_terms_html' | t }}
+                  </label>
+                {% if settings.tos_page != blank %}
+                  <a href="{{ pages[settings.tos_page].url }}" target="_blank" class="tos_icon">{{ 'cart.general.view_terms' | t }}</a>
+                {% endif %}
+              </p>
+            {% endif %}
+
+            {% if section.settings.cart_message != blank %}
+              <div>
+                {{ section.settings.cart_message }}
+              </div>
+            {% endif %}
+
+            <p>
+              <input type="submit" class="action_button add_to_cart" id="checkout" name="checkout" value="{{ 'cart.general.checkout' | t }}" />
+            </p>
+
+            {% if content_for_additional_checkout_buttons and settings.cart_action != 'ajax' %}
+             {% comment %}  <div class="additional-checkout-buttons">
+               
+                {{ content_for_additional_checkout_buttons }}
+                {% endcomment %}
+              </div>
+            {% endif %}
+
+            {% if cart.item_count > 0 %}
+              <div class="featured-links">
+                <a href="/collections/all-sunglasses-blenders-eyewear" class="secondary_button">{{ 'cart.general.continue_shopping_link_html' | t }}</a>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+	{% endif %}
+
+  </form>
+
+  {% include 'cart-shipping-calculator' %}
+
+<div id="related-custom">
+
+  {% if cart.item_count > 0 %}
+
+	{% include 'recomatic-related-products', widget: "cart" %}
+
+  {% endif %}
+</div>
+<div id="shopmessage-checkbox" style="width:175px;margin:0 auto;"></div>
+{% schema %}
+
+{
+  "name": "Cart page",
+  "class": "cart-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "display_special_instructions",
+      "label": "Show \"note\" text box"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_tos_checkbox",
+      "label": "Show \"agree to terms\" checkbox"
+    },
+    {
+      "type": "richtext",
+      "id": "cart_message",
+      "label": "Cart message"
+    }
+  ]
+}
+
+{% endschema %}
+
+<style>
+
+  .saso-notification {
+    z-index: 2147483647;
+    display: none;
+    left: 0px;
+    width: 118%!important;
+    margin: 0px;
+    padding: 16px 0px;
+    font-size: 120%;
+    text-align: center;
+    text-transform: none;
+    margin-left: -10%!important;
+}
+  
+  form {
+    margin-bottom: 0px!important;
+}
+  
+  .container .offset-by-one {
+    padding-left: 5px;
+}
+  
+  
+    @media only screen and (min-width: 1200px) {
+  .container .five.columns {
+    width: 355px;
+    float: right;
+}
+    }
+  
+  @media only screen and (max-width: 1199px) and (min-width: 960px) {
+.container .five.columns {
+    width: 280px!important;
+}
+  }
+  
+    @media only screen and (max-width: 959) and (min-width: 769px) {
+.container .five.columns {
+    width: 250px!important;
+}
+  }
+  
+  @media only screen and (min-width: 736px) {
+.container .offset-by-five {
+    margin: 0 auto!important;
+  padding-left: auto!important;
+}
+  }
+  
+  a.action_button.continue-button.add_to_cart {
+    background-color: #00A3F0;
+    color: white!important;
+    border-color: #00A3F0;
+}
+  
+  @media only screen and (min-width: 736px) {
+    .container .offset-by-five {
+        padding-left: 32% !important;
+    }
+    .mobile-upsell{
+        display: none!important;
+    } 
+  }
+  
+@media only screen and (max-width: 736px){
+  .pouch-upsell{
+    display: none;
+  }
+}
+  
+.shippingmessage {
+    text-align: center;
+    font-weight: bold;
+    padding-left: 15px;
+    padding-right: 15px;
+    max-width: 24rem;
+    margin: 0 auto 15px;
+}
+
+.shipping-notice {
+    background: none;
+    padding: 1px 5px;
+    color: rgba(0,0,0,0.85);
+    letter-spacing: .05em;
+    display: inline-block;
+    margin: 0 auto;
+    font-style: italic;
+    font-size: 1rem;
+}
+
+.shipping-notice--free{
+  background: #e0fde0;
+}
+  
+    @media only screen and (max-width: 736px) {
+  .shippingmessage {
+    text-align: center;
+    margin-bottom: 14px;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 22px;
+}
+    }
+
+input.hidden{
+  display: hidden;
+  font-size: 0.5rem;
+}
+  
+
+</style>
