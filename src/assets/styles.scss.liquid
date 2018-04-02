@@ -11630,7 +11630,6 @@ p.modal_price {
   }
 }
 
-
 // ------------------------------------------------------------------------------------------
 //    Cart Page
 // ------------------------------------------------------------------------------------------
@@ -11824,6 +11823,34 @@ input#checkout {
   padding: .5rem 0;
   letter-spacing: .05em;
   display: block;
+}
+
+.empty-cart-or{
+  text-transform: uppercase;
+  margin: 1rem auto 3rem;
+}
+
+.empty-cart-or:before,
+.empty-cart-or:after {
+    content: '';
+    display: inline-block;
+    height: 1px;
+    width: 28px;
+    background: black;
+    margin: 0 6px;
+    transform: translateY(-4px);
+}
+
+.empty-cart .empty-cart-keep-shopping{
+  height: auto;
+  min-height: auto;
+  line-height: 1;
+  padding: 12px 50px;
+  margin: 2rem auto 4rem;
+  display: block;
+  font-weight: 600;
+  width: fit-content;
+  max-width: 100%;
 }
 
 

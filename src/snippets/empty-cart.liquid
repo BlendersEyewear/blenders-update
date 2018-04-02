@@ -1,6 +1,6 @@
 <div class="section empty-cart-container">
 <div class="empty-cart">
-<h3 class="center">Today's Top Styles</h3>
+<h3 class="center">Check out Today's Top Styles</h3>
 
 {% comment %} Top 4 Best Selling Items {% endcomment %}
 <div class="empty-cart-product-container">
@@ -42,14 +42,13 @@
             <a href="{{product.url}}" class="product__title-img_link">{{ product.title }}</a>
         </h4>
         <p class="center price product__price">{{product.price | money }}</p>
-        <a href="{{product.url}}" class="button btn product__btn">Learn More</a>
 
         <form action="/cart/add">
-        <input type="hidden" name="id" value="{{ spirit.variants.first.id }}">
-        <button type="submit" name="add" class="action_button add_to_cart product-info__add product-info__add--green" data-label={{ add_to_cart_label | json }}>
-          {{ 'products.product.add_to_cart' | t }}
-        </button>
-      </form>
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            <button type="submit" name="add" class="action_button add_to_cart product__btn" data-label={{ add_to_cart_label | json }}>
+            {{ 'products.product.add_to_cart' | t }}
+            </button>
+        </form>
 
         {% comment %} Yotpo {% endcomment %}
         <div class="yotpo-container yotpo-empty-cart-container">
@@ -69,6 +68,10 @@
     </div>
     {% endfor %}
 </div>
+
+<p class="center italics empty-cart-or">Or</p>
+
+<a href="{% if cart.items.first.product.collections != blank %}{{ cart.items.first.product.collections.last.url }}{% else %}/collections/all{% endif %}" class="action_button continue-button add_to_cart empty-cart-keep-shopping">{{ 'cart.general.continue_shopping_link_html' | t }}</a>
 </div>
 
 </div>
