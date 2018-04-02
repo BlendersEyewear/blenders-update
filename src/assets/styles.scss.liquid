@@ -11774,9 +11774,59 @@ input#checkout {
 }
 
 // Empty Cart Mesg
-.cart-empty-message{
+.cart-empty-message > .quote{
   border: none;
 }
+
+
+// Empty Cart Page
+
+.empty-cart-product-container {
+    display: flex;
+    justify-content: space-between;
+    @include flexbox();
+    @include justify-content('space-between');
+    @include align-items('stretch');
+}
+
+.empty-cart .product {
+    padding: 10px;
+    @include flex(1);
+}
+
+.empty-cart .product__price{
+  margin: 0 0 1rem;
+}
+
+.empty-cart .product__btn {
+  height: auto;
+  min-height: auto;
+  line-height: 1;
+  padding: 7px 15px;
+  margin: .5rem auto;
+  display: block;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.empty-cart .yotpo {
+    width: auto;
+    max-width: fit-content;
+    margin: 0 auto;
+}
+
+.empty-cart span.yotpo-stars {
+    padding: 0 0 1rem !important;
+    display: block;
+}
+
+.empty-cart .product .yotpo .text-m {
+  padding: .5rem 0;
+  letter-spacing: .05em;
+  display: block;
+}
+
+
 
 // ------------------------------------------------------------------------------------------
 //    Mega Menu
