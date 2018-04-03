@@ -115,9 +115,15 @@
                 {% include 'popup-size-chart', product_id: product.id %}
               {% endif %}
             {% endfor %}
-          {% elsif settings.size_chart != blank %}
+          {% endif %}
+
+
+          <div class="below-title-section">
+          
+          {% if settings.size_chart != blank %}
             <a href="#size-chart" class="size_chart" data-remodal-target="size-chart" data-no-instant>{{ 'products.product.size_chart' | t }} <span class="icon-right-arrow"></span></a>
           {% endif %}
+
 
           {% comment %} Yotpo {% endcomment %}
           <div class="yotpo-container">
@@ -134,6 +140,8 @@
             </div>
           </div>
 
+          </div>
+          
           {% if collection_handles contains 'coming-soon' %}
             <p class="modal_price">{{ 'collections.general.coming_soon' | t }}</p>
           {% else %}

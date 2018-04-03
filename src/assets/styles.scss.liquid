@@ -11518,10 +11518,12 @@ $headerDesktopLargeUp: 1280px;
 
 // Size Chart link
 a.size_chart {
-    background: #f1f1f1;
-    padding:  7px 8px;
-    display:  block;
+    background: hsla(198, 25%, 92%, 1);
+    padding: 7px 8px;
+    display: block;
     font-size: 0.825rem;
+    color: rgba(0, 0, 0, 0.72);
+    font-weight: 600;
     line-height: 1;
     letter-spacing: .05em;
     transition: all .15s ease-in-out;
@@ -11645,6 +11647,38 @@ p.modal_price {
 
   .yotpo.bottomLine.yotpo-small {
       width: auto;
+  }
+}
+
+
+// below title stuff - size guide and reviews
+.product .below-title-section{
+  @include flexbox();
+  @include justify-content(space-between);
+  @include align-items(flex-start);
+  margin: 1.5rem 0 0;
+}
+
+
+// Mobile Styles
+@include respond-to('small'){
+  // center custom fields
+  .custom-field--value {
+    text-align: center;
+    line-height: 1;
+    margin: 0 0 1.5rem;
+  }
+
+  a.size_chart{
+    margin: 0;
+  }
+
+  .yotpo-container{
+    order: -1;
+  }
+
+  .yotpo.bottomLine{
+    padding: 0 !important;
   }
 }
 
@@ -11979,4 +12013,25 @@ select#sort-by {
 .slider-gallery .thumbnail .thumbnail-overlay,
 .list-collections .thumbnail .thumbnail-overlay{
   bottom: 2.75rem;
+}
+
+// Show add to cart button on mobile
+@include respond-to('medium'){
+  .product-list .thumbnail .quick_shops,
+  .slider-gallery .thumbnail .quick_shops,
+  .list-collections .thumbnail .quick_shops{
+    opacity: 1;
+    display: block;
+  }
+
+
+  .collection-add-to-cart {
+    height: auto;
+  }
+
+  .quick_shops .action_button.add_to_cart{
+    font-size: 0.825rem;
+    font-weight: 600;
+    letter-spacing: .05em;
+  }
 }
