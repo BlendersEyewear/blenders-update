@@ -11772,20 +11772,29 @@ input#checkout {
   display: none;
 }
 
+
+
+// Empty Cart Page ----------------
+
+.cart-empty-message__section{
+  margin: -1rem 0 3rem !important
+}
+
 // Empty Cart Mesg
 .cart-empty-message > .quote{
   border: none;
+  margin: 0;
+  font-weight: 400;
+  color: #a0a0a0;
 }
-
-
-// Empty Cart Page
 
 .empty-cart-product-container {
     display: flex;
     justify-content: space-between;
     @include flexbox();
-    @include justify-content('space-between');
-    @include align-items('stretch');
+    @include justify-content(space-between);
+    @include flex-flow(row nowrap);
+    @include align-items(stretch);
 }
 
 .empty-cart .product {
@@ -11851,6 +11860,22 @@ input#checkout {
   font-weight: 600;
   width: fit-content;
   max-width: 100%;
+}
+
+// Mobile Styles for Cart page
+@include respond-to('medium'){
+  .empty-cart-product-container {
+    @include flex-flow(row wrap);
+  }
+
+  .empty-cart .product {
+    @include flex(0 0 50%);
+  }
+
+  .empty-cart .product:nth-of-type(1),
+  .empty-cart .product:nth-of-type(2) {
+    margin: 0 0 1rem;
+  }
 }
 
 

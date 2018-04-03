@@ -9,6 +9,8 @@
   <div class="sixteen columns">
     <h1>{{ 'cart.general.title' | t }}</h1>
 
+    {% unless cart.item_count == 0 %}
+    
     <div class="shippingmessage">
         {% if cart.total_price >= 4000 %}
           <div class="shipping-notice shipping-notice--free">Sweet! You scored Free Shipping…</div>
@@ -18,12 +20,15 @@
     </div>
 
     <div class="feature_divider"></div>
+
+    {% endunless %}
+
   </div>
 </div>
 
 {% if cart.item_count == 0 %}
   <div class="sixteen columns">
-    <div class="section clearfix">
+    <div class="section clearfix cart-empty-message__section">
       <div class="six columns offset-by-five cart-empty-message">
         <p class="quote">{{ 'cart.general.continue_browsing_html' | t }} 😢</p>
       </div>

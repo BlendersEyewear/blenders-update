@@ -4,21 +4,17 @@
 
 {% comment %} Top 4 Best Selling Items {% endcomment %}
 <div class="empty-cart-product-container">
-    {% assign best_sellers = "all_products.natty-ice-lime,all_products.rose-theater"| split: ',' %}
+    {% assign best_sellers = "natty-ice-lime,rose-theater,tipsy-goat-polarized,blue-angel"| split: ',' %}
 
-    {% for product in best_sellers%}
-        <h4>{{product.title}}</h4>
-    {% endfor %}
+    {% for raw_product in best_sellers%}
 
-    {% for product in collections.best-sellers-blenders-eyewear.products limit:4 %}
+    {% assign product = all_products[raw_product] %}
+
     {% assign inventory = product.first_available_variant.inventory_quantity %}
 
     {% comment %} if sold out, skip {% endcomment %}
     {%if inventory == 0 %} {% continue%} {% endif %}
 
-    {%if product['blue-angel'].inventory > 0 %}
-      <h4>Wooohooo</h4>
-    {% endif %}
 
     <div class="product">
         <div class="image__container">
