@@ -9831,6 +9831,24 @@ select.currencies,
   font-family: 'proxima-nova', 'Roboto', Helvetica, sans-serif !important;
 }
 
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="search"],
+input[type="url"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="range"],
+input[type="color"],
+select,
+textarea {
+  font-family: 'proxima-nova', 'Roboto', Helvetica, sans-serif !important;
+}
+
 
 #tracktorOrderForm {
   text-align: center;
@@ -11904,4 +11922,61 @@ input#checkout {
 .dropdown_column__menu > ul > li > a:focus, {
     text-transform: uppercase;
     letter-spacing: .05em;
+}
+
+
+
+
+// ------------------------------------------------------------------------------------------
+//   Collection Page
+// ------------------------------------------------------------------------------------------
+
+// Fix 2 Per Row Mobile Product Grid -----------
+/*  #Mobile (Portrait)
+================================================== */
+
+    /* Note: Design for a width of 320px */
+
+    @media only screen and (max-width: 798px) {
+        {% if settings.mobile_products_per_row == "2" %}
+          .container .thumbnail.even,
+          // .container .thumbnail.odd  { width: 140px !important; }
+          .container .thumbnail.odd  { width: 155px !important; }
+          .container div.thumbnail.even  { clear: left }
+          .container div.thumbnail.odd  { margin-left: 20px }
+          br.product_clear { display: none }
+        {% endif %}
+
+
+    }
+
+
+/* #Mobile (Landscape)
+================================================== */
+
+/* Note: Design for a width of 480px */
+
+@media only screen and (min-width: 480px) and (max-width: 798px) {
+    {% if settings.mobile_products_per_row == "2" %}
+      .container .thumbnail.even,
+      .container .thumbnail.odd  { width: 200px !important; }
+      .container div.thumbnail.even  { clear: left }
+      .container div.thumbnail.odd  { margin-left: 20px }
+      br.product_clear { display: none }
+    {% endif %}
+}
+
+
+select#sort-by {
+    letter-spacing: .05em;
+    color: #7f7f7f;
+    font-size: 0.825rem;
+    font-weight: 600;
+}
+
+// move up the product overlay so user can click add to cart button.
+.product-list .thumbnail .thumbnail-overlay,
+.slider-gallery .thumbnail .thumbnail-overlay,
+.list-collections .thumbnail .thumbnail-overlay{
+  bottom: 2.75rem;
 }

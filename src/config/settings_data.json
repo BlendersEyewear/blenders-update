@@ -2397,7 +2397,7 @@
     "slideshow_shadow": true,
     "favicon": "shopify://shop_images/favicon_small_c4421ed7-01de-47f4-98ce-d9591919c160.png",
     "search_option": "everything",
-    "mobile_products_per_row": "1",
+    "mobile_products_per_row": "2",
     "pagination_type": "basic_pagination",
     "align_height": false,
     "collection_height": "200",

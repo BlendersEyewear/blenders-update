@@ -66,6 +66,12 @@
             </div>
           {% endif %}
         </a>
+
+      {% comment %} Testing Add to Cart Button {% endcomment %}
+      <div class="quick_shops {% unless product.available %}hide{% endunless %} desktop action_button">
+      {% if product.available %}
+      {% include 'collection-product-form' %}{% endif %}
+      </div>
       {% include "product-details" %}
     </div>
     <a class="product-info__caption {% if settings.thumbnail_hover_enabled %}hidden{% endif %}" href="{{ product.url | within: collection }}" itemprop="url">

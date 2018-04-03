@@ -100,10 +100,6 @@
     {% endif %}
     {{ content_for_header }}
 
-    {% comment%} - edited out by adam 2/9
-		{% include 'bacon-menu' %}
-    {% endcomment %}
-
           <script>
           window['friendbuy'] = window['friendbuy'] || [];
           window['friendbuy'].push(['site', 'site-29c0693f-www.blenderseyewear.com']);
@@ -221,6 +217,12 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
   </noscript>
 
   <body class="{{ template | replace: '.', '-' | handle }}" data-money-format="{{ shop.money_format }}">
+
+  {% if settings.mobile_products_per_row == "2" %}
+  <!-- 2 per row turned on  -->
+  {% else %}
+  <!-- Need to turn on -->
+  {% endif%}
 
     
     {% section 'header' %}
