@@ -11652,12 +11652,16 @@ p.modal_price {
 .product .below-title-section{
   @include flexbox();
   @include justify-content(space-between);
-  @include align-items(flex-start);
+  @include align-items(center);
   margin: 1.5rem 0 0;
 }
 
 .product .yotpo-container{
   order: -1;
+}
+
+.yotpo-display-wrapper {
+    border-top: 1px solid #e3e3e3 !important;
 }
 
 // Mobile Styles
@@ -11681,13 +11685,79 @@ p.modal_price {
 
 
 // Product form
-.product{
+.product_section {
   .product-quantity-box .product-plus,
-  .product-quantity-box .product-minus {
-    background: white;
-    font-weight: 600;
-    width: 20%;
-    border: 1px solid #04a3f0;
+  .product-quantity-box .product-minus{
+    span:before {
+      font-size: 10px;
+      font-weight: bold;
+      opacity: 0.85;
+    }
+  }
+
+  // Remove "qty" label
+  .product-quantity-box > label{
+    display: none;
+  }
+
+  // Add bottom padding to price
+  p.modal_price {
+    margin: 1rem 0 1.5rem;
+  }
+
+  // Move add to cart button up to match the qty picker
+  .purchase{
+    margin-top: 0;
+  }
+}
+
+
+// 460 add padding
+.product{
+  #fs-product{
+    margin-bottom: 2rem;
+  }
+}
+
+
+// Recomatic Product Styles
+/*  Mobile Changes  */
+@media only screen and (max-width: 736px){
+  /* Make Recomatic Buttons Static on mobile, and other rec */
+  button.btn.recomatic-add-to-cart {
+    visibility: visible;
+    font-size: 1rem;
+    padding: 5px;
+    height: auto;
+    min-height: unset;
+    font-variant-caps: all-petite-caps;
+    max-width: 10rem;
+    margin: 0 auto 10px;
+  }
+
+  .recomatic-title {
+    line-height: 1.5 !important;
+    margin: 0 auto 5px !important;
+  }
+
+  .recomatic-subtitle {
+    font-variant-caps: all-small-caps !important;
+    opacity: 0.8;
+  }
+
+  /*  Disable Hover effects on Mobile    */
+  .recomatic-wrap a:hover .alternate-recomatic-image{
+    opacity: 0;
+  }
+
+  .recomatic-wrap a:hover .main-recomatic-image{
+    opacity: 1;
+  }
+
+  /*   'xxxxx reviews' span */
+  .recomatic-reviews-wrap .text-m {
+    display: block !important;
+    margin-top: 5px;
   }
 }
 
@@ -12042,5 +12112,130 @@ select#sort-by {
     font-size: 0.825rem;
     font-weight: 600;
     letter-spacing: .05em;
+  }
+}
+
+
+// -------------------------------------------
+// ------- Page Details 
+// -------------------------------------------
+
+.banner{
+  .caption .headline {
+    font-weight: 800;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+    text-transform: uppercase;
+  }
+
+  .caption .subtitle > p {
+    font-weight: 600;
+    font-size: 1.5rem;
+    font-style: italic;
+
+    strong{
+      font-size: 2rem;
+      text-transform: uppercase;
+      font-style: normal;
+    }
+  }
+}
+
+@include respond-to('small'){
+  .banner{
+    .caption{
+      margin: 1.25rem 0 1rem !important;
+      padding: 0 2rem;
+    }
+    .caption .headline{
+      text-shadow: none;
+    }
+
+    .caption .subtitle > p strong{
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.block__image_with_text{
+  .description{
+    font-size: 1.25rem;
+    font-weight: 400;
+  }
+}
+
+// ----------------------------------------------------
+// --------------- Contact Page
+// ----------------------------------------------------
+.contact-page__container{
+  @include flexbox();
+  @include justify-content(center);
+  @include align-content(stretch);
+  @include flex-flow(row wrap);
+}
+
+.contact-page__container > .contact {
+  @include flex(1);
+  padding: 1rem;
+  margin: 0 0 2rem;
+  font-weight: 400;
+
+  .contact__title{
+    font-weight: 600;
+  }
+
+  .contact__content p{
+    margin: 0
+  }
+
+  .contact__greeting{
+    margin: 0 0 1rem !important;
+  }
+}
+
+.contact > .contact__content{
+  text-align: center;
+  a{
+    text-decoration: underline;
+  }
+
+  .contact__number{
+    display: block;
+    margin: 0.5rem auto 1rem !important;
+    letter-spacing: .05em;
+  }
+}
+
+.contact-page__container > .contact__sticker{
+  @include flex(100%);
+   
+  p {
+    max-width: 18rem;
+    margin: 0 auto 1rem;
+  }
+}
+
+.contact__subcontent-title{
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0;
+  font-style: italic;
+}
+
+.contact__email{
+  display: block;
+  text-align: center;
+  margin: 0 0 1.5rem;
+}
+
+@include respond-to('small'){
+  .contact-page__container > .contact {
+    @include flex(100%);
+    padding: 0 1rem;
+  }
+}
+
+@include respond-to('medium'){
+  .contact-section .contact-page__image{
+    margin-top: 0;
   }
 }

@@ -1,0 +1,133 @@
+<a name="pagecontent" id="pagecontent"></a>
+
+{% if section.settings.image != nil %}
+  <header class="banner center page_banner dark-overlay-{{ section.settings.image_darken }} contact-page__image">
+    <img  src="{{ section.settings.image | img_url: '100x' }}"
+          alt="{% if section.settings.image.alt != blank %}{{ section.settings.image.alt | escape }}{% else %}{{ page.title | escape }}{% endif %}"
+          class="lazyload {{ settings.image_loading_style }}"
+          data-src="{{ section.settings.image | img_url: '1400x', format: 'pjpg' }}"
+          sizes="100vw"
+          srcset="{{ section.settings.image | img_url: '480x', format: 'pjpg' }} 480w,
+                  {{ section.settings.image | img_url: '765x', format: 'pjpg' }} 765w,
+                  {{ section.settings.image | img_url: '1400x', format: 'pjpg' }} 1400w,
+                  {{ section.settings.image | img_url: '2048x', format: 'pjpg' }} 2048w"
+           />
+    <div class="caption">
+      <h1 class="headline">{{ section.settings.title }}</h1>
+      <p class="subtitle">{{ section.settings.subtitle }}</p>
+    </div>
+  </header>
+{% endif %}
+
+
+<div class="container main content contact-page__container">
+
+    <div class="contact contact__phone">
+        <h2 class="title center contact__title">Call Us</h2>
+        <div class="contact__content">
+            <p>
+                Call us during business hours for a nice little convo.
+            </p>
+            <p class="contact__number">(858)-999-7782</p>
+            <p>
+                Mon-Thurs. | 9 AM - 5 PM PST <br>
+                Fri | 9 AM – 2 PM PST<br>
+            </p>
+        </div>
+    </div>
+
+    <div class="contact contact__email">
+        <h2 class="title center contact__title">Email Us</h2>
+        <div class="contact__content">
+            {%if section.settings.support_email != blank %}
+                <h4 class="center contact__subcontent-title">Customer Support</h4>
+                <a href="mailto:{{section.settings.support_email}}" target="_blank" rel="noopener" class="contact__email">{{section.settings.support_email}}</a>
+            {% endif %}
+
+            {%if section.settings.wholesale_email != blank %}
+                <h4 class="center contact__subcontent-title">Wholesale/Distribution</h4>
+                <a href="mailto:{{section.settings.wholesale_email}}" target="_blank" rel="noopener" class="contact__email">{{section.settings.wholesale_email}}</a>
+            {% endif %}
+
+        </div>
+    </div>
+
+    <div class="contact contact__address">
+        <h2 class="title center contact__title">Visit Us</h2>
+        <div class="contact__content">
+            <p class="contact__greeting">
+                {{section.settings.visit_greeting}}
+            </p>
+            <p>
+                {{shop.name}}<br>
+                {{shop.address.street}} <br>
+                {{shop.address.city}}, {{shop.address.province_code}} <br>
+                {{shop.address.zip}} <br>
+            </p>
+        </div>
+    </div>
+
+    <div class="contact contact__sticker">
+        <h3 class="center contact__title">Want Free Stickers?</h3>
+        <p class="center">Send an self-addressed envelope to our address with ATTN: STICKERS</p>
+    </div>
+
+</div>
+
+
+{% schema %}
+
+{
+  "name": "Contact",
+  "class": "contact-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner image"
+    },  
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "1600 x 600px recommended"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Get in touch"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Subheading"
+    },   
+    {
+      "type": "text",
+      "id": "contact_address",
+      "label": "Street address",
+      "info": "The full address that will be placed on the map."
+    },
+    {
+        "type": "text",
+        "id": "support_email",
+        "label": "Support Email",
+        "info": "Enter the email for the support email address"
+    },
+    {
+        "type": "text",
+        "id": "wholesale_email",
+        "label": "Wholesale Email",
+        "info": "Enter the email for the wholesale email address"
+    },
+    {
+        "type": "text",
+        "id": "visit_greeting",
+        "label": "Visit Us Greeting",
+        "default": "In San Diego? Rad. Come by our office anytime during our hours."
+    }
+  ]
+}
+
+{% endschema %}

@@ -141,7 +141,7 @@
           </div>
 
           </div>
-          
+
           {% if collection_handles contains 'coming-soon' %}
             <p class="modal_price">{{ 'collections.general.coming_soon' | t }}</p>
           {% else %}
@@ -286,6 +286,9 @@
 
       {% include "foursixty-product-slider" %}
 
+      {% comment %} Add Recomatic - Adam - 4/4/  {% endcomment %}
+      {% include 'recomatic-related-products', widget: "product" %}
+
       {% if product.metafields.yotpo.reviews_count != blank %}
           <!-- Yotpo Code -->
           <div class="container">
@@ -299,6 +302,7 @@
           </div>
           <br /><br />
       {% endif %}
+
 
       {% if section.settings.display_related_products %}
         <div class="container">
