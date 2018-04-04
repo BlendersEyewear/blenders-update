@@ -46,13 +46,19 @@
       data-products-per-slide="{{ visible_products }}"
       data-products-limit="{{ limit }}"
       data-products-available="{{ products_length }}">
+
   {% for product in products limit: loop_limit %}
 
-    {% comment %} Remove Sold Out Items {% endcomment %}
+    {% comment %} Remove Sold Out Items by skipping over them {% endcomment %}
 
     {% assign inventory = product.selected_or_first_available_variant.inventory_quantity %}
+
+    <!-- {{ inventory }} -->
+
+    {%if inventory <= 0 %}
+      {% continue %}
+    {% endif %}
     
-    {% unless inventory == 0 %}
 
     {% if settings.align_height %}
       {% assign collection_height = settings.collection_height | plus: 0 %}
@@ -115,8 +121,6 @@
         {% include 'collection-swatch' %}
       </div>
     {% endif %}
-
-    {% endunless %}
 
   {% endfor %}
 </div>
