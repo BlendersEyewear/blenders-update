@@ -218,12 +218,6 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 
   <body class="{{ template | replace: '.', '-' | handle }}" data-money-format="{{ shop.money_format }}">
 
-  {% if settings.mobile_products_per_row == "2" %}
-  <!-- 2 per row turned on  -->
-  {% else %}
-  <!-- Need to turn on -->
-  {% endif%}
-
     
     {% section 'header' %}
 
@@ -255,7 +249,7 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 
     {% unless feature_image %}
     
-      <div class="container main content {% if template == 'page.landing' or template == 'page.landing-sunset-kid-spirit-wind' or template == 'page.landing-millenia' %}landing-page-container{% endif%}">
+      <div class="container main content {% if template == 'page.landing' or template == 'page.landing-sunset-kid-spirit-wind' or template == 'page.landing-millenia' or template == 'page.shop-by-frame-new' %}landing-page-container{% endif%}">
     {% endunless %}
 
       {{ content_for_layout }}

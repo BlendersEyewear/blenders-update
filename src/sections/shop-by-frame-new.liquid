@@ -1,0 +1,344 @@
+{% comment %}
+** Details page - custom view **
+- Page template
+{% endcomment %}
+
+<a name="pagecontent" id="pagecontent"></a>
+
+<header
+  class="collection_banner collection_banner-container"
+  style="background-image: url('{{ section.settings.image | img_url: '1900x'}}');"
+>
+{% if section.settings.title != blank %}
+  <h1 class="collection_banner_title">{{section.settings.title}}</h1>
+{% else %}
+  <h1 class="collection_banner_title">Shop By Frame Shapes</h1>
+{% endif %}
+</header>
+
+<div id="saso-notifications" class="saso-notifications--below-header" style="padding-top: 0px; "></div>
+
+{% comment %} Custom Built Grid by Adam - 4/5/18 {% endcomment %}
+<div class="container shop-frame__container">
+
+    {% comment %} K Series {% endcomment %}
+    {%  if collections['frontpage'] %}
+        {%  assign col = collections['frontpage'] %}
+        {% assign product = all_products['deep-space-k-series']%}
+
+            <div class="shop-frame__shape shop-frame__shape--{{col.handle}}">
+                <a href="{{ col.url }}" class="shop-frame__link">
+                    <img  src="{{ product.featured_image | product_img_url: '100x' }}"
+                    alt="{{ alt_text | escape }}"
+                    class="lazyload {{ settings.image_loading_style }}"
+                    style="{{ align_height_value }} max-width: {{- product.featured_image.width -}}px;"
+                    data-sizes="auto"
+                    data-src="{{ product.featured_image | product_img_url: '900x' }}"
+                    data-srcset=" {{ product.featured_image | product_img_url: '300x' }} 300w,
+                                {{ product.featured_image | product_img_url: '400x' }} 400w,
+                                {{ product.featured_image | product_img_url: '500x' }} 500w,
+                                {{ product.featured_image | product_img_url: '600x' }} 600w,
+                                {{ product.featured_image | product_img_url: '700x' }} 700w,
+                                {{ product.featured_image | product_img_url: '800x' }} 800w,
+                                {{ product.featured_image | product_img_url: '900x' }} 900w"
+                />
+
+                </a>
+                <h2 class="center shop-frame__title">{{col.title}}</h2>
+                <a href="{{ col.url }}" class="shop-frame__btn">Shop Now</a>
+                
+            </div>
+    {% endif %}
+
+
+    {% if collections['h-series'] %}        
+        {% assign col = collections['h-series'] %}
+        {% assign product = all_products['alumni-queen-h2']%}
+
+        <div class="shop-frame__shape shop-frame__shape--{{col.handle}}">
+            <a href="{{ col.url }}" class="shop-frame__link">
+                <img  src="{{ product.featured_image | product_img_url: '100x' }}"
+                alt="{{ alt_text | escape }}"
+                class="lazyload {{ settings.image_loading_style }}"
+                style="{{ align_height_value }} max-width: {{- product.featured_image.width -}}px;"
+                data-sizes="auto"
+                data-src="{{ product.featured_image | product_img_url: '900x' }}"
+                data-srcset=" {{ product.featured_image | product_img_url: '300x' }} 300w,
+                              {{ product.featured_image | product_img_url: '400x' }} 400w,
+                              {{ product.featured_image | product_img_url: '500x' }} 500w,
+                              {{ product.featured_image | product_img_url: '600x' }} 600w,
+                              {{ product.featured_image | product_img_url: '700x' }} 700w,
+                              {{ product.featured_image | product_img_url: '800x' }} 800w,
+                              {{ product.featured_image | product_img_url: '900x' }} 900w"
+              />
+
+            </a>
+            <h2 class="center shop-frame__title">{{col.title}}</h2>
+            <a href="{{ col.url }}" class="shop-frame__btn">Shop Now</a>
+        </div>
+    {% endif %}
+
+    {% if collections['l-series'] %}        
+        {% assign col = collections['l-series'] %}
+        {% assign product = all_products['lucky-folie']%}
+
+        <div class="shop-frame__shape shop-frame__shape--{{col.handle}}">
+            <a href="{{ col.url }}" class="shop-frame__link">
+                <img  src="{{ product.featured_image | product_img_url: '100x' }}"
+                alt="{{ alt_text | escape }}"
+                class="lazyload {{ settings.image_loading_style }}"
+                style="{{ align_height_value }} max-width: {{- product.featured_image.width -}}px;"
+                data-sizes="auto"
+                data-src="{{ product.featured_image | product_img_url: '900x' }}"
+                data-srcset=" {{ product.featured_image | product_img_url: '300x' }} 300w,
+                              {{ product.featured_image | product_img_url: '400x' }} 400w,
+                              {{ product.featured_image | product_img_url: '500x' }} 500w,
+                              {{ product.featured_image | product_img_url: '600x' }} 600w,
+                              {{ product.featured_image | product_img_url: '700x' }} 700w,
+                              {{ product.featured_image | product_img_url: '800x' }} 800w,
+                              {{ product.featured_image | product_img_url: '900x' }} 900w"
+              />
+
+            </a>
+            <h2 class="center shop-frame__title">{{col.title}}</h2>
+            <a href="{{ col.url }}" class="shop-frame__btn">Shop Now</a>
+        </div>
+    {% endif %}
+
+    {% if collections['m-class'] %}        
+        {% assign col = collections['m-class'] %}
+        {% assign product = all_products['tipsy-goat']%}
+
+        <div class="shop-frame__shape shop-frame__shape--{{col.handle}}">
+            <a href="{{ col.url }}" class="shop-frame__link">
+                <img  src="{{ product.featured_image | product_img_url: '100x' }}"
+                alt="{{ alt_text | escape }}"
+                class="lazyload {{ settings.image_loading_style }}"
+                style="{{ align_height_value }} max-width: {{- product.featured_image.width -}}px;"
+                data-sizes="auto"
+                data-src="{{ product.featured_image | product_img_url: '900x' }}"
+                data-srcset=" {{ product.featured_image | product_img_url: '300x' }} 300w,
+                              {{ product.featured_image | product_img_url: '400x' }} 400w,
+                              {{ product.featured_image | product_img_url: '500x' }} 500w,
+                              {{ product.featured_image | product_img_url: '600x' }} 600w,
+                              {{ product.featured_image | product_img_url: '700x' }} 700w,
+                              {{ product.featured_image | product_img_url: '800x' }} 800w,
+                              {{ product.featured_image | product_img_url: '900x' }} 900w"
+              />
+
+            </a>
+            <h2 class="center shop-frame__title">{{col.title}}</h2>
+            <a href="{{ col.url }}" class="shop-frame__btn">Shop Now</a>
+        </div>
+    {% endif %}
+
+    {% if collections['roxie'] %}        
+        {% assign col = collections['roxie'] %}
+        {% assign product = all_products['runway-doll']%}
+
+        <div class="shop-frame__shape shop-frame__shape--{{col.handle}}">
+            <a href="{{ col.url }}" class="shop-frame__link">
+                <img  src="{{ product.featured_image | product_img_url: '100x' }}"
+                alt="{{ alt_text | escape }}"
+                class="lazyload {{ settings.image_loading_style }}"
+                style="{{ align_height_value }} max-width: {{- product.featured_image.width -}}px;"
+                data-sizes="auto"
+                data-src="{{ product.featured_image | product_img_url: '900x' }}"
+                data-srcset=" {{ product.featured_image | product_img_url: '300x' }} 300w,
+                              {{ product.featured_image | product_img_url: '400x' }} 400w,
+                              {{ product.featured_image | product_img_url: '500x' }} 500w,
+                              {{ product.featured_image | product_img_url: '600x' }} 600w,
+                              {{ product.featured_image | product_img_url: '700x' }} 700w,
+                              {{ product.featured_image | product_img_url: '800x' }} 800w,
+                              {{ product.featured_image | product_img_url: '900x' }} 900w"
+              />
+
+            </a>
+            <h2 class="center shop-frame__title">{{col.title}}</h2>
+            <a href="{{ col.url }}" class="shop-frame__btn">Shop Now</a>
+        </div>
+    {% endif %}
+
+    {% if collections['a-series'] %}        
+        {% assign col = collections['a-series'] %}
+        {% assign product = all_products['athena-star']%}
+
+        <div class="shop-frame__shape shop-frame__shape--{{col.handle}}">
+            <a href="{{ col.url }}" class="shop-frame__link">
+                <img  src="{{ product.featured_image | product_img_url: '100x' }}"
+                alt="{{ alt_text | escape }}"
+                class="lazyload {{ settings.image_loading_style }}"
+                style="{{ align_height_value }} max-width: {{- product.featured_image.width -}}px;"
+                data-sizes="auto"
+                data-src="{{ product.featured_image | product_img_url: '900x' }}"
+                data-srcset=" {{ product.featured_image | product_img_url: '300x' }} 300w,
+                              {{ product.featured_image | product_img_url: '400x' }} 400w,
+                              {{ product.featured_image | product_img_url: '500x' }} 500w,
+                              {{ product.featured_image | product_img_url: '600x' }} 600w,
+                              {{ product.featured_image | product_img_url: '700x' }} 700w,
+                              {{ product.featured_image | product_img_url: '800x' }} 800w,
+                              {{ product.featured_image | product_img_url: '900x' }} 900w"
+              />
+
+            </a>
+            <h2 class="center shop-frame__title">{{col.title}}</h2>
+            <a href="{{ col.url }}" class="shop-frame__btn">Shop Now</a>
+        </div>
+    {% endif %}
+
+    {% if collections['north-park-blenders-eyewear'] %}        
+        {% assign col = collections['north-park-blenders-eyewear'] %}
+        {% assign product = all_products['rose-theater']%}
+
+        <div class="shop-frame__shape shop-frame__shape--{{col.handle}}">
+            <a href="{{ col.url }}" class="shop-frame__link">
+                <img  src="{{ product.featured_image | product_img_url: '100x' }}"
+                alt="{{ alt_text | escape }}"
+                class="lazyload {{ settings.image_loading_style }}"
+                style="{{ align_height_value }} max-width: {{- product.featured_image.width -}}px;"
+                data-sizes="auto"
+                data-src="{{ product.featured_image | product_img_url: '900x' }}"
+                data-srcset=" {{ product.featured_image | product_img_url: '300x' }} 300w,
+                              {{ product.featured_image | product_img_url: '400x' }} 400w,
+                              {{ product.featured_image | product_img_url: '500x' }} 500w,
+                              {{ product.featured_image | product_img_url: '600x' }} 600w,
+                              {{ product.featured_image | product_img_url: '700x' }} 700w,
+                              {{ product.featured_image | product_img_url: '800x' }} 800w,
+                              {{ product.featured_image | product_img_url: '900x' }} 900w"
+              />
+
+            </a>
+            <h2 class="center shop-frame__title">{{col.title}}</h2>
+            <a href="{{ col.url }}" class="shop-frame__btn">Shop Now</a>
+        </div>
+    {% endif %}
+
+    {% if collections['east-village'] %}        
+        {% assign col = collections['east-village'] %}
+        {% assign product = all_products['spirit-wind']%}
+
+        <div class="shop-frame__shape shop-frame__shape--{{col.handle}}">
+            <a href="{{ col.url }}" class="shop-frame__link">
+                <img  src="{{ product.featured_image | product_img_url: '100x' }}"
+                alt="{{ alt_text | escape }}"
+                class="lazyload {{ settings.image_loading_style }}"
+                style="{{ align_height_value }} max-width: {{- product.featured_image.width -}}px;"
+                data-sizes="auto"
+                data-src="{{ product.featured_image | product_img_url: '900x' }}"
+                data-srcset=" {{ product.featured_image | product_img_url: '300x' }} 300w,
+                              {{ product.featured_image | product_img_url: '400x' }} 400w,
+                              {{ product.featured_image | product_img_url: '500x' }} 500w,
+                              {{ product.featured_image | product_img_url: '600x' }} 600w,
+                              {{ product.featured_image | product_img_url: '700x' }} 700w,
+                              {{ product.featured_image | product_img_url: '800x' }} 800w,
+                              {{ product.featured_image | product_img_url: '900x' }} 900w"
+              />
+
+            </a>
+            <h2 class="center shop-frame__title">{{col.title}}</h2>
+            <a href="{{ col.url }}" class="shop-frame__btn">Shop Now</a>
+        </div>
+    {% endif %}
+
+    {% if collections['cardiff'] %}        
+    {% assign col = collections['cardiff'] %}
+    {% assign product = all_products['black-betsy']%}
+
+        <div class="shop-frame__shape shop-frame__shape--{{col.handle}}">
+            <a href="{{ col.url }}" class="shop-frame__link">
+                <img  src="{{ product.featured_image | product_img_url: '100x' }}"
+                alt="{{ alt_text | escape }}"
+                class="lazyload {{ settings.image_loading_style }}"
+                style="{{ align_height_value }} max-width: {{- product.featured_image.width -}}px;"
+                data-sizes="auto"
+                data-src="{{ product.featured_image | product_img_url: '900x' }}"
+                data-srcset=" {{ product.featured_image | product_img_url: '300x' }} 300w,
+                              {{ product.featured_image | product_img_url: '400x' }} 400w,
+                              {{ product.featured_image | product_img_url: '500x' }} 500w,
+                              {{ product.featured_image | product_img_url: '600x' }} 600w,
+                              {{ product.featured_image | product_img_url: '700x' }} 700w,
+                              {{ product.featured_image | product_img_url: '800x' }} 800w,
+                              {{ product.featured_image | product_img_url: '900x' }} 900w"
+              />
+
+            </a>
+            <h2 class="center shop-frame__title">{{col.title}}</h2>
+            <a href="{{ col.url }}" class="shop-frame__btn">Shop Now</a>
+        </div>
+    {% endif %}
+
+    {% if collections['millenia'] %}        
+        {% assign col = collections['millenia'] %}
+        {% assign product = all_products['autumn-fire']%}
+
+        <div class="shop-frame__shape shop-frame__shape--{{col.handle}}">
+            <a href="{{ col.url }}" class="shop-frame__link">
+                <img  src="{{ product.featured_image | product_img_url: '100x' }}"
+                alt="{{ alt_text | escape }}"
+                class="lazyload {{ settings.image_loading_style }}"
+                style="{{ align_height_value }} max-width: {{- product.featured_image.width -}}px;"
+                data-sizes="auto"
+                data-src="{{ product.featured_image | product_img_url: '900x' }}"
+                data-srcset=" {{ product.featured_image | product_img_url: '300x' }} 300w,
+                              {{ product.featured_image | product_img_url: '400x' }} 400w,
+                              {{ product.featured_image | product_img_url: '500x' }} 500w,
+                              {{ product.featured_image | product_img_url: '600x' }} 600w,
+                              {{ product.featured_image | product_img_url: '700x' }} 700w,
+                              {{ product.featured_image | product_img_url: '800x' }} 800w,
+                              {{ product.featured_image | product_img_url: '900x' }} 900w"
+              />
+
+            </a>
+            <h2 class="center shop-frame__title">{{col.title}}</h2>
+            <a href="{{ col.url }}" class="shop-frame__btn">Shop Now</a>
+        </div>
+    {% endif %}
+
+    {% if collections['snow-goggles'] %}        
+    {% assign col = collections['snow-goggles'] %}
+    {% assign product = all_products['splashtacular']%}
+
+        <div class="shop-frame__shape shop-frame__shape--{{col.handle}}">
+            <a href="{{ col.url }}" class="shop-frame__link">
+                <img  src="{{ product.featured_image | product_img_url: '100x' }}"
+                alt="{{ alt_text | escape }}"
+                class="lazyload {{ settings.image_loading_style }}"
+                style="{{ align_height_value }} max-width: {{- product.featured_image.width -}}px;"
+                data-sizes="auto"
+                data-src="{{ product.featured_image | product_img_url: '900x' }}"
+                data-srcset=" {{ product.featured_image | product_img_url: '300x' }} 300w,
+                              {{ product.featured_image | product_img_url: '400x' }} 400w,
+                              {{ product.featured_image | product_img_url: '500x' }} 500w,
+                              {{ product.featured_image | product_img_url: '600x' }} 600w,
+                              {{ product.featured_image | product_img_url: '700x' }} 700w,
+                              {{ product.featured_image | product_img_url: '800x' }} 800w,
+                              {{ product.featured_image | product_img_url: '900x' }} 900w"
+              />
+
+            </a>
+            <h2 class="center shop-frame__title">{{col.title}}</h2>
+            <a href="{{ col.url }}" class="shop-frame__btn">Shop Now</a>
+        </div>
+    {% endif %}
+
+</div>
+
+{% schema %}
+
+{
+  "name": "shop-by-frame-settings",
+  "settings": [
+        {
+            "type": "image_picker",
+            "id": "header_image",
+            "label": "Image"
+        },
+        {
+            "type": "text",
+            "id": "header_title",
+            "label": "Title"
+        }
+  ]
+}
+
+{% endschema %}

@@ -12239,3 +12239,64 @@ select#sort-by {
     margin-top: 0;
   }
 }
+
+
+// -------------------------------------------
+// ------- Shop by Frame New Page
+// -------------------------------------------
+
+.shop-frame__container{
+  @include flexbox();
+  @include justify-content(flex-start);
+  @include align-items(stretch);
+  @include flex-flow(row wrap);
+}
+
+.shop-frame__shape{
+  max-width: 33.333%;
+  @include flex(0 0 33.333%);
+  padding: 1rem;
+  margin: 0 0 1rem;
+}
+
+a.shop-frame__btn{
+  display: block;
+  color: white;
+  background: {{ settings.btn_color }};
+  text-align: center;
+  margin: .5rem auto 0;
+  line-height: 1;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: .5rem 1.5rem;
+  max-width: max-content;
+  transition: all .15s ease-in-out;
+  letter-spacing: .05em;
+  opacity: 1;
+}
+
+a.shop-frame__btn:hover,
+a.shop-frame__btn:focus {
+  opacity: 0.85;
+}
+
+.center.shop-frame__title {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1;
+    margin: 0 0 1rem;
+}
+
+// Make snow goggles smaller
+.shop-frame__shape.shop-frame__shape--snow-goggles {
+    padding: 3rem;
+}
+
+// mobile Styles
+@include respond-to('small'){
+  .shop-frame__shape{
+    max-width: 50%;
+    @include flex(0 0 50%);
+    margin: 0 0 1rem;
+  }
+}
