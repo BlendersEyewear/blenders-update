@@ -49,14 +49,62 @@ const tabfunc = () => {
 }
 
 
+// =========== WARNING =============
+//  ------ jQuery Ugliness -------
+
+function jQueryTest(){
+  var header = $('.product_section').find('.description').find('h5')
+  $(header).wrap('<div class="product-accordion__title"></div>');
+
+  var chevron = '<img src="https://cdn.shopify.com/s/files/1/0148/9585/files/chevron-up.svg?7007077893122410469" alt="accordion toggle" class="product-accordion__arrow">';
+
+  var accordTitle = $('.product-accordion__title');
+  $(accordTitle).append(chevron);
+
+
+  var accordContent = $(accordTitle).nextUntil(accordTitle);
+
+  $(accordContent).wrap('<div class="product-accordion__body"></div>');
+
+  var accordionBody = $('.product-accordion__body');
+
+  function productTabToggle(){
+    // hide the accordion content
+    $(accordContent).hide();
+
+    // click function
+    $(accordTitle).click(function(){
+      // Make arrow turn
+      $(this).find('.product-accordion__arrow').toggleClass('product-accordion__arrow--open');
+
+      let contentRaw = $(this).nextUntil(accordTitle).find(accordionBody);
+      let content = contentRaw.prevObject;
+
+      // console.log(content);
+      
+      for (let line of content){
+        // console.log(line);
+          $(line).children().toggle(250);
+      }
+
+    });
+  }
+
+  productTabToggle();
+
+}
+
 
 //  Doc Ready
 document.addEventListener("DOMContentLoaded", function() {
   console.log("custom js loaded");
-
   let screenSize = window.innerWidth;
 
   // Change Feature Promotion Button text on Desktop
   screenSize >= tabletSize ? fpBtnSwap() : "";
+
+
+  // Create accordions on product pages on mobile
+  screenSize <= tabletSize ? jQueryTest() : '';
 
 });
