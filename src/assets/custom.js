@@ -56,7 +56,9 @@ function jQueryTest(){
   var header = $('.product_section').find('.description').find('h5')
   $(header).wrap('<div class="product-accordion__title"></div>');
 
-  var chevron = '<img src="https://cdn.shopify.com/s/files/1/0148/9585/files/chevron-up.svg?7007077893122410469" alt="accordion toggle" class="product-accordion__arrow">';
+  const chevronImg = 'https://cdn.shopify.com/s/files/1/0148/9585/files/icon-arrow-up.svg?15783001183810907320';
+
+  var chevron = `<img src="${chevronImg}" alt="accordion toggle" class="product-accordion__arrow">`;
 
   var accordTitle = $('.product-accordion__title');
   $(accordTitle).append(chevron);
@@ -84,7 +86,7 @@ function jQueryTest(){
       
       for (let line of content){
         // console.log(line);
-          $(line).children().toggle(250);
+          $(line).children().slideToggle(250);
       }
 
     });

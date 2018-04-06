@@ -10002,79 +10002,88 @@ img.collection_banner_img{
   
     /* Desktop Cart  Counter */
   
-  @media only screen and (min-width: 768px) {
-  span.cart_count {
-    font-size: 17px!important;
-}
-  }
+	// Edited out By Adam - 4/6/2018
+//   @media only screen and (min-width: 768px) {
+//   span.cart_count {
+//     font-size: 17px!important;
+// }
+//   }
 
-    @media only screen and (min-width: 768px) {
-  .icon-cart:before {
-    content: "\e901";
-    font-size: 18px;
-}
-    }
+  // Edited out By Adam - 4/6/2018
+//     @media only screen and (min-width: 768px) {
+//   .icon-cart:before {
+//     content: "\e901";
+//     font-size: 18px;
+// }
+//     }
 
 /* Mobile Nav Updates */
 
-@media only screen and (max-width: 768px) {
-  #header a.mobile_logo img {
-    width: auto;
-    max-width: 350px;
-    max-height: 36px;
-    padding-top: 10px;
-  }
-}
+// Edited out By Adam - 4/6/2018
+// @media only screen and (max-width: 768px) {
+// 	#header a.mobile_logo img {
+// 		width: auto;
+// 		max-width: 350px;
+// 		max-height: 36px;
+// 		padding-top: 10px;
+// 	}
+// }
 
-@media (max-width: 768px) {
-  #header .top_bar a.mobile_logo img {
-    margin-top: 5px!important;
-  }
-}
+// Edited out By Adam - 4/6/2018
+// @media (max-width: 768px) {
+// 	#header .top_bar a.mobile_logo img {
+// 		margin-top: 5px!important;
+// 	}
+// }
 
-@media (max-width: 768px) {
-  .mobile_nav div {
-    width: 22px;
-  }
-}
+// Edited out By Adam - 4/6/2018
+// @media (max-width: 768px) {
+// 	.mobile_nav div {
+// 		width: 22px;
+// 	}
+// }
 
-@media only screen and (max-width: 768px) {
-  #header .top_bar a.mobile_logo {
-    margin: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    font-size: 18px;
-    line-height: 34px;
-    z-index: 0;
-    width: 100%;
-    height: auto;
-  }
-}
-  
-  @media (max-width: 768px) {
-.mini_cart, .nav a.mini_cart {
-    right: 4px;
-}
-  }
-  
-  .mini_cart, .nav a.mini_cart {
-    float: right;
-    text-align: center;
-    cursor: pointer;
-    background-color: #ffffff;
-  }
-  
-  @media (max-width: 768px) {
-#header .mini_cart {
-    height: 52px!important;
-    padding-top: 20px;
-    padding-left: 8px;
-    padding-right: 10px;
-}
-  }
+// Edited out By Adam - 4/6/2018
+// @media only screen and (max-width: 768px) {
+// 	#header .top_bar a.mobile_logo {
+// 		margin: auto;
+// 		position: absolute;
+// 		top: 0;
+// 		left: 0;
+// 		bottom: 0;
+// 		right: 0;
+// 		font-size: 18px;
+// 		line-height: 34px;
+// 		z-index: 0;
+// 		width: 100%;
+// 		height: auto;
+// 	}
+// }
+
+// Edited out By Adam - 4/6/2018
+// @media (max-width: 768px) {
+// 	.mini_cart, .nav a.mini_cart {
+// 		right: 4px;
+// 	}
+// }
+
+// .mini_cart, .nav a.mini_cart {
+// 	float: right;
+//     text-align: center;
+//     cursor: pointer;
+//     background-color: #ffffff;
+// }
+
+
+// Edited out By Adam - 4/6/2018
+//   @media (max-width: 768px) {
+// #header .mini_cart {
+//     height: 52px!important;
+//     padding-top: 20px;
+//     padding-left: 8px;
+//     padding-right: 10px;
+// }
+//   }
  
   
  /* Mobile Padding & Spacing Customizations */
@@ -11503,10 +11512,10 @@ $headerDesktopLargeUp: 1280px;
   }
 
   // Move/nudge search icon a bit
-  #header .top_bar .icon-search {
-    top: 15px;
-    right: 51px;
-  }
+//   #header .top_bar .icon-search {
+//     top: 15px;
+//     right: 51px;
+//   }
 }
 
 
@@ -11619,7 +11628,7 @@ p.modal_price {
 
 // Descriptions - product tabs
 .product .description {
-  h5, h5 strong{
+  h5, h5 strong, h5 b{
 	font-weight: 600;
 	font-size: 0.875rem;
 	letter-spacing: .05em;
@@ -11771,6 +11780,14 @@ p.modal_price {
   #fs-product{
     margin-bottom: 2rem;
   }
+}
+
+@include respond-to('small'){
+	.product_section{
+		p.modal_price{
+			margin: 1rem 0 1.5rem;
+		}
+	}
 }
 
 
@@ -12166,6 +12183,12 @@ select#sort-by {
     font-size: 0.825rem;
     font-weight: 600;
     letter-spacing: .05em;
+  }
+
+  .quick_shops .action_button.add_to_cart:hover,
+  .quick_shops .action_button.add_to_cart:focus{
+	  border:none;
+	  border-width: none !important;
   }
 }
 

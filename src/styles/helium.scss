@@ -445,35 +445,36 @@ html.touch-device .homepage-product-slider .quick_shops {
   opacity: 1 !important;
 }
 
-@media (max-width: 768px) {
-  #header .top_bar {
-    background-color: white;
-    border-bottom: 1px solid #e0e0e0;
-    height: 55px;
-  }
-  #header .top_bar a.mobile_nav {
-    top: 10px;
-  }
-  #header .top_bar a.mobile_logo img {
-    margin-top: 8px;
-  }
-  #header .mini_cart {
-    height: 55px;
-    padding-top: 20px;
-    padding-left: 8px;
-    padding-right: 10px;
-  }
-  #header .cart_content {
-    top: 54px;
-  }
-  #header .cart_count {
-    position: absolute !important;
-    top: -4px;
-    right: -2px;
-    width: 100%;
-    text-align: center;
-  }
-}
+// Edited out by adam 4/6
+// @media (max-width: 768px) {
+//   #header .top_bar {
+//     background-color: white;
+//     border-bottom: 1px solid #e0e0e0;
+//     height: 55px;
+//   }
+//   #header .top_bar a.mobile_nav {
+//     top: 10px;
+//   }
+//   #header .top_bar a.mobile_logo img {
+//     margin-top: 8px;
+//   }
+//   #header .mini_cart {
+//     height: 55px;
+//     padding-top: 20px;
+//     padding-left: 8px;
+//     padding-right: 10px;
+//   }
+//   #header .cart_content {
+//     top: 54px;
+//   }
+//   #header .cart_count {
+//     position: absolute !important;
+//     top: -4px;
+//     right: -2px;
+//     width: 100%;
+//     text-align: center;
+//   }
+// }
 
 .customers-login h1, body.search h1 {
   text-align: center;
@@ -591,9 +592,10 @@ body.product .yotpo-stars-and-sum-reviews .write-review-button, body.product .yo
   }
 }
 @media (max-width: 480px) {
-  .action_button {
-    font-size: 18px;
-  }
+  // Removed by Adam 4/6
+  // .action_button {
+  //   font-size: 1px;
+  // }
 
   .QABottomLine {
     display: none !important;
@@ -612,14 +614,16 @@ body.product .yotpo-stars-and-sum-reviews .write-review-button, body.product .yo
     margin: 0 auto;
   }
 }
-@media (max-width: 768px) {
-  body.search h1, body.search .feature_divider {
-    display: none;
-  }
-  body.search .search_page {
-    padding-top: 0;
-  }
-}
+
+// commented out by Adam 4/6/18
+// @media (max-width: 768px) {
+//   body.search h1, body.search .feature_divider {
+//     display: none;
+//   }
+//   body.search .search_page {
+//     padding-top: 0;
+//   }
+// }
 
 label.discount {
     text-align: center;
