@@ -6,8 +6,9 @@
 <a name="pagecontent" id="pagecontent"></a>
 
 <div class="container main content">
-  <div class="sixteen columns">
-    {% if collection.previous_product or collection.next_product or section.settings.product_breadcrumb %}
+  <div class="sixteen columns top-of-product-reviews">
+  {% comment %} Commented out by Adam - 4/6/18 {% endcomment %}
+    {% comment %} {% if collection.previous_product or collection.next_product or section.settings.product_breadcrumb %}
       <div class="clearfix breadcrumb-collection">
         {% if collection.previous_product or collection.next_product %}
           <div class="nav_arrows breadcrumb_text">
@@ -38,7 +39,22 @@
           </div>
         {% endif %}
       </div>
-    {% endif %}
+    {% endif %} {% endcomment %}
+
+    {% comment %} Yotpo {% endcomment %}
+          <div class="yotpo-container top-of-product-reviews__review">
+            <div class="yotpo bottomLine"
+              data-appkey="7Na4Xsq5Vf0s5VxSDIrDl56IRsBb1HHiohLKFKOK"
+              data-domain="{{shop.permanent_domain | escape }}"
+              data-product-id="{{ product.id }}"
+              data-product-models="{{ product.id }}"
+              data-name="{{ product.title | escape }}"
+              data-url="{{ shop.url }}{{ product.url }}"
+              data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
+              data-description="{{ product.description | escape }}"
+              data-bread-crumbs="{% for tag in product.tags %}{{ tag | escape }};{% endfor %}">
+            </div>
+          </div>
   </div>
 
   {% comment %}Check to see if sidebar should be enabled{% endcomment %}
@@ -123,22 +139,6 @@
           {% if settings.size_chart != blank %}
             <a href="#size-chart" class="size_chart" data-remodal-target="size-chart" data-no-instant>{{ 'products.product.size_chart' | t }} <span class="icon-right-arrow"></span></a>
           {% endif %}
-
-
-          {% comment %} Yotpo {% endcomment %}
-          <div class="yotpo-container">
-            <div class="yotpo bottomLine"
-              data-appkey="7Na4Xsq5Vf0s5VxSDIrDl56IRsBb1HHiohLKFKOK"
-              data-domain="{{shop.permanent_domain | escape }}"
-              data-product-id="{{ product.id }}"
-              data-product-models="{{ product.id }}"
-              data-name="{{ product.title | escape }}"
-              data-url="{{ shop.url }}{{ product.url }}"
-              data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
-              data-description="{{ product.description | escape }}"
-              data-bread-crumbs="{% for tag in product.tags %}{{ tag | escape }};{% endfor %}">
-            </div>
-          </div>
 
           </div>
 
@@ -315,9 +315,7 @@
 
     {% endif %}
 
-<script>
-  console.log('scripts from product page');
-</script>
+
 
 {% schema %}
 

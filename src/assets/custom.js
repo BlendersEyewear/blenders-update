@@ -78,6 +78,8 @@ function jQueryTest(){
     $(accordTitle).click(function(){
       // Make arrow turn
       $(this).find('.product-accordion__arrow').toggleClass('product-accordion__arrow--open');
+      // add bottom margin
+      $(this).toggleClass('product-accordion__title--open');
 
       let contentRaw = $(this).nextUntil(accordTitle).find(accordionBody);
       let content = contentRaw.prevObject;

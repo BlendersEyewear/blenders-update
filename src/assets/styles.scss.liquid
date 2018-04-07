@@ -11520,9 +11520,11 @@ $headerDesktopLargeUp: 1280px;
 
 
 
-// ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------------------
 //    Product Page
-// ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------------------
 
 
 // Size Chart link
@@ -11562,6 +11564,26 @@ ul.tabs-content>li.active {
   font-size: 1rem;
   line-height: 1.5;
   font-weight: 400;
+}
+
+// Top of Product Reviews
+.top-of-product-reviews {
+	@include flexbox();
+	@include justify-content(center);
+	@include align-items(center);
+    padding: 0 0 1rem;
+    margin-top: -1rem;
+}
+
+
+
+// ---------------------------
+// Product gallery on Mobile
+// ---------------------------
+@include respond-to('medium'){
+	.product .product_gallery{
+		margin-bottom: 0;
+	}
 }
 
 // Yotpo
@@ -11632,6 +11654,9 @@ p.modal_price {
 	font-weight: 600;
 	font-size: 0.875rem;
 	letter-spacing: .05em;
+	line-height: 1;
+    padding: 0;
+    margin: 0;
   }
 }
 
@@ -11641,21 +11666,18 @@ p.modal_price {
   @include justify-content(space-between);
   @include align-items(center);
   cursor: pointer;
+  padding: .75rem 0;
 }
 
 // Accordion Titles
-.product .product-accordion__title:not(:first-child){
-  margin: 1rem 0 0;
+.product .product-accordion__title--open{
+	margin-bottom: 0.5rem;
 }
 
 // Accordion Content
-.product-accordion__title + .product-accordion__body{
-  padding-top: 0.5rem;
-}
-
-.product .product-accordion__body:first-of-type{
-	background: red;
-}
+// .product-accordion__title + .product-accordion__body{
+//   padding-top: 0.5rem;
+// }
 
 // arrow
 .product .product-accordion__arrow {
@@ -11663,10 +11685,12 @@ p.modal_price {
     width: auto;
 	display: block;
 	transition: all .25s ease-in-out;
+	transform: rotate(90deg);
+
 }
 
 .product-accordion__arrow--open{
-	transform: rotate(180deg);
+	transform: rotate(-90deg);
 }
 
 
@@ -11677,7 +11701,7 @@ p.modal_price {
   }
 
   // Price area
-  body.product p.modal_price {
+  body.product .modal_price {
       margin: 1rem 0;
   }
 }
@@ -11714,7 +11738,7 @@ p.modal_price {
 // below title stuff - size guide and reviews
 .product .below-title-section{
   @include flexbox();
-  @include justify-content(space-between);
+  @include justify-content(center);
   @include align-items(center);
   margin: 1.5rem 0 0;
 }
@@ -11772,6 +11796,18 @@ p.modal_price {
   .purchase{
     margin-top: 0;
   }
+}
+
+@include respond-to('medium'){
+	body.product .product_section{
+		p.modal_price{
+			margin: 1rem 0 1.5rem;
+		}
+
+		.modal_price > .current_price{
+			font-weight: 600;
+		}
+	}
 }
 
 
