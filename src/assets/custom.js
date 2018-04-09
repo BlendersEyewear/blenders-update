@@ -51,12 +51,12 @@ const tabfunc = () => {
 
 // =========== WARNING =============
 //  ------ jQuery Ugliness -------
-
-function jQueryTest(){
+// Make Product Tabs into accordions
+function productTabs(){
   var header = $('.product_section').find('.description').find('h5')
   $(header).wrap('<div class="product-accordion__title"></div>');
 
-  const chevronImg = 'https://cdn.shopify.com/s/files/1/0148/9585/files/icon-arrow-up.svg?15783001183810907320';
+  const chevronImg = 'https://cdn.shopify.com/s/files/1/0148/9585/files/icon-arrow-right.svg?1448602857142359948';
 
   var chevron = `<img src="${chevronImg}" alt="accordion toggle" class="product-accordion__arrow">`;
 
@@ -98,6 +98,25 @@ function jQueryTest(){
 
 }
 
+const productTabsDesktop = function(){
+  console.log('yo, this is on a Desktop');
+}
+
+
+// resize the section headers on product pages
+const resizeHeadings = function(){
+  let heading460 = $('.product')
+                      .find('#fs-product')
+                      .find('.related-products__title')
+                      .find('h4');
+
+  $(heading460).css('fontSize', '1rem');
+
+  $('.product').find('h4').css('fontSize','1rem');
+
+}
+
+
 
 //  Doc Ready
 document.addEventListener("DOMContentLoaded", function() {
@@ -107,8 +126,8 @@ document.addEventListener("DOMContentLoaded", function() {
   // Change Feature Promotion Button text on Desktop
   screenSize >= tabletSize ? fpBtnSwap() : "";
 
-
+ 
   // Create accordions on product pages on mobile
-  screenSize <= tabletSize ? jQueryTest() : '';
+  screenSize <= tabletSize ? (productTabs(), resizeHeadings()) : productTabsDesktop();
 
 });

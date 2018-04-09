@@ -11529,7 +11529,7 @@ $headerDesktopLargeUp: 1280px;
 
 // Size Chart link
 a.size_chart {
-    background: hsla(198, 25%, 92%, 1);
+    background: #f2f2f2;
     padding: 7px 8px;
     display: block;
     font-size: 0.825rem;
@@ -11568,13 +11568,39 @@ ul.tabs-content>li.active {
 
 // Top of Product Reviews
 .top-of-product-reviews {
-	@include flexbox();
-	@include justify-content(center);
-	@include align-items(center);
-    padding: 0 0 1rem;
+	display: none;
+	padding: 0 0 1rem;
     margin-top: -1rem;
 }
 
+@include respond-to('medium'){
+    .product .top-of-product-reviews{
+		@include flexbox();
+		@include justify-content(center);
+		@include align-items(center);
+
+		.yotpo .yotpo-bottomline .yotpo-icon-star,
+		.yotpo .yotpo-bottomline .yotpo-icon-half-star,
+		.yotpo .yotpo-bottomline .yotpo-icon-empty-star{
+			color: hsla(49, 100%, 50%, 0.66);
+		}
+
+		a.text-m{
+			padding-left: .35rem !important;
+		}
+	}
+
+}
+
+
+
+// ----------------------------------
+// Product Form
+// ----------------------------------
+
+.product .product_form{
+
+}
 
 
 // ---------------------------
@@ -11583,6 +11609,15 @@ ul.tabs-content>li.active {
 @include respond-to('medium'){
 	.product .product_gallery{
 		margin-bottom: 0;
+	}
+}
+
+
+// Make product image arrows visible even when not hovered over.
+.product .product_section{
+	.gallery-arrows--true .product_gallery .flickity-prev-next-button {
+		opacity: 0.65;
+		padding: 0;
 	}
 }
 
@@ -11642,6 +11677,23 @@ p.modal_price {
     display: none !important;
 }
 
+// Remove bottom border from Yotpo box
+.product .yotpo-main-widget .yotpo-display-wrapper{
+	border: none !important;
+}
+
+// Remove Review Share button on product page
+.product{
+	.yotpo.yotpo-main-widget.yotpo-small .yotpo-review .yotpo-footer .footer-actions,
+	.yotpo.yotpo-main-widget.yotpo-small .yotpo-comment .yotpo-footer .footer-actions,
+	.yotpo.yotpo-main-widget.yotpo-small .yotpo-question .yotpo-footer .footer-actions,
+	.yotpo .yotpo-modal-dialog.yotpo-small .yotpo-review .yotpo-footer .footer-actions,
+	.yotpo .yotpo-modal-dialog.yotpo-small .yotpo-comment .yotpo-footer .footer-actions,
+	.yotpo .yotpo-modal-dialog.yotpo-small .yotpo-question .yotpo-footer .footer-actions {
+		display: none;
+	}
+}
+
 .product .yotpo .text-m {
     padding: 0 !important;
     margin: 0 !important;
@@ -11661,7 +11713,7 @@ p.modal_price {
 }
 
 .product .product-accordion__title{
-  box-shadow: inset 0 -1px 0 0 rgba(0,0,0,0.45);
+  box-shadow: inset 0 -1px 0 0 rgba(0,0,0,0.13);
   @include flexbox();
   @include justify-content(space-between);
   @include align-items(center);
@@ -11674,18 +11726,12 @@ p.modal_price {
 	margin-bottom: 0.5rem;
 }
 
-// Accordion Content
-// .product-accordion__title + .product-accordion__body{
-//   padding-top: 0.5rem;
-// }
-
 // arrow
 .product .product-accordion__arrow {
     max-height: 1rem;
     width: auto;
 	display: block;
 	transition: all .25s ease-in-out;
-	transform: rotate(90deg);
 
 }
 
@@ -11721,7 +11767,7 @@ p.modal_price {
     margin: 0;
   }
 
-  a.text-m {
+  .related-products a.text-m {
     display: block !important;
     line-height: 1;
     margin: .5rem 0 !important;
@@ -11740,7 +11786,7 @@ p.modal_price {
   @include flexbox();
   @include justify-content(center);
   @include align-items(center);
-  margin: 1.5rem 0 0;
+  margin: 1.5rem 0;
 }
 
 .product .yotpo-container{
@@ -11771,6 +11817,46 @@ p.modal_price {
 }
 
 
+
+//  ----------------------------------
+//  Product Form ---- 
+//  ----------------------------------
+@include respond-to('medium'){
+	.product_section{
+		.product_form {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+		}
+		
+		.product_form .product-quantity-box {
+			float: none;
+			max-width: auto;
+			width: auto;
+		}
+		
+		.product-quantity-box .quantity {
+			padding: 6px 3px;
+			width: 32px;
+		}
+		
+		.product-quantity-box .product-plus, .product-quantity-box .product-minus {
+			width: 25px;
+		}
+		
+		.purchase.inline_purchase {
+			flex: 1;
+			margin-left: 15px;
+			font-weight: 600;
+		}
+		
+		button.action_button.add_to_cart {
+			font-weight: 600;
+		}
+	}
+}
+
+
 // Product form
 .product_section {
   .product-quantity-box .product-plus,
@@ -11785,11 +11871,6 @@ p.modal_price {
   // Remove "qty" label
   .product-quantity-box > label{
     display: none;
-  }
-
-  // Add bottom padding to price
-  p.modal_price {
-    margin: 1rem 0 1.5rem;
   }
 
   // Move add to cart button up to match the qty picker
@@ -11810,7 +11891,7 @@ p.modal_price {
 	}
 }
 
-
+//  460 section ==-=-=-=-=-=-=-=-=-=-=-=-=
 // 460 add padding
 .product{
   #fs-product{
@@ -11827,8 +11908,25 @@ p.modal_price {
 }
 
 
+// Section Title
+@include respond-to('medium'){
+	.product .related-products__title h4{
+		font-size: 1rem;
+	}
+}
+
+@include respond-to('medium'){
+	.product {
+		.fs-slider-next-button,
+		.fs-slider-prev-button{
+			z-index:3 !important;
+		}
+	}
+}
+
 // Recomatic Product Styles
 /*  Mobile Changes  */
+// global styles
 @media only screen and (max-width: 736px){
   /* Make Recomatic Buttons Static on mobile, and other rec */
   button.btn.recomatic-add-to-cart {
@@ -11841,6 +11939,22 @@ p.modal_price {
     max-width: 10rem;
     margin: 0 auto 10px;
   }
+
+//   disable hover effect on mobile
+@include respond-to('medium'){
+	.recomatic-wrap a:hover .main-recomatic-image {
+		opacity: 1 !important;
+	}
+	.recomatic-wrap a:hover .alternate-recomatic-image {
+		opacity: 0 !important;
+	}
+}
+
+//   Added by Adam 4/9
+button.btn.recomatic-add-to-cart:hover,
+button.btn.recomatic-add-to-cart:focus{
+	border: none;
+}
 
   .recomatic-title {
     line-height: 1.5 !important;
@@ -11867,6 +11981,13 @@ p.modal_price {
     margin-top: 5px;
   }
 }
+
+
+
+
+
+
+
 
 // ------------------------------------------------------------------------------------------
 //    Cart Page

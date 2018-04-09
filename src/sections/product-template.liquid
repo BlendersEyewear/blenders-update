@@ -121,7 +121,6 @@
           {% if settings.enable_shopify_product_badges and settings.enable_shopify_review_comments %}
             <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
           {% endif %}
-          <div class="feature_divider"></div>
 
           {% assign product_tags = product.tags | join: ' ' %}
           {% if product_tags contains 'meta-size-chart-' %}
@@ -133,14 +132,6 @@
             {% endfor %}
           {% endif %}
 
-
-          <div class="below-title-section">
-          
-          {% if settings.size_chart != blank %}
-            <a href="#size-chart" class="size_chart" data-remodal-target="size-chart" data-no-instant>{{ 'products.product.size_chart' | t }} <span class="icon-right-arrow"></span></a>
-          {% endif %}
-
-          </div>
 
           {% if collection_handles contains 'coming-soon' %}
             <p class="modal_price">{{ 'collections.general.coming_soon' | t }}</p>
@@ -179,6 +170,8 @@
             {% include 'product-notify-me' %}
           {% endif %}
 
+          {% comment %} <div class="feature_divider"></div> {% endcomment %}
+
           {% if section.settings.product_description_position == "top" %}
             {% if product.description != blank %}
              <div class="description" itemprop="description">
@@ -199,6 +192,14 @@
             {% endif %}
           {% endif %}
 
+          <div class="below-title-section">
+          
+          {% if settings.size_chart != blank %}
+            <a href="#size-chart" class="size_chart" data-remodal-target="size-chart" data-no-instant>{{ 'products.product.size_chart' | t }} <span class="icon-right-arrow"></span></a>
+          {% endif %}
+
+          </div>
+
           {% if settings.enable_shopify_review_comments and settings.review_position == "next_to_gallery" %}
             <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
           {% endif %}
@@ -216,12 +217,12 @@
                 </p>
               {% endif %}
 
-              {% if section.settings.display_type %}
+              {% comment %} {% if section.settings.display_type %}
                 <p>
                   <span class="label">{{ 'products.product.product_types' | t }}:</span>
                   <span>{{ product.type | link_to_type }}</span>
                 </p>
-              {% endif %}
+              {% endif %} {% endcomment %}
 
               {% if section.settings.display_tags %}
                 <p>
@@ -248,6 +249,7 @@
           </div>
         </div>
       </div>
+
 
       {% if product.description contains "<!-- split -->"  %}
         <br class="clear" />
