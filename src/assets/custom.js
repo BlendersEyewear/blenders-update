@@ -99,7 +99,23 @@ function productTabs(){
 }
 
 const productTabsDesktop = function(){
-  console.log('yo, this is on a Desktop');
+  let productDesc = $('.product_section').find('.description');
+  let header = $('.product_section').find('.description').find('h5')
+  $(header).wrap('<div class="product-tab__title-hidden"></div>');
+
+
+  // Create Tab Links container
+  const tabLinks = $('<div />', {
+    "class": 'product-tab-links'
+  });
+
+  $(tabLinks).append('<h5 class="product-tab-link">Details</h5>');
+  $(tabLinks).append('<h5 class="product-tab-link">Description</h5>');
+  $(tabLinks).append('<h5 class="product-tab-link">Shipping & Returns</h5>');
+
+  $(productDesc).prepend(tabLinks);
+
+  // console.log(productDesc);
 }
 
 
@@ -125,7 +141,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Change Feature Promotion Button text on Desktop
   screenSize >= tabletSize ? fpBtnSwap() : "";
-
  
   // Create accordions on product pages on mobile
   screenSize <= tabletSize ? (productTabs(), resizeHeadings()) : productTabsDesktop();
