@@ -143,6 +143,8 @@ document.addEventListener("DOMContentLoaded", function() {
   screenSize >= tabletSize ? fpBtnSwap() : "";
  
   // Create accordions on product pages on mobile
-  screenSize <= tabletSize ? (productTabs(), resizeHeadings()) : productTabsDesktop();
+  // disabled this for now
+  // screenSize <= tabletSize ? (productTabs(), resizeHeadings()) : productTabsDesktop();
+  screenSize <= tabletSize ? (productTabs(), resizeHeadings()) : '';
 
 });
