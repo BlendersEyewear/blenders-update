@@ -1,0 +1,68 @@
+<div id="productTabs" class="product-tabs">
+        <div id="tabsTitles" class="product-tabs__titles">
+            <a href="#tab1" class="product-tabs__tab-title" id="productTab1">Details</a>
+            <a href="#tab2" class="product-tabs__tab-title" id="productTab2">Fit</a>
+            <a href="#tab3" class="product-tabs__tab-title" id="productTab3">Description</a>
+        </div>
+
+        <div class="product-tab__info">
+            <div id="tab1" class="product-tab product-tab__details">
+                {% comment %} Vibe {% endcomment %}
+                {%if product.metafields.custom_fields["vibe"] != blank %}
+                    <div class="product-tab__detail">
+                        <p class="product-tab__detail-title">Vibe</p>
+                        <p class="product-tab__detail-value">
+                            {{ product.metafields.custom_fields['vibe']}}
+                            {% comment %} add womens tag if womens {% endcomment %}
+                            {% if product.metafields.custom_fields["womens"] != blank %}
+                                {% if product.metafields.custom_fields["womens"] == 1 %}
+                                    | Women's
+                                {% endif %}
+                            {% endif %}
+                        </p>
+                    </div>
+                {% endif %}
+
+                {% comment %} Frame (shape, material) {% endcomment %}
+                {%if product.metafields.custom_fields["category"] != blank %}
+                    <div class="product-tab__detail">
+                        <p class="product-tab__detail-title">Frame</p>
+                        <p class="product-tab__detail-value">
+                            {{ product.metafields.custom_fields['category']}}
+                        </p>
+                    </div>
+                {% endif %}
+
+
+                {% comment %} Lens {% endcomment %}
+                {% if product.metafields.custom_fields["lens_color"] != blank %}
+                    <div class="product-tab__detail">
+                        <p class="product-tab__detail-title">Lens</p>
+
+                        <p class="product-tab__detail-value">
+                            {{ product.metafields.custom_fields['lens_color']}}
+                            {% comment %} add womens tag if polarized {% endcomment %}
+                            {% if product.metafields.custom_fields["polarized"] != blank %}
+                                {% if product.metafields.custom_fields["polarized"] == 1 %}
+                                    | Polarized
+                                {% endif %}
+                            {% endif %}
+                        </p>
+                    </div>
+                {% endif %}
+
+                {% comment %} Hinges {% endcomment %}
+                <div class="product-tab__detail">
+                    <p class="product-tab__detail-title">Hinges</p>
+                    <p class="product-tab__detail-value"></p>
+                </div>
+            </div>
+
+            <div id="tab2" class="product-tab product-tab__fit">fit</div>
+
+            <div id="tab3" class="product-tab product-tab__description">
+            {{product.description}}
+            </div>
+        </div>
+
+    </div>

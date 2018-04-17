@@ -26,6 +26,7 @@
         </div>
     </div>
 
+    {% comment %} Product Form {% endcomment %}
     <div class="product product--custom clearfix">
         <div class="sixteen columns">
 
@@ -132,8 +133,9 @@
 
                     </div>
 
+                    {% comment %}
                     {% assign inventory = product.selected_or_first_available_variant.inventory_quantity %}
-                    {%if inventory <= 10 %}
+                    {%if inventory <= 10 and inventory > 0 %}
                         {%if inventory == 1 %}
                             <div class="product-low-inventory-warning">
                                 Only {{inventory}} pair left!
@@ -144,6 +146,7 @@
                             </div>
                         {% endif %}
                     {% endif %}
+                    {% endcomment %}
 
 
                     {% unless collection_handles contains 'coming-soon' %}
@@ -159,24 +162,51 @@
     </div>
 </div>
 
+<div class="mobile-product-fit">
+    <div id="mobileFitToggle" class="mobile-product-fit-toggle">
+        <i class="fal fa-bullseye fa-xs"></i> Size Guide <i class="fal fa-chevron-right fa-xs mobile-product-fit-icon"></i>
+    </div>
+
+    <div id="mobileFitContent" class="mobile-fit-content">
+        <img src="https://picsum.photos/600/400" alt="" class="mobile-fit-img">
+
+        <p class="mobile-fit-blurb">
+            Lorem ipsum dolor sit amet, cu dolore fuisset phaedrum sit. Quo clita omnium signiferumque ne, in pro detraxit sensibus expetendis
+        </p>
+
+        <p class="mobile-fit-size">
+            <span class="fit-title">Fit: </span>
+            <span class="value">Small-Medium</span>
+        </p>
+        <p class="mobile-fit-measurements">
+            <span class="fit-title">Measurements: </span>
+            <span class="value">55-15-143</span>
+        </p>
+    </div>
+</div>
+
 <div class="container product-icons">
     {% if shop.metafields.custom_fields["icon_message_1"] != blank %}
         <div class="product-icon">
+            <i class="fal fa-shipping-fast"></i>
             <p>{{ shop.metafields.custom_fields["icon_message_1"] }}</p>
         </div>
     {% endif %}
     {% if shop.metafields.custom_fields["icon_message_2"] != blank %}
         <div class="product-icon">
+            <i class="fal fa-hand-holding-box"></i>
             <p>{{ shop.metafields.custom_fields["icon_message_2"] }}</p>
         </div>
     {% endif %}
     {% if shop.metafields.custom_fields["icon_message_3"] != blank %}
         <div class="product-icon">
+            <i class="fal fa-shield-check"></i>
             <p>{{ shop.metafields.custom_fields["icon_message_3"] }}</p>
         </div>
     {% endif %}
     {% if shop.metafields.custom_fields["icon_message_4"] != blank %}
         <div class="product-icon">
+            <i class="fal fa-smile"></i>
             <p>{{ shop.metafields.custom_fields["icon_message_4"] }}</p>
         </div>
     {% endif %}
@@ -186,51 +216,7 @@
 
 
 <section class="container product-lifestyle-container">
-    <div class="custom-field-lines">
-        {%if product.metafields.custom_fields["category"] != blank %}
-                <p><strong>Category:</strong> {{ product.metafields.custom_fields['category']}}</p>
-        {% endif %}
-
-        {%if product.metafields.custom_fields["vibe"] != blank %}
-                <p><strong>Vibe:</strong> {{ product.metafields.custom_fields['vibe']}}</p>
-        {% endif %}
-
-        {% if product.metafields.custom_fields["womens"] != blank %}
-            {% if product.metafields.custom_fields["womens"] == 1 %}
-                <p><strong>Womens:</strong> True</p>
-            {% else %}
-                <p><strong>Womens:</strong> False</p>
-            {% endif %}
-        {% endif %}
-
-        {% if product.metafields.custom_fields["frame_color"] != blank %}
-            <p><strong>Frame Color:</strong> {{ product.metafields.custom_fields["frame_color"] }}</p>
-        {% endif %}
-        {% if product.metafields.custom_fields["accent_color"] != blank %}
-            <p><strong>Accent Color:</strong> {{ product.metafields.custom_fields["accent_color"] }}</p>
-        {% endif %}
-
-        {% if product.metafields.custom_fields["lens_color"] != blank %}
-            <p><strong>Lens Color:</strong> {{ product.metafields.custom_fields["lens_color"] }}</p>
-        {% endif %}
-
-        {% if product.metafields.custom_fields["polarized"] != blank %}
-            {% if product.metafields.custom_fields["polarized"] == 1 %}
-                <p><strong>Polarized:</strong> True</p>
-            {% else %}
-                <p><strong>Polarized:</strong> False</p>
-            {% endif %}
-        {% endif %}
-
-    </div>
-
-    {% for collection in product.collections %}
-    <p>{{collection.handle}}</p>
-    {% endfor %}
-
-    <p>{{ shop.products_count }}</p>
-
-    <div class="description">{{product.description}}</div>
+    {% include 'product-tabs'%}
 </section>
 
 
@@ -253,7 +239,38 @@
 {% endif %}
 
 
-
+{% comment %} 
+- Prevent Yotpot Products from showing if the product has no reivews
+- Provided by Yotpot Support
+-4/16
+{% endcomment %}
+<style>
+@keyframes nodeInserted {
+    from {
+        outline-color: #fff;
+    }
+    to {
+        outline-color: #000;
+    }
+}
+ 
+div.yotpo.bottomLine .star-clickable {
+    animation-duration: 0.01s;
+    animation-name: nodeInserted;
+}
+</style>
+<script type="text/javascript">
+document.addEventListener('animationstart', function(event) {
+    if (event.animationName == 'nodeInserted') {
+      	console.log('removing blank yotpo widgets');
+        var ratingContent = jQuery('.yotpo.bottomLine a.text-m').text();
+        if (ratingContent.includes('Write')) {
+            jQuery(".yotpo.bottomLine").remove();
+          	jQuery(".yotpo-main-widget").remove();
+        }
+    }
+}, true);
+</script>
 
 
 {% schema %}
@@ -615,3 +632,5 @@
 }
 
 {% endschema %}
+
+
