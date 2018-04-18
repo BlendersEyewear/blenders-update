@@ -162,61 +162,49 @@
     </div>
 </div>
 
-<div class="mobile-product-fit">
-    <div id="mobileFitToggle" class="mobile-product-fit-toggle">
-        <i class="fal fa-bullseye fa-xs"></i> Size Guide <i class="fal fa-chevron-right fa-xs mobile-product-fit-icon"></i>
+{% comment %} Mobilde Product Fit Guide {% endcomment %}
+{% include 'product-fit'%}
+
+
+{% comment %} Product Icons {% endcomment %}
+{% include 'product-icons'%}
+
+
+<section class="product-lifestyle-container">
+    <div class="container">
+        <div class="sixteen columns">
+            <div class="eight columns alpha lifestyle-container">
+                <h4 class="lifestyle-product-title">{{product.title}}</h4>
+
+                <img
+                    src="https://picsum.photos/623/778"
+                    alt=""
+                    class="product-lifestyle-image product-lifestyle-image--1">
+                
+                <img
+                    src="https://picsum.photos/320"
+                    alt=""
+                    class="product-lifestyle-image product-lifestyle-image--2">
+
+
+                <div id="lifestyleTestimonials" class="lifestyle-testimonials"></div>
+            </div>
+
+            {% comment %} Second Column {% endcomment %}
+            <div class="eight columns omega product-tab-container">
+                {% assign tagline = product.metafields.custom_fields["product_tagline"] %}
+                {% if tagline != blank %}
+                    <h2 class="product-tagline">{{tagline}}</h2>
+                {% endif %}
+
+                <hr class="product-border">
+
+                <img src="https://picsum.photos/580/387" alt="" class="product-lifestyle-image product-lifestyle-image--3">
+
+                {% include 'product-tabs'%}
+            </div>
+        </div>
     </div>
-
-    <div id="mobileFitContent" class="mobile-fit-content">
-        <img src="https://picsum.photos/600/400" alt="" class="mobile-fit-img">
-
-        <p class="mobile-fit-blurb">
-            Lorem ipsum dolor sit amet, cu dolore fuisset phaedrum sit. Quo clita omnium signiferumque ne, in pro detraxit sensibus expetendis
-        </p>
-
-        <p class="mobile-fit-size">
-            <span class="fit-title">Fit: </span>
-            <span class="value">Small-Medium</span>
-        </p>
-        <p class="mobile-fit-measurements">
-            <span class="fit-title">Measurements: </span>
-            <span class="value">55-15-143</span>
-        </p>
-    </div>
-</div>
-
-<div class="container product-icons">
-    {% if shop.metafields.custom_fields["icon_message_1"] != blank %}
-        <div class="product-icon">
-            <i class="fal fa-shipping-fast"></i>
-            <p>{{ shop.metafields.custom_fields["icon_message_1"] }}</p>
-        </div>
-    {% endif %}
-    {% if shop.metafields.custom_fields["icon_message_2"] != blank %}
-        <div class="product-icon">
-            <i class="fal fa-hand-holding-box"></i>
-            <p>{{ shop.metafields.custom_fields["icon_message_2"] }}</p>
-        </div>
-    {% endif %}
-    {% if shop.metafields.custom_fields["icon_message_3"] != blank %}
-        <div class="product-icon">
-            <i class="fal fa-shield-check"></i>
-            <p>{{ shop.metafields.custom_fields["icon_message_3"] }}</p>
-        </div>
-    {% endif %}
-    {% if shop.metafields.custom_fields["icon_message_4"] != blank %}
-        <div class="product-icon">
-            <i class="fal fa-smile"></i>
-            <p>{{ shop.metafields.custom_fields["icon_message_4"] }}</p>
-        </div>
-    {% endif %}
-</div>
-
-
-
-
-<section class="container product-lifestyle-container">
-    {% include 'product-tabs'%}
 </section>
 
 
@@ -253,11 +241,33 @@
         outline-color: #000;
     }
 }
- 
+/* added by yotpo */
 div.yotpo.bottomLine .star-clickable {
     animation-duration: 0.01s;
     animation-name: nodeInserted;
 }
+
+/* --------styles via custom fields-------- */
+{% assign accent = product.metafields.custom_fields["accent_color"] %}
+{% if accent != blank %}
+    {%if accent contains "#" %}
+        .product--custom .product_section .product-info:after {
+            background: {{ accent}};
+        }
+
+        .product-lifestyle-container .product-border{
+            background: {{ accent }};
+        }
+    {% else %}
+        .product--custom .product_section .product-info:after {
+            background: #{{ accent}};
+        }
+        .product-lifestyle-container .product-border{
+            background: #{{ accent }};
+        }
+    {% endif %}
+{% endif %}
+
 </style>
 <script type="text/javascript">
 document.addEventListener('animationstart', function(event) {

@@ -6,6 +6,8 @@
         </div>
 
         <div class="product-tab__info">
+            
+            {% comment %} First Tab - Details {% endcomment %}
             <div id="tab1" class="product-tab product-tab__details">
                 {% comment %} Vibe {% endcomment %}
                 {%if product.metafields.custom_fields["vibe"] != blank %}
@@ -24,14 +26,23 @@
                 {% endif %}
 
                 {% comment %} Frame (shape, material) {% endcomment %}
-                {%if product.metafields.custom_fields["category"] != blank %}
-                    <div class="product-tab__detail">
-                        <p class="product-tab__detail-title">Frame</p>
-                        <p class="product-tab__detail-value">
-                            {{ product.metafields.custom_fields['category']}}
-                        </p>
-                    </div>
-                {% endif %}
+                {% for collection in product.collections %}
+                    {% if collection.handle == 'a-series'
+                        or collection.handle == 'cardiff' or collection.handle == 'east-village'
+                        or collection.handle == 'h-series' or collection.handle == 'frontpage'
+                        or collection.handle == 'l-series' or collection.handle == 'm-class'
+                        or collection.handle == 'millenia' or collection.handle == 'north-park-blenders-eyewear'
+                        or collection.handle == 'providence' or collection.handle == 'roxie-1'
+                        or collection.handle == 'test-collection' %}
+                        <div class="product-tab__detail">
+                            <p class="product-tab__detail-title">Frame</p>
+
+                            <p class="product-tab__detail-value">
+                                {{ collection.title }}
+                            </p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
 
 
                 {% comment %} Lens {% endcomment %}
@@ -47,21 +58,92 @@
                                     | Polarized
                                 {% endif %}
                             {% endif %}
+                                | 100% UV Protection
                         </p>
                     </div>
                 {% endif %}
 
                 {% comment %} Hinges {% endcomment %}
-                <div class="product-tab__detail">
-                    <p class="product-tab__detail-title">Hinges</p>
-                    <p class="product-tab__detail-value"></p>
-                </div>
+                {% for collection in product.collections %}
+                    {% if collection.handle == 'a-series'
+                        or collection.handle == 'cardiff' or collection.handle == 'east-village'
+                        or collection.handle == 'h-series' or collection.handle == 'frontpage'
+                        or collection.handle == 'l-series' or collection.handle == 'm-class'
+                        or collection.handle == 'millenia' or collection.handle == 'north-park-blenders-eyewear'
+                        or collection.handle == 'providence' or collection.handle == 'roxie-1'
+                        or collection.handle == 'test-collection' %}
+                        {% assign hinges = collection.metafields.custom_fields["hinge"] %}
+                        {% if hinges != blank %}
+                            <div class="product-tab__detail">
+                                <p class="product-tab__detail-title">Hinges</p>
+                                <p class="product-tab__detail-value">{{ hinges }}</p>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                
             </div>
 
-            <div id="tab2" class="product-tab product-tab__fit">fit</div>
+            {% comment %} Second Tab - Fit {% endcomment %}
+            <div id="tab2" class="product-tab product-tab__fit">
+            
+                {% for collection in product.collections %}
+                    {% if collection.handle == 'a-series'
+                        or collection.handle == 'cardiff' or collection.handle == 'east-village'
+                        or collection.handle == 'h-series' or collection.handle == 'frontpage'
+                        or collection.handle == 'l-series' or collection.handle == 'm-class'
+                        or collection.handle == 'millenia' or collection.handle == 'north-park-blenders-eyewear'
+                        or collection.handle == 'providence' or collection.handle == 'roxie-1'
+                        or collection.handle == 'test-collection' %}
+                        
+                        <img src="https://picsum.photos/600/400" alt="" class="product-tab__img">
+
+                        {% assign fit_blurb = collection.metafields.custom_fields["fit_blurb"] %}
+                        {% if fit_blurb != blank %}
+                            <p class="product-tab__fit-blurb">{{ fit_blurb }}</p>
+                        {% else %}
+                            <p class="product-tab__fit-blurb">
+                                We forgot to fill out this section, so here's a poop emoji 💩.
+                            </p>
+                        {% endif %}
+
+                        {% assign frame_size = collection.metafields.custom_fields["frame_size"] %}
+                        
+                            <div class="product-tab__detail">
+                                <p class="product-tab__detail-title">Fit</p>
+
+                                <p class="product-tab__detail-value">
+                                    {% if frame_size != blank %}
+                                        {% if frame_size == 'S-M'%}
+                                            Small - Medium
+                                        {% elsif frame_size == 'M-L'%}
+                                            Medium - Large
+                                        {% elsif frame_size == 'L-XL'%}<span class="value">
+                                            Large - Extra Large
+                                        {% endif %}
+                                    {% else %}
+                                        All Sizes
+                                    {% endif %}
+                                </p>
+                            </div>
+                        
+
+                        {% assign measurements = collection.metafields.custom_fields["frame_measurements"] %}
+                        {% if measurements != blank %}
+                            <div class="product-tab__detail">
+                                <p class="product-tab__detail-title">Measurements</p>
+
+                                <p class="product-tab__detail-value">{{ measurements }}</p>
+                            </div>
+                        {% endif %}
+
+                    {% endif %}
+                {% endfor %}
+
+            </div>
 
             <div id="tab3" class="product-tab product-tab__description">
-            {{product.description}}
+                {{product.description}}
             </div>
         </div>
 

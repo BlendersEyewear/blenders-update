@@ -1,0 +1,28 @@
+<div class="container product-icons">
+    {% if shop.metafields.custom_fields["icon_message_1"] != blank %}
+        <div class="product-icon">
+            <i class="fal fa-shipping-fast"></i>
+            <p>{{ shop.metafields.custom_fields["icon_message_1"] }}</p>
+        </div>
+    {% endif %}
+    {% if shop.metafields.custom_fields["icon_message_2"] != blank %}
+        <div class="product-icon">
+            <i class="fal fa-thumbs-up"></i>
+            <p>{{ shop.metafields.custom_fields["icon_message_2"] }}</p>
+        </div>
+    {% endif %}
+
+    {% if shop.metafields.custom_fields["icon_message_3"] != blank %}
+        <div class="product-icon product-icon--hide-mobile">
+            <i class="fal fa-shield-check"></i>
+            <p>{{ shop.metafields.custom_fields["icon_message_3"] }}</p>
+        </div>
+    {% endif %} 
+    
+    {% if shop.metafields.custom_fields["icon_message_4"] != blank %}
+        <div class="product-icon">
+            <i class="fal fa-smile"></i>
+            <p>{{ shop.metafields.custom_fields["icon_message_4"] }}</p>
+        </div>
+    {% endif %}
+</div>

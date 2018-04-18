@@ -1,0 +1,54 @@
+<div class="mobile-product-fit">
+    <div id="mobileFitToggle" class="mobile-product-fit-toggle">
+        <i class="fal fa-smile fa-sm"></i> Size Guide <i class="fal fa-chevron-right fa-xs mobile-product-fit-icon"></i>
+    </div>
+
+    <div id="mobileFitContent" class="mobile-fit-content">
+
+        {% for collection in product.collections %}
+        {% if collection.handle == 'a-series'
+            or collection.handle == 'cardiff' or collection.handle == 'east-village'
+            or collection.handle == 'h-series' or collection.handle == 'frontpage'
+            or collection.handle == 'l-series' or collection.handle == 'm-class'
+            or collection.handle == 'millenia' or collection.handle == 'north-park-blenders-eyewear'
+            or collection.handle == 'providence' or collection.handle == 'roxie-1'
+            or collection.handle == 'test-collection' %}
+            
+            <img src="https://picsum.photos/600/400" alt="" class="mobile-fit-img">
+
+            {% assign fit_blurb = collection.metafields.custom_fields["fit_blurb"] %}
+            {% if fit_blurb != blank %}
+                <p class="mobile-fit-blurb">{{ fit_blurb }}</p>
+            {% else %}
+                <p class="mobile-fit-blurb">
+                    We forgot to fill out this section, so here's a poop emoji 💩.
+                </p>
+            {% endif %}
+
+            {% assign frame_size = collection.metafields.custom_fields["frame_size"] %}
+                <p class="mobile-fit-size">
+                    <span class="fit-title">Fit: </span>
+                    
+                    {% if frame_size != blank %}
+                        {% if frame_size == 'S-M'%}<span class="value">Small - Medium</span>
+                        {% elsif frame_size == 'M-L'%}<span class="value">Medium - Large</span>
+                        {% elsif frame_size == 'L-XL'%}<span class="value">Large - Extra Large</span>
+                        {% endif %}
+                    {% else %}
+                        <span class="value">All Sizes</span>
+                    {% endif %}
+                </p>
+
+            {% assign measurements = collection.metafields.custom_fields["frame_measurements"] %}
+            {% if measurements != blank %}
+                <p class="mobile-fit-measurements">
+                    <span class="fit-title">Measurements: </span>
+                    <span class="value">{{ measurements }}</span>
+                </p>
+            {% endif %}
+
+        {% endif %}
+    {% endfor %}
+
+    </div>
+</div>
