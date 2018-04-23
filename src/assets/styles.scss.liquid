@@ -11277,7 +11277,7 @@ $headerDesktopLargeUp: 1280px;
 
 
 // =======================================================================================================================
-// Make first three featured promos on Home page square on mobile
+// HOME PAGE -- Make first three featured promos on Home page square on mobile
 // =======================================================================================================================
 @include respond-to('medium'){
 
@@ -11596,6 +11596,39 @@ ul.tabs-content>li.active {
 }
 
 
+//  ---------------------------
+//  New Custom Created Tabs 
+//  ---------------------------
+.product .description{
+  .product-tab-links {
+    @include flexbox();
+    @include justify-content(flex-start);
+    @include align-items(center);
+    @include flex-flow(row nowrap);
+    margin: 0 0 1rem;
+  }
+
+  h5.product-tab-link {
+    display: block;
+    text-align: center;
+    background: white;
+    font-size: 0.875rem;
+    line-height: 1;
+    padding: .5rem 1rem;
+    letter-spacing: .05em;
+    margin: 0;
+    cursor: pointer;
+    transition: all .15s ease-in-out;
+  }
+
+  h5.product-tab-link:hover,
+  h5.product-tab-link:focus,
+  h5.product-tab-link-active{
+    box-shadow: inset 0 -2px 0 0 #333;
+  }
+}
+
+
 // ----------------------------------
 // Product Form
 // ----------------------------------
@@ -11721,32 +11754,59 @@ p.modal_price {
   }
 }
 
-.product .product-accordion__title{
-  box-shadow: inset 0 -1px 0 0 rgba(0,0,0,0.13);
-  @include flexbox();
-  @include justify-content(space-between);
-  @include align-items(center);
-  cursor: pointer;
-  padding: .75rem 0;
-}
+// --------------------------------
+// Product Page -------------
+// --------------------------------
+.product{
+  .product-accordion__title{
+    box-shadow: inset 0 -1px 0 0 rgba(0,0,0,0.13);
+    @include flexbox();
+    @include justify-content(space-between);
+    @include align-items(center);
+    cursor: pointer;
+    padding: .75rem 0;
+  }
 
-// Accordion Titles
-.product .product-accordion__title--open{
-	margin-bottom: 0.5rem;
-}
-
-// arrow
-.product .product-accordion__arrow {
+  // arrow
+  .product-accordion__arrow {
     max-height: 1rem;
     width: auto;
-	display: block;
-	transition: all .25s ease-in-out;
+    display: block;
+    transition: all .25s ease-in-out;
+  }
+  
+  .product-accordion__arrow--open{
+    transform: rotate(-90deg);
+  }
+  
+  // Accordion body/content - add margin-top to the first child
+  .product-accordion__title + .product-accordion__body > div,
+  .product-accordion__title + .product-accordion__body > p,
+  .product-accordion__title + .product-accordion__body > ul{
+    padding-top: 0.5rem;
+  }
 
+  // Lists within accordion body/content
+  .product-accordion__body > ul {
+    list-style: none;
+    padding: 0 0 0 0.5rem;
+    margin: 0;
+  
+    li {
+      line-height: 1.5;
+      padding: 0;
+      margin: 0 0 .825rem;
+      text-indent: -0.5rem;
+    }
+  
+    li:before{
+      content: '- ';
+      text-indent: -0.5rem;
+  
+    }
+  }
 }
 
-.product-accordion__arrow--open{
-	transform: rotate(-90deg);
-}
 
 
 // Yatpo - Remove bottom border lines
@@ -11773,7 +11833,7 @@ p.modal_price {
     margin: 0.5rem 0;
   }
   .product .yotpo-container{
-    margin: 0;
+    margin: -1rem 0 1rem;
   }
 
   .related-products a.text-m {
@@ -11849,8 +11909,13 @@ p.modal_price {
     
     .product_form .items_left{
       @include flex(100%);
-      margin: 0.5rem 0 1.5rem;
+      padding: 0.5rem 0 1.5rem;
+      margin: 0;
       line-height: 1;
+    }
+
+    .items_left:empty{
+      display: none;
     }
 		
 		.product-quantity-box .quantity {
@@ -11893,7 +11958,12 @@ p.modal_price {
   .product_section{
     .product_form .items_left{
       text-align: center;
-      margin: 1.25rem 0 2rem;
+      margin: 0;
+      padding: 1.25rem 0 2rem;
+    }
+
+    .items_left:empty{
+      display: none;
     }
   }
 }
@@ -12594,7 +12664,7 @@ input[type="submit"]:hover, input[type="reset"]:hover,input[type="button"]:hover
 .action_button:hover, input.action_button[type="submit"]:hover, input.action_button[type="button"]:hover {
   background-image: linear-gradient(-180deg, hsla(199, 85%, 57%, 1) 0%, hsla(218, 98%, 51%, 1) 100%);
   // opacity: 0.95;
-  border: 1px solid #00a3f0;
+  border: none;
 }
 
 
@@ -13007,6 +13077,7 @@ div.product-icons{
 
 }
 
+// Mobile Styles for Custom Templates
 @include respond-to('small'){
   .product--custom{
 

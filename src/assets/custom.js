@@ -51,71 +51,109 @@ const tabfunc = () => {
 
 // =========== WARNING =============
 //  ------ jQuery Ugliness -------
-// Make Product Tabs into accordions
-function productTabs(){
-  var header = $('.product_section').find('.description').find('h5')
-  $(header).wrap('<div class="product-accordion__title"></div>');
 
-  const chevronImg = 'https://cdn.shopify.com/s/files/1/0148/9585/files/icon-arrow-right.svg?1448602857142359948';
+const shippingTest = "<ul><li>hi there!!! This is a test string!</li></ul>";
 
-  var chevron = `<img src="${chevronImg}" alt="accordion toggle" class="product-accordion__arrow">`;
+const shippingReturnData = 
+"<ul>" +
+"<li>Free Shipping on U.S. Orders over $40.</li>" +
+"<li>Free International Shipping on ALL Orders over $70.</li>" +
+"<li>Returns within 45 days of Purchase.</li>" +
+"<li>Orders typically ship 1-2 business days after purchase.</li>" +
+"<li>Orders placed on weekends will ship out on Monday/Tuesday.</li>" +
+"</ul>";
 
-  var accordTitle = $('.product-accordion__title');
-  $(accordTitle).append(chevron);
+// Make Product Tabs into accordions - on mobile
+const productTabs = function(){
+  // Check if on product page
+  if($("body").hasClass("product")){
 
+    var header = $('.product_section').find('.description').find('h5')
+    $(header).wrap('<div class="product-accordion__title"></div>');
+    
+    const chevronImg = 'https://cdn.shopify.com/s/files/1/0148/9585/files/icon-arrow-right.svg?1448602857142359948';
+    
+    const chevron = `<img src="${chevronImg}" alt="accordion toggle" class="product-accordion__arrow">`;
+    
+    const accordTitle = $('.product-accordion__title');
+    $(accordTitle).append(chevron);
+    
+    
+    const accordContent = $(accordTitle).nextUntil(accordTitle);
+    
+    $(accordContent).wrap('<div class="product-accordion__body"></div>');
+    
+    var accordionBody = $('.product-accordion__body');
 
-  var accordContent = $(accordTitle).nextUntil(accordTitle);
+    // Create Variable for shipping and returns tab
+    let shippingTab = $(".product-accordion__title").last();
 
-  $(accordContent).wrap('<div class="product-accordion__body"></div>');
+    let shippingContent = $(shippingReturnData);
+    
+    // Remove all content for shipping and return
+    $(shippingTab).nextAll().remove();
+    
+    $(shippingTab).after(shippingContent);
+    $(shippingContent).wrap('<div class="product-accordion__body"></div>');
 
-  var accordionBody = $('.product-accordion__body');
+    // Populate element with shipping data
+    // $(shippingTab).insertAfter(shippingContent);
 
-  function productTabToggle(){
-    // hide the accordion content
-    $(accordContent).hide();
+    console.log(shippingContent);
+    
 
-    // click function
-    $(accordTitle).click(function(){
-      // Make arrow turn
-      $(this).find('.product-accordion__arrow').toggleClass('product-accordion__arrow--open');
-      // add bottom margin
-      $(this).toggleClass('product-accordion__title--open');
-
-      let contentRaw = $(this).nextUntil(accordTitle).find(accordionBody);
-      let content = contentRaw.prevObject;
-
-      // console.log(content);
+    function productTabToggle(){
+      // hide the accordion content
+      $(accordContent).hide();
+      $(shippingContent).hide();
       
-      for (let line of content){
-        // console.log(line);
+      // click function
+      $(accordTitle).click(function(){
+        // Make arrow turn
+        $(this).find('.product-accordion__arrow').toggleClass('product-accordion__arrow--open');
+        // add bottom margin
+        $(this).toggleClass('product-accordion__title--open');
+        
+        let contentRaw = $(this).nextUntil(accordTitle).find(accordionBody);
+        let content = contentRaw.prevObject;
+        
+        for (let line of content){
           $(line).children().slideToggle(250);
-      }
+          // console.log($(line).children());
+        }
+        
+      });
+    }
+    
+    productTabToggle();
 
-    });
+
+
   }
-
-  productTabToggle();
-
 }
 
 const productTabsDesktop = function(){
-  let productDesc = $('.product_section').find('.description');
-  let header = $('.product_section').find('.description').find('h5')
-  $(header).wrap('<div class="product-tab__title-hidden"></div>');
+  // Only work on vanilla Product Pages
+  if ($("body").hasClass("product")){
+    let productDesc = $('.product_section').find('.description');
+    let header = $('.product_section').find('.description').find('h5')
+    $(header).wrap('<div class="product-tab__title-hidden"></div>');
+    
+    
+    // Create Tab Links container
+    const tabLinks = $('<div />', {
+      "class": 'product-tab-links'
+    });
+    
+    $(tabLinks).append('<h5 class="product-tab-link">Details</h5>');
+    $(tabLinks).append('<h5 class="product-tab-link">Description</h5>');
+    $(tabLinks).append('<h5 class="product-tab-link">Shipping & Returns</h5>');
+    
+    $(productDesc).prepend(tabLinks);
 
 
-  // Create Tab Links container
-  const tabLinks = $('<div />', {
-    "class": 'product-tab-links'
-  });
-
-  $(tabLinks).append('<h5 class="product-tab-link">Details</h5>');
-  $(tabLinks).append('<h5 class="product-tab-link">Description</h5>');
-  $(tabLinks).append('<h5 class="product-tab-link">Shipping & Returns</h5>');
-
-  $(productDesc).prepend(tabLinks);
-
-  // console.log(productDesc);
+    // To Do: Create Tabbed content
+  }
 }
 
 
@@ -126,10 +164,12 @@ const resizeHeadings = function(){
                       .find('.related-products__title')
                       .find('h4');
 
-  $(heading460).css('fontSize', '1rem');
-
-  $('.product').find('h4').css('fontSize','1rem');
-
+  if($("body").hasClass("body")){
+    
+    $(heading460).css('fontSize', '1rem');
+    
+    $('.product').find('h4').css('fontSize','1rem');
+  }
 }
 
 
@@ -137,71 +177,73 @@ const resizeHeadings = function(){
 //--------- Custom Product Page ------------------
 //------------------------------------------------
 const customProductPage = function(){
-  $('.product-tabs__titles').each(function(){
+  // Check if custom product template
+  if($("body").hasClass("product-template-custom'")){
+    $('.product-tabs__titles').each(function(){
 
-    var $active, $content, $links = $(this).find('a');
+      var $active, $content, $links = $(this).find('a');
 
-    // If the location.hash matches one of the links, use that as the active tab.
-    // If no match is found, use the first link as the initial active tab.
-    $active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
-    $active.addClass('active');
-
-    $content = $($active[0].hash);
-
-    // Hide the remaining content
-    $links.not($active).each(function () {
-      $(this.hash).hide();
-    });
-
-    // Bind the click event handler
-    $(this).on('click', 'a', function(e){
-      // Make the old tab inactive.
-      $active.removeClass('active');
-      $content.hide();
-
-      // Update the variables with the new link and content
-      $active = $(this);
-      $content = $(this.hash);
-
-      // Make the tab active.
+      // If the location.hash matches one of the links, use that as the active tab.
+      // If no match is found, use the first link as the initial active tab.
+      $active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
       $active.addClass('active');
-      $content.show();
 
-      // Prevent the anchor's default click action
-      e.preventDefault();
+      $content = $($active[0].hash);
+
+      // Hide the remaining content
+      $links.not($active).each(function () {
+        $(this.hash).hide();
+      });
+
+      // Bind the click event handler
+      $(this).on('click', 'a', function(e){
+        // Make the old tab inactive.
+        $active.removeClass('active');
+        $content.hide();
+
+        // Update the variables with the new link and content
+        $active = $(this);
+        $content = $(this.hash);
+
+        // Make the tab active.
+        $active.addClass('active');
+        $content.show();
+
+        // Prevent the anchor's default click action
+        e.preventDefault();
+      });
     });
-  });
 
-  // Mobile Size Guide
-
-  // Hide mobile fit content
-  $('#mobileFitContent').hide();
-  // Click function
-  $('#mobileFitToggle').click(function(){
-    console.log('wohoo');
-    // rotate arrow icon
-    $('.mobile-product-fit-icon').attr('data-fa-transform', $('.mobile-product-fit-icon').attr('data-fa-transform') == 'rotate--90' ? '' : 'rotate--90');
-    // toggle slide fit guide content
-    $('#mobileFitContent').slideToggle(250);
-  });
+    // Mobile Size Guide---------
+    // Hide mobile fit content
+    $('#mobileFitContent').hide();
+    // Click function
+    $('#mobileFitToggle').click(function(){
+      // rotate arrow icon
+      $('.mobile-product-fit-icon').attr('data-fa-transform', $('.mobile-product-fit-icon').attr('data-fa-transform') == 'rotate--90' ? '' : 'rotate--90');
+      // toggle slide fit guide content
+      $('#mobileFitContent').slideToggle(250);
+    });
+  }
 }
 
-
-
-
+//------------------------------------------------
 //  Doc Ready
+//------------------------------------------------
 document.addEventListener("DOMContentLoaded", function() {
   console.log("custom js loaded");
   let screenSize = window.innerWidth;
 
-  // Change Feature Promotion Button text on Desktop
+  // Home Page -------------
+  // Change Feature Promotion Button text to "Shop Now" on Desktop
   screenSize >= tabletSize ? fpBtnSwap() : "";
  
-  // Create accordions on product pages on mobile
-  // disabled this for now
-  // screenSize <= tabletSize ? (productTabs(), resizeHeadings()) : productTabsDesktop();
-  screenSize <= tabletSize ? (productTabs(), resizeHeadings()) : '';
-
+  // Product Page -------------
+  // Create accordions on Mobile
+  // Create Tabs on Desktop
+  screenSize <= tabletSize ? (productTabs(), resizeHeadings()) : productTabsDesktop();
+  
+  // Custom Product Page -------------
   // Run custom product page scripts if on custom product page.
   body.classList.contains('product-template-custom') ? customProductPage() : '';
 
