@@ -11527,6 +11527,35 @@ $headerDesktopLargeUp: 1280px;
 // ------------------------------------------------------------------------------------------------------------------------
 
 
+.product .product_section{
+  hr.product-hr {
+    display: block;
+    border: none;
+    height: 1px;
+    background: #aaa;
+    margin: 1.5rem 0 1rem;
+  }
+
+  // Savings price
+  .current_price{
+    font-weight: 400;
+  }
+  .savings{
+    display: inline-block;
+    margin-left: .25rem;
+    font-size: 0.875rem;
+  }
+
+  .yotpo--desktop-only .bottomLine,
+  .yotpo--desktop-only .QABottomLine{
+    display: inline-block;
+    margin-right: 1rem;
+    .text-m{
+      padding-left: .25rem !important;
+    }
+  }
+}
+
 // Size Chart link
 a.size_chart {
     background: #f2f2f2;
@@ -11550,6 +11579,8 @@ a.size_chart {
     font-size: .5rem;
     line-height: 1;
 }
+
+
 
 
 // Tabs
@@ -11608,23 +11639,48 @@ ul.tabs-content>li.active {
     margin: 0 0 1rem;
   }
 
-  h5.product-tab-link {
+  a.product-tab-link {
     display: block;
     text-align: center;
     background: white;
     font-size: 0.875rem;
     line-height: 1;
-    padding: .5rem 1rem;
+    padding: .5rem .65rem;
+    text-transform: uppercase;
+    font-weight: 600;
     letter-spacing: .05em;
     margin: 0;
-    cursor: pointer;
     transition: all .15s ease-in-out;
+    outline: 0;
   }
 
-  h5.product-tab-link:hover,
-  h5.product-tab-link:focus,
-  h5.product-tab-link-active{
+  a.product-tab-link:hover,
+  a.product-tab-link:focus{
+    color: black;
+    // box-shadow: inset 0 -2px 0 0 #e6e9ef;
     box-shadow: inset 0 -2px 0 0 #333;
+  }
+
+  a.product-tab-link:active,
+  a.product-tab-link-active{
+    color: black;
+    box-shadow: inset 0 -2px 0 0 #333;
+  }
+
+
+  .product-tab{
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 0;
+    }
+
+    li:before{
+      content: '- ';
+    }
   }
 }
 
@@ -11805,6 +11861,13 @@ p.modal_price {
   
     }
   }
+
+  // Remove Quantity Boxes
+  .product_section{
+    .product-quantity-box{
+      display: none;
+    }
+  }
 }
 
 
@@ -11867,6 +11930,13 @@ p.modal_price {
 }
 
 
+// Tablet styles
+@include respond-to('medium'){
+  .product .below-title-section{
+    display: none;
+  }
+}
+
 
 // Mobile Styles
 @include respond-to('small'){
@@ -11892,6 +11962,11 @@ p.modal_price {
 //  ----------------------------------
 //  Product Form ---- 
 //  ----------------------------------
+.product_form .items_left:empty{
+  display: none;
+}
+
+
 @include respond-to('medium'){
 	.product_section{
 		.product_form {
@@ -11914,17 +11989,18 @@ p.modal_price {
       line-height: 1;
     }
 
-    .items_left:empty{
+    .product_form .items_left:empty{
       display: none;
     }
+
 		
 		.product-quantity-box .quantity {
-			padding: 6px 3px;
+      padding: 6px 3px;
 			width: 32px;
 		}
 		
 		.product-quantity-box .product-plus, .product-quantity-box .product-minus {
-			width: 25px;
+      width: 25px;
 		}
 		
 		.purchase.inline_purchase {

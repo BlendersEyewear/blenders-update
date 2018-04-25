@@ -118,6 +118,8 @@
             </div>
   		    {% endif %}
 
+          <hr class="product-hr">
+
           {% if settings.enable_shopify_product_badges and settings.enable_shopify_review_comments %}
             <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
           {% endif %}
@@ -161,12 +163,32 @@
               {% if section.settings.display_savings %}
                 <span class="sale savings">
                   {% if variant.price < variant.compare_at_price and variant.available %}
-                    {{ 'products.product.savings' | t }}  {{ variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price }}% (<span class="money">{{ variant.compare_at_price | minus: variant.price | money }}</span>)
+                  {{ variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price }}% OFF
                   {% endif %}
                 </span>
               {% endif %}
             </p>
 
+            <div class="yotpo--desktop-only">
+
+            <div class="yotpo bottomLine yotpo-stars--desktop-only"
+                data-appkey="7Na4Xsq5Vf0s5VxSDIrDl56IRsBb1HHiohLKFKOK"
+                data-domain="{{shop.permanent_domain | escape }}"
+                data-product-id="{{ product.id }}"
+                data-product-models="{{ product.id }}"
+                data-name="{{ product.title | escape }}"
+                data-url="{{ shop.url }}{{ product.url }}"
+                data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
+                data-description="{{ product.description | escape }}"
+                data-bread-crumbs="{% for tag in product.tags %}{{ tag | escape }};{% endfor %}">
+            </div>
+
+            <div class='yotpo QABottomLine yotpo-stars--desktop-only'
+              data-appkey='7Na4Xsq5Vf0s5VxSDIrDl56IRsBb1HHiohLKFKOK'
+              data-product-id='{{ product.id }}'></div>
+
+            </div>
+            
             {% include 'product-notify-me' %}
           {% endif %}
 

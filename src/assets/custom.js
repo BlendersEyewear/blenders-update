@@ -135,6 +135,7 @@ const productTabs = function(){
 const productTabsDesktop = function(){
   // Only work on vanilla Product Pages
   if ($("body").hasClass("product")){
+
     let productDesc = $('.product_section').find('.description');
     let header = $('.product_section').find('.description').find('h5')
     $(header).wrap('<div class="product-tab__title-hidden"></div>');
@@ -145,14 +146,89 @@ const productTabsDesktop = function(){
       "class": 'product-tab-links'
     });
     
-    $(tabLinks).append('<h5 class="product-tab-link">Details</h5>');
-    $(tabLinks).append('<h5 class="product-tab-link">Description</h5>');
-    $(tabLinks).append('<h5 class="product-tab-link">Shipping & Returns</h5>');
+    $(tabLinks).append('<a class="product-tab-link" href="#tab1">Details</a>');
+    $(tabLinks).append('<a class="product-tab-link" href="#tab2">Description</a>');
+    $(tabLinks).append('<a class="product-tab-link" href="#tab3">Shipping & Returns</a>');
     
     $(productDesc).prepend(tabLinks);
 
+    // Create empty tab divs to populate later
+    jQuery('<div/>', {
+      id: 'tab1',
+      class: 'product-tab'
+    }).insertAfter(tabLinks);
 
-    // To Do: Create Tabbed content
+    jQuery('<div/>', {
+      id: 'tab2',
+      class: 'product-tab'
+    }).insertAfter($('#tab1'));
+
+    jQuery('<div/>', {
+      id: 'tab3',
+      class: 'product-tab'
+    }).insertAfter($('#tab2'));
+
+
+    // Populate empty divs with appropriate content -----------
+
+    // Details
+    let detailsContent = $('.product-tab__title-hidden').first().nextUntil($('.product-tab__title-hidden'));
+    $('#tab1').append($(detailsContent));
+    
+    
+    // Description
+    let descContentTitle = $('.product-tab__title-hidden')[1];
+    let descContent = $(descContentTitle).nextUntil($('.product-tab__title-hidden'));
+    $('#tab2').append($(descContent));
+
+
+    // Shipping and Returns
+    let shippingContentTitle = $('.product-tab__title-hidden')[2];
+    // Remove content
+    $(shippingContentTitle).nextAll().remove();
+    // Populate with premade content;
+    $('#tab3').append(shippingReturnData);
+
+    // Remove all titles from default description
+    $('.product-tab__title-hidden').remove();
+
+
+    // Function - to make Tabs work
+    $('.product-tab-links').each(function(){
+      // For each set of tabs, we want to keep track of
+      // which tab is active and its associated content
+      var $active, $content, $links = $(this).find('a');
+    
+      // If the location.hash matches one of the links, use that as the active tab.
+      // If no match is found, use the first link as the initial active tab.
+      $active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
+      $active.addClass('product-tab-link-active');
+    
+      $content = $($active[0].hash);
+    
+      // Hide the remaining content
+      $links.not($active).each(function () {
+        $(this.hash).hide();
+      });
+    
+      // Bind the click event handler
+      $(this).on('click', 'a', function(e){
+        // Make the old tab inactive.
+        $active.removeClass('product-tab-link-active');
+        $content.hide();
+    
+        // Update the variables with the new link and content
+        $active = $(this);
+        $content = $(this.hash);
+    
+        // Make the tab active.
+        $active.addClass('product-tab-link-active');
+        $content.show();
+    
+        // Prevent the anchor's default click action
+        e.preventDefault();
+      });
+    });
   }
 }
 
