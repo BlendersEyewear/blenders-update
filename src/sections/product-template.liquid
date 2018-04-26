@@ -112,11 +112,17 @@
           <h1 class="product_name" itemprop="name">{{ product.title }}</h1>
 
           {% comment %} Added Custom Fields {% endcomment %}
-          {% if product.metafields.custom_fields["product_subtitle"] != blank %}
-            <div class="custom-field custom-field__product-subtitle custom-field__type--text">
-            <div class="custom-field--value">{{ product.metafields.custom_fields["product_subtitle"] }}</div>
-            </div>
-  		    {% endif %}
+          <div class="product-meta-container">
+            {% if product.metafields.custom_fields["product_subtitle"] != blank %}
+              <div class="custom-field custom-field__product-subtitle custom-field__type--text">
+              <div class="custom-field--value">{{ product.metafields.custom_fields["product_subtitle"] }}</div>
+              </div>
+            {% endif %}
+
+            {% if settings.size_chart != blank %}
+              <a href="#size-chart" class="size_chart" data-remodal-target="size-chart" data-no-instant>{{ 'products.product.size_chart' | t }} <span class="icon-right-arrow"></span></a>
+            {% endif %}
+          </div>
 
           <hr class="product-hr">
 
@@ -144,7 +150,6 @@
               <link itemprop="availability" href="http://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}">
               <meta itemprop="itemCondition" content="New" />
 
-              <span class="sold_out">{% if variant.available == false %}{{ 'products.product.sold_out' | t }}{% endif %}</span>
               <span itemprop="price" content="{{ variant.price | money_without_currency | remove: "," }}" class="{% if variant.compare_at_price > variant.price %}sale{% endif %}">
                 <span class="current_price {% if product.available == false %}hidden{% endif %}">
                   {% if variant.price > 0 %}
@@ -170,26 +175,25 @@
             </p>
 
             <div class="yotpo--desktop-only">
-
-            <div class="yotpo bottomLine yotpo-stars--desktop-only"
-                data-appkey="7Na4Xsq5Vf0s5VxSDIrDl56IRsBb1HHiohLKFKOK"
-                data-domain="{{shop.permanent_domain | escape }}"
-                data-product-id="{{ product.id }}"
-                data-product-models="{{ product.id }}"
-                data-name="{{ product.title | escape }}"
-                data-url="{{ shop.url }}{{ product.url }}"
-                data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
-                data-description="{{ product.description | escape }}"
-                data-bread-crumbs="{% for tag in product.tags %}{{ tag | escape }};{% endfor %}">
-            </div>
-
-            <div class='yotpo QABottomLine yotpo-stars--desktop-only'
-              data-appkey='7Na4Xsq5Vf0s5VxSDIrDl56IRsBb1HHiohLKFKOK'
-              data-product-id='{{ product.id }}'></div>
-
+              <div class="yotpo bottomLine yotpo-stars--desktop-only"
+                  data-appkey="7Na4Xsq5Vf0s5VxSDIrDl56IRsBb1HHiohLKFKOK"
+                  data-domain="{{shop.permanent_domain | escape }}"
+                  data-product-id="{{ product.id }}"
+                  data-product-models="{{ product.id }}"
+                  data-name="{{ product.title | escape }}"
+                  data-url="{{ shop.url }}{{ product.url }}"
+                  data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
+                  data-description="{{ product.description | escape }}"
+                  data-bread-crumbs="{% for tag in product.tags %}{{ tag | escape }};{% endfor %}">
+              </div>
+              <div class='yotpo QABottomLine yotpo-stars--desktop-only'
+                data-appkey='7Na4Xsq5Vf0s5VxSDIrDl56IRsBb1HHiohLKFKOK'
+                data-product-id='{{ product.id }}'></div>
             </div>
             
-            {% include 'product-notify-me' %}
+            <button id="notifyToggle" class="notify-toggle">Notify Me</button>
+            {% comment %} Changed from 'product-notify-me' to 'product-notify-new' by Adam 4/28{% endcomment %}
+            {% include 'product-notify-me-new' %}
           {% endif %}
 
           {% comment %} <div class="feature_divider"></div> {% endcomment %}
@@ -215,11 +219,9 @@
           {% endif %}
 
           <div class="below-title-section">
-          
-          {% if settings.size_chart != blank %}
-            <a href="#size-chart" class="size_chart" data-remodal-target="size-chart" data-no-instant>{{ 'products.product.size_chart' | t }} <span class="icon-right-arrow"></span></a>
-          {% endif %}
-
+            {% if settings.size_chart != blank %}
+              <a href="#size-chart" class="size_chart" data-remodal-target="size-chart" data-no-instant>{{ 'products.product.size_chart' | t }} <span class="icon-right-arrow"></span></a>
+            {% endif %}
           </div>
 
           {% if settings.enable_shopify_review_comments and settings.review_position == "next_to_gallery" %}

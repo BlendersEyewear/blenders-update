@@ -10156,17 +10156,17 @@ img.collection_banner_img{
     /* Yotpo */
   
     @media (min-width: 768px) {
-  .yotpo .yotpo-regular-box {
-    padding: 25px 0 22px;
-    margin: 0 10px;
-    border-top: 0px solid #e3e3e3!important;
-}
+      .yotpo .yotpo-regular-box {
+        padding: 25px 0 22px;
+        margin: 0 10px;
+        border-top: 0px solid #e3e3e3!important;
+      }
     }
   
       @media (min-width: 768px) {
-  .yotpo-display-wrapper {
-    border-top: 1px solid #e3e3e3!important;
-}
+        .yotpo-display-wrapper {
+          border-top: 1px solid #e3e3e3!important;
+        }
       }
   
     /* Product Subtitles */
@@ -10176,7 +10176,7 @@ img.collection_banner_img{
     letter-spacing: 1px;
     color: #7d7d7d;
     line-height: 10px;
-    margin-bottom: 9px;
+    margin-bottom: 0;
 }
   
   
@@ -11528,12 +11528,33 @@ $headerDesktopLargeUp: 1280px;
 
 
 .product .product_section{
+
+  // Meta Container (conaints metafields and desktop size guide)
+  .product-meta-container{
+    @include flexbox();
+    @include justify-content(space-between);
+    @include align-items(center);
+    @include flex-flow(row nowrap);
+    margin: 0;
+
+    a.size_chart {
+      background: none;
+      padding: 0;
+    }
+
+    a.size_chart:focus,
+    a.size_chart:hover {
+      background: none;
+      padding: 0;
+    }
+  }
+
   hr.product-hr {
     display: block;
     border: none;
     height: 1px;
     background: #aaa;
-    margin: 1.5rem 0 1rem;
+    margin: .5rem 0 1rem;
   }
 
   // Savings price
@@ -11546,12 +11567,54 @@ $headerDesktopLargeUp: 1280px;
     font-size: 0.875rem;
   }
 
+
+  // Sold Out modal price state
+  p.modal_price span:empty{
+    display: none;
+  }
+
+  // Desktop Only a
+  .yotpo--desktop-only{
+    margin: 0 0 1.3rem;
+  }
+
   .yotpo--desktop-only .bottomLine,
   .yotpo--desktop-only .QABottomLine{
     display: inline-block;
     margin-right: 1rem;
     .text-m{
       padding-left: .25rem !important;
+    }
+  }
+
+
+  // 'Notify Me' Toggle
+  button.notify-toggle{
+    background: linear-gradient(-180deg, #757575, #101010);
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    min-height: unset;
+    padding: 0.875rem;
+    line-height: 1;
+  }
+
+  button.notify-toggle:focus,
+  button.notify-toggle:hover{
+    background: linear-gradient(-180deg, #949494, #252525);
+  }
+
+
+  .notify_form + .description{
+    margin-top: 1.5rem;
+  }
+
+}
+
+@include respond-to('medium'){
+  .product .product_section{
+    .yotpo--desktop-only{
+      display: none;
     }
   }
 }
@@ -11645,7 +11708,7 @@ ul.tabs-content>li.active {
     background: white;
     font-size: 0.875rem;
     line-height: 1;
-    padding: .5rem .65rem;
+    padding: .5rem .875rem;
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: .05em;
@@ -11919,6 +11982,7 @@ p.modal_price {
   @include justify-content(center);
   @include align-items(center);
   margin: 1.5rem 0;
+  display: none;
 }
 
 .product .yotpo-container{
@@ -11933,7 +11997,7 @@ p.modal_price {
 // Tablet styles
 @include respond-to('medium'){
   .product .below-title-section{
-    display: none;
+    display: block;
   }
 }
 

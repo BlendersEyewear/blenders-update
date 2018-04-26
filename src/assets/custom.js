@@ -232,6 +232,41 @@ const productTabsDesktop = function(){
   }
 }
 
+const soldOutNotifyToggle = function(){
+  
+  let toggleBtn = $('#notifyToggle');
+
+  let notifyForm = $(toggleBtn).next('.notify_form');
+
+  // Hide notify form
+  notifyForm.hide();
+
+  // Create click function that makes notify form slide down, and disables cursor pointer
+  $(toggleBtn).click(function(){
+    $(notifyForm).slideDown(250);
+
+    // If form is visible
+    if($(notifyForm).is(":visible")){
+      // change button cursor back to default;
+      $(toggleBtn).css({
+          'cursor': 'default',
+          'background': '#b1b1b1'
+        });
+      $(toggleBtn).animate({'font-size': '0.875rem', 'padding': '0.5rem'}, 250);
+      $(toggleBtn).text('Notify Me when This Product is Available')
+
+    }
+
+    // find email
+    let email = $(notifyForm).find('.notify_email');
+    
+    // Focus on Email input
+    $(email).focus();
+
+  });
+
+}
+
 
 // resize the section headers on product pages
 const resizeHeadings = function(){
@@ -318,6 +353,8 @@ document.addEventListener("DOMContentLoaded", function() {
   // Create accordions on Mobile
   // Create Tabs on Desktop
   screenSize <= tabletSize ? (productTabs(), resizeHeadings()) : productTabsDesktop();
+  // Sold Out button toggle
+  body.classList.contains('product') ? (soldOutNotifyToggle()) : '';
   
   // Custom Product Page -------------
   // Run custom product page scripts if on custom product page.
