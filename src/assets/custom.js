@@ -363,11 +363,17 @@ const customProductPage = function(){
     $('#mobileFitContent').hide();
 
     // Click function
-    $('#mobileFitToggle').click(function(){
+    let sizeGuideToggle = $('#mobileFitToggle');
+    $(sizeGuideToggle).click(function(){
       // rotate arrow icon
       $('.mobile-product-fit-icon').attr('data-fa-transform', $('.mobile-product-fit-icon').attr('data-fa-transform') == 'rotate--90' ? '' : 'rotate--90');
       // toggle slide fit guide content
       $('#mobileFitContent').slideToggle(250);
+
+      // check if open
+      if($('#mobileFitcontent').is(':visible')){
+        $('#mobile')
+      }
     });
 
 
@@ -382,29 +388,40 @@ const customProductPage = function(){
       $lsImage3 = $('.product-lifestyle-image--3');
       $lsImages = $('.product-lifestyle-image--1, .product-lifestyle-image--2, .product-lifestyle-image--3');
 
-      console.log('hi');
-
-      $lsImage1.detach();
-      $lsImage2.detach();
-      $lsImage3.detach();
+      console.log($lsImages);
 
 
       // Empty out the lifestyle-image-container
       $lsContainer = $('.lifestyle-container');
       $lsContainer.empty();
 
-      $lsContainer.append()
-
+      // append tagline and HR into lifestyle container
+      $lsContainer.append($('.product-tagline'));
+      $lsContainer.append($('.product-border'));
+      
       // Create New Div to use as flickity container and append into lifestyle image container
       jQuery('<div/>',{
         id: 'customProductFlicktyContainer',
         class: 'custom-product-flickity-container'
       }).appendTo($lsContainer);
-    }
 
-    // prepend tagline and HR into lifestyle container
-    $lsContainer.prepend($('.product-border'));
-    $lsContainer.prepend($('.product-tagline'));
+      $flickityContainer = $('#customProductFlicktyContainer');
+      
+      // Append lfestyle images into containeres
+      $flickityContainer.append($lsImages);
+
+      // add class to flickity children (images)
+      $flickityContainer.children().addClass('custom-flickity-image')
+
+
+      // Initialize Flickity on Lifestyle image conatiner
+      $flickityContainer.flickity({
+        wrapAround: true,
+        lazyLoad: true
+      });
+
+
+    }
 }
 
 //------------------------------------------------

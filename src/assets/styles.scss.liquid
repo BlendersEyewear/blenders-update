@@ -13346,6 +13346,23 @@ div.product-icons{
       display: block;
     }
 
+    // Flickity (swipable carousel) container
+    .custom-product-flickity-container{
+
+      // Remove opaicty from flickity button
+      .flickity-prev-next-button{
+        background: none;
+      }
+    }
+
+    // Flickity images
+    .custom-flickity-image{
+      width: 100%;
+      height: calc(100vw - 20px);
+      object-fit: cover;
+    }
+
+
     // remove sideways product title
     .lifestyle-product-title{
       display: none;
@@ -13360,5 +13377,7 @@ div.product-icons{
       display: none;
     }
   }
+
+
 }
 
