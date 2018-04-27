@@ -11569,6 +11569,7 @@ $headerDesktopLargeUp: 1280px;
 
 
   // Sold Out modal price state
+  p.modal_price:empty,
   p.modal_price span:empty{
     display: none;
   }
@@ -11602,19 +11603,75 @@ $headerDesktopLargeUp: 1280px;
   button.notify-toggle:focus,
   button.notify-toggle:hover{
     background: linear-gradient(-180deg, #949494, #252525);
+    outline: 0;
   }
 
+  button.notify-toggle:active{
+    box-shadow: none;
+  }
 
   .notify_form + .description{
     margin-top: 1.5rem;
+  }
+
+  // Floating Input Labels
+  .notify_form{
+    .input-group {
+      position: relative;
+    }
+  
+    label.input_label {
+      position: absolute;
+      top: 0.875rem;
+      left: 10px;
+      line-height: 1;
+      letter-spacing: .1em;
+      font-size: 0.875rem;
+      transition: all .15s ease-in-out;
+    }
+
+    .notify_email:focus + label.input_label,
+    .notify_email--has-value + label.input_label{
+      font-size: 0.75rem;
+      font-weight: 600;
+      left: 0;
+      top: -1rem;
+      bottom: initial;
+      opacity: 0.65;
+    }
   }
 
 }
 
 @include respond-to('medium'){
   .product .product_section{
+
+    // Moving thumbnail arrows outwards
+    button.flickity-prev-next-button.next{
+      -webkit-transform: translateX(8px);
+              transform: translateX(8px);
+    }
+    button.flickity-prev-next-button.previous{
+      -webkit-transform: translateX(-8px);
+              transform: translateX(-8px);
+    }
+
+    .product-meta-container{
+      @include justify-content(center);
+
+      a.size_chart{
+        display: none;
+      }
+    }
+
     .yotpo--desktop-only{
       display: none;
+    }
+
+    .notify_form{
+      .message{
+        text-align: center;
+      }
     }
   }
 }
@@ -11751,7 +11808,6 @@ ul.tabs-content>li.active {
 // ----------------------------------
 // Product Form
 // ----------------------------------
-
 .product .product_form{
 
 }
@@ -11997,27 +12053,28 @@ p.modal_price {
 // Tablet styles
 @include respond-to('medium'){
   .product .below-title-section{
-    display: block;
+    display: flex;
   }
 }
 
 
 // Mobile Styles
-@include respond-to('small'){
-  // center custom fields
-  .custom-field--value {
-    text-align: center;
-    line-height: 1;
-    margin: 0 0 1.5rem;
-  }
-
-  a.size_chart{
-    margin: 0;
-  }
-
-
-  .yotpo.bottomLine{
-    padding: 0 !important;
+@include respond-to('medium'){
+  .product{    
+    // center custom fields
+    .custom-field--value {
+      text-align: center;
+      line-height: 1;
+      margin: 0 0 1rem;
+    }
+    
+    a.size_chart{
+      margin: 0;
+    }
+    
+    .yotpo.bottomLine{
+      padding: 0 !important;
+    }
   }
 }
 
@@ -12134,7 +12191,7 @@ p.modal_price {
 @include respond-to('medium'){
 	body.product .product_section{
 		p.modal_price{
-			margin: 1rem 0 1.5rem;
+			margin: 1rem 0 1.25rem;
 		}
 
 		.modal_price > .current_price{
@@ -12521,7 +12578,9 @@ input#checkout {
 
 
 // ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------
 //   Collection Page
+// ------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------
 
 // Fix 2 Per Row Mobile Product Grid -----------
@@ -12534,7 +12593,7 @@ input#checkout {
         {% if settings.mobile_products_per_row == "2" %}
           .container .thumbnail.even,
           // .container .thumbnail.odd  { width: 140px !important; }
-          .container .thumbnail.odd  { width: 155px !important; }
+          .container .thumbnail.odd  { width: 160px !important; }
           .container div.thumbnail.even  { clear: left }
           .container div.thumbnail.odd  { margin-left: 20px }
           br.product_clear { display: none }
@@ -12581,6 +12640,16 @@ select#sort-by {
   .list-collections .thumbnail .quick_shops{
     opacity: 1;
     display: block;
+    height: auto;
+    min-height: unset;
+  }
+
+  .product-list .thumbnail .quick_shops button,
+  .slider-gallery .thumbnail .quick_shops button,
+  .list-collections .thumbnail .quick_shops button{
+    height: auto;
+    min-height: unset;
+    padding: 0.5rem;
   }
 
 
@@ -12796,14 +12865,14 @@ input.action_button[type="submit"], input.action_button[type="button"]{
   background-image: linear-gradient(-180deg, hsla(199, 98%, 48%, 1) 0%, hsla(218, 98%, 48%, 1) 100%);
   font-weight: 600;
   transition: opacity .15s ease-in-out;
-  opaicty: 1.0;
+  opacity: 1.0;
+  border: none;
 }
 
 a.button:hover, button:hover,
 input[type="submit"]:hover, input[type="reset"]:hover,input[type="button"]:hover,
 .action_button:hover, input.action_button[type="submit"]:hover, input.action_button[type="button"]:hover {
   background-image: linear-gradient(-180deg, hsla(199, 85%, 57%, 1) 0%, hsla(218, 98%, 51%, 1) 100%);
-  // opacity: 0.95;
   border: none;
 }
 
@@ -13065,6 +13134,7 @@ div.product-icons{
 .product-lifestyle-container{
   background: $color-background-light;
   padding: 4rem 0;
+  margin: 0 0 4rem;
 
   .lifestyle-container{
     display: grid;

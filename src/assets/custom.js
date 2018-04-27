@@ -67,7 +67,18 @@ const shippingReturnData =
 const productTabs = function(){
   // Check if on product page
   if($("body").hasClass("product")){
+    console.log('productTabs / Accordions working');
 
+    // Unwrap god awful Div Soup from Product descriptions
+    let h5 = $('.product_section').find('.description').find('h5');
+
+    // if($('.description').find('meta').parent().is("div")){
+    //   $('.description').find('meta').unwrap();
+    // }
+
+    // $('.description').find('meta').remove();
+
+    // Wrapping h5 tags with accordion title div
     var header = $('.product_section').find('.description').find('h5')
     $(header).wrap('<div class="product-accordion__title"></div>');
     
@@ -104,7 +115,7 @@ const productTabs = function(){
 
     function productTabToggle(){
       // hide the accordion content
-      $(accordContent).hide();
+      // $('.product-accordion__body').hide();
       $(shippingContent).hide();
       
       // click function
@@ -119,7 +130,6 @@ const productTabs = function(){
         
         for (let line of content){
           $(line).children().slideToggle(250);
-          // console.log($(line).children());
         }
         
       });
@@ -135,6 +145,7 @@ const productTabs = function(){
 const productTabsDesktop = function(){
   // Only work on vanilla Product Pages
   if ($("body").hasClass("product")){
+    console.log('product Tabs Desktop Working');
 
     let productDesc = $('.product_section').find('.description');
     let header = $('.product_section').find('.description').find('h5')
@@ -232,6 +243,19 @@ const productTabsDesktop = function(){
   }
 }
 
+const floatingLabels = function(){
+  $('.notify_form .input-group input').focusout(function(){
+    let val = $(this).val();
+
+    if(val === ''){
+      $(this).removeClass('notify_email--has-value');
+    } else {
+      $(this).addClass('notify_email--has-value');
+    }
+
+  });
+}
+
 const soldOutNotifyToggle = function(){
   
   let toggleBtn = $('#notifyToggle');
@@ -250,10 +274,15 @@ const soldOutNotifyToggle = function(){
       // change button cursor back to default;
       $(toggleBtn).css({
           'cursor': 'default',
-          'background': '#b1b1b1'
+          'background': 'white',
+          'color': 'black'
         });
       $(toggleBtn).animate({'font-size': '0.875rem', 'padding': '0.5rem'}, 250);
-      $(toggleBtn).text('Notify Me when This Product is Available')
+      $(toggleBtn).text('Yup, I want dibs on these!');
+      $(toggleBtn).attr('disabled', 'disabled');
+
+      // enter floating label
+      floatingLabels();
 
     }
 
@@ -289,14 +318,16 @@ const resizeHeadings = function(){
 //------------------------------------------------
 const customProductPage = function(){
   // Check if custom product template
-  if($("body").hasClass("product-template-custom'")){
+    console.log('custom product page script loaded ');
+
     $('.product-tabs__titles').each(function(){
 
       var $active, $content, $links = $(this).find('a');
 
       // If the location.hash matches one of the links, use that as the active tab.
       // If no match is found, use the first link as the initial active tab.
-      $active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
+      // $active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
+      $active = $($links.filter('[href="'+location.hash+'"]')[0]);
       $active.addClass('active');
 
       $content = $($active[0].hash);
@@ -335,7 +366,6 @@ const customProductPage = function(){
       // toggle slide fit guide content
       $('#mobileFitContent').slideToggle(250);
     });
-  }
 }
 
 //------------------------------------------------

@@ -191,9 +191,12 @@
                 data-product-id='{{ product.id }}'></div>
             </div>
             
-            <button id="notifyToggle" class="notify-toggle">Notify Me</button>
             {% comment %} Changed from 'product-notify-me' to 'product-notify-new' by Adam 4/28{% endcomment %}
-            {% include 'product-notify-me-new' %}
+            {%unless product.available %}
+              <button id="notifyToggle" class="notify-toggle">Email When Available</button>
+              {% include 'product-notify-me-new' %}
+            {% endunless %}
+
           {% endif %}
 
           {% comment %} <div class="feature_divider"></div> {% endcomment %}
@@ -240,13 +243,6 @@
                   </span>
                 </p>
               {% endif %}
-
-              {% comment %} {% if section.settings.display_type %}
-                <p>
-                  <span class="label">{{ 'products.product.product_types' | t }}:</span>
-                  <span>{{ product.type | link_to_type }}</span>
-                </p>
-              {% endif %} {% endcomment %}
 
               {% if section.settings.display_tags %}
                 <p>
