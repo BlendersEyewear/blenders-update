@@ -12923,11 +12923,20 @@ $color-background-light: #FAFAFA;
     @include flexbox();
     @include justify-content(space-between);
     @include align-items(center);
-    @include flex-flow(row nowrap);
+    @include flex-flow(row wrap);
+
+    .notify_form{
+      max-width: 400px;
+      width: 100%;
+    }
   }
 
   .yotpo-container{
     order: 1;
+  }
+
+  .yotpo-container:empty{
+    display: none;
   }
 
   p.modal_price{
@@ -13152,11 +13161,6 @@ div.product-icons{
       transform: rotate(-90deg);
       transform-origin: left top 0;
 
-      // -webkit-writing-mode: vertical-lr;
-      // -ms-writing-mode: tb-lr;
-      // writing-mode: vertical-lr;
-      // text-orientation: upright;
-
       width: max-content;
       max-height: 3rem;
       position: absolute;
@@ -13288,7 +13292,7 @@ div.product-icons{
 }
 
 // Mobile Styles for Custom Templates
-@include respond-to('small'){
+@include respond-to('medium'){
   .product--custom{
 
     .product_section{
@@ -13333,11 +13337,19 @@ div.product-icons{
       @include justify-content(center);
     }
 
-    // center product form
-
   }
 
   .product-lifestyle-container{
+
+    // Lifestyle imagery
+    .lifestyle-container{
+      display: block;
+    }
+
+    // remove sideways product title
+    .lifestyle-product-title{
+      display: none;
+    }
 
     .product-tabs__tab-title{
       max-width: calc(50% - 0.25rem);

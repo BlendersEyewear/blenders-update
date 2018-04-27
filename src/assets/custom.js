@@ -320,14 +320,16 @@ const customProductPage = function(){
   // Check if custom product template
     console.log('custom product page script loaded ');
 
+    // Sold Out notify Toggle
+    soldOutNotifyToggle();
+
     $('.product-tabs__titles').each(function(){
 
       var $active, $content, $links = $(this).find('a');
 
       // If the location.hash matches one of the links, use that as the active tab.
       // If no match is found, use the first link as the initial active tab.
-      // $active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
-      $active = $($links.filter('[href="'+location.hash+'"]')[0]);
+      $active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
       $active.addClass('active');
 
       $content = $($active[0].hash);
@@ -359,6 +361,7 @@ const customProductPage = function(){
     // Mobile Size Guide---------
     // Hide mobile fit content
     $('#mobileFitContent').hide();
+
     // Click function
     $('#mobileFitToggle').click(function(){
       // rotate arrow icon
@@ -366,6 +369,42 @@ const customProductPage = function(){
       // toggle slide fit guide content
       $('#mobileFitContent').slideToggle(250);
     });
+
+
+    // Create sliding images from lifestyle images on mobile
+    // Check that its on tablet or smaller
+    if($(window).width() <= tabletSize){
+      console.log('Time to go MoBile! ⋋( ºΘº)⋌');
+
+      // Detach of lifestyle images
+      $lsImage1 = $('.product-lifestyle-image--1');
+      $lsImage2 = $('.product-lifestyle-image--2');
+      $lsImage3 = $('.product-lifestyle-image--3');
+      $lsImages = $('.product-lifestyle-image--1, .product-lifestyle-image--2, .product-lifestyle-image--3');
+
+      console.log('hi');
+
+      $lsImage1.detach();
+      $lsImage2.detach();
+      $lsImage3.detach();
+
+
+      // Empty out the lifestyle-image-container
+      $lsContainer = $('.lifestyle-container');
+      $lsContainer.empty();
+
+      $lsContainer.append()
+
+      // Create New Div to use as flickity container and append into lifestyle image container
+      jQuery('<div/>',{
+        id: 'customProductFlicktyContainer',
+        class: 'custom-product-flickity-container'
+      }).appendTo($lsContainer);
+    }
+
+    // prepend tagline and HR into lifestyle container
+    $lsContainer.prepend($('.product-border'));
+    $lsContainer.prepend($('.product-tagline'));
 }
 
 //------------------------------------------------

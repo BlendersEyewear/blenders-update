@@ -82,7 +82,10 @@
                         {% if collection_handles contains 'coming-soon' %}
                             <p class="modal_price">{{ 'collections.general.coming_soon' | t }}</p>
                         {% else %}
-                          {% unless product.available %}
+                        {%if product.available %}
+                          <!-- product is available -->
+                        {% endif %}
+                          {% if product.available %}
                             <p class="modal_price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                             <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
                             <meta itemprop="seller" content="{{ shop.name | escape }}" />
@@ -112,9 +115,13 @@
                                 </span>
                             {% endif %}
                             </p>
+                          {% endif %}
+
+                          {%unless product.available %}
+                            <button id="notifyToggle" class="notify-toggle">Email When Available</button>
+                            {% include 'product-notify-me-new' %}
                           {% endunless %}
 
-                            {% include 'product-notify-me' %}
                         {% endif %}
 
                         <div class="yotpo-container product-price-reviews__review">
@@ -130,7 +137,6 @@
                                 data-bread-crumbs="{% for tag in product.tags %}{{ tag | escape }};{% endfor %}">
                             </div>
                         </div>
-
                     </div>
 
                     {% comment %}
