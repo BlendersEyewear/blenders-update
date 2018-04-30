@@ -1,73 +1,78 @@
 <div class="section empty-cart-container">
-<div class="empty-cart">
-<h3 class="center">Check out Today's Top Styles</h3>
+    <div class="empty-cart">
 
-{% comment %} Top 4 Best Selling Items {% endcomment %}
-<div class="empty-cart-product-container">
-    {% assign best_sellers = "natty-ice-lime,rose-theater,tipsy-goat-polarized,blue-angel"| split: ',' %}
+    {% comment %} Recently Viewed Items {% endcomment %}
+    {% include 'recently-viewed-cart' %}
 
-    {% for raw_product in best_sellers%}
+    {% comment %} Top Selects {% endcomment %}
+    <h3 class="center">Check out Today's Top Styles</h3>
 
-    {% assign product = all_products[raw_product] %}
+    {% comment %} Top 4 Best Selling Items {% endcomment %}
+    <div class="empty-cart-product-container">
+        {% assign best_sellers = "natty-ice-lime,rose-theater,tipsy-goat-polarized,blue-angel"| split: ',' %}
 
-    {% assign inventory = product.first_available_variant.inventory_quantity %}
+        {% for raw_product in best_sellers%}
 
-    {% comment %} if sold out, skip {% endcomment %}
-    {%if inventory == 0 %} {% continue%} {% endif %}
+        {% assign product = all_products[raw_product] %}
+
+        {% assign inventory = product.first_available_variant.inventory_quantity %}
+
+        {% comment %} if sold out, skip {% endcomment %}
+        {%if inventory == 0 %} {% continue%} {% endif %}
 
 
-    <div class="product">
-        <div class="image__container">
-            <a href="{{product.url}}" class="product-img_link">
-            <img  src="{{ product.feature_image | product_img_url: '50x' }}"
-                alt="{{ product.title | escape }}"
-                class="lazyload {{ settings.image_loading_style }} product__img"
-                data-sizes="auto"
-                data-src="{{ product.feature_image | product_img_url: default }}"
-                data-srcset=" {{ product.featured_image | product_img_url: '300x' }} 300w,
-                              {{ product.featured_image | product_img_url: '400x' }} 400w,
-                              {{ product.featured_image | product_img_url: '500x' }} 500w,
-                              {{ product.featured_image | product_img_url: '600x' }} 600w,
-                              {{ product.featured_image | product_img_url: '700x' }} 700w,
-                              {{ product.featured_image | product_img_url: '800x' }} 800w,
-                              {{ product.featured_image | product_img_url: '900x' }} 900w"
-                />
-            </a>
+        <div class="product">
+            <div class="image__container">
+                <a href="{{product.url}}" class="product-img_link">
+                <img  src="{{ product.feature_image | product_img_url: '50x' }}"
+                    alt="{{ product.title | escape }}"
+                    class="lazyload {{ settings.image_loading_style }} product__img"
+                    data-sizes="auto"
+                    data-src="{{ product.feature_image | product_img_url: default }}"
+                    data-srcset=" {{ product.featured_image | product_img_url: '300x' }} 300w,
+                                {{ product.featured_image | product_img_url: '400x' }} 400w,
+                                {{ product.featured_image | product_img_url: '500x' }} 500w,
+                                {{ product.featured_image | product_img_url: '600x' }} 600w,
+                                {{ product.featured_image | product_img_url: '700x' }} 700w,
+                                {{ product.featured_image | product_img_url: '800x' }} 800w,
+                                {{ product.featured_image | product_img_url: '900x' }} 900w"
+                    />
+                </a>
+                </div>
+            <h4 class="center product__title">
+                <a href="{{product.url}}" class="product__title-img_link">{{ product.title }}</a>
+            </h4>
+            <p class="center price product__price">{{product.price | money }}</p>
+
+            <form action="/cart/add">
+                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                <button type="submit" name="add" class="action_button add_to_cart product__btn" data-label={{ add_to_cart_label | json }}>
+                {{ 'products.product.add_to_cart' | t }}
+                </button>
+            </form>
+
+            {% comment %} Yotpo {% endcomment %}
+            <div class="yotpo-container yotpo-empty-cart-container">
+                <div class="yotpo bottomLine yotpo-empty-cart"
+                data-appkey="7Na4Xsq5Vf0s5VxSDIrDl56IRsBb1HHiohLKFKOK"
+                data-domain="{{shop.permanent_domain | escape }}"
+                data-product-id="{{ product.id }}"
+                data-product-models="{{ product.id }}"
+                data-name="{{ product.title | escape }}"
+                data-url="{{ shop.url }}{{ product.url }}"
+                data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
+                data-description="{{ product.description | escape }}"
+                data-bread-crumbs="{% for tag in product.tags %}{{ tag | escape }};{% endfor %}">
+                </div>
             </div>
-        <h4 class="center product__title">
-            <a href="{{product.url}}" class="product__title-img_link">{{ product.title }}</a>
-        </h4>
-        <p class="center price product__price">{{product.price | money }}</p>
 
-        <form action="/cart/add">
-            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-            <button type="submit" name="add" class="action_button add_to_cart product__btn" data-label={{ add_to_cart_label | json }}>
-            {{ 'products.product.add_to_cart' | t }}
-            </button>
-        </form>
-
-        {% comment %} Yotpo {% endcomment %}
-        <div class="yotpo-container yotpo-empty-cart-container">
-            <div class="yotpo bottomLine yotpo-empty-cart"
-            data-appkey="7Na4Xsq5Vf0s5VxSDIrDl56IRsBb1HHiohLKFKOK"
-            data-domain="{{shop.permanent_domain | escape }}"
-            data-product-id="{{ product.id }}"
-            data-product-models="{{ product.id }}"
-            data-name="{{ product.title | escape }}"
-            data-url="{{ shop.url }}{{ product.url }}"
-            data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
-            data-description="{{ product.description | escape }}"
-            data-bread-crumbs="{% for tag in product.tags %}{{ tag | escape }};{% endfor %}">
-            </div>
         </div>
-
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
 
-<p class="center italics empty-cart-or">Or</p>
+    <p class="center italics empty-cart-or">Or</p>
 
-<a href="{% if cart.items.first.product.collections != blank %}{{ cart.items.first.product.collections.last.url }}{% else %}/collections/all{% endif %}" class="action_button continue-button add_to_cart empty-cart-keep-shopping">{{ 'cart.general.continue_shopping_link_html' | t }}</a>
-</div>
+    <a href="{% if cart.items.first.product.collections != blank %}{{ cart.items.first.product.collections.last.url }}{% else %}/collections/all{% endif %}" class="empty-cart-keep-shopping">{{ 'cart.general.continue_shopping_link_html' | t }}</a>
+    </div>
 
 </div>

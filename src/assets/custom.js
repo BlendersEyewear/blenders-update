@@ -376,6 +376,8 @@ const customProductPage = function(){
       }
     });
 
+    // Recently Viewed
+
 
     // Create sliding images from lifestyle images on mobile
     // Check that its on tablet or smaller

@@ -9,19 +9,47 @@
   <div class="sixteen columns">
     <h1>{{ 'cart.general.title' | t }}</h1>
 
+    {% comment %} Only show when cart has items in it {% endcomment %}
     {% unless cart.item_count == 0 %}
     
-    <div class="shippingmessage">
-        {% if cart.total_price >= 4000 %}
-          <div class="shipping-notice shipping-notice--free">Sweet! You scored Free Shipping…</div>
-        {% elsif cart.total_price < 4000 %}
-          <div class="shipping-notice">Add more items to get Free Shipping! All orders over $40 ship Free.</div>
-        {% endif %}
-    </div>
+      <div class="shippingmessage">
+          {% if cart.total_price >= 4000 %}
+            <div class="shipping-notice shipping-notice--free">Sweet! You scored Free Shipping…</div>
+          {% elsif cart.total_price < 4000 %}
+            <div class="shipping-notice">Add more items to get Free Shipping! All orders over $40 ship Free.</div>
+          {% endif %}
+      </div>
 
     <div class="feature_divider"></div>
 
     {% endunless %}
+
+    {% comment %} Cart Mobile Upsell {% endcomment %}
+      <div class="mobile-upsell">  
+        
+      {% for item in cart.items %}
+        {% if item.product.type == "Sunglasses" %}
+          {% assign sunglasses_in_cart = true %}
+        {% endif %}
+      {% endfor %}
+        
+        
+        
+        
+      {% for item in cart.items %}
+        {% if item.product.type == "Soft Pouches" %}
+          {% assign sunglasses_in_cart = false %}
+        {% endif %}
+      {% endfor %}
+        
+
+      {% if sunglasses_in_cart %}
+        {% include 'mobile-upsell' %}
+      {% endif %}
+
+      </div>
+    {% comment %} End Mobile Upsell {% endcomment %}
+
 
   </div>
 </div>
@@ -35,6 +63,8 @@
       <br class="clear" />
     </div>
   </div>
+
+  {% comment %} Call empty cart logic if cart is empty {% endcomment %}
   {% include 'empty-cart' %}
 {% else %}
 
@@ -48,7 +78,7 @@
             {% assign total_saving = saving | plus: total_saving %}
           {% endif %}
 
-          <div class="section clearfix">
+          <div class="section clearfix cart-product">
             <div class="three columns alpha">
               <a href="{{ item.url }}" title="{{ item.title | escape }}" class="cart_page_image">
                 <img  src="{{ item | img_url: '100x' }}"
@@ -97,7 +127,12 @@
 
               <p class="modal_price">
                 {% if item.price > 0 %}
-                  <span class="money">{{ item.price | money }}</span>
+                  {% comment %} Check if items is on sale, if on sale, use the 'sale' class {% endcomment %}
+                  {% if item.price < item.variant.compare_at_price %}
+                    <span class="sale">{{ item.price | money }}</span>
+                  {% else %}
+                    {{ item.price | money }}
+                  {% endif %}
                 {% else %}
                   {{ settings.free_price_text }}
                 {% endif %}
@@ -137,17 +172,6 @@
                 {% endif %}
               </p>
             {% endif %}
-
-            {% comment %} Commented out "order will be process in X" by Adam 4/2 {% endcomment %}
-            {% comment %}
-            {% if settings.show_multiple_currencies %}
-              <p>
-                <small>
-                  {{ 'cart.general.orders_processed_in_currency_html' | t: currency: shop.currency }}
-                </small>
-              </p>
-            {% endif %}
-            {% endcomment %}
 
             {% if section.settings.display_special_instructions %}
               <label for="note">{{ 'cart.general.note' | t: shop_name: shop.name }}:</label>

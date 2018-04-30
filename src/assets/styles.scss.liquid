@@ -12326,6 +12326,18 @@ button.btn.recomatic-add-to-cart:focus{
 .cart .container .offset-by-one {
     padding-left: 5px;
 }
+
+
+// Cart Form
+.cart .cart-product{
+  p.modal_price{
+    font-weight: 600;
+  }
+
+  .was_price{
+    font-weight: 400;
+  }
+}
   
   
 @media only screen and (min-width: 1200px) {
@@ -12369,11 +12381,6 @@ button.btn.recomatic-add-to-cart:focus{
     } 
   }
   
-@media only screen and (max-width: 736px){
-  .pouch-upsell{
-    display: none;
-  }
-}
   
 .shippingmessage {
     text-align: center;
@@ -12406,6 +12413,10 @@ button.btn.recomatic-add-to-cart:focus{
     font-weight: bold;
     font-size: 15px;
     line-height: 22px;
+  }
+
+  .promo_banner-show.mobile_nav-fixed--true #pagecontent{
+    padding: 0 !important;
   }
 }
 
@@ -12440,9 +12451,67 @@ input#checkout {
   display: none;
 }
 
+// Mobile styles -phone
+@include respond-to('small'){
+  // unneccassry padding
+  .mobile_nav-fixed--true #pagecontent{
+    padding: 0 !important;
+  }
+
+  // Product
+  .cart .cart-product{
+    margin: 10px 0 30px;
+  }
+
+  // Product Image
+  .three.columns.alpha {
+    max-width: 30%;
+    float: left;
+  }
+
+// Product Info (title, price, etc.)
+  .seven.columns.omega.cart_content_info {
+    max-width: 63%;
+    text-align: left;
+    margin-left: 5%;
+  }
+
+  .cart_content_info p.modal_price {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    max-width: fit-content;
+    display: inline-block;
+  }
+
+  .cart_content_info h3 {
+    margin: 0 0 .5rem;
+  }
+
+  .cart_content_info .product-quantity-box.left {
+    width: 96px !important;
+    margin: 0 0 0 0.5rem !important;
+    float: right;
+  }
 
 
+  // Cart Subtotal
+  p.cart_subtotal {
+    margin: 0 0 1rem;
+    line-height: 1;
+  }
+
+  // Cart Subtotal Savings
+  p.cart_savings.sale {
+    margin: 0 0 1.5rem;
+    line-height: 1;
+  }
+}
+
+
+// ----------------------------------------------------
 // Empty Cart Page ------------------------------------
+// ----------------------------------------------------
 
 .cart-empty-message__section{
   margin: -1rem 0 3rem !important
@@ -12497,7 +12566,7 @@ input#checkout {
 }
 
 .empty-cart .product .yotpo .text-m {
-  padding: .5rem 0;
+  padding: .25rem 0 !important;
   letter-spacing: .05em;
   display: block;
 }
@@ -12518,22 +12587,59 @@ input#checkout {
     transform: translateY(-4px);
 }
 
-.empty-cart .empty-cart-keep-shopping{
+.empty-cart a.empty-cart-keep-shopping{
   height: auto;
   min-height: auto;
   line-height: 1;
-  padding: 12px 50px;
+  padding: 8px 30px;
   margin: 2rem auto 4rem;
   display: block;
   font-weight: 600;
   width: fit-content;
   max-width: 100%;
+  color: black;
+  background: none;
+  transition: all .15s ease-in-out;
+}
+
+.empty-cart a.empty-cart-keep-shopping:focus,
+.empty-cart a.empty-cart-keep-shopping:hover{
+  color: black;
+  outline: 0;
+  box-shadow: inset 0 0 0 1px black;
 }
 
 // Mobile Styles for Cart page
 @include respond-to('medium'){
   .empty-cart-product-container {
     @include flex-flow(row wrap);
+
+    // Reduce margins for product info (title and price and buttons)
+    .product__title{
+      padding: 0;
+      margin-bottom: 0.125rem;
+    }
+
+    .product__price{
+      margin: 0 0 0.5rem;
+    }
+
+    // Yotpo product Stars
+    .yotpo-container{
+      margin: 0;
+    }
+
+    // Empoty cart OR
+    .empty-cart-or{
+      margin: 1rem auto;
+    }
+
+    // continue shopping button
+    a.empty-cart-keep-shopping{
+      margin: 1rem auto 3rem;
+    }
+
+
   }
 
   .empty-cart .product {
@@ -12545,7 +12651,6 @@ input#checkout {
     margin: 0 0 1rem;
   }
 }
-
 
 
 // ------------------------------------------------------------------------------------------
@@ -12719,7 +12824,7 @@ select#sort-by {
 }
 
 // ----------------------------------------------------
-// --------------- Contact Page
+// --------------- Contact Page New
 // ----------------------------------------------------
 .contact-page__container{
   @include flexbox();
@@ -12733,6 +12838,12 @@ select#sort-by {
   padding: 1rem;
   margin: 0 0 2rem;
   font-weight: 400;
+
+  svg.contact__icon {
+    display: block;
+    margin: 0 auto;
+    opacity: 0.85;
+  }
 
   .contact__title{
     font-weight: 600;
@@ -12782,6 +12893,13 @@ select#sort-by {
   margin: 0 0 1.5rem;
 }
 
+.page-contact-new{
+  header .caption{
+    top: calc(50% + 1rem);
+  }
+}
+
+
 @include respond-to('small'){
   .contact-page__container > .contact {
     @include flex(100%);
@@ -12790,8 +12908,22 @@ select#sort-by {
 }
 
 @include respond-to('medium'){
-  .contact-section .contact-page__image{
-    margin-top: 0;
+  // remove top margin on mobile
+  .page-contact-new {
+    .contact-section .contact-page__image{
+      margin-top: 0 !important;
+    }
+
+    // remove bottom padding from section title
+    .caption {
+      padding: 1rem 1rem 0;
+      margin: 0.5rem auto 0 !important;
+    }
+
+    // remove top padding from page container
+    .contact-page__container{
+      padding: 0 0 15px;
+    }
   }
 }
 
@@ -12817,7 +12949,6 @@ select#sort-by {
 a.shop-frame__btn{
   display: block;
   color: white;
-  background: {{ settings.btn_color }};
   text-align: center;
   margin: .5rem auto 0;
   line-height: 1;
@@ -12828,11 +12959,8 @@ a.shop-frame__btn{
   transition: all .15s ease-in-out;
   letter-spacing: .05em;
   opacity: 1;
-}
-
-a.shop-frame__btn:hover,
-a.shop-frame__btn:focus {
-  opacity: 0.85;
+  min-height: unset;
+  height: auto;
 }
 
 .center.shop-frame__title {
@@ -13380,4 +13508,3 @@ div.product-icons{
 
 
 }
-
