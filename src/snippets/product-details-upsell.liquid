@@ -1,0 +1,9 @@
+
+{% assign collection_handles = product.collections | map: 'handle' %}
+<div class="thumbnail-overlay">
+  <a href="{{ product.url | within: collection }}" itemprop="url" class="hidden-product-link">{{ product.title }}</a>
+  <div class="info">
+      {% include "product-info" %}
+      {% include 'quick-shop-button' %}
+  </div>
+</div>

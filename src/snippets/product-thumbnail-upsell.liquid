@@ -26,7 +26,7 @@
   {% endif %}
 
   <div class="product-wrap">
-    <div class="relative product_image swap-true">
+    <div class="relative product_image">
           <img  src="{{ product.featured_image | product_img_url: '100x' }}"
                 alt="{{ alt_text | escape }}"
                 class="lazyload {{ settings.image_loading_style }}"
@@ -40,16 +40,6 @@
                               {{ product.featured_image | product_img_url: '800x' }} 800w,
                               {{ product.featured_image | product_img_url: '900x' }} 900w"
               />
-          {% if settings.collection_secondary_image != blank %}
-            <img src="{% if product.images[1] != blank %}{{ product.images[1] | product_img_url: '900x' }}{% else %}{{ product.featured_image | product_img_url: '900x' }}{% endif %}"
-            class="secondary lazyload"
-            alt="{{ alt_text | escape }}"
-            />
-          {% endif %}
-
-       {% comment %} <div class="quick_shops {% unless product.available %}hide{% endunless %} desktop action_button">
-        {% if product.available %}{% include 'product-form' %}{% endif %}
-       </div> {% endcomment %}
 
       {% include "product-details" %}
     </div>

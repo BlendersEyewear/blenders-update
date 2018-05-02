@@ -4,22 +4,30 @@
 // Document Vars
 const body = document.body;
 
-
 // Document Scripts
 
-// If element exists
-// const exists = (el) => {
-  
-// }
-
-// Last Updated --  2/14
+// Last Updated --  5/1
 const detailsBtns = document.querySelectorAll(".feature-details__button");
 
 // Screen Sizes / Measurements
 const tabletSize = 768;
 
-// Functions
+// Helper Functions
 // ====================================================================
+
+// Check if element exists
+const exists = (el) => {
+  if(typeof(el) != 'undefined' && el != null){
+    return true
+  } else {
+    return false
+  }
+}
+
+
+// CORE Functions
+// ====================================================================
+
 
 // Replace the button text to 'Shop Now' on Dekstop
 const fpBtnSwap = () => {
@@ -48,6 +56,44 @@ const tabfunc = () => {
   }
 }
 
+
+// Remove "Soft Pouch" from product titles pouch upsell
+const PouchUpsell = () => {
+
+  console.log('puch upsel scripts loaded');
+  
+  // Get pouch containers
+  let pouchContainers = document.querySelectorAll('.mobile-upsell-container');
+
+  // Remove ' SOFT POUCH' from the Title
+  let removeTitle = () => {
+    // Loop through all the products in the pouch containers
+    for(let container of pouchContainers){
+      let productDetails = container.querySelector('.product-details');
+
+      if(exists(productDetails)){
+        let title = productDetails.querySelector('.title');
+
+        // Check if span.title exists
+        if(exists(title)){
+          let text = title.innerHTML;
+          let toRemove = " SOFT"
+          
+          // Remove "BBQ" from Backyard BBQ
+          if(text.indexOf(" BBQ SOFT") !== -1 ){
+            title.innerHTML = text.replace(" BBQ SOFT", '');
+          } else if(text.indexOf(toRemove) !== -1){
+            title.innerHTML = text.replace(toRemove, '');
+          }
+          
+        }
+      }
+      
+    }
+  }
+
+  body.classList.contains('cart') ? removeTitle() : '';
+}
 
 // =========== WARNING =============
 //  ------ jQuery Ugliness -------
@@ -447,5 +493,8 @@ document.addEventListener("DOMContentLoaded", function() {
   // Custom Product Page -------------
   // Run custom product page scripts if on custom product page.
   body.classList.contains('product-template-custom') ? customProductPage() : '';
+
+  // Mobile only Scripts
+  screenSize <= tabletSize ? (PouchUpsell()) : '';
 
 });

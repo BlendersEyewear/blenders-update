@@ -48,13 +48,13 @@
                 style="{{ align_height_value }} max-width: {{- product.featured_image.width -}}px;"
                 data-sizes="auto"
                 data-src="{{ product.featured_image | product_img_url: '900x' }}"
-                data-srcset=" {{ product.featured_image | product_img_url: '300x' }} 300w,
-                              {{ product.featured_image | product_img_url: '400x' }} 400w,
-                              {{ product.featured_image | product_img_url: '500x' }} 500w,
-                              {{ product.featured_image | product_img_url: '600x' }} 600w,
-                              {{ product.featured_image | product_img_url: '700x' }} 700w,
-                              {{ product.featured_image | product_img_url: '800x' }} 800w,
-                              {{ product.featured_image | product_img_url: '900x' }} 900w"
+                data-srcset=" {{ product.featured_image | product_img_url: '400x' }} 300w,
+                              {{ product.featured_image | product_img_url: '500x' }} 400w,
+                              {{ product.featured_image | product_img_url: '600x' }} 500w,
+                              {{ product.featured_image | product_img_url: '700x' }} 600w,
+                              {{ product.featured_image | product_img_url: '800x' }} 700w,
+                              {{ product.featured_image | product_img_url: '900x' }} 800w,
+                              {{ product.featured_image | product_img_url: '1000x' }} 900w"
               />
             </div>
           {% if settings.collection_secondary_image != blank %}

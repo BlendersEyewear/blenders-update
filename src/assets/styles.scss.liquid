@@ -10952,9 +10952,9 @@ $transparent: rgba(0,0,0,0.0);
   }
 }
 
-  // ========================================
-// Bug Fixes
-// ========================================
+// =========================================================
+// -----------------  Bug Fixes
+// =========================================================
 
   .index.quick_shops.desktop,
   .collection.quick_shops.desktop {
@@ -12306,18 +12306,26 @@ button.btn.recomatic-add-to-cart:focus{
   text-align: center;
 }
 
-.cart .saso-notification {
-    z-index: 2147483647;
-    display: none;
-    left: 0px;
-    width: 118%!important;
-    margin: 0px;
-    padding: 16px 0px;
-    font-size: 120%;
-    text-align: center;
-    text-transform: none;
-    margin-left: -10%!important;
+.cart{
+  // Cart Product Titles
+  .cart_content_info h3 {
+    margin: 0 0 2px;
+    padding: 7px 0 0;
+  }
 }
+
+// .cart .saso-notification {
+//     z-index: 2147483647;
+//     display: none;
+//     left: 0px;
+//     width: 118%!important;
+//     margin: 0px;
+//     padding: 16px 0px;
+//     font-size: 120%;
+//     text-align: center;
+//     text-transform: none;
+//     margin-left: -10%!important;
+// }
   
 .cart form {
     margin-bottom: 0px!important;
@@ -12330,16 +12338,41 @@ button.btn.recomatic-add-to-cart:focus{
 
 // Cart Form
 .cart .cart-product{
-  p.modal_price{
-    font-weight: 600;
+  margin: 10px 0 35px;
+
+  // metafields
+  .cart-product__metafields{
+    font-size: .75rem;
+    letter-spacing: .05em;
+    line-height: 1.25;
+    color: #7d7d7d;
+    padding: 0;
+    margin: 0 0 1rem;
   }
 
+  // making modal price and qty checker line up
+  p.modal_price{
+    font-weight: 600;
+    padding: 0;
+    margin: 0 1rem 0 0;
+    float: left;
+    width: 6rem;
+  }
+  
   .was_price{
     font-weight: 400;
+    color: #adadad;
   }
+
+  .product-quantity-box{
+    display: inline-block;
+    float: left;
+    margin: 0 !important;
+  }
+
 }
   
-  
+// Removing redonk margin on subtotal
 @media only screen and (min-width: 1200px) {
   .cart .container .five.columns {
     width: 355px;
@@ -12366,32 +12399,33 @@ button.btn.recomatic-add-to-cart:focus{
   }
 }
   
-  .cart a.action_button.continue-button.add_to_cart {
-    background-color: #00A3F0;
-    color: white!important;
-    border-color: #00A3F0;
+.cart a.action_button.continue-button.add_to_cart {
+  background-color: #00A3F0;
+  color: white!important;
+  border-color: #00A3F0;
 }
   
-  @media only screen and (min-width: 736px) {
-    .container .offset-by-five {
-        padding-left: 32% !important;
-    }
-    .mobile-upsell{
-        display: none!important;
-    } 
+@media only screen and (min-width: 736px) {
+  .container .offset-by-five {
+      padding-left: 32% !important;
   }
-  
-  
-.shippingmessage {
+  .mobile-upsell{
+      display: none!important;
+  } 
+}
+
+// Subtotal Area
+.cart{
+  .shippingmessage {
     text-align: center;
     font-weight: bold;
     padding-left: 15px;
     padding-right: 15px;
     max-width: 24rem;
     margin: 0 auto 2rem;
-}
+  }
 
-.shipping-notice {
+  .shipping-notice {
     background: none;
     padding: 1px 5px;
     color: rgba(0,0,0,0.85);
@@ -12400,82 +12434,182 @@ button.btn.recomatic-add-to-cart:focus{
     margin: 0 auto;
     font-style: italic;
     font-size: 1rem;
-}
+  }
 
-.shipping-notice--free{
-  background: #e0fde0;
-}
+  .shipping-notice--free{
+    background: #e0fde0;
+  }
+
+  .subtotal{
+    border: none;
+
+    .cart_savings{
+      line-height: 1;
+      margin: 0 0 1.75rem;
+    }
+  }
+
+  // Remove Addition checkout buttons
+  .additional-checkout-buttons{
+    display: none;
+  }
+
+  input.hidden{
+    display: hidden;
+    font-size: 0.5rem;
+  }
   
-@media only screen and (max-width: 736px) {
-  .shippingmessage {
-    text-align: center;
-    margin-bottom: 14px;
-    font-weight: bold;
-    font-size: 15px;
-    line-height: 22px;
-  }
-
-  .promo_banner-show.mobile_nav-fixed--true #pagecontent{
-    padding: 0 !important;
-  }
-}
-
-input.hidden{
-  display: hidden;
-  font-size: 0.5rem;
-}
-
-// 'continue shopping' message
-.featured-links > a {
+  // 'continue shopping' message
+  .featured-links > a {
     border-bottom: none;
     font-size: 0.75rem;
     color: #333 !important;
     letter-spacing: .1em;
     padding: 1rem 0;
     line-height: 1;
-}
-
-// checkout button
-input#checkout {
+  }
+  
+  // checkout button
+  input#checkout {
     font-weight: 600;
     letter-spacing: .1em;
+  }
 }
 
-// remove border left of subtotal
-.cart .subtotal{
-  border: none;
+// BOGO Components
+.cart{
+  .bogo-free-item-message,
+  span.cart-message-bogo,
+  span.bogo-message-add-pair,
+  span.bogo-message-add-pair-mobile,
+  span.cart-message-bogo{
+    font-size: 1rem;
+    font-style: italic;
+  }
+
+  // Bogo Free Item Message
+  .bogo-free-item-message,
+  span.cart-message-bogo {
+    color: #44bd32;
+  }
+
+  // Add pair msg - BOGO
+  span.bogo-message-add-pair {
+    display: block;
+    text-align: center;
+    color: #e87015;
+    line-height: 1;
+    margin: 1rem 0 0;
+  }
+
+  span.cart-message-bogo {
+    display: block;
+    text-align: center;
+    line-height: 1.25;
+    margin: 1rem 0;
+  }
 }
 
-// Remove Addition checkout buttons
-.additional-checkout-buttons{
+.bogo-message-add-pair-mobile{
+  text-align: center;
+  background: #f1f1f1;
+  margin: 1rem 0 2rem;
   display: none;
 }
 
-// Mobile styles -phone
-@include respond-to('small'){
+// Mobile Styles - Tablet Down
+@include respond-to('medium') {
   // unneccassry padding
-  .mobile_nav-fixed--true #pagecontent{
+  .cart.mobile_nav-fixed--true #pagecontent{
     padding: 0 !important;
   }
 
-  // Product
-  .cart .cart-product{
-    margin: 10px 0 30px;
+  .cart{
+    .shippingmessage {
+      text-align: center;
+      margin-bottom: 14px;
+      font-weight: bold;
+      font-size: 15px;
+      line-height: 22px;
+    }
+  
+    // Soft Pouch Upsell
+    // Static Add to Cart Buttons on Mobile Pouch Upsells
+  .thumbnail{
+    margin-bottom: .5rem;
+
+    .quick_shops{
+      opacity: 1;
+      height: auto;
+      min-height: unset;
+    }
+
+    .price span.money:hover{
+      color: #000;
+    }
   }
 
+  // Add to cart button
+  .quick_shops{
+    .product-quantity-box,
+    .items_left{
+      display: none;
+    }
+
+    .product-quantity-box+.inline_purchase{
+      width: 100%;
+      margin-top: 0;
+    }
+  }
+
+  .quick_shops .action_button.add_to_cart {
+    font-size: 14px;
+    line-height: 1;
+    padding: 10px 5px;
+    height: auto;
+    min-height: unset;
+  }
+
+  .mobile-upsell-container .product-details{
+    font-size: 0.875rem;
+    line-height: 1.25;
+    letter-spacing: 0;
+    margin-bottom: 0.5rem;
+  }
+
+    // Subtotal
+    .subtotal{
+      .cart_subtotal,
+      .cart_savings{
+        line-height: 1;
+        max-width: 40%;
+        margin: 0 auto 1rem;
+      }
+
+      .cart_savings{
+        margin: 0 auto 1.5rem;
+      }
+    }
+  }
+  
+  // Product
+  .cart .cart-product{
+    margin: 10px 0 35px;
+  }
+  
   // Product Image
   .three.columns.alpha {
     max-width: 30%;
     float: left;
   }
-
-// Product Info (title, price, etc.)
+  
+  // Product Info (title, price, etc.)
   .seven.columns.omega.cart_content_info {
     max-width: 63%;
     text-align: left;
     margin-left: 5%;
   }
-
+  
   .cart_content_info p.modal_price {
     margin: 0;
     padding: 0;
@@ -12483,31 +12617,37 @@ input#checkout {
     max-width: fit-content;
     display: inline-block;
   }
-
+  
   .cart_content_info h3 {
     margin: 0 0 .5rem;
   }
-
+  
   .cart_content_info .product-quantity-box.left {
     width: 96px !important;
-    margin: 0 0 0 0.5rem !important;
+    margin: 0 !important;
     float: right;
   }
 
-
-  // Cart Subtotal
-  p.cart_subtotal {
-    margin: 0 0 1rem;
-    line-height: 1;
+  // BOGO
+  // Fix padding for free BOGO cart item message
+  span.bogo-free-item-message {
+    display: block;
+    margin: 0 0 -10px;
   }
 
-  // Cart Subtotal Savings
-  p.cart_savings.sale {
-    margin: 0 0 1.5rem;
-    line-height: 1;
+  // Cart you 'scored X free items!' msg
+  span.cart-message-bogo {
+    margin: 1rem 0 0;
+    padding: 0 0 5px;
   }
+
+  // Remove junk padding from checkout button on mobile
+  p.checkout-button-container {
+    padding: 0;
+    margin: 0;
+  }
+
 }
-
 
 // ----------------------------------------------------
 // Empty Cart Page ------------------------------------
@@ -12517,7 +12657,7 @@ input#checkout {
   margin: -1rem 0 3rem !important
 }
 
-// Empty Cart Mesg
+// Empty Cart Msg
 .cart-empty-message > .quote{
   border: none;
   margin: 0;
@@ -12534,42 +12674,61 @@ input#checkout {
     @include align-items(stretch);
 }
 
-.empty-cart .product {
+.empty-cart{
+
+  .product {
     padding: 10px;
     @include flex(1);
-}
+  }
 
-.empty-cart .product__price{
-  margin: 0 0 1rem;
-}
+  h4.product__title {
+    margin: 0 0 .5rem;
+    padding: 0;
+  }
 
-.empty-cart .product__btn {
-  height: auto;
-  min-height: auto;
-  line-height: 1;
-  padding: 7px 15px;
-  margin: .5rem auto;
-  display: block;
-  font-weight: 600;
-  width: fit-content;
-}
-
-.empty-cart .yotpo {
+  .product__subtitle {
+    font-size: 0.75rem;
+    letter-spacing: .05em;
+    line-height: 1.25;
+    opacity: 0.75;
+    margin: 0 0 0.75rem;
+  }
+  
+  .product__price {
+    margin: 0 0 .5rem;
+    line-height: 1;
+    font-weight: 400;
+  }
+  
+  .product__btn {
+    height: auto;
+    min-height: auto;
+    line-height: 1;
+    padding: 7px 15px;
+    margin: .5rem auto;
+    display: block;
+    font-weight: 600;
+    width: fit-content;
+  }
+  
+  .yotpo {
     width: auto;
     max-width: fit-content;
     margin: 0 auto;
-}
-
-.empty-cart span.yotpo-stars {
+  }
+  
+  span.yotpo-stars {
     padding: 0 0 1rem !important;
     display: block;
+  }
+  
+  .product .yotpo .text-m {
+    padding: .25rem 0 !important;
+    letter-spacing: .05em;
+    display: block;
+  }
 }
 
-.empty-cart .product .yotpo .text-m {
-  padding: .25rem 0 !important;
-  letter-spacing: .05em;
-  display: block;
-}
 
 .empty-cart-or{
   text-transform: uppercase;
@@ -12687,6 +12846,27 @@ input#checkout {
 //   Collection Page
 // ------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------
+
+.collection{
+  .product-details{
+    // Meta fields
+    .product-details__metafields{
+      font-size: .75rem;
+      letter-spacing: .05em;
+      line-height: 1.25;
+      color: #7d7d7d;
+      padding: 0;
+      margin: 0 0 0.75rem;
+    }
+
+    // Yotpo stars (making them go to second row)
+    .yotpo .text-m{
+      display: block;
+      margin: .25rem auto 0;
+      padding: 0;
+    }
+  }
+}
 
 // Fix 2 Per Row Mobile Product Grid -----------
 /*  #Mobile (Portrait)
@@ -12849,6 +13029,7 @@ select#sort-by {
 
   .contact__title{
     font-weight: 600;
+    margin: .75rem 0;
   }
 
   .contact__content p{
@@ -12873,6 +13054,11 @@ select#sort-by {
   }
 }
 
+// sticker link
+.contact.contact__sticker a{
+  text-decoration: underline;
+}
+
 .contact-page__container > .contact__sticker{
   @include flex(100%);
    
@@ -12891,8 +13077,9 @@ select#sort-by {
 
 .contact__email{
   display: block;
+  width: fit-content;
   text-align: center;
-  margin: 0 0 1.5rem;
+  margin: 0 auto 1.5rem;
 }
 
 .page-contact-new{
@@ -12912,8 +13099,25 @@ select#sort-by {
 @include respond-to('medium'){
   // remove top margin on mobile
   .page-contact-new {
+    
+    
     .contact-section .contact-page__image{
       margin-top: 0 !important;
+    }
+    
+    // Make the header title go back over the header image
+    header .caption{
+      position: absolute;
+      top: calc(50% - 0.875rem);
+      padding: 0;
+      margin: 0 !important;
+
+      h1.headline{
+        line-height: 1;
+        margin: 0;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.15); // copied from the theme default
+        color: white;
+      }
     }
 
     // remove bottom padding from section title
@@ -12924,7 +13128,11 @@ select#sort-by {
 
     // remove top padding from page container
     .contact-page__container{
-      padding: 0 0 15px;
+      padding: 2rem 0;
+
+      .contact{
+        margin: 0 0 3rem;
+      }
     }
   }
 }
@@ -13509,4 +13717,22 @@ div.product-icons{
   }
 
 
+}
+
+
+
+// ==================================================
+//  ------- Mini Cart Fixes
+// ==================================================
+// Total Savings Fix
+.top_bar .cart_container{
+  li.cart_subtotal.js-cart_subtotal {
+    margin: 0 0 .75rem;
+    line-height: 1;
+  }
+
+  li.cart_savings.sale.js-cart_savings {
+    line-height: 1;
+    margin: 0 0 1.25rem;
+  }
 }
