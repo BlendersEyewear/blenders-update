@@ -9948,6 +9948,49 @@ p.modal_price {
     padding-bottom: 0;
 }
 
+// ----------- Make Mobile Header Cart Icon have the Number above the icon, and align the seach icon -------
+@include respond-to('medium'){
+  #header .top_bar {
+    background-color:white;
+    border-bottom: 1px solid #e0e0e0;
+    height: 55px
+  }
+
+  #header .top_bar a.mobile_nav {
+    top: 10px
+  }
+
+  #header .top_bar a.mobile_logo img {
+    margin-top: 8px
+  }
+
+  #header .top_bar .icon-search{
+    margin-top: 8px;
+    padding: 0;
+    right: 48px;
+  }
+
+  #header .mini_cart {
+    height: 54px;
+    padding-top: 20px;
+    padding-left: 8px;
+    padding-right: 10px
+  }
+
+  #header .cart_content {
+    top: 54px
+  }
+
+  #header .cart_count {
+    position: absolute !important;
+    top: -4px;
+    right: -2px;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
 // Fix cart item price on mobile
 // added by adam 2/8/18
 @media (max-width: 768px) {
@@ -12015,7 +12058,7 @@ p.modal_price {
     margin: 0.5rem 0;
   }
   .product .yotpo-container{
-    margin: -1rem 0 1rem;
+    margin: 0;
   }
 
   .related-products a.text-m {
@@ -13059,6 +13102,13 @@ select#sort-by {
   text-decoration: underline;
 }
 
+svg.contact__sticker-img {
+  filter: drop-shadow( 1px 7px 3px rgba(0,0,0,0.25));
+  margin: 0 auto 1.25rem;
+  display: block;
+  max-height: 12rem;
+}
+
 .contact-page__container > .contact__sticker{
   @include flex(100%);
    
@@ -13132,6 +13182,10 @@ select#sort-by {
 
       .contact{
         margin: 0 0 3rem;
+      }
+
+      .contact__sticker{
+        padding-top: 2rem;
       }
     }
   }
@@ -13238,7 +13292,6 @@ $color-background-light: #FAFAFA;
 
     text-transform: uppercase;
   }
-
 
   .product-meta__type,
   a.size-chart--desktop{
@@ -13348,6 +13401,13 @@ $color-background-light: #FAFAFA;
 
     iframe{
       color: blue;
+    }
+  }
+
+  // Fit Guide popup
+  .remodal.remodal-is-opened{
+    img {
+      max-width: 100%;
     }
   }
 }
@@ -13514,7 +13574,7 @@ div.product-icons{
       grid-row: 1 / 3;
     }
 
-    .product-lifestyle-image--2{
+    .product-lifestyle-image--3{
       grid-column: 1 / 3;
       grid-row: 2 / 4;
     }
@@ -13551,7 +13611,7 @@ div.product-icons{
     height: auto;
   }
 
-  .product-lifestyle-image--3{
+  .product-lifestyle-image--2{
     margin-bottom: 1rem;
   }
 
@@ -13734,5 +13794,10 @@ div.product-icons{
   li.cart_savings.sale.js-cart_savings {
     line-height: 1;
     margin: 0 0 1.25rem;
+  }
+
+  // Item Title
+  .cart_item .item_title{
+    font-weight: 600;
   }
 }

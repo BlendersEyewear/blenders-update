@@ -6,7 +6,7 @@
 
     {% comment %} Top 4 Best Selling Items {% endcomment %}
     <div class="empty-cart-product-container">
-        {% assign best_sellers = collections.top-selects-blenders-eyewear.products %}
+        {% assign best_sellers = collections.empty-cart-recomendations.products %}
 
         {% comment %} Loop through the first 4 products in 'top selects' {% endcomment %}
         {% for product in best_sellers limit: 4 %}
@@ -65,8 +65,11 @@
                     </div>
 
                 </div>
-
+            
+            <!-- {{ forloop.index0}} -->
             {% endif %}
+
+            <!-- {{ forloop.length}} -->
         {% endfor %}
     </div>
 

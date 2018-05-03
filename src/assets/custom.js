@@ -59,14 +59,14 @@ const tabfunc = () => {
 
 // Remove "Soft Pouch" from product titles pouch upsell
 const PouchUpsell = () => {
-
-  console.log('puch upsel scripts loaded');
   
   // Get pouch containers
   let pouchContainers = document.querySelectorAll('.mobile-upsell-container');
-
+  
   // Remove ' SOFT POUCH' from the Title
   let removeTitle = () => {
+    console.log('puch upsell scripts loaded');
+
     // Loop through all the products in the pouch containers
     for(let container of pouchContainers){
       let productDetails = container.querySelector('.product-details');
@@ -153,16 +153,14 @@ const productTabs = function(){
     $(shippingTab).after(shippingContent);
     $(shippingContent).wrap('<div class="product-accordion__body"></div>');
 
-    // Populate element with shipping data
-    // $(shippingTab).insertAfter(shippingContent);
 
     console.log(shippingContent);
     
 
     function productTabToggle(){
       // hide the accordion content
-      // $('.product-accordion__body').hide();
-      $(shippingContent).hide();
+      $('.product-accordion__body').hide();
+      // $(shippingContent).hide();
       
       // click function
       $(accordTitle).click(function(){
@@ -175,7 +173,7 @@ const productTabs = function(){
         let content = contentRaw.prevObject;
         
         for (let line of content){
-          $(line).children().slideToggle(250);
+          $(line).slideToggle(250);
         }
         
       });

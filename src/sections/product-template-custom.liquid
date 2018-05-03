@@ -139,22 +139,6 @@
                         </div>
                     </div>
 
-                    {% comment %}
-                    {% assign inventory = product.selected_or_first_available_variant.inventory_quantity %}
-                    {%if inventory <= 10 and inventory > 0 %}
-                        {%if inventory == 1 %}
-                            <div class="product-low-inventory-warning">
-                                Only {{inventory}} pair left!
-                            </div>
-                        {% else %}
-                            <div class="product-low-inventory-warning">
-                                Only {{inventory}} pairs left!
-                            </div>
-                        {% endif %}
-                    {% endif %}
-                    {% endcomment %}
-
-
                     {% unless collection_handles contains 'coming-soon' %}
                         {% include 'product-form' with 'product' %}
                     {% endunless %}
@@ -182,17 +166,63 @@
             <div class="eight columns alpha lifestyle-container">
                 <h4 class="lifestyle-product-title">{{product.title}}</h4>
 
-                <img
-                    src="https://picsum.photos/623/778"
-                    data-flickity-lazyload="https://picsum.photos/623/778"
-                    alt=""
-                    class="product-lifestyle-image product-lifestyle-image--1">
+                {% comment %} Lifestyle Image 1 (portrait) {% endcomment %}
+                {% comment %} doesn't have alt {% endcomment %}
+                {% if product.metafields.custom_fields["image_1"] != blank and product.metafields.custom_fields["image_1"] contains 'alt=""'%}
+                    {% assign img_1_url = product.metafields.custom_fields["image_1"] | remove: '<img src="' | remove: '" alt="" typeof="foaf:Image" />' %}
+                {% comment %} If has alt value  {% endcomment %}
+                {% elsif product.metafields.custom_fields["image_1"] != blank %}
+                    {% assign v1 = product.metafields.custom_fields["image_1"] | remove: '<img alt="' | split: '" src="'%}
+                    {% assign img_1_alt = v1[0] %}
+                    {% assign img_1_url = v1[1] | remove: '" typeof="foaf:Image" />'%}
+                {% endif %}
+
+                {% comment %} Lifestyle Image 1 {% endcomment %}
+                {% comment %} Check for presence - use fallback if not loading correctly {% endcomment %}
+                {%if img_1_url %}
+                  <img
+                      src="{{img_1_url}}"
+                      data-flickity-lazyload="{{img_1_url}}"
+                      alt="{%if img_1_alt %}{{img_1_alt}}{%else%}{{product.title}}{% endif %}"
+                      class="product-lifestyle-image product-lifestyle-image--1">
+                {% else %}
+                  <img
+                      src="https://picsum.photos/640"
+                      data-flickity-lazyload="https://picsum.photos/640"
+                      alt="{{product.title}}"
+                      class="product-lifestyle-image product-lifestyle-image--1">
+                {% endif %}
+
                 
-                <img
-                    src="https://picsum.photos/320"
-                    data-flickity-lazyload="https://picsum.photos/320"
-                    alt=""
-                    class="product-lifestyle-image product-lifestyle-image--2">
+
+                {% comment %} Lifestyle Image 3 (square) {% endcomment %}
+                {% comment %} doesn't have alt {% endcomment %}
+                {% if product.metafields.custom_fields["lifestyle_image_3"] != blank and product.metafields.custom_fields["lifestyle_image_3"] contains 'alt=""'%}
+                    {% assign img_3_url = product.metafields.custom_fields["lifestyle_image_3"] | remove: '<img src="' | remove: '" alt="" typeof="foaf:Image" />' %}
+                {% comment %} If has alt value  {% endcomment %}
+                {% elsif product.metafields.custom_fields["lifestyle_image_3"] != blank %}
+                    {% assign v1 = product.metafields.custom_fields["lifestyle_image_3"] | remove: '<img alt="' | split: '" src="'%}
+                    {% assign img_3_alt = v1[0] %}
+                    {% assign img_3_url = v1[1] | remove: '" typeof="foaf:Image" />'%}
+                {% endif %}
+
+                {% comment %} Check if lifestyle image 3 exists / fallback {% endcomment %}
+                {%if img_3_url %}
+                  <img
+                      src="{{img_3_url}}"
+                      data-flickity-lazyload="https://picsum.photos/320"
+                      alt="{%if img_3_alt %}{{img_3_alt}}{%else%}{{product.title}}{% endif %}"
+                      class="product-lifestyle-image product-lifestyle-image--3">
+
+                {% else %}
+                  {% comment %} REMINDER: PUT FALLBACK HERE {% endcomment %}
+                  <img
+                      src="https://picsum.photos/320"
+                      data-flickity-lazyload="https://picsum.photos/320"
+                      alt=""
+                      class="product-lifestyle-image product-lifestyle-image--3">
+
+                {% endif %}
 
 
                 <div id="lifestyleTestimonials" class="lifestyle-testimonials"></div>
@@ -207,8 +237,36 @@
 
                 <hr class="product-border">
 
-                <img src="https://picsum.photos/580/387" data-flickity-lazyload="https://picsum.photos/580/387" alt="" class="product-lifestyle-image product-lifestyle-image--3">
+                {% comment %} Lifestyle Image 2 (landscape) {% endcomment %}
+                {% comment %} doesn't have alt {% endcomment %}
+                {% if product.metafields.custom_fields["lifestyle_image_2"] != blank and product.metafields.custom_fields["lifestyle_image_2"] contains 'alt=""'%}
+                    {% assign img_2_url = product.metafields.custom_fields["lifestyle_image_2"] | remove: '<img src="' | remove: '" alt="" typeof="foaf:Image" />' %}
+                {% comment %} If has alt value  {% endcomment %}
+                {% elsif product.metafields.custom_fields["lifestyle_image_2"] != blank %}
+                    {% assign v1 = product.metafields.custom_fields["lifestyle_image_2"] | remove: '<img alt="' | split: '" src="'%}
+                    {% assign img_2_alt = v1[0] %}
+                    {% assign img_2_url = v1[1] | remove: '" typeof="foaf:Image" />'%}
+                {% endif %}
 
+                {% comment %} Lifestyle image 2 check - if no return, use fallback {% endcomment %}
+                {%if img_3_url %}
+                  <img
+                    src="{{img_2_url}}"
+                    data-flickity-lazyload="{{img_2_url}}"
+                    alt="{%if img_2_alt %}{{img_2_alt}}{%else%}{{product.title}}{% endif %}"
+                    class="product-lifestyle-image product-lifestyle-image--2">
+
+                {% else %}
+
+                  <img
+                    src="https://picsum.photos/580/387"
+                    data-flickity-lazyload="https://picsum.photos/580/387"
+                    alt=""
+                    class="product-lifestyle-image product-lifestyle-image--2">
+
+                {% endif %}
+
+                {% comment %} Product Tabs {% endcomment %}
                 {% include 'product-tabs'%}
             </div>
         </div>

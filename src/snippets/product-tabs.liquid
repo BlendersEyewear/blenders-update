@@ -25,7 +25,7 @@
                     </div>
                 {% endif %}
 
-                {% comment %} Frame (shape, material) {% endcomment %}
+                {% comment %} Frame (color, material) {% endcomment %}
                 {% for collection in product.collections %}
                     {% if collection.handle == 'a-series'
                         or collection.handle == 'cardiff' or collection.handle == 'east-village'
@@ -38,14 +38,21 @@
                             <p class="product-tab__detail-title">Frame</p>
 
                             <p class="product-tab__detail-value">
-                                {{ collection.title }}
+
+                                {% comment %} Frame Color {% endcomment %}
+                                {% assign frame_color = product.metafields.custom_fields["frame_color"] %}
+                                {%if frame_color != blank %}
+                                  {{frame_color}}
+                                {% endif %}
+
+                                | {{ collection.title }}
                             </p>
                         </div>
                     {% endif %}
                 {% endfor %}
 
 
-                {% comment %} Lens {% endcomment %}
+                {% comment %} Lens (Color, Polarized, UV) {% endcomment %}
                 {% if product.metafields.custom_fields["lens_color"] != blank %}
                     <div class="product-tab__detail">
                         <p class="product-tab__detail-title">Lens</p>
