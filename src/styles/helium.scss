@@ -15,8 +15,6 @@
 }
 
 .fancybox-inner {
-  /*   overflow-x: hidden !important;
-  overflow-y: scroll !important;*/
   overflow: auto !important;
   -webkit-overflow-scrolling: touch;
 }
@@ -58,11 +56,12 @@ div.container.main.join {
   position: relative;
 }
 
-.fs-timeline-entry.blsrel:hover .fs-entry-title {
+.fs-timeline-entry.blsrel:hover .fs-entry-title,
+.fs-timeline-entry.blsrel:focus .fs-entry-title {
   border: 3px solid #ffffff;
   display: inline-block;
   opacity: 1;
-  padding: 7px;
+  padding: 7px 10px;
   text-shadow: none;
 }
 
@@ -86,8 +85,8 @@ div.container.main.join {
 }
 
 div.fs-text-container.bl .fs-entry-title {
-  font-family: "Roboto";
-  font-size: 25px;
+  font-family: "proxima-nova", "Roboto", sans-serif;
+  font-size: 20px;
   font-style: normal;
   font-weight: bold;
   letter-spacing: 2px;

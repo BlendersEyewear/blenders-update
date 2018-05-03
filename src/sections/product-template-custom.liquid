@@ -72,7 +72,30 @@
                         {% endif %}
 
                         {% if settings.size_chart != blank %}
-                            <a href="#size-chart" class="size-chart--desktop" data-remodal-target="size-chart" data-no-instant>{{ 'products.product.size_chart' | t }} <i class="fal fa-chevron-right fa-xs"></i></a>
+
+                            {% comment %} Check if collection has size guide image  {% endcomment %}
+                            {% for collection in product.collections %}
+                              {% if collection.handle == 'a-series'
+                                  or collection.handle == 'cardiff' or collection.handle == 'east-village'
+                                  or collection.handle == 'h-series' or collection.handle == 'frontpage'
+                                  or collection.handle == 'l-series' or collection.handle == 'm-class'
+                                  or collection.handle == 'millenia' or collection.handle == 'north-park-blenders-eyewear'
+                                  or collection.handle == 'providence' or collection.handle == 'roxie-1'
+                                  or collection.handle == 'test-collection' %}
+
+                                  {% assign collection_blurb = collection.metafields.custom_fields["fit_blurb"] %}
+                                  {% assign collection_image = collection.metafields.custom_fields["fit_image"] %}
+                                  {% assign collection_size  = collection.metafields.custom_fields["frame_measurements"] %}
+
+                                <a href="#size-chart" class="size-chart--desktop" data-remodal-target="size-chart" data-collection-blurb="{% if collection_blurb != blank%}{{ collection_blurb }}{% endif %}" data-collection-image="{% if collection_image != blank%}{{ collection_image }}{% endif %}" data-collection-size="{% if collection_size != blank%}{{ collection_size }}{% endif %}" data-no-instant>{{ 'products.product.size_chart' | t }} <i class="fal fa-chevron-right fa-xs"></i></a>
+                              
+                              {% elsif collection.handle == blank %}
+
+                                <a href="#size-chart" class="size-chart--desktop" data-remodal-target="size-chart" data-no-instant>{{ 'products.product.size_chart' | t }} <i class="fal fa-chevron-right fa-xs"></i></a>
+                              
+                              {% endif %}
+                            {% endfor %}
+
                         {% endif %}
                     </div>
 
