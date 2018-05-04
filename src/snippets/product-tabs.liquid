@@ -88,6 +88,16 @@
                         {% endif %}
                     {% endif %}
                 {% endfor %}
+
+
+                {% comment %} What's Included: Show for all sunglass and snow goggles {% endcomment %}
+                {%if product.type == 'Sunglasses' or product.type == 'Snow Goggles' %}
+                  <!-- Product Type: {{product.type}} -->
+                  <div class="product-tab__detail">
+                      <p class="product-tab__detail-title">Comes with</p>
+                      <p class="product-tab__detail-value">Microfiber Pouch + Sticker Pack</p>
+                  </div>
+                {% endif %}
                 
             </div>
 
@@ -102,8 +112,12 @@
                         or collection.handle == 'millenia' or collection.handle == 'north-park-blenders-eyewear'
                         or collection.handle == 'providence' or collection.handle == 'roxie-1'
                         or collection.handle == 'test-collection' %}
+
+                        {% assign fit_img = collection.metafields.custom_fields["fit_image"] %}
+                        {% if fit_img != blank %}
+                            <img src="{{ fit_img }}" alt="{{ collection.title }} Fit" class="product-tab__img">
+                        {% endif %}
                         
-                        <img src="https://picsum.photos/600/400" alt="" class="product-tab__img">
 
                         {% assign fit_blurb = collection.metafields.custom_fields["fit_blurb"] %}
                         {% if fit_blurb != blank %}
