@@ -13,8 +13,22 @@
             or collection.handle == 'millenia' or collection.handle == 'north-park-blenders-eyewear'
             or collection.handle == 'providence' or collection.handle == 'roxie-1'
             or collection.handle == 'test-collection' %}
+
+            {% assign mob_fit_img = collection.metafields.custom_fields["fit_image"] %}
+
+            {% comment %} If the alt tag is empty... {% endcomment %}
+            {% if mob_fit_img contains 'alt=""' %}
+                {% assign mob_fit_img_url = mob_fit_img | remove: '<img src="' | remove: '" alt="" typeof="foaf:Image" />' %}
+            {% else %}
+            {% comment %} If the alt tag has a value... {% endcomment %}
+                {% assign mob_fit_v1 = mob_fit_img | remove: '<img alt="' | split: '" src="'%}
+                {% assign mob_fit_img_url = mob_fit_v1[1] | remove: '" typeof="foaf:Image" />'%}
+            {% endif %}
             
-            <img src="https://picsum.photos/600/400" alt="" class="mobile-fit-img">
+            {% comment %} If fir image url exists {% endcomment %}
+            {% if mob_fit_img_url != blank %}
+                <img src="{{ mob_fit_img_url }}" alt="{{ collection.title }} Fit" class="product-tab__img">
+            {% endif %}
 
             {% assign fit_blurb = collection.metafields.custom_fields["fit_blurb"] %}
             {% if fit_blurb != blank %}

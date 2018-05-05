@@ -65,7 +65,7 @@ const PouchUpsell = () => {
   
   // Remove ' SOFT POUCH' from the Title
   let removeTitle = () => {
-    console.log('puch upsell scripts loaded');
+    console.log('pouch upsell scripts loaded');
 
     // Loop through all the products in the pouch containers
     for(let container of pouchContainers){
@@ -340,7 +340,6 @@ const soldOutNotifyToggle = function(){
 
 }
 
-
 // resize the section headers on product pages
 const resizeHeadings = function(){
   let heading460 = $('.product')
@@ -356,12 +355,56 @@ const resizeHeadings = function(){
   }
 }
 
+// Size Guide Content for Desktop
+const sizeGuideDesktop = function(){
+  console.log('size guide desktop loaded');
+
+  let sizeChartToggle = $('#desktopSizeChartToggle');
+
+  let sizeBlurb = $(sizeChartToggle).data('collection-blurb');
+  let sizeImg = $(sizeChartToggle).data('collection-image');
+  let sizeMeasurements = $(sizeChartToggle).data('collection-size');
+
+  console.log($('.remodal.remodal-is-opened'));
+
+  
+  $(sizeChartToggle).click(function(){
+    let modal = $('.remodal.remodal-is-opened');
+    console.log('modal', $(modal));
+
+    setTimeout(console.log($('.remodal.remodal-is-opened')), 500);
+  });
+
+}
+
+
+//------------------------------------------------
+//------------- Product Page --------------------
+//------------------------------------------------
+const productPageScripts = function(){
+
+  // Sold out Notification
+  soldOutNotifyToggle();
+
+  // If Desktop
+  if($(window).width > tabletSize){
+    productTabsDesktop();
+    sizeGuideDesktop();
+
+  // If Tablet or Mobile
+  } else {
+    productTabs();
+    resizeHeadings();
+  }
+}
+
 
 //------------------------------------------------
 //--------- Custom Product Page ------------------
 //------------------------------------------------
 const customProductPage = function(){
-  // Check if custom product template
+
+  // Check if custom product template -----------
     console.log('custom product page script loaded ');
 
     // Sold Out notify Toggle
@@ -402,9 +445,14 @@ const customProductPage = function(){
       });
     });
 
-    // Mobile Size Guide---------
+  // Mobile Size Guide--------------
+
     // Hide mobile fit content
     $('#mobileFitContent').hide();
+
+
+    // Desktop Size Guide Content
+    sizeGuideDesktop();
 
     // Click function
     let sizeGuideToggle = $('#mobileFitToggle');
@@ -420,22 +468,16 @@ const customProductPage = function(){
       }
     });
 
-    // Recently Viewed
-
-
-    // Create sliding images from lifestyle images on mobile
-    // Check that its on tablet or smaller
+    // Check for window width of tablet or smaller
     if($(window).width() <= tabletSize){
       console.log('Time to go MoBile! ⋋( ºΘº)⋌');
-
+      
+      // Create sliding images from lifestyle images on mobile - // Check that its on tablet or smaller
       // Detach of lifestyle images
       $lsImage1 = $('.product-lifestyle-image--1');
       $lsImage2 = $('.product-lifestyle-image--2');
       $lsImage3 = $('.product-lifestyle-image--3');
       $lsImages = $('.product-lifestyle-image--1, .product-lifestyle-image--2, .product-lifestyle-image--3');
-
-      console.log($lsImages);
-
 
       // Empty out the lifestyle-image-container
       $lsContainer = $('.lifestyle-container');
@@ -474,7 +516,9 @@ const customProductPage = function(){
 //  Doc Ready
 //------------------------------------------------
 document.addEventListener("DOMContentLoaded", function() {
+
   console.log("custom js loaded");
+  
   let screenSize = window.innerWidth;
 
   // Home Page -------------
@@ -482,11 +526,11 @@ document.addEventListener("DOMContentLoaded", function() {
   screenSize >= tabletSize ? fpBtnSwap() : "";
  
   // Product Page -------------
-  // Create accordions on Mobile
-  // Create Tabs on Desktop
+  // Create accordions on Mobile -- // Create Tabs on Desktop // ---- 
   screenSize <= tabletSize ? (productTabs(), resizeHeadings()) : productTabsDesktop();
+
   // Sold Out button toggle
-  body.classList.contains('product') ? (soldOutNotifyToggle()) : '';
+  // body.classList.contains('product') ? (sizeGuideDesktop(), soldOutNotifyToggle()) : '';
   
   // Custom Product Page -------------
   // Run custom product page scripts if on custom product page.

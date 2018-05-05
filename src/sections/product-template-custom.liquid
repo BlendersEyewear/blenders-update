@@ -87,7 +87,16 @@
                                   {% assign collection_image = collection.metafields.custom_fields["fit_image"] %}
                                   {% assign collection_size  = collection.metafields.custom_fields["frame_measurements"] %}
 
-                                <a href="#size-chart" class="size-chart--desktop" data-remodal-target="size-chart" data-collection-blurb="{% if collection_blurb != blank%}{{ collection_blurb }}{% endif %}" data-collection-image="{% if collection_image != blank%}{{ collection_image }}{% endif %}" data-collection-size="{% if collection_size != blank%}{{ collection_size }}{% endif %}" data-no-instant>{{ 'products.product.size_chart' | t }} <i class="fal fa-chevron-right fa-xs"></i></a>
+                                  {% comment %} If the alt tag is empty... {% endcomment %}
+                                  {% if collection_image contains 'alt=""' %}
+                                      {% assign collection_image_url = collection_image | remove: '<img src="' | remove: '" alt="" typeof="foaf:Image" />' %}
+                                  {% else %}
+                                  {% comment %} If the alt tag has a value... {% endcomment %}
+                                      {% assign collection_image_v1 = collection_image | remove: '<img alt="' | split: '" src="'%}
+                                      {% assign collection_image_url = fit_v1[1] | remove: '" typeof="foaf:Image" />'%}
+                                  {% endif %}
+
+                                <a href="#size-chart" id="desktopSizeChartToggle" class="size-chart--desktop" data-remodal-target="size-chart" data-collection-blurb="{% if collection_blurb != blank%}{{ collection_blurb }}{% endif %}" data-collection-image="{% if collection_image != blank%}{{ collection_image_url }}{% endif %}" data-collection-size="{% if collection_size != blank%}{{ collection_size }}{% endif %}" data-no-instant>{{ 'products.product.size_chart' | t }} <i class="fal fa-chevron-right fa-xs"></i></a>
                               
                               {% elsif collection.handle == blank %}
 

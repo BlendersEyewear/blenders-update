@@ -114,8 +114,19 @@
                         or collection.handle == 'test-collection' %}
 
                         {% assign fit_img = collection.metafields.custom_fields["fit_image"] %}
-                        {% if fit_img != blank %}
-                            <img src="{{ fit_img }}" alt="{{ collection.title }} Fit" class="product-tab__img">
+
+                        {% comment %} If the alt tag is empty... {% endcomment %}
+                        {% if fit_img contains 'alt=""' %}
+                            {% assign fit_img_url = fit_img | remove: '<img src="' | remove: '" alt="" typeof="foaf:Image" />' %}
+                        {% else %}
+                        {% comment %} If the alt tag has a value... {% endcomment %}
+                            {% assign fit_v1 = fit_img | remove: '<img alt="' | split: '" src="'%}
+                            {% assign fit_img_url = fit_v1[1] | remove: '" typeof="foaf:Image" />'%}
+                        {% endif %}
+                        
+                        {% comment %} If fir image url exists {% endcomment %}
+                        {% if fit_img_url != blank %}
+                            <img src="{{ fit_img_url }}" alt="{{ collection.title }} Fit" class="product-tab__img">
                         {% endif %}
                         
 
