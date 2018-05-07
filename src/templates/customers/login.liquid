@@ -3,7 +3,8 @@
 <div class="clearfix" id="customer">
   <br class="clear" />
   <br class="clear" />
-  <div class="six columns offset-by-five animated fadeInUp" id="login_form">
+  {% comment %} <div class="six columns offset-by-five animated fadeInUp" id="login_form"> {% endcomment %}
+  <div class="animated fadeInUp customer-login-container">
 
     {% form 'customer_login' %}
       {{ form.errors | default_errors }}
@@ -99,9 +100,10 @@
 <style>
 div.content {
     padding: 30px 0px 105px 0;
-    background-image: url(https://cdn.shopify.com/s/files/1/0148/9585/files/BLNDRS_Returnly_1600x965_03.jpg?8713500155395314852);
+    background-image: url(https://cdn.shopify.com/s/files/1/0148/9585/files/customer-login-background-2.jpg?5786055561035946841);
     width: 100%!important;
     background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
 }
  

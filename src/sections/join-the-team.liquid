@@ -38,7 +38,7 @@
         <div class="one-third column">
           <a  id="choose{{ forloop.index }}" href="#">
             <div class="fs-entry-container bll">
-              <div class="fs-timeline-entry blsrel">
+              <div class="fs-timeline-entry blsrel fs-timeline-entry--{{block.settings.title | handleize }}">
                 <img class="first" src="{{ block.settings.background | img_url: '500x'}}" alt="{{ block.settings.title }}" />
                 <div class="fs-text-container bl">
                   <div class="fs-timeline-text tt">

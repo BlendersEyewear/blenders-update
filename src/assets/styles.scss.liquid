@@ -9849,6 +9849,19 @@ textarea {
   font-family: 'proxima-nova', 'Roboto', Helvetica, sans-serif !important;
 }
 
+// FourSixty
+div.fs-text-container .fs-entry-date,
+div.fs-detail-container .fs-post-info,
+div.fs-wrapper div.fs-has-links::after,
+.fs-text-product, .fs-overlink-text{
+  font-family: 'proxima-nova', 'Roboto', Helvetica, sans-serif !important;
+}
+
+
+.fs-wrapper div.fs-text-container .fs-entry-title, div.fs-detail-title{
+  font-family: 'proxima-nova', 'Roboto', Helvetica, sans-serif !important;
+}
+
 
 #tracktorOrderForm {
   text-align: center;
@@ -13275,14 +13288,29 @@ input.action_button[type="submit"], input.action_button[type="button"]{
   border: none;
 }
 
+// Hover Effect
 a.button:hover, button:hover,
 input[type="submit"]:hover, input[type="reset"]:hover,input[type="button"]:hover,
 .action_button:hover, input.action_button[type="submit"]:hover, input.action_button[type="button"]:hover {
   background-image: linear-gradient(-180deg, hsla(199, 85%, 57%, 1) 0%, hsla(218, 98%, 51%, 1) 100%);
   border: none;
+  outline: 0;
 }
 
 
+// 460 popout button
+.fs-shopify-add-cart.fs-shopify-add-cart-container{
+  background: linear-gradient(-180deg, hsla(199, 98%, 48%, 1) 0%, hsla(218, 98%, 48%, 1) 100%) !important;
+  max-width: unset;
+  font-size: 0.875rem;
+  letter-spacing: .05em;
+}
+
+.fs-shopify-add-cart.fs-shopify-add-cart-container:hover,
+.fs-shopify-add-cart.fs-shopify-add-cart-container:focus{
+  background-image: linear-gradient(-180deg, hsla(199, 85%, 57%, 1) 0%, hsla(218, 98%, 51%, 1) 100%) !important;
+  outline: 0;
+}
 
 // ===============================================================================
 // ===============================================================================
@@ -13851,7 +13879,71 @@ div.product-icons{
 // ====================================================================
 #mobile_menu{
   // parrent links (links with submenus)
-  li{
-    border-bottom: 1px solid rgba(0,0,0,0.13);
+  li, 
+  li.sublink li.sublink li{
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  li.sublink li:last-child,
+  li.sublink li.sublink,
+  li.sublink div:last-child li,
+  li.sublink li.sublink li:last-child,
+  li:empty{
+    border: none;
+  }
+
+}
+
+
+// ====================================================================
+//  ------- Login Page
+// ====================================================================
+.customers-login{
+
+  // Bold the Title
+  h1{
+    font-weight: 800;
+    letter-spacing: .1em;
+  }
+  // remove werid white background
+  form#customer_login{
+    background: none;
+  }
+
+  // Add backgroudn to label to stand out from background
+  label.login {
+    max-width: fit-content;
+    line-height: 1;
+    letter-spacing: .05em;
+  }
+
+  // login container
+  .customer-login-container {
+    max-width: 29rem;
+    margin: 0 auto;
+    /* transform: translateY(9rem); */
+  }
+}
+
+
+// ====================================================================
+//  ------- Join the Team Page
+// ====================================================================
+
+
+.page-join-the-team{
+  .fs-timeline-entry.blsrel {
+      overflow: hidden;
+      height: 190px;
+
+
+      img{
+        transform: translateY(-2rem);
+      }
+    }
+    
+    // move the street team image higher
+    .fs-timeline-entry.blsrel.fs-timeline-entry--street-team img {
+      transform: translateY(-2.5rem);
   }
 }
