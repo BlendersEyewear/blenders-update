@@ -112,17 +112,11 @@ const shippingReturnData =
 // Make Product Tabs into accordions - on mobile
 const productTabs = function(){
   // Check if on product page
-  if($("body").hasClass("product")){
-    console.log('productTabs / Accordions working');
+  if($("body").hasClass("product") && window.screen.width <= tabletSize){
+    console.log('productTabs (accordions) working');
 
     // Unwrap god awful Div Soup from Product descriptions
     let h5 = $('.product_section').find('.description').find('h5');
-
-    // if($('.description').find('meta').parent().is("div")){
-    //   $('.description').find('meta').unwrap();
-    // }
-
-    // $('.description').find('meta').remove();
 
     // Wrapping h5 tags with accordion title div
     var header = $('.product_section').find('.description').find('h5')
@@ -187,8 +181,8 @@ const productTabs = function(){
 }
 
 const productTabsDesktop = function(){
-  // Only work on vanilla Product Pages
-  if ($("body").hasClass("product")){
+  // Only work on vanilla Product Pages and window is bigger than tablet
+  if (window.screen.width > tabletSize){
     console.log('product Tabs Desktop Working');
 
     let productDesc = $('.product_section').find('.description');
@@ -301,6 +295,7 @@ const floatingLabels = function(){
 }
 
 const soldOutNotifyToggle = function(){
+  console.log('sold out script working');
   
   let toggleBtn = $('#notifyToggle');
 
@@ -386,14 +381,18 @@ const productPageScripts = function(){
   // Sold out Notification
   soldOutNotifyToggle();
 
+  // Product Tabs
+  
   // If Desktop
-  if($(window).width > tabletSize){
+  if(window.screen.width > tabletSize){
+    console.log(window.screen.width + ' desktop screen size!');
     productTabsDesktop();
     sizeGuideDesktop();
-
-  // If Tablet or Mobile
-  } else {
+    
+    // If Tablet or Mobile
+  } else if(window.screen.width <= tabletSize){
     productTabs();
+    console.log(window.screen.width + 'tablet/mobile screen size!');
     resizeHeadings();
   }
 }
@@ -520,6 +519,7 @@ document.addEventListener("DOMContentLoaded", function() {
   console.log("custom js loaded");
   
   let screenSize = window.innerWidth;
+  console.log(screenSize + ' ' + window.screen.width);
 
   // Home Page -------------
   // Change Feature Promotion Button text to "Shop Now" on Desktop
@@ -527,11 +527,18 @@ document.addEventListener("DOMContentLoaded", function() {
  
   // Product Page -------------
   // Create accordions on Mobile -- // Create Tabs on Desktop // ---- 
-  screenSize <= tabletSize ? (productTabs(), resizeHeadings()) : productTabsDesktop();
+  body.classList.contains('product') ? productPageScripts() : '';
+  if(body.classList.contains('product')){
 
-  // Sold Out button toggle
-  // body.classList.contains('product') ? (sizeGuideDesktop(), soldOutNotifyToggle()) : '';
-  
+    soldOutNotifyToggle();
+    // If Desktop
+    if(window.screen.width > tabletSize){
+      console.log('desktop size!');
+    } else if(window.screen.width <= tabletSize){
+      console.log('mobile size!');
+    }
+  }
+
   // Custom Product Page -------------
   // Run custom product page scripts if on custom product page.
   body.classList.contains('product-template-custom') ? customProductPage() : '';
