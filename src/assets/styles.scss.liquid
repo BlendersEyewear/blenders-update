@@ -11228,10 +11228,26 @@ $headerDesktopLargeUp: 1280px;
     left: 1.25rem;
   }
 
+  // REmove all styles if no text inside
+  .above-button-label:empty{
+    padding: 0;
+    display: none;
+  }
+
 }
 
 // Tablet Down - Mobile Styles - Collapse on Mobile
 @include respond-to('medium'){
+
+  .index {
+    .custom-front-page-styles-container{
+      padding: 10px 0 0;
+    }
+
+    .custom-front-page-styles-container:nth-of-type(2){
+      padding: 0;
+    }
+  }
   .custom-front-page-styles-div.custom-front-page-styles-div--2{
       padding: 0 30px !important;
       @include flexbox();
@@ -11800,6 +11816,24 @@ a.size_chart {
 .size_chart .icon-right-arrow:before {
     font-size: .5rem;
     line-height: 1;
+}
+
+
+//  ------- Size Guide (pop up) on Product page and Custom Product Page -----------
+// ================================================================================
+.product, .product-template-custom{
+  .popup-size-chart{
+    img{
+      max-width: 100%;
+      height: auto;
+    }
+
+    .product-size-guide__detail-title,
+    .product-size-guide__detail-value{
+      display: inline-block;
+      margin: 0 .25rem;
+    }
+  }
 }
 
 
@@ -13975,16 +14009,32 @@ div.product-icons{
 .page-join-the-team{
   .fs-timeline-entry.blsrel {
       overflow: hidden;
-      height: 190px;
+      height: 240px;
 
 
       img{
-        transform: translateY(-2rem);
+        transform: translateY(-2.5rem);
       }
     }
     
     // move the street team image higher
     .fs-timeline-entry.blsrel.fs-timeline-entry--street-team img {
       transform: translateY(-2.5rem);
+  }
+
+  // .remodal-wrapper.remodal-is-opening,
+  .remodal-wrapper.remodal-is-opened{
+    padding: 0;
+
+      iframe{
+        min-height: 1000px;
+      }
+  }
+  
+  .remodal-wrapper.remodal-is-opened > div {
+        height: 600px;
+        width: 600px;
+        overflow: scroll;
+        padding: 15px;
   }
 }

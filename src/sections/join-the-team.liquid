@@ -36,7 +36,8 @@
         <!--GRID ITEM -->
 
         <div class="one-third column">
-          <a  id="choose{{ forloop.index }}" href="#">
+          {% comment %} Took our href="#" and added data-remodal-target="modal" {% endcomment %}
+          <a data-remodal-target="popup{{ forloop.index }}"  id="choose{{ forloop.index }}" href="#popup{{ forloop.index }}">
             <div class="fs-entry-container bll">
               <div class="fs-timeline-entry blsrel fs-timeline-entry--{{block.settings.title | handleize }}">
                 <img class="first" src="{{ block.settings.background | img_url: '500x'}}" alt="{{ block.settings.title }}" />
@@ -52,7 +53,7 @@
 
 
         <!-- POPUP -->
-        <div id="home{{ forloop.index }}" class="middle form-embed-wrap"  style="display:none">
+        <div id="popup{{ forloop.index }}" class="middle form-embed-wrap remodal" data-remodal-id="popup{{ forloop.index }}" >
           {{ block.settings.form_code }}
         </div>
 

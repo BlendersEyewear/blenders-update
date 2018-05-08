@@ -40,15 +40,14 @@
     {% if settings.logo_font contains 'Google' or settings.headline_font contains 'Google' or settings.nav_font contains 'Google' or settings.slideshow_subtitle_font contains 'Google' or settings.regular_font contains 'Google' %}
       <link href="//fonts.googleapis.com/css?family=.|{% if settings.logo_font contains 'Google' %}{{ settings.logo_font | replace: 'Google_', '' | replace: "'", "" }}:light,normal,bold|{% endif %}{% if settings.headline_font contains 'Google' %}{{ settings.headline_font | replace: 'Google_', '' | replace: "'", "" }}:light,normal,bold|{% endif %}{% if settings.nav_font contains 'Google' %}{{ settings.nav_font | replace: 'Google_', '' | replace: "'", "" }}:light,normal,bold|{% endif %}{% if settings.slideshow_subtitle_font contains 'Google' %}{{ settings.slideshow_subtitle_font | replace: 'Google_', '' | replace: "'", "" }}:light,normal,bold|{% endif %}{% if settings.regular_font contains 'Google' %}{{ settings.regular_font | replace: 'Google_', '' | replace: "'", "" }}:light,normal,bold{% endif %}" rel="stylesheet" type="text/css" />
     {% endif %}
-    
 
 	{% comment %} Added by Adam - 2/7/2018{% endcomment %}    
     <!-- typekit fonts -->
     <link rel="stylesheet" href="https://use.typekit.net/pcu3zqp.css">
 
-	<!--   updated - 2/13/2018   -->
+	{% comment %} updated - 2/13/2018 {% endcomment %}
     
-    <!-- Stylesheets for Turbo 2.0.9 -->
+    <!-- Stylesheets for Turbo 3.0.1 -->
     {{ 'styles.scss.css' | asset_url | stylesheet_tag }}
 
     <!-- Stylesheets for Landing Pages -->
@@ -56,7 +55,6 @@
       <!-- wohoooo, this is millenia -->
       {{ 'millenia.css' | asset_url | stylesheet_tag }}
     {% endif %}
-    
 
     <!-- Helium Stylesheet and JS-->
     {{ 'helium.scss.css' | asset_url | stylesheet_tag }}
@@ -245,7 +243,8 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
     </div>
 
     {% comment %} Add Ultimate Special Offers Notification if on Cart page {% endcomment %}
-    {% if template == 'cart'%} <div id="saso-notifications" class="saso-notifications--cart"></div> {% endif %}
+    {% comment %} Removed after abandoning USO app {% endcomment %}
+    {% comment %} {% if template == 'cart'%} <div id="saso-notifications" class="saso-notifications--cart"></div> {% endif %} {% endcomment %}
 
     {% unless feature_image %}
     
@@ -285,10 +284,7 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
     <script defer src="{{ 'custom.js' | asset_url }}"></script>
     
     {% comment %} Custom Ultimate Special Offers App js {% endcomment %}
-    <script src="{{ 'custom-saso-scripts.js' | asset_url }}"></script>
-    
-    {% comment %} AJAX CArt {% endcomment %}
-    {% comment %} <script src="{{ 'ajaxcart.js' | asset_url }}" defer></script> {% endcomment %}
+    {% comment %} <script src="{{ 'custom-saso-scripts.js' | asset_url }}"></script> {% endcomment %}
 
     {% if settings.show_multiple_currencies %}
       {% include 'currencies' %}
@@ -342,11 +338,9 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
     </script>
 
    	<script>
-
       function goToLogin() {        
         location.href = "/account"        
       }
-
     </script>
 
     {% include 'social-login' %}
@@ -360,39 +354,31 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 
 {% include 'special-offers' %}
 
-{% include 'easyvideo' %}
-
-
-    {% comment %}
-{% endcomment %}
-    {% include 'back-in-stock-helper' %}
+{% include 'back-in-stock-helper' %}
         
-        
-    <script>
-      $(document).ready(function() {
-        $('.add_to_cart').click(function() {
-          fbq('track', 'AddToCart', {
-            content_ids: '{{ product.id }}',
-            content_type: 'product',
-            value: '{{ product.price | money_without_currency}}',
-          });
+  <script>
+    $(document).ready(function() {
+      $('.add_to_cart').click(function() {
+        fbq('track', 'AddToCart', {
+          content_ids: '{{ product.id }}',
+          content_type: 'product',
+          value: '{{ product.price | money_without_currency}}',
         });
-      }); 
-    </script>
+      });
+    }); 
+  </script>
     
-    
-    
-    <script type="text/javascript">
-  var _learnq = _learnq || [];
+  <script type="text/javascript">
+    var _learnq = _learnq || [];
 
-  _learnq.push(['account', 'hA2RSZ']);
+    _learnq.push(['account', 'hA2RSZ']);
 
-  (function () {
-  var b = document.createElement('script'); b.type = 'text/javascript'; b.async = true;
-  b.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'a.klaviyo.com/media/js/analytics/analytics.js';
-  var a = document.getElementsByTagName('script')[0]; a.parentNode.insertBefore(b, a);
-  })();
-</script>
+    (function () {
+    var b = document.createElement('script'); b.type = 'text/javascript'; b.async = true;
+    b.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'a.klaviyo.com/media/js/analytics/analytics.js';
+    var a = document.getElementsByTagName('script')[0]; a.parentNode.insertBefore(b, a);
+    })();
+  </script>
     
     
     

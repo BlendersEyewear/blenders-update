@@ -1,4 +1,4 @@
-<div class="remodal" data-remodal-id="size-chart{{product_id}}" data-remodal-options="hashTracking: false">
+<div class="remodal popup-size-chart" data-remodal-id="size-chart{{product_id}}" data-remodal-options="hashTracking: false">
 <a data-remodal-action="close" class="remodal-close"></a>
 
   {% assign product_tags = product.tags | join: ' ' %}
@@ -12,9 +12,77 @@
       {% endif %}
     {% endfor %}
   {% elsif settings.size_chart != blank %}
-    <h5 class="center">{{ pages[settings.size_chart].title }}</h5>
+    <h5 class="center">{{product.title}} Size Guide</h5>
+
     <div class="feature_divider"></div>
-    {{ pages[settings.size_chart].content }}
+
+    {% for collection in product.collections %}
+    {% if collection.handle == 'a-series'
+        or collection.handle == 'cardiff' or collection.handle == 'east-village'
+        or collection.handle == 'h-series' or collection.handle == 'frontpage'
+        or collection.handle == 'l-series' or collection.handle == 'm-class'
+        or collection.handle == 'millenia' or collection.handle == 'north-park-blenders-eyewear'
+        or collection.handle == 'providence' or collection.handle == 'roxie-1'
+        or collection.handle == 'test-collection' %}
+
+        {% assign fit_img = collection.metafields.custom_fields["fit_image"] %}
+
+        {% comment %} If the alt tag is empty... {% endcomment %}
+        {% if fit_img contains 'alt=""' %}
+            {% assign fit_img_url = fit_img | remove: '<img src="' | remove: '" alt="" typeof="foaf:Image" />' %}
+        {% else %}
+        {% comment %} If the alt tag has a value... {% endcomment %}
+            {% assign fit_v1 = fit_img | remove: '<img alt="' | split: '" src="'%}
+            {% assign fit_img_url = fit_v1[1] | remove: '" typeof="foaf:Image" />'%}
+        {% endif %}
+        
+        {% comment %} If fir image url exists {% endcomment %}
+        {% if fit_img_url != blank %}
+            <img src="{{ fit_img_url }}" alt="{{ collection.title }} Fit" class="product-size-guide__img">
+        {% endif %}
+        
+
+        {% assign fit_blurb = collection.metafields.custom_fields["fit_blurb"] %}
+        {% if fit_blurb != blank %}
+            <p class="product-size-guide__blurb">{{ fit_blurb }}</p>
+        {% else %}
+            <p class="product-size-guide__blurb">
+                We forgot to fill out this section, so here's a poop emoji 💩.
+            </p>
+        {% endif %}
+
+        {% assign frame_size = collection.metafields.custom_fields["frame_size"] %}
+        
+            <div class="product-size-guide__detail">
+                <p class="product-size-guide__detail-title">Fit:</p>
+
+                <p class="product-size-guide__detail-value">
+                    {% if frame_size != blank %}
+                        {% if frame_size == 'S-M'%}
+                            Small - Medium
+                        {% elsif frame_size == 'M-L'%}
+                            Medium - Large
+                        {% elsif frame_size == 'L-XL'%}<span class="value">
+                            Large - Extra Large
+                        {% endif %}
+                    {% else %}
+                        All Sizes
+                    {% endif %}
+                </p>
+            </div>
+        
+
+        {% assign measurements = collection.metafields.custom_fields["frame_measurements"] %}
+        {% if measurements != blank %}
+            <div class="product-size-guide__detail">
+                <p class="product-size-guide__detail-title">Measurements:</p>
+
+                <p class="product-size-guide__detail-value">{{ measurements }}</p>
+            </div>
+        {% endif %}
+
+    {% endif %}
+{% endfor %}
   {% endif %}
 
 </div>

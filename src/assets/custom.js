@@ -350,28 +350,6 @@ const resizeHeadings = function(){
   }
 }
 
-// Size Guide Content for Desktop
-const sizeGuideDesktop = function(){
-  console.log('size guide desktop loaded');
-
-  let sizeChartToggle = $('#desktopSizeChartToggle');
-
-  let sizeBlurb = $(sizeChartToggle).data('collection-blurb');
-  let sizeImg = $(sizeChartToggle).data('collection-image');
-  let sizeMeasurements = $(sizeChartToggle).data('collection-size');
-
-  console.log($('.remodal.remodal-is-opened'));
-
-  
-  $(sizeChartToggle).click(function(){
-    let modal = $('.remodal.remodal-is-opened');
-    console.log('modal', $(modal));
-
-    setTimeout(console.log($('.remodal.remodal-is-opened')), 500);
-  });
-
-}
-
 
 
 // Above Button Labels for Custom Featured Promotions
