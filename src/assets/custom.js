@@ -112,7 +112,7 @@ const shippingReturnData =
 // Make Product Tabs into accordions - on mobile
 const productTabs = function(){
   // Check if on product page
-  if($("body").hasClass("product") && window.screen.width <= tabletSize){
+  if($("body").hasClass("product") && window.innerWidth <= tabletSize){
     console.log('productTabs (accordions) working');
 
     // Unwrap god awful Div Soup from Product descriptions
@@ -373,6 +373,32 @@ const sizeGuideDesktop = function(){
 }
 
 
+
+// Above Button Labels for Custom Featured Promotions
+const aboveBtnLabels = function(){
+  let title = $(".custom-front-page-styles-div--2 .feature-section.section-1.promo-1 h2.title.title-below, .custom-front-page-styles-div--2 .feature-section.section-2.promo-2 h2.title.title-below");
+  $(title).each(function(){
+    let aboveBtnText = $(this).data('above-button-label');
+
+    // Create Span
+    jQuery('<span />',{
+      class: 'above-button-label',
+      text: aboveBtnText
+    }).insertBefore($(this));
+
+    
+  });
+}
+
+//------------------------------------------------
+//------------- Front Page --------------------
+//------------------------------------------------
+const frontPageScripts = function(){
+  console.log('front page scripts loaded');
+  aboveBtnLabels();
+}
+
+
 //------------------------------------------------
 //------------- Product Page --------------------
 //------------------------------------------------
@@ -381,18 +407,17 @@ const productPageScripts = function(){
   // Sold out Notification
   soldOutNotifyToggle();
 
-  // Product Tabs
-  
   // If Desktop
-  if(window.screen.width > tabletSize){
-    console.log(window.screen.width + ' desktop screen size!');
+  if(window.innerWidth > tabletSize){
+
+    console.log(window.innerWidth + ' desktop screen size!');
     productTabsDesktop();
     sizeGuideDesktop();
     
     // If Tablet or Mobile
-  } else if(window.screen.width <= tabletSize){
+  } else if(window.innerWidth <= tabletSize){
+    console.log(window.innerWidth + ' tablet/mobile screen size!');
     productTabs();
-    console.log(window.screen.width + 'tablet/mobile screen size!');
     resizeHeadings();
   }
 }
@@ -519,25 +544,15 @@ document.addEventListener("DOMContentLoaded", function() {
   console.log("custom js loaded");
   
   let screenSize = window.innerWidth;
-  console.log(screenSize + ' ' + window.screen.width);
 
   // Home Page -------------
   // Change Feature Promotion Button text to "Shop Now" on Desktop
   screenSize >= tabletSize ? fpBtnSwap() : "";
+  body.classList.contains('index') ? frontPageScripts() : '';
  
   // Product Page -------------
   // Create accordions on Mobile -- // Create Tabs on Desktop // ---- 
   body.classList.contains('product') ? productPageScripts() : '';
-  if(body.classList.contains('product')){
-
-    soldOutNotifyToggle();
-    // If Desktop
-    if(window.screen.width > tabletSize){
-      console.log('desktop size!');
-    } else if(window.screen.width <= tabletSize){
-      console.log('mobile size!');
-    }
-  }
 
   // Custom Product Page -------------
   // Run custom product page scripts if on custom product page.

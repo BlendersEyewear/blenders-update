@@ -11174,21 +11174,41 @@ $headerDesktopLargeUp: 1280px;
     left: 1.25rem;
     width: auto;
     max-width: 100%;
-    min-width: 12rem;
+    // min-width: 12rem;
 
     color: white;
     border: 1px solid white;
-    padding: 8px;
+    padding: 8px 12px;
     line-height: 1;
     font-size: 1rem;
     font-weight: 600;
     letter-spacing: .1em;
   }
 
-  // 'NEW' Tag - Desktop
-  .feature-section.section-1.promo-1 h2.title.title-below:after,
-  .feature-section.section-2.promo-2 h2.title.title-below:after{
-    content: 'New';
+  // 'NEW' Tag - Desktop - Edited out by adam - 5/3/2018
+  // .feature-section.section-1.promo-1 h2.title.title-below:after,
+  // .feature-section.section-2.promo-2 h2.title.title-below:after{
+  //   content: 'New';
+  //   position: absolute;
+  //   display: inline-block;
+  //   color: black;
+  //   background: white;
+  //   font-size: 1rem;
+  //   font-weight: 600;
+  //   font-variant-caps: all-small-caps;
+  //   text-align: center;
+  //   padding: 4px 5px;
+  //   margin: 0;
+  //   letter-spacing: .1em;
+  //   width: auto;
+  //   height: auto;
+  //   z-index: 3;
+  //   top: -32px;
+  //   left: -1px;
+  // }
+
+  // Above Button Labels
+  .above-button-label{
     position: absolute;
     display: inline-block;
     color: black;
@@ -11200,11 +11220,12 @@ $headerDesktopLargeUp: 1280px;
     padding: 4px 5px;
     margin: 0;
     letter-spacing: .1em;
+    line-height: 1;
     width: auto;
     height: auto;
     z-index: 3;
-    top: -32px;
-    left: -1px;
+    bottom: 4rem;
+    left: 1.25rem;
   }
 
 }
@@ -11405,7 +11426,20 @@ $headerDesktopLargeUp: 1280px;
 
   // Lower 2 Promotions
   .featured-promotions.promo-per-row-2, .featured-promotions.promo-per-row-2.clearfix {
-    padding: 0 20px !important;
+    padding: 0 10px !important;
+
+    // Make the sections stack on mobile
+    .feature-section.custom-front-page-figure{
+      max-width: unset !important;
+      margin-bottom: 1rem;
+    }
+
+    // Title
+    h2.title.title-below{
+      display: block;
+      padding: 6px 8px;
+      font-weight: 600;
+    }
   }
   
 }
@@ -13892,6 +13926,13 @@ div.product-icons{
     border: none;
   }
 
+}
+
+.menu {
+  a.active,
+  a.active span{
+    color: #000;
+  }
 }
 
 

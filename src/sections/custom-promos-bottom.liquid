@@ -1,7 +1,7 @@
 {% comment %}
-** Featured promotions - homepage partial **
-- Draggable section
+** Custom Featured promotions - By Adam 5/7 **
 - Uses blocks
+- 2 Areas
 {% endcomment %}
 
 {% assign featured_promos_per_row = section.settings.featured_promos_per_row | minus: 0 %}
@@ -9,13 +9,14 @@
 {% assign title_on_image = section.settings.promo_text_on_image_enabled %}
 
 {% if section.blocks.size > 0 %}
-  <div class="container promotions-grid-{{ featured_promos_grid }} {% if section.settings.custom_styling == true %}custom-front-page-styles-container{% endif %}">
-    <div  class="js-featured-promotions featured-promotions promo-per-row-{{ featured_promos_per_row }} clearfix {% if section.settings.custom_styling == true %}custom-front-page-styles-div custom-front-page-styles-div--{{ featured_promos_per_row }}{% endif %}"
+  <div class="container promotions-grid-full_width custom-front-page-styles-container">
+    <div  class="js-featured-promotions featured-promotions promo-per-row-2 clearfix custom-front-page-styles-div custom-front-page-styles-div--2"
           data-promo-animation="{{ section.settings.featured_links_animation }}">
-
+        
         {% for block in section.blocks %}
-          <figure class="feature-section section-{{ forloop.index }} promo-{{ forloop.index }} title-overlay-{{ title_on_image }} {% if section.settings.featured_links_animation != blank %}promo-animation--true{% endif %} {% if section.settings.custom_styling == true %}custom-front-page-figure custom-front-page-figure--{{ forloop.index }}{% endif %}" {{ block.shopify_attributes }}>
+          <figure class="feature-section section-{{ forloop.index }} promo-{{ forloop.index }} title-overlay-true custom-front-page-figure custom-front-page-figure--{{ forloop.index }}" {{ block.shopify_attributes }}>
               <div class="feature-inner feature-style--{{ section.settings.feature_style }} ">
+              
                 {% if block.settings.image != nil %}
                     <img  src="{{ block.settings.image | img_url: '100x' }}"
                           alt="{% if block.settings.image.alt != blank %}{{ block.settings.image.alt }}{% else %}{{ block.settings.title | escape }}{% endif %}"
@@ -34,14 +35,11 @@
                     {{ 'collection-' | append: i | placeholder_svg_tag: 'placeholder-svg placeholder-svg--promotions' }}
                   {% endif %}
                 {% if block.settings.text != blank or block.settings.button_label != blank or block.settings.title != blank and title_on_image != blank %}
-
                   <figcaption class="feature-overlay">
                     <a {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}class="link-promo"></a>
                       <div class="feature-wrap">
                         {% if block.settings.title != blank %}
-                          <h2
-                          data-above-button-label="{{ block.settings.label }}"
-                          class="title">{{ block.settings.title }} {{ block.settings.label }}</h2>
+                          <h2 class="title">{{ block.settings.title }}</h2>
                         {% endif %}
                         <div class="feature-details">
                           {% if block.settings.text != blank %}
@@ -61,7 +59,7 @@
             {% if title_on_image == blank %}
               {% if block.settings.title != blank %}
                 <a {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}>
-                  <h2 {% if block.settings.above_button_label != blank %}data-above-button-label="{{ block.settings.above_button_label }}" {% endif %}class="title title-below">{{ block.settings.title }}</h2>
+                  <h2 class="title title-below">{{ block.settings.title }}</h2>
                 </a>
               {% endif %}
             {% endif %}
@@ -73,7 +71,7 @@
 
 {% schema %}
 {
-  "name": "Featured promotions",
+  "name": "Custom Featured promotions Bottom",
   "class": "featured-promotions-section",
   "max_blocks": 12,
   "settings": [
@@ -186,11 +184,6 @@
           "id": "text",
           "label": "Text",
           "default": "<p>Promotion description details.</p>"
-        },
-        {
-          "type": "text",
-          "id": "above_button_label",
-          "label": "Above Button LAbel"
         },
         {
           "type": "text",
