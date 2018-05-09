@@ -218,9 +218,7 @@
            {% endif %}
           {% endif %}
 
-          {% unless collection_handles contains 'coming-soon' %}
             {% include 'product-form' with 'product' %}
-          {% endunless %}
 
           {% if section.settings.product_description_position == "bottom" %}
             {% if product.description != blank %}

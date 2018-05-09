@@ -1,11 +1,5 @@
-<div class="product-details">
+<div class="product-details product-details--coming-soon">
   <span class="title" itemprop="name">{{ product.title }}</span>
-  {% if settings.enable_shopify_collection_badges and settings.enable_shopify_review_comments %}
-    <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
-  {% endif %}
-  {% if settings.display_vendor %}
-    <span itemprop="brand" class="brand">{{ product.vendor }}</span>
-  {% endif %}
 
   {% comment %} Add Custom Fields / Show Custom Category & Polarized / If not category / Show subtitle {% endcomment %}
   {% unless template contains 'cart' %}
@@ -15,25 +9,27 @@
   {% endunless %}
 
 
-    <span class="price {% if product.compare_at_price_max > product.price %}sale{% endif %}">
-      {% if product.available %}
+<span class="price {% if product.compare_at_price_max > product.price %}sale{% endif %}">
+    {% if product.available %}
         {% if product.price_varies and product.price_min > 0 %}
-          <small><em>{{ 'products.general.from' | t }}</em></small>
+            <small><em>{{ 'products.general.from' | t }}</em></small>
         {% endif %}
-          {% if product.price_min > 0 %}
+
+        {% if product.price_min > 0 %}
             <span class="money">{{ product.price_min | money }}</span>
-          {% else %}
+        {% else %}
             {{ settings.free_price_text }}
-          {% endif %}
-      {% else %}
+        {% endif %}
+
+    {% else %}
         <span class="sold_out">{{ 'products.product.sold_out' | t }}</span>
-      {% endif %}
-      {% if product.compare_at_price_max > product.price and product.available %}
+    {% endif %}
+    {% if product.compare_at_price_max > product.price and product.available %}
         <span class="was_price">
-          <span class="money">{{ product.compare_at_price_max | money }}</span>
+            <span class="money">{{ product.compare_at_price_max | money }}</span>
         </span>
-      {% endif %}
-    </span>
+    {% endif %}
+</span>
 
   {% comment %} Yatpo {% endcomment %}
   <div class="yotpo-container">

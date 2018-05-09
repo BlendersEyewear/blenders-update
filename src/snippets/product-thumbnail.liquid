@@ -75,7 +75,12 @@
       {% include "product-details" %}
     </div>
     <a class="product-info__caption {% if settings.thumbnail_hover_enabled %}hidden{% endif %}" href="{{ product.url | within: collection }}" itemprop="url">
-      {% include "product-info" %}
+      {% comment %} USe product info back in stock if product is in coming soon collection {% endcomment %}
+      {%if template contains 'coming-soon' %}
+        {% include 'product-info-back-in-stock' %}
+      {% else %}
+        {% include 'product-info' %}
+      {% endif %}
     </a>
   </div>
 {% include 'collection-swatch' %}

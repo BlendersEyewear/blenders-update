@@ -52,9 +52,6 @@
                     {% if collection_handles contains 'new' %}
                         <div class="new_banner_product">{{ 'collections.general.new' | t }}</div>
                     {% endif %}
-                    {% if collection_handles contains 'pre-order' %}
-                        <div class="preorder_banner_product">{{ 'collections.general.pre_order' | t }}</div>
-                    {% endif %}
 
                     <div class="product-meta">
                         {%if product.type =='Sunglasses' or product.type == 'Snow Goggles' %}
@@ -111,69 +108,60 @@
                     <h1 class="product_name product-title" itemprop="name">{{ product.title }}</h1>
 
                     <div class="product-price-reviews">
-                        {% if collection_handles contains 'coming-soon' %}
-                            <p class="modal_price">{{ 'collections.general.coming_soon' | t }}</p>
-                        {% else %}
-                        {%if product.available %}
-                          <!-- product is available -->
-                        {% endif %}
-                          {% if product.available %}
-                            <p class="modal_price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                            <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
-                            <meta itemprop="seller" content="{{ shop.name | escape }}" />
-                            <link itemprop="availability" href="http://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}">
-                            <meta itemprop="itemCondition" content="New" />
+                      {% if product.available %}
+                        <p class="modal_price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                        <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+                        <meta itemprop="seller" content="{{ shop.name | escape }}" />
+                        <link itemprop="availability" href="http://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}">
+                        <meta itemprop="itemCondition" content="New" />
 
-                            <span itemprop="price" content="{{ variant.price | money_without_currency | remove: "," }}" class="{% if variant.compare_at_price > variant.price %}sale{% endif %}">
-                                <span class="current_price {% if product.available == false %}hidden{% endif %}">
-                                {% if variant.price > 0 %}
-                                    <span class="money">{{ variant.price | money }}</span>
-                                {% else %}
-                                    {{ settings.free_price_text }}
-                                {% endif %}
-                                </span>
-                            </span>
-                            <span class="was_price">
-                                {% if variant.price < variant.compare_at_price and variant.available %}
-                                <span class="money">{{ variant.compare_at_price | money }}</span>
-                                {% endif %}
-                            </span>
-
-                            {% if section.settings.display_savings %}
-                                <span class="sale savings">
-                                {% if variant.price < variant.compare_at_price and variant.available %}
-                                    {{ variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price }}%
-                                {% endif %}
-                                </span>
+                        <span itemprop="price" content="{{ variant.price | money_without_currency | remove: "," }}" class="{% if variant.compare_at_price > variant.price %}sale{% endif %}">
+                            <span class="current_price {% if product.available == false %}hidden{% endif %}">
+                            {% if variant.price > 0 %}
+                                <span class="money">{{ variant.price | money }}</span>
+                            {% else %}
+                                {{ settings.free_price_text }}
                             {% endif %}
-                            </p>
-                          {% endif %}
+                            </span>
+                        </span>
 
-                          {%unless product.available %}
-                            <button id="notifyToggle" class="notify-toggle">Email When Available</button>
-                            {% include 'product-notify-me-new' %}
-                          {% endunless %}
+                        <span class="was_price">
+                            {% if variant.price < variant.compare_at_price and variant.available %}
+                            <span class="money">{{ variant.compare_at_price | money }}</span>
+                            {% endif %}
+                        </span>
 
+                        {% if section.settings.display_savings %}
+                            <span class="sale savings">
+                            {% if variant.price < variant.compare_at_price and variant.available %}
+                                {{ variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price }}%
+                            {% endif %}
+                            </span>
                         {% endif %}
+                        </p>
+                      {% endif %}
 
-                        <div class="yotpo-container product-price-reviews__review">
-                            <div class="yotpo bottomLine"
-                                data-appkey="7Na4Xsq5Vf0s5VxSDIrDl56IRsBb1HHiohLKFKOK"
-                                data-domain="{{shop.permanent_domain | escape }}"
-                                data-product-id="{{ product.id }}"
-                                data-product-models="{{ product.id }}"
-                                data-name="{{ product.title | escape }}"
-                                data-url="{{ shop.url }}{{ product.url }}"
-                                data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
-                                data-description="{{ product.description | escape }}"
-                                data-bread-crumbs="{% for tag in product.tags %}{{ tag | escape }};{% endfor %}">
-                            </div>
-                        </div>
+                      {%unless product.available %}
+                        <button id="notifyToggle" class="notify-toggle">Email When Available</button>
+                        {% include 'product-notify-me-1' %}
+                      {% endunless %}
+
+                      <div class="yotpo-container product-price-reviews__review">
+                          <div class="yotpo bottomLine"
+                              data-appkey="7Na4Xsq5Vf0s5VxSDIrDl56IRsBb1HHiohLKFKOK"
+                              data-domain="{{shop.permanent_domain | escape }}"
+                              data-product-id="{{ product.id }}"
+                              data-product-models="{{ product.id }}"
+                              data-name="{{ product.title | escape }}"
+                              data-url="{{ shop.url }}{{ product.url }}"
+                              data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
+                              data-description="{{ product.description | escape }}"
+                              data-bread-crumbs="{% for tag in product.tags %}{{ tag | escape }};{% endfor %}">
+                          </div>
+                      </div>
                     </div>
 
-                    {% unless collection_handles contains 'coming-soon' %}
-                        {% include 'product-form' with 'product' %}
-                    {% endunless %}
+                    {% include 'product-form' with 'product' %}
 
                 </div>
             </div>
