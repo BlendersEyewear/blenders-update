@@ -64,7 +64,10 @@
     {% assign sidebar = false %}
   {% endif %}
 
-  <div class="product clearfix">
+  {% comment %} The actual fucking product div (product area) {% endcomment %}
+  {% comment %} Pass the product type to JS to make product tabs correctly for each product type {% endcomment %}
+  {% comment %} Creating a product type of 'Gift Card' if product title contains gift card {% endcomment %}
+  <div class="product clearfix product-area" data-product-type="{% if product.title contains 'GIFT CARD' %}Gift Card{% else %}{{ product.type}}{% endif %}">
     {% if sidebar %}
       {% include 'sidebar' %}
       <div class="twelve columns">
@@ -111,18 +114,24 @@
           {% endif %}
           <h1 class="product_name" itemprop="name">{{ product.title }}</h1>
 
-          {% comment %} Added Custom Fields {% endcomment %}
-          <div class="product-meta-container">
-            {% if product.metafields.custom_fields["product_subtitle"] != blank %}
-              <div class="custom-field custom-field__product-subtitle custom-field__type--text">
-              <div class="custom-field--value">{{ product.metafields.custom_fields["product_subtitle"] }}</div>
-              </div>
-            {% endif %}
+          {% comment %} Added Custom Fields (Do Not Show on Gift Card Pages) {% endcomment %}
+          {% unless product.title contains 'GIFT CARD' %}
+            <div class="product-meta-container">
+              {% if product.metafields.custom_fields["product_subtitle"] != blank %}
+                <div class="custom-field custom-field__product-subtitle custom-field__type--text">
+                <div class="custom-field--value">{{ product.metafields.custom_fields["product_subtitle"] }}</div>
+                </div>
+              {% endif %}
 
-            {% if settings.size_chart != blank %}
-              <a href="#size-chart" class="size_chart" data-remodal-target="size-chart" data-no-instant>{{ 'products.product.size_chart' | t }} <span class="icon-right-arrow"></span></a>
-            {% endif %}
-          </div>
+              {% comment %} Don't show on Accessories {% endcomment %}
+              {% unless product.type =='Soft Pouches' %}
+                {% if settings.size_chart != blank %}
+                  <a href="#size-chart" class="size_chart" data-remodal-target="size-chart" data-no-instant>{{ 'products.product.size_chart' | t }} <span class="icon-right-arrow"></span></a>
+                {% endif %}
+
+              {% endunless %}
+            </div>
+          {% endunless %}
 
           <hr class="product-hr">
 
@@ -221,9 +230,13 @@
             {% endif %}
           {% endif %}
 
+          {% comment %} Shows only On mobile {% endcomment %}
           <div class="below-title-section">
             {% if settings.size_chart != blank %}
-              <a href="#size-chart" class="size_chart" data-remodal-target="size-chart" data-no-instant>{{ 'products.product.size_chart' | t }} hi<span class="icon-right-arrow"></span></a>
+
+              <button class="size_chart size_chart--mobile">{{ 'products.product.size_chart' | t }} <img src="https://cdn.shopify.com/s/files/1/0148/9585/files/icon-arrow-right.svg?1448602857142359948" class="size_chart__arrow" alt=""></button>
+              {% include 'size-chart-slide' %}
+
             {% endif %}
           </div>
 

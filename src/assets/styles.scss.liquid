@@ -11836,8 +11836,11 @@ a.size_chart {
   }
 }
 
-
-
+//  ------- Size Guide slide down on Product page -----------
+// ================================================================================
+.product .product-area{
+  .below-title-section{}
+}
 
 // Tabs
 ul.tabs {
@@ -12065,9 +12068,9 @@ p.modal_price {
   }
 }
 
-// --------------------------------
+// ----------------------------------------------------------------------------------
 // Product Page -------------
-// --------------------------------
+// ----------------------------------------------------------------------------------
 .product{
   .product-accordion__title{
     box-shadow: inset 0 -1px 0 0 rgba(0,0,0,0.13);
@@ -12169,12 +12172,58 @@ p.modal_price {
 
 
 // below title stuff - size guide and reviews
-.product .below-title-section{
-  @include flexbox();
-  @include justify-content(center);
-  @include align-items(center);
+.product .product-area .below-title-section{
   margin: 1.5rem 0;
+  text-align: center;
   display: none;
+
+  // Image
+  .size_chart.size_chart--mobile{
+    margin: 1rem auto;
+    display: block;
+    margin: 1rem auto;
+    float: none;
+    background: #f2f2f2;
+    color: rgba(0,0,0,0.72);
+    min-height: unset;
+    height: auto;
+    padding: .5rem .75rem;
+    font-size: 0.75rem;
+  }
+
+  .size_chart__arrow{
+    transform: rotate(0);
+    transition: all .25s ease-in-out;
+    max-height: 0.65rem;
+    width: auto;
+  }
+
+  .size_chart__arrow--open{
+    transform: rotate(90deg);
+  }
+  
+  .size_chart--mobile:active{
+    box-shadow: none;
+    background: #e2e2e2;
+    outline: 0;
+  }
+
+  .size_chart--mobile:focus{
+    outline: 0;
+  }
+
+  .product-size-guide__img{
+    display: block;
+    margin: 0 auto;
+  }
+
+  // Detail titles
+  .product-size-guide__detail-title{
+    margin: 0 0 .25rem;
+    line-height: 1;
+    font-size: 0.75rem;
+    letter-spacing: .05em;
+  }
 }
 
 .product .yotpo-container{
@@ -12188,8 +12237,8 @@ p.modal_price {
 
 // Tablet styles
 @include respond-to('medium'){
-  .product .below-title-section{
-    display: flex;
+  .product .product-area .below-title-section{
+    display: block;
   }
 }
 
@@ -12216,9 +12265,9 @@ p.modal_price {
 
 
 
-//  ----------------------------------
-//  Product Form ( for new regular product page ) ---- 
-//  ----------------------------------
+//  --------------------------------------------------
+//  Product Form ( for product page ) ---- 
+//  --------------------------------------------------
 .product_form .items_left:empty{
   display: none;
 }
@@ -12436,9 +12485,11 @@ button.btn.recomatic-add-to-cart:focus{
 
 
 
-// ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------
 //    Cart Page
-// ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------
 
 .cart h1 {
   text-align: center;
