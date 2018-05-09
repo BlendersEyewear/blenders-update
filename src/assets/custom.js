@@ -59,10 +59,10 @@ const tabfunc = () => {
 
 // Remove "Soft Pouch" from product titles pouch upsell
 const PouchUpsell = () => {
-  
+
   // Get pouch containers
   let pouchContainers = document.querySelectorAll('.mobile-upsell-container');
-  
+
   // Remove ' SOFT POUCH' from the Title
   let removeTitle = () => {
     console.log('pouch upsell scripts loaded');
@@ -78,17 +78,17 @@ const PouchUpsell = () => {
         if(exists(title)){
           let text = title.innerHTML;
           let toRemove = " SOFT"
-          
+
           // Remove "BBQ" from Backyard BBQ
           if(text.indexOf(" BBQ SOFT") !== -1 ){
             title.innerHTML = text.replace(" BBQ SOFT", '');
           } else if(text.indexOf(toRemove) !== -1){
             title.innerHTML = text.replace(toRemove, '');
           }
-          
+
         }
       }
-      
+
     }
   }
 
@@ -100,7 +100,7 @@ const PouchUpsell = () => {
 
 const shippingTest = "<ul><li>hi there!!! This is a test string!</li></ul>";
 
-const shippingReturnData = 
+const shippingReturnData =
 "<ul>" +
 "<li>Free Shipping on U.S. Orders over $40.</li>" +
 "<li>Free International Shipping on ALL Orders over $70.</li>" +
@@ -121,58 +121,58 @@ const productTabs = function(){
     // Wrapping h5 tags with accordion title div
     var header = $('.product_section').find('.description').find('h5')
     $(header).wrap('<div class="product-accordion__title"></div>');
-    
+
     const chevronImg = 'https://cdn.shopify.com/s/files/1/0148/9585/files/icon-arrow-right.svg?1448602857142359948';
-    
+
     const chevron = `<img src="${chevronImg}" alt="accordion toggle" class="product-accordion__arrow">`;
-    
+
     const accordTitle = $('.product-accordion__title');
     $(accordTitle).append(chevron);
-    
-    
+
+
     const accordContent = $(accordTitle).nextUntil(accordTitle);
-    
+
     $(accordContent).wrap('<div class="product-accordion__body"></div>');
-    
+
     var accordionBody = $('.product-accordion__body');
 
     // Create Variable for shipping and returns tab
     let shippingTab = $(".product-accordion__title").last();
 
     let shippingContent = $(shippingReturnData);
-    
+
     // Remove all content for shipping and return
     $(shippingTab).nextAll().remove();
-    
+
     $(shippingTab).after(shippingContent);
     $(shippingContent).wrap('<div class="product-accordion__body"></div>');
 
 
     console.log(shippingContent);
-    
+
 
     function productTabToggle(){
       // hide the accordion content
       $('.product-accordion__body').hide();
       // $(shippingContent).hide();
-      
+
       // click function
       $(accordTitle).click(function(){
         // Make arrow turn
         $(this).find('.product-accordion__arrow').toggleClass('product-accordion__arrow--open');
         // add bottom margin
         $(this).toggleClass('product-accordion__title--open');
-        
+
         let contentRaw = $(this).nextUntil(accordTitle).find(accordionBody);
         let content = contentRaw.prevObject;
-        
+
         for (let line of content){
           $(line).slideToggle(250);
         }
-        
+
       });
     }
-    
+
     productTabToggle();
 
 
@@ -188,17 +188,17 @@ const productTabsDesktop = function(){
     let productDesc = $('.product_section').find('.description');
     let header = $('.product_section').find('.description').find('h5')
     $(header).wrap('<div class="product-tab__title-hidden"></div>');
-    
-    
+
+
     // Create Tab Links container
     const tabLinks = $('<div />', {
       "class": 'product-tab-links'
     });
-    
+
     $(tabLinks).append('<a class="product-tab-link" href="#tab1">Details</a>');
     $(tabLinks).append('<a class="product-tab-link" href="#tab2">Description</a>');
     $(tabLinks).append('<a class="product-tab-link" href="#tab3">Shipping & Returns</a>');
-    
+
     $(productDesc).prepend(tabLinks);
 
     // Create empty tab divs to populate later
@@ -223,8 +223,8 @@ const productTabsDesktop = function(){
     // Details
     let detailsContent = $('.product-tab__title-hidden').first().nextUntil($('.product-tab__title-hidden'));
     $('#tab1').append($(detailsContent));
-    
-    
+
+
     // Description
     let descContentTitle = $('.product-tab__title-hidden')[1];
     let descContent = $(descContentTitle).nextUntil($('.product-tab__title-hidden'));
@@ -247,33 +247,33 @@ const productTabsDesktop = function(){
       // For each set of tabs, we want to keep track of
       // which tab is active and its associated content
       var $active, $content, $links = $(this).find('a');
-    
+
       // If the location.hash matches one of the links, use that as the active tab.
       // If no match is found, use the first link as the initial active tab.
       $active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
       $active.addClass('product-tab-link-active');
-    
+
       $content = $($active[0].hash);
-    
+
       // Hide the remaining content
       $links.not($active).each(function () {
         $(this.hash).hide();
       });
-    
+
       // Bind the click event handler
       $(this).on('click', 'a', function(e){
         // Make the old tab inactive.
         $active.removeClass('product-tab-link-active');
         $content.hide();
-    
+
         // Update the variables with the new link and content
         $active = $(this);
         $content = $(this.hash);
-    
+
         // Make the tab active.
         $active.addClass('product-tab-link-active');
         $content.show();
-    
+
         // Prevent the anchor's default click action
         e.preventDefault();
       });
@@ -296,7 +296,7 @@ const floatingLabels = function(){
 
 const soldOutNotifyToggle = function(){
   console.log('sold out script working');
-  
+
   let toggleBtn = $('#notifyToggle');
 
   let notifyForm = $(toggleBtn).next('.notify_form');
@@ -327,7 +327,7 @@ const soldOutNotifyToggle = function(){
 
     // find email
     let email = $(notifyForm).find('.notify_email');
-    
+
     // Focus on Email input
     $(email).focus();
 
@@ -343,9 +343,9 @@ const resizeHeadings = function(){
                       .find('h4');
 
   if($("body").hasClass("body")){
-    
+
     $(heading460).css('fontSize', '1rem');
-    
+
     $('.product').find('h4').css('fontSize','1rem');
   }
 }
@@ -364,7 +364,7 @@ const aboveBtnLabels = function(){
       text: aboveBtnText
     }).insertBefore($(this));
 
-    
+
   });
 }
 
@@ -385,16 +385,27 @@ const productPageScripts = function(){
   // Sold out Notification
   soldOutNotifyToggle();
 
+  // Check for product type
+  let productType = $('.product-area')
+                      .data('product-type')
+                      .trim();
+  // Check  against: Soft Pouches | 
+  const checkProductType = function(){
+    if((productType != 'Soft Pouches' && productType != 'Gift Card')){
+      return true;
+    }
+  }
+
   // If Desktop
   if(window.innerWidth > tabletSize){
 
-    console.log(window.innerWidth + ' desktop screen size!');
-    productTabsDesktop();
-    sizeGuideDesktop();
-    
+    // Product Tabs (not on accessories)
+    if(checkProductType()){
+      productTabsDesktop();
+    }
+
     // If Tablet or Mobile
   } else if(window.innerWidth <= tabletSize){
-    console.log(window.innerWidth + ' tablet/mobile screen size!');
     productTabs();
     resizeHeadings();
   }
@@ -452,10 +463,6 @@ const customProductPage = function(){
     // Hide mobile fit content
     $('#mobileFitContent').hide();
 
-
-    // Desktop Size Guide Content
-    sizeGuideDesktop();
-
     // Click function
     let sizeGuideToggle = $('#mobileFitToggle');
     $(sizeGuideToggle).click(function(){
@@ -473,7 +480,7 @@ const customProductPage = function(){
     // Check for window width of tablet or smaller
     if($(window).width() <= tabletSize){
       console.log('Time to go MoBile! ⋋( ºΘº)⋌');
-      
+
       // Create sliding images from lifestyle images on mobile - // Check that its on tablet or smaller
       // Detach of lifestyle images
       $lsImage1 = $('.product-lifestyle-image--1');
@@ -488,7 +495,7 @@ const customProductPage = function(){
       // append tagline and HR into lifestyle container
       $lsContainer.append($('.product-tagline'));
       $lsContainer.append($('.product-border'));
-      
+
       // Create New Div to use as flickity container and append into lifestyle image container
       jQuery('<div/>',{
         id: 'customProductFlicktyContainer',
@@ -496,7 +503,7 @@ const customProductPage = function(){
       }).appendTo($lsContainer);
 
       $flickityContainer = $('#customProductFlicktyContainer');
-      
+
       // Append lfestyle images into containeres
       $flickityContainer.append($lsImages);
 
@@ -520,16 +527,16 @@ const customProductPage = function(){
 document.addEventListener("DOMContentLoaded", function() {
 
   console.log("custom js loaded");
-  
+
   let screenSize = window.innerWidth;
 
   // Home Page -------------
   // Change Feature Promotion Button text to "Shop Now" on Desktop
   screenSize >= tabletSize ? fpBtnSwap() : "";
   body.classList.contains('index') ? frontPageScripts() : '';
- 
+
   // Product Page -------------
-  // Create accordions on Mobile -- // Create Tabs on Desktop // ---- 
+  // Create accordions on Mobile -- // Create Tabs on Desktop // ----
   body.classList.contains('product') ? productPageScripts() : '';
 
   // Custom Product Page -------------
