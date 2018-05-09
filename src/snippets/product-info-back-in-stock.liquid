@@ -14,6 +14,11 @@
         {% if product.price_varies and product.price_min > 0 %}
             <small><em>{{ 'products.general.from' | t }}</em></small>
         {% endif %}
+        {% if product.compare_at_price_max > product.price and product.available %}
+            <span class="was_price">
+                <span class="money">{{ product.compare_at_price_max | money }}</span>
+            </span>
+        {% endif %}
 
         {% if product.price_min > 0 %}
             <span class="money">{{ product.price_min | money }}</span>
@@ -23,11 +28,7 @@
 
     {% else %}
         <span class="sold_out">{{ 'products.product.sold_out' | t }}</span>
-    {% endif %}
-    {% if product.compare_at_price_max > product.price and product.available %}
-        <span class="was_price">
-            <span class="money">{{ product.compare_at_price_max | money }}</span>
-        </span>
+        {% include 'product-notify-collection' %}
     {% endif %}
 </span>
 

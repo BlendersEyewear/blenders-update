@@ -74,14 +74,17 @@
       </div>
       {% include "product-details" %}
     </div>
-    <a class="product-info__caption {% if settings.thumbnail_hover_enabled %}hidden{% endif %}" href="{{ product.url | within: collection }}" itemprop="url">
-      {% comment %} USe product info back in stock if product is in coming soon collection {% endcomment %}
-      {%if template contains 'coming-soon' %}
-        {% include 'product-info-back-in-stock' %}
-      {% else %}
-        {% include 'product-info' %}
-      {% endif %}
-    </a>
+    
+    {% comment %} Remove wrapping link and use product info back in stock if product is in coming soon collection {% endcomment %}
+    {%if template contains 'coming-soon' %}
+      <div class="product-info__caption {% if settings.thumbnail_hover_enabled %}hidden{% endif %}">
+          {% include 'product-info-back-in-stock' %}
+      </div>
+    {% else %}
+      <a class="product-info__caption {% if settings.thumbnail_hover_enabled %}hidden{% endif %}" href="{{ product.url | within: collection }}" itemprop="url">
+          {% include 'product-info' %}
+      </a>
+    {% endif %}
   </div>
 {% include 'collection-swatch' %}
 </div>

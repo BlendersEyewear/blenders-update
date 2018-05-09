@@ -14089,3 +14089,30 @@ div.product-icons{
         padding: 15px;
   }
 }
+
+
+// ====================================================================
+//  ------- Coming Soon Page / Coming Soon Collection
+// ====================================================================
+.collection-coming-soon{
+  .notify-form--collection{
+    padding: 0 2rem;
+  }
+
+  input.action_button.waitlist_button{
+    background: linear-gradient(-180deg, #757575, #101010)
+  }
+
+  input.action_button.waitlist_button:hover,
+  input.action_button.waitlist_button:focus{
+
+  }
+}
+
+@include respond-to('medium'){
+  .collection-coming-soon{
+    .notify-form--collection{
+      padding: 0;
+    }
+  }
+}
