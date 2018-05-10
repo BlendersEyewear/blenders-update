@@ -56,7 +56,7 @@
                               {{ product.featured_image | product_img_url: '900x' }} 800w,
                               {{ product.featured_image | product_img_url: '1000x' }} 900w"
               />
-            </div>
+        </div>
           {% if settings.collection_secondary_image != blank %}
             <div class="image__container" style="max-width: {% if product.images[1] != blank %}{{- product.images[1].width -}}px{% else %}{{- product.featured_image.width -}}px{% endif %}; ">
               <img src="{% if product.images[1] != blank %}{{ product.images[1] | product_img_url: '900x' }}{% else %}{{ product.featured_image | product_img_url: '900x' }}{% endif %}"
@@ -65,14 +65,23 @@
               />
             </div>
           {% endif %}
-        </a>
+      </a>
+      
+      {% comment %} Add to Cart Button - took out 'hide' {% endcomment %}
+      {%if product.available%}
+        <div class="quick_shops {% unless product.available %}sold-out-nofity-button{% endunless %} desktop action_button">
+            {% include 'collection-product-form' %}
+        </div>
+          {% include "product-details" %}
 
-      {% comment %} Add to Cart Button {% endcomment %}
-      <div class="quick_shops {% unless product.available %}hide{% endunless %} desktop action_button">
-      {% if product.available %}
-      {% include 'collection-product-form' %}{% endif %}
-      </div>
-      {% include "product-details" %}
+      {% else %}
+        <!-- {{ template }} -->
+        {% unless template contains 'coming-soon'%}
+          <a href="{{ product.url }}" class="button button_sold-out">Notify Me</a>
+        {% endunless %}
+          {% include "product-details" %}
+      {% endif%}
+    
     </div>
     
     {% comment %} Remove wrapping link and use product info back in stock if product is in coming soon collection {% endcomment %}

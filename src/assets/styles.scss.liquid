@@ -11873,10 +11873,11 @@ ul.tabs-content>li.active {
     @include justify-content(center);
     @include align-items(center);
 
+    // Make stars lighter - increased the opacity a touch per Chase's request
     .yotpo .yotpo-bottomline .yotpo-icon-star,
     .yotpo .yotpo-bottomline .yotpo-icon-half-star,
     .yotpo .yotpo-bottomline .yotpo-icon-empty-star{
-      color: hsla(49, 100%, 50%, 0.66);
+      color: hsla(49, 100%, 50%, 0.8);
     }
 
     a.text-m{
@@ -11898,17 +11899,19 @@ ul.tabs-content>li.active {
     margin: 0 0 1rem;
   }
 
+  // spacing out the tab links - 5/9/18
+
   a.product-tab-link {
     display: block;
     text-align: center;
     background: white;
     font-size: 0.875rem;
     line-height: 1;
-    padding: .5rem .875rem;
+    padding: .5rem .25rem;
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: .05em;
-    margin: 0;
+    margin: 0 .5rem 0 0 ;
     transition: all .15s ease-in-out;
     outline: 0;
   }
@@ -11916,7 +11919,6 @@ ul.tabs-content>li.active {
   a.product-tab-link:hover,
   a.product-tab-link:focus{
     color: black;
-    // box-shadow: inset 0 -2px 0 0 #e6e9ef;
     box-shadow: inset 0 -2px 0 0 #333;
   }
 
@@ -11966,8 +11968,24 @@ ul.tabs-content>li.active {
 .product .product_section{
 	.gallery-arrows--true .product_gallery .flickity-prev-next-button {
 		opacity: 0.65;
-		padding: 0;
-	}
+    padding: 0;
+    
+    // make them smaller
+    width: 8%;
+  }
+
+  .flickity-prev-next-button.next{
+    transform: translateX(.5rem);
+  }
+
+  .flickity-prev-next-button.previous{
+    transform: translateX(-.5rem);
+  }
+  
+  // remove active shadow
+  .flickity-prev-next-button:active{
+    box-shadow: none;
+  }
 }
 
 // Yotpo
@@ -13049,11 +13067,23 @@ button.btn.recomatic-add-to-cart:focus{
     }
 
     // Yotpo stars (making them go to second row)
-    .yotpo .text-m{
-      display: block;
+    .yotpo-small .yotpo-bottomline.pull-left .text-m{
+      display: block !important;
       margin: .25rem auto 0;
       padding: 0;
     }
+  }
+
+  // Creating a New notify me button for sold out products
+  a.button.button_sold-out {
+    min-height: unset;
+    height: auto;
+    display: block;
+    padding: 0.6rem .25rem;
+    font-size: 0.825rem;
+    line-height: 1;
+    background: #757575;
+    background: linear-gradient(-180deg, #757575, #101010);
   }
 }
 
@@ -13997,7 +14027,7 @@ div.product-icons{
 //  ------- Navigation Fixes 
 // ====================================================================
 #mobile_menu{
-  // parrent links (links with submenus)
+  // parent links (links with submenus) - add a faint border line
   li, 
   li.sublink li.sublink li{
     border-bottom: 1px solid rgba(0,0,0,0.08);
@@ -14009,6 +14039,12 @@ div.product-icons{
   li.sublink li.sublink li:last-child,
   li:empty{
     border: none;
+  }
+
+  // Make subchildren of subchildren less prominent
+  // dropdown
+  .sublink.mobile-mega-menu-parent ul ul li a{
+    font-weight: normal;
   }
 
 }
