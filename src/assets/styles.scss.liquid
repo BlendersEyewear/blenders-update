@@ -10237,35 +10237,35 @@ img.collection_banner_img{
   
   
    /* Upsell Product Pop Up*/
-  .saso-cross-sell-popup button.saso-click-here {
-    width: auto;
-    display: none;
-}
+//   .saso-cross-sell-popup button.saso-click-here {
+//     width: auto;
+//     display: none;
+// }
 
-  .saso-notifications-message {
-    line-height: 3;
-}
+//   .saso-notifications-message {
+//     line-height: 3;
+// }
   
-.saso-cross-sell-popup {
-    position: relative;
-    background: #ffffff;
-    padding: 20px;
-    width: auto;
-    min-width: 250px;
-    margin: 20px auto;
-    text-align: center;
-    text-transform: none;
-    padding-top: 2px;
-    padding-bottom: 2px!important;
-}
+// .saso-cross-sell-popup {
+//     position: relative;
+//     background: #ffffff;
+//     padding: 20px;
+//     width: auto;
+//     min-width: 250px;
+//     margin: 20px auto;
+//     text-align: center;
+//     text-transform: none;
+//     padding-top: 2px;
+//     padding-bottom: 2px!important;
+// }
   
-  .saso-cross-sell-popup table {
-    table-layout: fixed;
-    width: auto;
-    margin: auto;
-    border: 0 !important;
-    margin-top: -45px!important
-}
+//   .saso-cross-sell-popup table {
+//     table-layout: fixed;
+//     width: auto;
+//     margin: auto;
+//     border: 0 !important;
+//     margin-top: -45px!important
+// }
   
   table tr {
     border-bottom: 0px;
@@ -12542,6 +12542,16 @@ button.btn.recomatic-add-to-cart:focus{
     padding-left: 5px;
 }
 
+.cart .recomatic-container--cart{
+  margin-top: 4rem;
+}
+
+@include respond-to('medium'){
+  .cart .recomatic-container--cart{
+    margin-top: 2rem;
+  }
+}
+
 
 // Cart Form
 .cart .cart-product{
@@ -12726,10 +12736,10 @@ button.btn.recomatic-add-to-cart:focus{
 
 // Mobile Styles - Tablet Down
 @include respond-to('medium') {
-  // unneccassry padding
-  .cart.mobile_nav-fixed--true #pagecontent{
-    padding: 0 !important;
-  }
+  // unneccassry padding - commented out by Adam 5/11
+  // .cart.mobile_nav-fixed--true #pagecontent{
+  //   padding: 0 !important;
+  // }
 
   .cart{
     .shippingmessage {
@@ -12829,9 +12839,10 @@ button.btn.recomatic-add-to-cart:focus{
     margin: 0 0 .5rem;
   }
   
+  // Quantity Updater
   .cart_content_info .product-quantity-box.left {
     width: 96px !important;
-    margin: 0 !important;
+    margin: 0 20% 0 0 !important;
     float: right;
   }
 
@@ -14129,6 +14140,13 @@ div.product-icons{
   }
 }
 
+// Collapse buttons on mobile
+@include respond-to('small'){
+  .customers-login{
+
+  }
+}
+
 
 // ====================================================================
 //  ------- Join the Team Page
@@ -14189,16 +14207,50 @@ div.product-icons{
 
 @include respond-to('medium'){
   .collection-coming-soon{
+
+    // remove unnessesary padding from below banenr 
+    .collection_banner{
+      margin-bottom: 0;
+    }
+    
+    // Remove padding from the email me form
     .notify-form--collection{
       padding: 0;
     }
+
+    // Remove sold out / coming soon title from product item
+    .sold_out{
+      display: none;
+    }
+
+    // Resize email input
+    input[type="email"]{
+      height: auto;
+      min-height: unset;
+      padding: .35rem .5rem;
+    }
   }
+}
+
+// make Sold out tag uppdercase
+.thumbnail .sold_out, .sold_out{
+  text-transform: uppercase;
 }
 
 
 // ------------------------------------------------------------------------------------------
 //   Footer
 // ------------------------------------------------------------------------------------------
+
+.footer{
+
+  // Make footer logo smaller
+  img.footer-logo{
+    max-width: 150px;
+    margin-bottom: 0.5rem;
+  }
+}
+
 // Make mobile footer links bold
 @include respond-to('small'){
   .footer_menu h6 {

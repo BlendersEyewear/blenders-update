@@ -558,6 +558,7 @@ const customProductPage = function(){
 document.addEventListener("DOMContentLoaded", function() {
 
   console.log("custom js loaded");
+  console.log(`Don't be a 🐐.`);
 
   let screenSize = window.innerWidth;
 

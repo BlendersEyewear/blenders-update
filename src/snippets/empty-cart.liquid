@@ -73,8 +73,6 @@
         {% endfor %}
     </div>
 
-    <p class="center italics empty-cart-or">Or</p>
-
     <a href="{% if cart.items.first.product.collections != blank %}{{ cart.items.first.product.collections.last.url }}{% else %}/collections/all{% endif %}" class="empty-cart-keep-shopping">{{ 'cart.general.continue_shopping_link_html' | t }}</a>
     </div>
 

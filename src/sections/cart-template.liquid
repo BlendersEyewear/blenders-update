@@ -9,26 +9,24 @@
   <div class="sixteen columns">
     <h1>{{ 'cart.general.title' | t }}</h1>
 
-    {% comment %} Only show when cart has items in it {% endcomment %}
-    {% unless cart.item_count == 0 %}
     
-      <div class="shippingmessage">
-          {% if cart.total_price >= 4000 %}
-            <div class="shipping-notice shipping-notice--free">BOOM. You scored FREE Shipping!</div>
-          
-          {% comment %} If $36-$39 {% endcomment %}
-          {% comment %} If $35 {% endcomment %}
-          {% elsif cart.total_price == 3500 %}
-            <div class="shipping-notice">Add a Soft Pouch to get FREE Shipping! All orders over $40 ship Free.</div>
-          
-          {% comment %} If < $35 {% endcomment %}
-          {% elsif cart.total_price < 3500 and cart.total_price >= 3000 %}
-            <div class="shipping-notice"></div>
+    <div class="shippingmessage">
+        {% assign shippingThreshold = 4000 %}
+        {% assign amountUntilFreeShipping = shippingThreshold | minus: cart.total_price | money %}
 
-          {% else %}
-            <div class="shipping-notice">Add more items to get FREE Shipping! All orders over $40 ship Free.</div>
-          {% endif %}
-      </div>
+        {% if cart.total_price >= shippingThreshold %}
+
+          <div class="shipping-notice shipping-notice--free">BOOM. You scored FREE Shipping!</div>
+
+        {% else %}
+
+          <div class="shipping-notice">
+            Add {{ amountUntilFreeShipping }} more to get FREE Shipping!<br>
+            All orders over $40 ship Free.
+          </div>
+
+        {% endif %}
+    </div>
 
       {% comment %} Top Checkout {% endcomment %}
       <form action="/cart" method="post" id="cart_form">
@@ -40,9 +38,6 @@
       </form>
 
     <div class="feature_divider"></div>
-
-    {% endunless %}
-
     {% comment %} Cart Mobile Upsell {% endcomment %}
       <div class="mobile-upsell">  
         
@@ -238,11 +233,12 @@
     </div>
   </form>
 
-  {% include 'cart-shipping-calculator' %}
+  {% comment %} {% include 'cart-shipping-calculator' %} {% endcomment %}
 
-  <div class="container">
-  <h4 class="title center">Some Other Items your might dig</h4>
-  <div recomatic="cart" shop="{{shop.permanent_domain}}" product_ids="{{cart.items|map:'product'|map:'id'|join:','}}"></div>
+  <div class="container recomatic-container--cart">
+  {% comment %} <h4 class="title center">You Might Also Dig</h4> {% endcomment %}
+  {% comment %} <div recomatic="cart" shop="{{shop.permanent_domain}}" product_ids="{{cart.items|map:'product'|map:'id'|join:','}}"></div> {% endcomment %}
+  {% include 'recomatic-related-products', widget: "cart" %}
   </div>
 
 
