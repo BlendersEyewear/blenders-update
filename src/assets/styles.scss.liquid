@@ -12930,9 +12930,9 @@ button.btn.recomatic-add-to-cart:focus{
   }
   
   .product .yotpo .text-m {
-    padding: .25rem 0 !important;
+    // padding: .25rem 0 !important;
     letter-spacing: .05em;
-    display: block;
+    // display: block;
   }
 }
 
@@ -13050,7 +13050,7 @@ button.btn.recomatic-add-to-cart:focus{
 
 // ------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------
-//   Collection Page
+//   Collection Page / Collection template
 // ------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------
 
@@ -13066,6 +13066,46 @@ button.btn.recomatic-add-to-cart:focus{
       margin: 0 0 0.75rem;
     }
 
+    .yotpo-small .yotpo-bottomline.pull-left .text-m{
+      padding-left: .125rem;
+      line-height: 1;
+    }
+  }
+
+  // Creating a New notify me button for sold out products
+  .product_image a.button_sold-out {
+    min-height: unset;
+    height: auto;
+    display: block;
+    color: white;
+    padding: 13px .25rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    background: #757575;
+    background: linear-gradient(-180deg, #757575, #101010);
+    visibility: hidden;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    outline: 1px solid transparent;
+  }
+
+  .product_image:hover a.button_sold-out,
+  .product_image:focus a.button_sold-out{
+    visibility: visible !important;
+  }
+}
+
+
+@include respond-to('medium'){
+
+  .collection{
+    .product_image a.button_sold-out {
+      visibility: visible;
+      padding: 0.5rem;
+      font-size: 0.825rem;
+    }
+
     // Yotpo stars (making them go to second row)
     .yotpo-small .yotpo-bottomline.pull-left .text-m{
       display: block !important;
@@ -13073,17 +13113,19 @@ button.btn.recomatic-add-to-cart:focus{
       padding: 0;
     }
   }
+  
+  .collection,
+  .collection-coming-soon{
 
-  // Creating a New notify me button for sold out products
-  a.button.button_sold-out {
-    min-height: unset;
-    height: auto;
-    display: block;
-    padding: 0.6rem .25rem;
-    font-size: 0.825rem;
-    line-height: 1;
-    background: #757575;
-    background: linear-gradient(-180deg, #757575, #101010);
+    // Remove top margin from breadcrumb collection
+    .breadcrumb-collection{
+      margin-top: 0;
+    }
+    
+    // add padding to sort by dropdown to match up with products on screen edge
+    .section_select .sort_by{
+      padding-left: 5px;
+    }
   }
 }
 
@@ -14149,6 +14191,29 @@ div.product-icons{
   .collection-coming-soon{
     .notify-form--collection{
       padding: 0;
+    }
+  }
+}
+
+
+// ------------------------------------------------------------------------------------------
+//   Footer
+// ------------------------------------------------------------------------------------------
+// Make mobile footer links bold
+@include respond-to('small'){
+  .footer_menu h6 {
+    font-weight: 600;
+    letter-spacing: .05em;
+  }
+  .footer_menu ul {
+    li{
+      margin-bottom: 1.5rem;
+    }
+
+    li a {
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: .05em;
     }
   }
 }

@@ -75,9 +75,9 @@
           {% include "product-details" %}
 
       {% else %}
-        <!-- {{ template }} -->
+        {% comment %} If product is NOT available and is NOT Coming Soon {% endcomment %}
         {% unless template contains 'coming-soon'%}
-          <a href="{{ product.url }}" class="button button_sold-out">Notify Me</a>
+          <a href="{{ product.url }}" class="button_sold-out">Notify Me</a>
         {% endunless %}
           {% include "product-details" %}
       {% endif%}
