@@ -955,6 +955,7 @@ body.is-active {
   }
   .cart_count {
     top: -2px;
+    transform: translateY(-2px);
   }
 }
 
@@ -9996,10 +9997,12 @@ p.modal_price {
 
   #header .cart_count {
     position: absolute !important;
-    top: -4px;
+    top: 8px;
     right: -2px;
     width: 100%;
     text-align: center;
+    line-height: 1;
+    transform: translateY(0);
   }
 }
 
@@ -11828,6 +11831,11 @@ a.size_chart {
       height: auto;
     }
 
+    .product-size-guide__blurb{
+      max-width: 26rem;
+      margin: 0 auto;
+    }
+
     .product-size-guide__detail-title,
     .product-size-guide__detail-value{
       display: inline-block;
@@ -12550,11 +12558,15 @@ button.btn.recomatic-add-to-cart:focus{
   .cart .recomatic-container--cart{
     margin-top: 2rem;
   }
+
+  // section
+  .cart div.section{
+    margin: 0;
+  }
 }
 
-
 // Cart Form
-.cart .cart-product{
+.cart .section.cart-product{
   margin: 10px 0 35px;
 
   // metafields
@@ -12631,6 +12643,12 @@ button.btn.recomatic-add-to-cart:focus{
   } 
 }
 
+@include respond-to('medium'){
+  .cart .section.cart-product:last-of-type{
+    margin: 10px 0 1.75rem;
+  }
+}
+
 // Subtotal Area
 .cart{
   .shippingmessage {
@@ -12654,7 +12672,12 @@ button.btn.recomatic-add-to-cart:focus{
   }
 
   .shipping-notice--free{
+    font-weight: 400;
+  }
+
+  .shipping-notice--free span{
     background: #e0fde0;
+    font-weight: 600;
   }
 
   .subtotal{
@@ -12744,13 +12767,13 @@ button.btn.recomatic-add-to-cart:focus{
   .cart{
     .shippingmessage {
       text-align: center;
-      margin-bottom: 14px;
+      margin-bottom: 2rem;
       font-weight: bold;
       font-size: 15px;
       line-height: 22px;
     }
   
-    // Soft Pouch Upsell
+    // -- Soft Pouch Upsell ----------------
     // Static Add to Cart Buttons on Mobile Pouch Upsells
   .thumbnail{
     margin-bottom: .5rem;
@@ -12785,6 +12808,12 @@ button.btn.recomatic-add-to-cart:focus{
     padding: 10px 5px;
     height: auto;
     min-height: unset;
+  }
+
+  // Soft pouch upsell -- increase bottom margin
+  .mobile-upsell-container:nth-of-type(3),
+  .mobile-upsell-container:nth-of-type(4){
+    margin-bottom: 2rem;
   }
 
   .mobile-upsell-container .product-details{
@@ -12872,7 +12901,8 @@ button.btn.recomatic-add-to-cart:focus{
 // ----------------------------------------------------
 
 .cart-empty-message__section{
-  margin: -1rem 0 3rem !important
+  // margin: -1rem 0 3rem !important
+  margin: 0;
 }
 
 // Empty Cart Msg
@@ -13027,6 +13057,10 @@ button.btn.recomatic-add-to-cart:focus{
   .empty-cart .product:nth-of-type(2) {
     margin: 0 0 1rem;
   }
+
+  .empty-cart a.empty-cart-keep-shopping{
+    margin: 2rem auto;
+  }
 }
 
 
@@ -13111,6 +13145,10 @@ button.btn.recomatic-add-to-cart:focus{
 @include respond-to('medium'){
 
   .collection{
+    // Remove unnecessary padding from below collection banner
+    .collection_banner{
+      margin-bottom: 0;
+    }
     .product_image a.button_sold-out {
       visibility: visible;
       padding: 0.5rem;
@@ -13424,6 +13462,12 @@ svg.contact__sticker-img {
 // -------------------------------------------
 // ------- Shop by Frame New Page
 // -------------------------------------------
+.page-shop-by-frame,
+.page-shop-by-frame-new{
+  .collection_banner{
+    margin-top: 0;
+  }
+}
 
 .shop-frame__container{
   @include flexbox();
@@ -13465,7 +13509,11 @@ a.shop-frame__btn{
 
 // Make snow goggles smaller
 .shop-frame__shape.shop-frame__shape--snow-goggles {
-    padding: 3rem;
+    padding: 1rem;
+
+    a.shop-frame__link{
+      padding: 0 1rem;
+    }
 }
 
 // mobile Styles
@@ -14246,7 +14294,7 @@ div.product-icons{
 
   // Make footer logo smaller
   img.footer-logo{
-    max-width: 150px;
+    max-width: 100px;
     margin-bottom: 0.5rem;
   }
 }
@@ -14267,5 +14315,16 @@ div.product-icons{
       font-size: 1rem;
       letter-spacing: .05em;
     }
+  }
+
+  // REMOVE extra padding at top
+  .container.footer-menu-wrap{
+    padding: 0 0 1rem;
+  }
+
+  // Remove extra padding/margin from logo 
+  .footer .mobile-logo{
+    margin: 0 auto 2rem;
+    padding: 0;
   }
 }

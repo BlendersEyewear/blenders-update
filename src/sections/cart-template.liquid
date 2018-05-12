@@ -7,7 +7,11 @@
 
 <div class="section clearfix">
   <div class="sixteen columns">
-    <h1>{{ 'cart.general.title' | t }}</h1>
+    {%if cart.item_count == 0 %}
+      <h1>Your Cart is Empty 🐐</h1>
+    {% else %}
+      <h1>{{ 'cart.general.title' | t }}</h1>
+    {% endif %}
 
     
     <div class="shippingmessage">
@@ -16,15 +20,20 @@
 
         {% if cart.total_price >= shippingThreshold %}
 
-          <div class="shipping-notice shipping-notice--free">BOOM. You scored FREE Shipping!</div>
+          <div class="shipping-notice shipping-notice--free"><span class="highlight">BOOM. You scored FREE Shipping!</span><br>All orders over $40 ship Free.</div>
 
-        {% else %}
+        {% elsif cart.total_price > 0%}
 
-          <div class="shipping-notice">
+          <div class="shipping-notice shipping-notice--until-amount">
             Add {{ amountUntilFreeShipping }} more to get FREE Shipping!<br>
             All orders over $40 ship Free.
           </div>
 
+        {% else %}
+          <div class="shipping-notice shipping-notice--empty">
+            Add more items to get FREE Shipping!<br>
+            All orders over $40 ship Free.
+          </div>
         {% endif %}
     </div>
 
@@ -68,7 +77,7 @@
   <div class="sixteen columns">
     <div class="section clearfix cart-empty-message__section">
       <div class="six columns offset-by-five cart-empty-message">
-        <p class="quote">{{ 'cart.general.continue_browsing_html' | t }} 😢</p>
+        {% comment %} <p class="quote">{{ 'cart.general.continue_browsing_html' | t }} 😢</p> {% endcomment %}
       </div>
       <br class="clear" />
     </div>

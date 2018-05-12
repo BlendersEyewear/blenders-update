@@ -21,6 +21,17 @@
         or collection.handle == 'providence' or collection.handle == 'roxie-1'
         or collection.handle == 'test-collection' %}
 
+
+        {% comment %} Fit Blurb {% endcomment %}
+        {% assign fit_blurb = collection.metafields.custom_fields["fit_blurb"] %}
+        {% if fit_blurb != blank %}
+            <p class="product-size-guide__blurb">{{ fit_blurb }}</p>
+        {% else %}
+            <p class="product-size-guide__blurb">
+                We forgot to fill out this section, so here's a poop emoji 💩.
+            </p>
+        {% endif %}
+
         {% assign fit_img = collection.metafields.custom_fields["fit_image"] %}
 
         {% comment %} If the alt tag is empty... {% endcomment %}
@@ -36,16 +47,7 @@
         {% if fit_img_url != blank %}
             <img src="{{ fit_img_url }}" alt="{{ collection.title }} Fit" class="product-size-guide__img">
         {% endif %}
-        
 
-        {% assign fit_blurb = collection.metafields.custom_fields["fit_blurb"] %}
-        {% if fit_blurb != blank %}
-            <p class="product-size-guide__blurb">{{ fit_blurb }}</p>
-        {% else %}
-            <p class="product-size-guide__blurb">
-                We forgot to fill out this section, so here's a poop emoji 💩.
-            </p>
-        {% endif %}
 
         {% assign frame_size = collection.metafields.custom_fields["frame_size"] %}
         
