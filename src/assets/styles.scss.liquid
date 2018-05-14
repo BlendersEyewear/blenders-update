@@ -14280,7 +14280,47 @@ div.product-icons{
 }
 
 @include respond-to('medium'){
-  
+  .page-join-the-team{
+    // Control the height/width of popup modal
+    .remodal-wrapper.remodal-is-opened > div {
+      height: auto;
+      width: auto;
+      overflow: scroll;
+      padding: 15px;
+    }
+  }
+
+  .remodal-wrapper.remodal-is-opened{
+    padding: 0;
+
+    #popup1 iframe{
+      min-height: 900px;
+      height: 900px;
+
+      input#saveForm{
+        -webkit-appearance: none;
+      }
+    }
+
+    #popup2 iframe{
+      min-height: 1324px;
+      height: 1324px;
+
+      input#saveForm{
+        -webkit-appearance: none;
+      }
+    }
+
+    #popup3 iframe{
+      min-height: 1700px;
+      height: 1700px;
+
+      input#saveForm{
+        -webkit-appearance: none;
+      }
+    }
+
+  }
 }
 
 
