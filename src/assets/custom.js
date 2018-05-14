@@ -454,9 +454,21 @@ const collectionPageScripts = function(){
   let stophover = function(){
     console.log('stopping hover states!');
     let product = $('.product-wrap');
-    let productImgContainer = $(product).find('.product_image');
 
-    // Remove 'swap-true' from first image
+    // Loop through all products
+    $(product).each(function(){
+      let image = $(this).find('.product_image')
+      let imglink = $(this).find('a');
+
+      console.log(image)
+      // Remove 'swap-true' class
+      $(image).removeClass('swap-true');
+
+      // Remove second image
+      $(imglink).find('.image__container').first().next().remove();
+      console.log($(imglink).find('.image__container').first().next());
+    });
+
     
     // Display none on second image
 
@@ -578,6 +590,33 @@ const customProductPage = function(){
     }
 }
 
+
+//------------------------------------------------
+//--------- Login Page ------------------
+//------------------------------------------------
+const loginPageScripts = function(){
+
+  let iframe = $('#one-click-social-login-buttons-1');
+
+  console.log(iframe);
+  
+  console.log('Login Page Scripts loaded');
+  
+  // Check for desktop size
+  if(window.innerWidth >= tabletSize){
+    let button = $(iframe).find('.button-container');
+
+    console.log('first load', button);
+
+    setTimeout( function(){
+      console.log('doing this after .7s');
+      console.log($(button).length);
+      console.log(iframe);
+      
+    }, 700);
+  }
+}
+
 //------------------------------------------------
 //  Doc Ready
 //------------------------------------------------
@@ -600,10 +639,15 @@ document.addEventListener("DOMContentLoaded", function() {
   // Custom Product Page -------------
   // Run custom product page scripts if on custom product page.
   body.classList.contains('product-template-custom') ? customProductPage() : '';
-
-    // Collection Page -------------
+  
+  // Collection Page -------------
   // Run custom collection page scripts if on a collection page, or coming soon page.
   body.classList.contains('collection') || body.classList.contains('collection-coming-soon') ? collectionPageScripts() : '';
+  
+  
+  // Login Page -------------
+  // Run Login page scripts if on login page.
+  // body.classList.contains('customers-login') ? loginPageScripts() : '';
 
   // Mobile only Scripts
   screenSize <= tabletSize ? (PouchUpsell()) : '';

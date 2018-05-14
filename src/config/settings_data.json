@@ -195,7 +195,7 @@
       "menu_alignment": "align_left",
       "fixed_header": true,
       "logo_top_padding": "15",
-      "menu_top_padding": "10",
+      "menu_top_padding": "20",
       "cart_icon": "cart",
       "search_enabled": true,
       "collection_sidebar": false,

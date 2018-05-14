@@ -11797,6 +11797,19 @@ $headerDesktopLargeUp: 1280px;
   }
 }
 
+@include respond-to('small'){
+  .product .product_section{
+    button.flickity-prev-next-button.next{
+      -webkit-transform: translateX(4px);
+              transform: translateX(4px);
+    }
+    button.flickity-prev-next-button.previous{
+      -webkit-transform: translateX(-4px);
+              transform: translateX(-4px);
+    }
+  }
+}
+
 // Size Chart link
 a.size_chart {
     background: #f2f2f2;
@@ -12566,6 +12579,10 @@ button.btn.recomatic-add-to-cart:focus{
   .cart div.section{
     margin: 0;
   }
+
+  .cart .container .offset-by-one {
+    padding-left: 0;
+  }
 }
 
 // Cart Form
@@ -12790,6 +12807,11 @@ button.btn.recomatic-add-to-cart:focus{
     .price span.money:hover{
       color: #000;
     }
+  }
+
+  // Soft pouch upsell padding/margin
+  .mobile-upsell .thumbnail.odd{
+    margin-left: 10px;
   }
 
   // Add to cart button
@@ -14235,9 +14257,18 @@ div.product-icons{
   .remodal-wrapper.remodal-is-opened{
     padding: 0;
 
-      iframe{
-        min-height: 1000px;
-      }
+    #popup1 iframe{
+      min-height: 900px
+    }
+
+    #popup2 iframe{
+      min-height: 1224px;
+    }
+
+    #popup3 iframe{
+      min-height: 1700px;
+    }
+
   }
   
   .remodal-wrapper.remodal-is-opened > div {
@@ -14246,6 +14277,10 @@ div.product-icons{
         overflow: scroll;
         padding: 15px;
   }
+}
+
+@include respond-to('medium'){
+  
 }
 
 
@@ -14353,5 +14388,42 @@ div.product-icons{
   input.btTxt{
     -webkit-appearance: none !important;
     -webkit-border-radius: 0 !important;
+  }
+}
+
+
+// ======================================================================================
+//  ------- Blog Page / Blog
+// ======================================================================================
+.blog .article{
+  background: white;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  min-height: 282px;
+
+  img {
+    box-shadow: 0 3px 0 0 #00a3f0;
+  }
+
+  h2 {
+    padding: 0 1rem;
+    font-size: 1.25rem;
+    line-height: 1.25;
+    font-weight: 600;
+    margin-top: 0;
+    padding-top: 1rem;
+  }
+
+  p.blog_meta{
+    padding: 0 1rem;
+  }
+}
+
+@include respond-to('medium'){
+  .blog .blog-header{
+    display: none !important;
+  }
+  .blog .article{
+    min-height: unset;
   }
 }
