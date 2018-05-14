@@ -11,6 +11,7 @@ const detailsBtns = document.querySelectorAll(".feature-details__button");
 
 // Screen Sizes / Measurements
 const tabletSize = 768;
+const phoneSize = 480;
 
 // Helper Functions
 // ====================================================================
@@ -444,6 +445,31 @@ const productPageScripts = function(){
 
 
 //------------------------------------------------
+//------------- Collection Page --------------------
+//------------------------------------------------
+const collectionPageScripts = function(){
+  console.log('collect page scripts lodaded');
+
+  // Stop Hover
+  let stophover = function(){
+    console.log('stopping hover states!');
+    let product = $('.product-wrap');
+    let productImgContainer = $(product).find('.product_image');
+
+    // Remove 'swap-true' from first image
+    
+    // Display none on second image
+
+  }
+
+
+  // Check for mobiel, then call the function
+  if (window.innerWidth <= phoneSize){
+    stophover();
+  }
+}
+
+//------------------------------------------------
 //--------- Custom Product Page ------------------
 //------------------------------------------------
 const customProductPage = function(){
@@ -574,6 +600,10 @@ document.addEventListener("DOMContentLoaded", function() {
   // Custom Product Page -------------
   // Run custom product page scripts if on custom product page.
   body.classList.contains('product-template-custom') ? customProductPage() : '';
+
+    // Collection Page -------------
+  // Run custom collection page scripts if on a collection page, or coming soon page.
+  body.classList.contains('collection') || body.classList.contains('collection-coming-soon') ? collectionPageScripts() : '';
 
   // Mobile only Scripts
   screenSize <= tabletSize ? (PouchUpsell()) : '';

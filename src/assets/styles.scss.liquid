@@ -11826,9 +11826,12 @@ a.size_chart {
 // ================================================================================
 .product, .product-template-custom{
   .popup-size-chart{
+    max-width: 42rem;
+
     img{
-      max-width: 100%;
+      width: 100%;
       height: auto;
+      max-width: 36rem;
     }
 
     .product-size-guide__blurb{
@@ -12337,7 +12340,7 @@ p.modal_price {
 		
 		.purchase.inline_purchase {
 			flex: 1;
-			margin-left: 15px;
+			// margin-left: 15px;
 			font-weight: 600;
 		}
 		
@@ -12347,12 +12350,12 @@ p.modal_price {
 
     .fb_iframe_widget span{
       max-width: 50%;
-      margin: 0 0 0 25%;
+      margin: 0 0 0 32%;
       display: block;
     }
 
     // 
-    ._ohe {
+    .fb_iframe_widget ._ohe {
       float: none;
       display: block;
       margin: 0 0 0 17px;
@@ -13264,6 +13267,17 @@ select#sort-by {
 	  border-width: none !important;
   }
 }
+
+
+// ----- Remove Hover on Collection Pages on Mobile 
+// Collection page, coming soon page,
+@include respond-to('small'){
+  .collection, .collection-coming-soon{
+  
+  }
+}
+
+
 
 
 // ---------------------------------------------------
@@ -14235,9 +14249,9 @@ div.product-icons{
 }
 
 
-// ====================================================================
+// ======================================================================================
 //  ------- Coming Soon Page / Coming Soon Collection
-// ====================================================================
+// ======================================================================================
 .collection-coming-soon{
   .notify-form--collection{
     padding: 0 2rem;
@@ -14326,5 +14340,18 @@ div.product-icons{
   .footer .mobile-logo{
     margin: 0 auto 2rem;
     padding: 0;
+  }
+}
+
+
+
+// ======================================================================================
+//  ------- Retail Page / Become a Retailer Page
+// ======================================================================================
+
+.page-retail iframe{
+  input.btTxt{
+    -webkit-appearance: none !important;
+    -webkit-border-radius: 0 !important;
   }
 }

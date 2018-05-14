@@ -7,10 +7,29 @@
 
 <a name="pagecontent" id="pagecontent"></a>
 
+{% if section.settings.featured_collection_image %}
+  {% capture sizes %}100x,480x,765x,1400x,2048x{% endcapture %}
+  {% assign sizes = sizes | split: ',' %}
+
+{% endif %}
+
+
+{% comment %} Get Banner Image from Section Blocks {% endcomment %}
+{% for block in section.blocks %}
+{% if block.type == 'banner'%}
+{% if collection.handle == block.settings.chosen_collection %}
+<!-- banner image: {{ block.settings.banner_image | img_url: '1900x'}} -->
+{% assign block_image = block.settings.banner_image | img_url: '1900x' %}
+{% endif %}
+{% endif %}
+{% endfor %}
+
+{% assign fallback_image = section.settings.image | img_url: '1900x' %}
 <header
   class="collection_banner collection_banner-container"
-  style="background-image: url('{{ section.settings.image | img_url: '1900x'}}');"
+  style="background-image: url('{%if block_image%}{{block_image}}{%else%}{{fallback_image}}{%endif%}');"
 >
+<!-- block banner image: {{ block_image}}, fallback image: {{ fallback_image }} -->
 {% if collection.handle == 'top-selects-blenders-eyewear' %}
   <h1 class="collection_banner_title">Best Sellers</h1>
 {% elsif collection.handle == 'womens-top-selects' %}
@@ -27,11 +46,7 @@
   <img src="{{ 'banner-ghost.png' | asset_url }}" class="ghost" />
 </header>
 
-{% if section.settings.featured_collection_image %}
-  {% capture sizes %}100x,480x,765x,1400x,2048x{% endcapture %}
-  {% assign sizes = sizes | split: ',' %}
 
-{% endif %}
 
 
 <div class="container">
@@ -104,11 +119,11 @@
 
 
     {% comment %}Check to see if sidebar should be enabled{% endcomment %}
-    {% if section.blocks.size > 0 %}
+    {% comment %} {% if section.blocks.size > 0 %}
       {% assign sidebar = true %}
     {% else %}
       {% assign sidebar = false %}
-    {% endif %}
+    {% endif %} {% endcomment %}
 
     {% if sidebar %}
       {% include 'sidebar' %}
@@ -185,22 +200,10 @@
       "content": "Banner image"
     },
     {
-      "type": "checkbox",
-      "id": "featured_collection_image",
-      "label": "Show top banner image",
-      "info": "The collection's featured image will be used by default. Optionally upload a banner image as a fallback."
-    },
-    {
       "type": "image_picker",
       "id": "image",
       "label": "Banner image",
       "info": "1600 x 1000px recommended"
-    },
-    {
-      "type": "checkbox",
-      "id": "image_darken",
-      "label": "Darken banner image",
-      "default": false
     },
     {
       "type": "header",
@@ -219,113 +222,20 @@
   ],
   "blocks": [
     {
-      "type": "filter_by_collection",
-      "name": "Collection list",
-      "limit": 1
-    },
-    {
-      "type": "menu",
-      "name": "Menu",
+      "type": "banner",
+      "name": "Banner",
       "settings": [
         {
-          "type": "link_list",
-          "id": "custom_menu_linklist",
-          "label": "Menu"
-        }
-      ]
-    },
-    {
-      "type": "page",
-      "name": "Page",
-      "settings": [
-        {
-          "type": "page",
-          "id": "content_page",
-          "label": "Page"
-        }
-      ]
-    },
-    {
-      "type": "recently_viewed",
-      "name": "Recently viewed products",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "paragraph",
-          "content": "To test the recently viewed products, view your online store outside of the Editor and visit multiple product pages ([?](https:\/\/help.outofthesandbox.com\/hc\/en-us\/articles\/115008765228))"
+          "type": "collection",
+          "id": "chosen_collection",
+          "label": "The Collection"
         },
         {
-          "type": "text",
-          "id": "sidebar_rv_title",
-          "label": "Title",
-          "default": "Recently Viewed"
-        },
-        {
-          "type": "range",
-          "id": "sidebar_rv_per",
-          "label": "Products limit",
-          "min": 1,
-          "max": 4,
-          "step": 1,
-          "default": 3
+          "type": "image_picker",
+          "id": "banner_image",
+          "label": "Banner Image"
         }
       ]
-    },
-    {
-      "type": "filter",
-      "name": "Tag filter",
-      "limit": 5,
-      "settings": [
-        {
-          "type": "text",
-          "id": "filter_name",
-          "label": "Title"
-        },
-        {
-          "type": "textarea",
-          "id": "filter_tags",
-          "label": "Filter tags",
-          "info": "Add a comma-separated list of product tags. Only the tags found in the collection will be displayed as filters ([?](https://help.outofthesandbox.com/hc/en-us/articles/115008642047))"
-        },
-        {
-          "type": "checkbox",
-          "id": "enable_filter_swatches",
-          "label": "Display color swatches"
-        }
-      ]
-    },
-    {
-      "type": "filter_by_tag",
-      "name": "Tag list",
-      "limit": 1
-    },
-    {
-      "type": "text",
-      "name": "Text",
-      "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Heading",
-          "default": "Heading"
-        },
-        {
-          "type": "richtext",
-          "id": "text",
-          "label": "Text",
-          "default": "<p>Text area can be used for special announcements or general information.</p>"
-        }
-      ]
-    },
-    {
-      "type": "filter_by_type",
-      "name": "Type list",
-      "limit": 1
-    },
-    {
-      "type": "filter_by_vendor",
-      "name": "Vendor list",
-      "limit": 1
     }
   ]
 }
