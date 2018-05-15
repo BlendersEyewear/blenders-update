@@ -12522,11 +12522,6 @@ button.btn.recomatic-add-to-cart:focus{
 
 
 
-
-
-
-
-
 // ------------------------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------------------------
 //    Cart Page
@@ -12544,19 +12539,6 @@ button.btn.recomatic-add-to-cart:focus{
     padding: 7px 0 0;
   }
 }
-
-// .cart .saso-notification {
-//     z-index: 2147483647;
-//     display: none;
-//     left: 0px;
-//     width: 118%!important;
-//     margin: 0px;
-//     padding: 16px 0px;
-//     font-size: 120%;
-//     text-align: center;
-//     text-transform: none;
-//     margin-left: -10%!important;
-// }
   
 .cart form {
     margin-bottom: 0px!important;
@@ -12666,6 +12648,14 @@ button.btn.recomatic-add-to-cart:focus{
 @include respond-to('medium'){
   .cart .section.cart-product:last-of-type{
     margin: 10px 0 1.75rem;
+  }
+
+  .cart .section.cart-product{
+    .product-quantity-box{
+      display: inline-block;
+      float: right;
+      margin: 0 20% 0 0 !important;
+    }
   }
 }
 

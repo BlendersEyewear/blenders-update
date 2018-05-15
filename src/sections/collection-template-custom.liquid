@@ -4,6 +4,7 @@
 - Uses blocks
 {% endcomment %}
 
+<!-- {{ template }} {{ page.handle }} -->
 
 <a name="pagecontent" id="pagecontent"></a>
 
@@ -18,7 +19,7 @@
 {% for block in section.blocks %}
 {% if block.type == 'banner'%}
 {% if collection.handle == block.settings.chosen_collection %}
-<!-- banner image: {{ block.settings.banner_image | img_url: '1900x'}} -->
+
 {% assign block_image = block.settings.banner_image | img_url: '1900x' %}
 {% endif %}
 {% endif %}
@@ -29,7 +30,6 @@
   class="collection_banner collection_banner-container"
   style="background-image: url('{%if block_image%}{{block_image}}{%else%}{{fallback_image}}{%endif%}');"
 >
-<!-- block banner image: {{ block_image}}, fallback image: {{ fallback_image }} -->
 {% if collection.handle == 'top-selects-blenders-eyewear' %}
   <h1 class="collection_banner_title">Best Sellers</h1>
 {% elsif collection.handle == 'womens-top-selects' %}

@@ -71,6 +71,7 @@
       </div>
     {% endif %}
     <div class="purchase clearfix {% if settings.display_product_quantity %}inline_purchase{% endif %}">
+
       {% if settings.cart_action == 'reload_page' %}
         <input type="hidden" name="return_to" value="back" />
       {% elsif settings.cart_action == 'redirect_checkout' %}

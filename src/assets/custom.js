@@ -64,8 +64,23 @@ const tabfunc = () => {
 // Remove "Soft Pouch" from product titles pouch upsell
 const PouchUpsell = () => {
 
+  // Master Container
+  let upsellContainer = document.querySelector('.mobile-upsell');
+  console.log(upsellContainer);
+
   // Get pouch containers
   let pouchContainers = document.querySelectorAll('.mobile-upsell-container');
+  
+
+  // Reload on Add to Cart
+  let clickWaitReload = (item) => {
+    item.addEventListener('click', () =>{
+      console.log('clicked!');
+      setTimeout(() => {
+        location.reload();
+      }, 750);
+    });
+  }
 
   // Remove ' SOFT POUCH' from the Title
   let removeTitle = () => {
@@ -74,7 +89,9 @@ const PouchUpsell = () => {
     // Loop through all the products in the pouch containers
     for(let container of pouchContainers){
       let productDetails = container.querySelector('.product-details');
+      let addToCart = container.querySelector('.quick_shops').querySelector('.add_to_cart');
 
+      // Remove 'SOFT' from Soft Pouch Title
       if(exists(productDetails)){
         let title = productDetails.querySelector('.title');
 
@@ -91,6 +108,11 @@ const PouchUpsell = () => {
           }
 
         }
+      }
+
+      // Reload after clicking add to cart
+      if(exists(addToCart)){
+        clickWaitReload(addToCart);
       }
 
     }
@@ -365,6 +387,10 @@ const sizeGuideMobileToggle = function(){
   }
 }
 
+const backInStock = funciton(){
+  console.log('back in stock works');
+}
+
 // resize the section headers on product pages
 const resizeHeadings = function(){
   let heading460 = $('.product')
@@ -592,6 +618,13 @@ const customProductPage = function(){
 
 
 //------------------------------------------------
+//--------- Cartt Page ------------------
+//------------------------------------------------
+const cartPageScripts = function(){
+
+}
+
+//------------------------------------------------
 //--------- Login Page ------------------
 //------------------------------------------------
 const loginPageScripts = function(){
@@ -643,7 +676,15 @@ document.addEventListener("DOMContentLoaded", function() {
   // Collection Page -------------
   // Run custom collection page scripts if on a collection page, or coming soon page.
   body.classList.contains('collection') || body.classList.contains('collection-coming-soon') ? collectionPageScripts() : '';
-  
+
+  // Cart Page -------------
+  // Run Cart page scripts on the cart page
+  body.classList.contains('cart') ? cartPageScripts() : '';
+
+
+  // Back in Stock 
+  // Run back in stock app to make sure data goes to back in stock app | only work on coming soon page, product, and custom product page
+
   
   // Login Page -------------
   // Run Login page scripts if on login page.

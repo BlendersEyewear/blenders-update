@@ -47,6 +47,7 @@
       </form>
 
     <div class="feature_divider"></div>
+    
     {% comment %} Cart Mobile Upsell {% endcomment %}
       <div class="mobile-upsell">  
         
@@ -151,7 +152,19 @@
               {% endif %}
 
               <p class="modal_price">
-                {% if item.price > 0 %}
+                {% comment %} Check if this is a BOGO ITEM and free {% endcomment %}
+                {% if item.total_discount == item.original_line_price %}
+
+                  {%if item.quantity == 1 %}
+                    {% comment %} Single Item {% endcomment %}
+                    <span class="bogo-free-item-message">This pair is FREE!</span>
+
+                  {% elsif item.quantity > 1 %}
+                    {% comment %} Multiple Items {% endcomment %}
+                    <span class="bogo-free-item-message">These pairs are FREE!</span>
+                  {% endif %}
+
+                {% elsif item.price > 0 %}
                   {% comment %} Check if items is on sale, if on sale, use the 'sale' class {% endcomment %}
                   {% if item.price < item.variant.compare_at_price %}
                     <span class="sale">{{ item.price | money }}</span>
@@ -162,14 +175,15 @@
                   {{ settings.free_price_text }}
                 {% endif %}
 
-                {% if item.price < item.variant.compare_at_price %}
+                {% comment %} Was/Before Price {% endcomment %}
+                {% if item.total_discount == 0 and item.price < item.variant.compare_at_price %}
                   <span class="money was_price">{{ item.variant.compare_at_price | money }}</span>
                 {% endif %}
               </p>
 
               <div class="product-quantity-box left">
                 <span class="ss-icon product-minus js-change-quantity" data-func="minus"><span class="icon-minus"></span></span>
-                <input type="number" min="0" size="2" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" data-line-id="{{ forloop.index }}" {% if settings.limit_quantity and item.variant.inventory_management != blank and item.variant.inventory_quantity > 0 and item.variant.inventory_policy == "deny" %}max="{{ item.variant.inventory_quantity }}"{% endif %} />
+                <input type="number" min="0" size="2" class="quantity" inputmoe="numeric" pattern="[0-9]*" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" data-line-id="{{ forloop.index }}" {% if settings.limit_quantity and item.variant.inventory_management != blank and item.variant.inventory_quantity > 0 and item.variant.inventory_policy == "deny" %}max="{{ item.variant.inventory_quantity }}"{% endif %} />
                 <span class="ss-icon product-plus js-change-quantity" data-func="plus"><span class="icon-plus"></span></span>
               </div>
             </div>
@@ -179,10 +193,19 @@
 
       <div class="five columns offset-by-one">
         <div class="section clearfix">
+
+        {% comment %} Utilizing Script sale prices {% endcomment %}
+        {% assign total_script_price = cart.orginal_total_price %}
           <div class="subtotal">
             <p class="cart_subtotal js-cart_subtotal">
+
               <span class="right">
-                <span class="money">{{ cart.total_price | money }}</span>
+            {% comment %} If No script discount/sale {% endcomment %}
+            <!-- Cart Total Discount: {{ cart.total_discount }} -->
+            <!-- Cart Total Price: {{ cart.total_price }} -->
+            {% if cart.total_discount == 0%}
+                {{ cart.total_price | money }}
+            {% endif %}
               </span>
               <span>{{ 'cart.general.subtotal' | t }}</span>
             </p>
@@ -195,8 +218,29 @@
                   </span>
                   <span>{{ 'layout.general.savings' | t }}</span>
                 {% endif %}
+
+                {% comment %} BOGO SALE Message {% endcomment %}
+                {% assign bogo_count = 0%}
+                  {% for item in cart.items %}
+                      {% if item.product.tags contains "BOGO" and item.total_discount > 0 %}
+                          {% capture raw_free_count %} {{bogo_count | plus: item.quantity }} {% endcapture %}
+                      {% endif %}
+                  {% endfor %}
+                
+                  {% assign free_count = raw_free_count | times: 1 %}
+                  
+                  {% comment %} Bogo Item Counter Messages {% endcomment %}
+
+                  {% if free_count > 1%}
+                    <span class="cart-message-bogo">Ya Mon! You Scored {{ free_count }} FREE pairs!</span>
+                  {% elsif free_count == 1%}
+                    <span class="cart-message-bogo">Ya Mon! You Scored a FREE pair!</span>
+                  {% endif %}
+
+
               </p>
             {% endif %}
+
 
             {% if section.settings.display_special_instructions %}
               <label for="note">{{ 'cart.general.note' | t: shop_name: shop.name }}:</label>

@@ -52,7 +52,6 @@
 
     <!-- Stylesheets for Landing Pages -->
     {%if template == 'page.landing-millenia' %}
-      <!-- wohoooo, this is millenia -->
       {{ 'millenia.css' | asset_url | stylesheet_tag }}
     {% endif %}
 
@@ -242,10 +241,6 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 
     </div>
 
-    {% comment %} Add Ultimate Special Offers Notification if on Cart page {% endcomment %}
-    {% comment %} Removed after abandoning USO app {% endcomment %}
-    {% comment %} {% if template == 'cart'%} <div id="saso-notifications" class="saso-notifications--cart"></div> {% endif %} {% endcomment %}
-
     {% unless feature_image %}
     
       <div class="container main content {% if template == 'page.landing' or template == 'page.landing-sunset-kid-spirit-wind' or template == 'page.landing-millenia' or template == 'page.shop-by-frame-new' %}landing-page-container{% endif%}">
@@ -282,9 +277,6 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
 
     {% comment %} Custom Javascript {% endcomment %}
     <script defer src="{{ 'custom.js' | asset_url }}"></script>
-    
-    {% comment %} Custom Ultimate Special Offers App js {% endcomment %}
-    {% comment %} <script src="{{ 'custom-saso-scripts.js' | asset_url }}"></script> {% endcomment %}
 
     {% if settings.show_multiple_currencies %}
       {% include 'currencies' %}
@@ -344,15 +336,6 @@ a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
     </script>
 
     {% include 'social-login' %}
-
-    
-<script>
-  window.saso_config = {
-    show_upsell_only_width_larger: 1000,
-  }
-</script>
-
-{% include 'special-offers' %}
 
 {% include 'back-in-stock-helper' %}
         
