@@ -320,6 +320,31 @@ const floatingLabels = function(){
   });
 }
 
+// 
+const backInStock = function(formDiv){
+  console.log('BIS loaded')
+  let id = $(formDiv).data('product-id');
+  let variant = $(formDiv).data('product-variant-id');
+  
+  console.log(id);
+
+  let form = $(formDiv).find('form');
+
+  console.log(form);
+
+  $(form).on('submit', function(e){
+    let email = $(e.target).find('.notify_email').val();
+    console.log('submitted');
+    console.log(email);
+    BIS.create(email, variant, id)
+      .then(function(response) {
+        response.status == 'OK' ? (console.log(resp.msg)) : (console.log(resp.status));
+      });
+  });
+
+}
+
+
 const soldOutNotifyToggle = function(){
   console.log('sold out script working');
 
@@ -348,6 +373,9 @@ const soldOutNotifyToggle = function(){
 
       // enter floating label
       floatingLabels();
+
+      // Load Back in Stock
+      backInStock(notifyForm);
 
     }
 
@@ -387,9 +415,7 @@ const sizeGuideMobileToggle = function(){
   }
 }
 
-const backInStock = funciton(){
-  console.log('back in stock works');
-}
+
 
 // resize the section headers on product pages
 const resizeHeadings = function(){
