@@ -25,7 +25,7 @@
         {% elsif cart.total_price > 0%}
 
           <div class="shipping-notice shipping-notice--until-amount">
-            Add {{ amountUntilFreeShipping }} more to get FREE Shipping!<br>
+            Add <span class="highlight-more">{{ amountUntilFreeShipping }}</span> to get FREE Shipping!<br>
             All orders over $40 ship Free.
           </div>
 
@@ -121,9 +121,25 @@
               </h3>
 
               {% comment %} Add Custom Fields / Show Custom Category & Polarized / If not category / Show subtitle {% endcomment %}
-              {% if item.product.metafields.custom_fields["product_subtitle"] != blank %}
-                  <p class="cart-product__metafields">{{ item.product.metafields.custom_fields["product_subtitle"] }}</p>
-              {% endif %}
+              {% for collection in item.product.collections %}
+                {% if collection.handle == 'a-series'
+                    or collection.handle == 'cardiff' or collection.handle == 'east-village'
+                    or collection.handle == 'h-series' or collection.handle == 'frontpage'
+                    or collection.handle == 'l-series' or collection.handle == 'm-class'
+                    or collection.handle == 'millenia' or collection.handle == 'north-park-blenders-eyewear'
+                    or collection.handle == 'providence' or collection.handle == 'roxie-1' or collection.handle == 'canyon'
+                    or collection.handle == 'test-collection' %}
+
+                    {% comment %} Check if polarized {% endcomment %}
+                    {% assign polarized = item.product.metafields.custom_fields["polarized"] %}               
+                    <p class="cart-product__metafields">
+                      {% if polarized == 1 %}
+                        <span class="metafield--polarized">Polarized</span>
+                      {% endif %}
+                      <span class="metafield">{{collection.title}}</span>
+                    </p>
+                {% endif %}
+              {% endfor %}
 
               {% unless item.product.has_only_default_variant or item.variant.title contains "Title" %}
                 <p class="meta">
@@ -191,7 +207,8 @@
         {% endfor %}
       </div>
 
-      <div class="five columns offset-by-one">
+      {% assign item_count = cart.item_count %}
+      <div class="five columns offset-by-one{% if item_count > 2%} sticky-checkout-area{% endif %}">
         <div class="section clearfix">
 
         {% comment %} Utilizing Script sale prices {% endcomment %}
@@ -265,7 +282,7 @@
               </div>
             {% endif %}
 
-            <p>
+            <p class="checkout-button-container">
               <input type="submit" class="action_button add_to_cart" id="checkout" name="checkout" value="{{ 'cart.general.checkout' | t }}" />
             </p>
 
@@ -289,8 +306,6 @@
   {% comment %} {% include 'cart-shipping-calculator' %} {% endcomment %}
 
   <div class="container recomatic-container--cart">
-  {% comment %} <h4 class="title center">You Might Also Dig</h4> {% endcomment %}
-  {% comment %} <div recomatic="cart" shop="{{shop.permanent_domain}}" product_ids="{{cart.items|map:'product'|map:'id'|join:','}}"></div> {% endcomment %}
   {% include 'recomatic-related-products', widget: "cart" %}
   </div>
 

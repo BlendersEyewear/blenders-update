@@ -9962,7 +9962,7 @@ p.modal_price {
     padding-bottom: 0;
 }
 
-// ----------- Make Mobile Header Cart Icon have the Number above the icon, and align the seach icon -------
+// ----------- Make Mobile Header Cart Icon have the Number above the icon, and align the seach icon - Custom Cart Icon - cart icon-------
 @include respond-to('medium'){
   #header .top_bar {
     background-color:white;
@@ -11656,6 +11656,23 @@ $headerDesktopLargeUp: 1280px;
       background: none;
       padding: 0;
     }
+
+    // Metafields / custom fields / polarized custom field / category .custom field
+    .product-details__metafields{
+      margin: 0;
+    }
+    .custom-field{
+      .custom-field--value{
+        text-transform: uppercase;
+        line-height: 1;
+      }
+
+      // Polarized
+      .custom-field--polarized:after{
+        content: '|';
+        margin: 0 .25rem;
+      }
+    }
   }
 
   hr.product-hr {
@@ -11746,6 +11763,13 @@ $headerDesktopLargeUp: 1280px;
       transition: all .15s ease-in-out;
     }
 
+    label.notify_email__label--checkbox {
+      display: inline-block;
+      margin: 0 .25rem 1rem;
+      font-weight: normal;
+      text-transform: Capitalize;
+    }
+
     .notify_email:focus + label.input_label,
     .notify_email--has-value + label.input_label{
       font-size: 0.75rem;
@@ -11764,6 +11788,14 @@ $headerDesktopLargeUp: 1280px;
 
 }
 
+.product, .product--custom{
+  .notify_form{
+    .action_button{
+      background: linear-gradient(-180deg, #757575, #101010);
+    }
+  }
+}
+
 @include respond-to('medium'){
   .product .product_section{
 
@@ -11779,6 +11811,11 @@ $headerDesktopLargeUp: 1280px;
 
     .product-meta-container{
       @include justify-content(center);
+
+      // Metafields / custom fields / polarized custom field / category .custom field
+    .product-details__metafields{
+      margin: 0 0 1.25rem;
+    }
 
       a.size_chart{
         display: none;
@@ -12579,6 +12616,13 @@ button.btn.recomatic-add-to-cart:focus{
     color: #7d7d7d;
     padding: 0;
     margin: 0 0 1rem;
+    text-transform: uppercase;
+
+    .metafield{}
+    .metafield--polarized:after{
+      content: '|';
+      margin: 0 .125rem 0 0.25rem;
+    }
   }
 
   // making modal price and qty checker line up
@@ -12646,6 +12690,12 @@ button.btn.recomatic-add-to-cart:focus{
 }
 
 @include respond-to('medium'){
+
+  // Add border on mobile
+  .cart .five.columns.offset-by-one{
+    border-top: 1px solid red;
+  }
+
   .cart .section.cart-product:last-of-type{
     margin: 10px 0 1.75rem;
   }
@@ -12679,6 +12729,10 @@ button.btn.recomatic-add-to-cart:focus{
     margin: 0 auto;
     font-style: italic;
     font-size: 1rem;
+
+    .highlight-more{
+      color: #4ca5ec;
+    }
   }
 
   .shipping-notice--free{
@@ -12708,21 +12762,41 @@ button.btn.recomatic-add-to-cart:focus{
     display: hidden;
     font-size: 0.5rem;
   }
+
+  // Checkout container
+  .checkout-button-container{
+    margin: 0 0 0.5rem;
+  }
   
   // 'continue shopping' message
   .featured-links > a {
-    border-bottom: none;
+    border: none;
     font-size: 0.75rem;
     color: #333 !important;
     letter-spacing: .1em;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
     line-height: 1;
+    margin: 0;
   }
   
   // checkout button
   input#checkout {
     font-weight: 600;
     letter-spacing: .1em;
+  }
+
+  // Sticky Checkout area
+  .sticky-checkout-area{
+    position: sticky;
+    top: 5rem;
+  }
+}
+
+@include respond-to('medium'){
+  // UNdo Sticky Checkout area on mobile
+  .cart .sticky-checkout-area{
+    position: static;
+    top: initial;
   }
 }
 
@@ -13033,6 +13107,13 @@ button.btn.recomatic-add-to-cart:focus{
 
 // Mobile Styles for Cart page
 @include respond-to('medium'){
+  .empty-cart{
+    a.empty-cart-keep-shopping:focus
+    a.empty-cart-keep-shopping:hover{
+      box-shadow: none;
+    }
+  }
+
   .empty-cart-product-container {
     @include flex-flow(row wrap);
 
@@ -13116,11 +13197,17 @@ button.btn.recomatic-add-to-cart:focus{
 
 .collection{
   .product-details{
+
+    // Product Info - Title
+    .title{
+      font-size: 22px;
+      line-height: 1.5rem;
+    }
     // Meta fields
     .product-details__metafields{
       font-size: .75rem;
       letter-spacing: .05em;
-      line-height: 1.25;
+      line-height: 1;
       color: #7d7d7d;
       padding: 0;
       margin: 0 0 0.75rem;
@@ -13128,12 +13215,12 @@ button.btn.recomatic-add-to-cart:focus{
 
       span{
         color: #7d7d7d;
-        display: block;
       }
 
       .metafield__category--polarized:after{
-        // content: '|';
-        // margin: 0 .25rem;
+        content: '|';
+        margin: 0 0.125rem 0 .25rem;
+        display: inline-block;
       }
     }
 
@@ -13149,7 +13236,7 @@ button.btn.recomatic-add-to-cart:focus{
     height: auto;
     display: block;
     color: white;
-    padding: 13px .25rem;
+    padding: 11px .25rem;
     font-size: 1rem;
     line-height: 1.25;
     background: #757575;
@@ -13167,8 +13254,28 @@ button.btn.recomatic-add-to-cart:focus{
   }
 }
 
+.collection, .collection-coming-soon{
+  .product-details{
+    // Product Info - Title
+    .title{
+      font-size: 22px;
+      line-height: 1.5rem;
+    }
+  }
+}
+
 
 @include respond-to('medium'){
+
+  .collection, .collection-coming-soon{
+    .product-details{
+      // Product Info - Title
+      .title{
+        font-size: 18px;
+        line-height: 28px;
+      }
+    }
+  }
 
   .collection{
     // Remove unnecessary padding from below collection banner
@@ -14162,20 +14269,16 @@ div.product-icons{
 
 
 // ====================================================================
-//  ------- Navigation Fixes 
+//  ------- Navigation Fixes  / Header fixes
 // ====================================================================
 #mobile_menu{
   // parent links (links with submenus) - add a faint border line
-  li, 
-  li.sublink li.sublink li{
+  // li,
+  li.sublink{
     border-bottom: 1px solid rgba(0,0,0,0.08);
   }
 
-  li.sublink li:last-child,
-  li.sublink li.sublink,
-  li.sublink div:last-child li,
-  li.sublink li.sublink li:last-child,
-  li:empty{
+  li.sublink ul li{
     border: none;
   }
 
@@ -14185,6 +14288,16 @@ div.product-icons{
     font-weight: normal;
   }
 
+  .sublink{
+    p {
+      font-weight: normal;
+    }
+  }
+
+}
+
+#mobile_menu > li {
+  border-bottom: 1px solid rgba(0,0,0,0.08);
 }
 
 .menu {
@@ -14383,10 +14496,47 @@ div.product-icons{
 
 .footer{
 
-  // Make footer logo smaller
   img.footer-logo{
-    max-width: 100px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .footer_credits{
+    @include flexbox();
+    @include justify-content(space-between);
+    @include align-items(center);
+    .credits,
+    .payment_methods{
+      float: none;
+    }
+  }
+
+  .footer_credits:before,
+  .footer_credits:after{
+    display: none;
+  }
+}
+
+@include respond-to('medium'){
+  .footer{
+    .footer_credits{
+      @include flex-flow(row wrap);
+    }
+
+    .credits,
+    .payment_methods{
+      display: block;
+      @include flex(100%);
+      margin: 0.5rem 0;
+    }
+
+    .credits{
+      padding: 0;
+      margin: 0;
+    }
+
+    .payment_methods{
+      @include order(-1);
+    }
   }
 }
 
@@ -14415,7 +14565,7 @@ div.product-icons{
 
   // Remove extra padding/margin from logo 
   .footer .mobile-logo{
-    margin: 0 auto 2rem;
+    margin: 0 auto 1rem;
     padding: 0;
   }
 }
@@ -14467,5 +14617,29 @@ div.product-icons{
   }
   .blog .article{
     min-height: unset;
+  }
+}
+
+
+
+// ======================================================================================
+//  ------- Header
+// ======================================================================================
+.top_bar .menu a,
+.top_bar .menu a span,
+.top_bar a.mini_cart span,
+.top_bar .menu select, {
+  font-weight: normal;
+} 
+
+// Unbold all sunblink in menu - desktop and mobile
+.main_nav{
+  .mega-menu .dropdown_column p{
+    font-weight: normal;
+  }
+
+  .mega-menu .dropdown_column p:focus,
+  .mega-menu .dropdown_column p:hover{
+    color: {{ settings.nav_color_hover }};
   }
 }

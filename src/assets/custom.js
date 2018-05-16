@@ -368,7 +368,7 @@ const soldOutNotifyToggle = function(){
           'color': 'black'
         });
       $(toggleBtn).animate({'font-size': '0.875rem', 'padding': '0.5rem'}, 250);
-      $(toggleBtn).text('Yup, I want dibs on these!');
+      $(toggleBtn).text('Notify Me');
       $(toggleBtn).attr('disabled', 'disabled');
 
       // enter floating label

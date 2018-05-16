@@ -16,7 +16,7 @@
           
           <input type="hidden" name="challenge" value="false" />
           <input type="hidden" name="contact[body]" class="notify_form_message" data-body="{{ 'products.notify_form.message_content' | t: product: product.title, url: canonical_url }}" value="{{ 'products.notify_form.message_content' | t: product: product.title, url: canonical_url }}" />
-          <input class="action_button waitlist_button" type="submit" value="{{ 'products.notify_form.send' | t }}" style="margin-bottom:0px" />    
+          <input class="action_button waitlist_button" type="submit" value="Waitlist" style="margin-bottom:0px" />    
         </p>
       {% endif %}
     {% endform %}

@@ -1,6 +1,7 @@
 {% comment %}Mobile navigation{% endcomment %}
 <header id="header" class="mobile_nav-fixed--{{ section.settings.fixed_header }}">
   {% if section.settings.promo_text != blank %}
+    
     <div class="promo_banner">
       {{ section.settings.promo_text }}
       <div class="promo_banner-close"></div>
@@ -30,6 +31,7 @@
     {% endif %}
   </div>
   {% if section.settings.search_enabled %}
+    <!-- search is enabled!!  -->
     <div class="dropdown_container center" data-dropdown="search">
       <div class="dropdown">
         <form action="/search" class="header_search_form">
@@ -49,7 +51,8 @@
         {% include 'mobile-menu' with section.settings.main_linklist2 %}
         {% include 'mobile-menu' with section.settings.top_bar_menu %}
         {% if section.settings.phone_number != blank %}
-          <li><a href="tel:+{{ section.settings.phone_number | replace: ' ', '' | replace: '+', '' | replace: '-', '' }}">{{ section.settings.phone_number }}</a></li>
+          {% comment %} <li><a href="tel:+{{ section.settings.phone_number | replace: ' ', '' | replace: '+', '' | replace: '-', '' }}">{{ section.settings.phone_number }}</a></li> {% endcomment %}
+          <li><a href="tel:+{{ section.settings.phone_number | replace: ' ', '' | replace: '+', '' | replace: '-', '' }}">CALL US</a></li>
         {% endif %}
 
         {% if shop.customer_accounts_enabled %}
