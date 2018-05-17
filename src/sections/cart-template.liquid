@@ -217,11 +217,11 @@
         {% comment %} Utilizing Script sale prices {% endcomment %}
         {% assign total_script_price = cart.orginal_total_price %}
           <div class="subtotal">
-            <p class="cart_subtotal js-cart_subtotal">
+            <p class="cart_subtotal ">
 
               <span class="subtotal__title">{{ 'cart.general.subtotal' | t }}</span>
 
-              <span class="right">
+              <span class="right js-cart_subtotal">
                 {% comment %} If No script discount/sale {% endcomment %}
                 {% if cart.total_discount == 0%}
                     {{ cart.total_price | money }}

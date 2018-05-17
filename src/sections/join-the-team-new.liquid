@@ -1,6 +1,6 @@
 <a name="pagecontent" id="pagecontent"></a>
 
-<!-- this is the new join the team page -->
+
 {% comment %}
   If heading text is filled out, show collection banner with text overlay, if not, show original image with '--has-image' collection banner
 {% endcomment %}
@@ -27,40 +27,20 @@
 {% endif %}
 
 
-<div class="container main join join-the-team">
-  <div class="sixteen columns featured_links">
-    <div class="section clearfix">
+<div class="container main join join-the-team__container">
 
       {% for block in section.blocks %}
 
         <!--GRID ITEM -->
-
-        <div class="one-third column">
-          {% comment %} Took our href="#" and added data-remodal-target="modal" {% endcomment %}
-          <a data-remodal-target="popup{{ forloop.index }}"  id="choose{{ forloop.index }}" href="#popup{{ forloop.index }}">
-            <div class="fs-entry-container bll">
-              <div class="fs-timeline-entry blsrel fs-timeline-entry--{{block.settings.title | handleize }}">
-                <img class="first" src="{{ block.settings.background | img_url: '500x'}}" alt="{{ block.settings.title }}" />
-                <div class="fs-text-container bl">
-                  <div class="fs-timeline-text tt">
-                    <div class="fs-entry-title">{{ block.settings.title }}</div>
-                  </div>
-                </div>
-              </div>
+            <div class="join-the-team__div join-team__div--{{block.settings.title | handleize }}" style="background-image: url('{{ block.settings.background | img_url: '500x'}}')">
+                {% assign url = block.settings.link %}
+                <a href="{{ url }}" class="join-the-team__link" target="_blank" rel="noopener">
+                    <h4 class="join-the-team__title">{{ block.settings.title }}</h4>
+                </a>
             </div>
-          </a>
-        </div>
-
-
-        <!-- POPUP -->
-        <div id="popup{{ forloop.index }}" class="middle form-embed-wrap remodal" data-remodal-id="popup{{ forloop.index }}" >
-          {{ block.settings.form_code }}
-        </div>
 
       {% endfor %}
 
-    </div>
-  </div>
 </div>
 
 
@@ -69,8 +49,8 @@
 
   {
     "name": "Join The Team",
-    "class": "join-the-team-new",
-    "max_blocks": 8,
+    "class": "join-the-team",
+    "max_blocks": 9,
     "settings": [
       {
         "type": "text",
@@ -109,9 +89,10 @@
             "label": "Background Image"
           },
           {
-            "type": "textarea",
-            "id": "form_code",
-            "label": "Form Code"
+            "type": "text",
+            "id": "link",
+            "label": "Link",
+            "info": "URL to Google Form"
           }
         ]
       }

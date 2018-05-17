@@ -415,6 +415,14 @@ const sizeGuideMobileToggle = function(){
   }
 }
 
+const reSizeRelatedProductsTitle = function(){
+  const recomaticContainer = $('.recomatic-container--cart');
+
+  const title = $(recomaticContainer).find('.related-product__title').find('.title');
+
+  $(title).css('font-size', '18px');
+
+}
 
 
 // resize the section headers on product pages

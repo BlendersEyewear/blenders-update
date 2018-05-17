@@ -19,28 +19,21 @@
                 <div class="product">
                     <div class="image__container">
                         <a href="{{product.url}}" class="product-img_link">
-                        <img  src="{{ product.feature_image | product_img_url: '200x' }}"
-                            alt="{{ product.title | escape }}"
-                            class="lazyload {{ settings.image_loading_style }} product__img"
-                            data-sizes="auto"
-                            data-src="{{ product.feature_image | product_img_url: default }}"
-                            data-srcset=" {{ product.featured_image | product_img_url: '400x' }} 300w,
-                                        {{ product.featured_image | product_img_url: '500x' }} 400w,
-                                        {{ product.featured_image | product_img_url: '600x' }} 500w,
-                                        {{ product.featured_image | product_img_url: '700x' }} 600w,
-                                        {{ product.featured_image | product_img_url: '800x' }} 700w,
-                                        {{ product.featured_image | product_img_url: '900x' }} 800w,
-                                        {{ product.featured_image | product_img_url: '1000x' }} 900w"
-                            />
+                            <img  src="{{ product.feature_image | product_img_url: '200x' }}"
+                                alt="{{ product.title | escape }}"
+                                class="lazyload {{ settings.image_loading_style }} product__img"
+                                data-sizes="auto"
+                                data-src="{{ product.feature_image | product_img_url: default }}"
+                                data-srcset=" {{ product.featured_image | product_img_url: '400x' }} 300w,
+                                            {{ product.featured_image | product_img_url: '500x' }} 400w,
+                                            {{ product.featured_image | product_img_url: '600x' }} 500w,
+                                            {{ product.featured_image | product_img_url: '700x' }} 600w,
+                                            {{ product.featured_image | product_img_url: '800x' }} 700w,
+                                            {{ product.featured_image | product_img_url: '900x' }} 800w,
+                                            {{ product.featured_image | product_img_url: '1000x' }} 900w"
+                                />
                         </a>
-                        </div>
-                    <h4 class="center product__title">
-                        <a href="{{product.url}}" class="product__title-img_link">{{ product.title }}</a>
-                    </h4>
-                    {% if product.metafields.custom_fields["product_subtitle"] != blank %}
-                        <p class="center product__subtitle">{{ product.metafields.custom_fields["product_subtitle"] }}</p>
-                    {% endif %}
-                    <p class="center price product__price">{{product.price | money }}</p>
+                    </div>
 
                     <form action="/cart/add">
                         <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
@@ -48,6 +41,14 @@
                         {{ 'products.product.add_to_cart' | t }}
                         </button>
                     </form>
+
+                    <h4 class="center product__title">
+                        <a href="{{product.url}}" class="product__title-img_link">{{ product.title }}</a>
+                    </h4>
+                    {% if product.metafields.custom_fields["product_subtitle"] != blank %}
+                        <p class="center product__subtitle">{{ product.metafields.custom_fields["product_subtitle"] }}</p>
+                    {% endif %}
+                    <p class="center price product__price">{{product.price | money }}</p>
 
                     {% comment %} Yotpo {% endcomment %}
                     <div class="yotpo-container yotpo-empty-cart-container">
