@@ -207,8 +207,11 @@
         {% endfor %}
       </div>
 
-      {% assign item_count = cart.item_count %}
-      <div class="five columns offset-by-one{% if item_count > 2%} sticky-checkout-area{% endif %}">
+      {% comment %} Check for number of line items in the cart. Make subtotal/checkout area sticky position if 3 or more line items {% endcomment %}
+      {% for line_item in cart.items %}
+        {% assign line_item_count = forloop.length %} 
+      {% endfor %}
+      <div class="five columns offset-by-one{% if line_item_count > 2%} sticky-checkout-area{% endif %}">
         <div class="section clearfix">
 
         {% comment %} Utilizing Script sale prices {% endcomment %}
@@ -216,24 +219,21 @@
           <div class="subtotal">
             <p class="cart_subtotal js-cart_subtotal">
 
+              <span class="subtotal__title">{{ 'cart.general.subtotal' | t }}</span>
+
               <span class="right">
-            {% comment %} If No script discount/sale {% endcomment %}
-            <!-- Cart Total Discount: {{ cart.total_discount }} -->
-            <!-- Cart Total Price: {{ cart.total_price }} -->
-            {% if cart.total_discount == 0%}
-                {{ cart.total_price | money }}
-            {% endif %}
+                {% comment %} If No script discount/sale {% endcomment %}
+                {% if cart.total_discount == 0%}
+                    {{ cart.total_price | money }}
+                {% endif %}
               </span>
-              <span>{{ 'cart.general.subtotal' | t }}</span>
             </p>
 
             {% if section.settings.display_savings %}
               <p class="cart_savings sale">
                 {% if total_saving > 0 %}
-                  <span class="right">
-                    <span class="money">{{ total_saving | money }}</span>
-                  </span>
-                  <span>{{ 'layout.general.savings' | t }}</span>
+                  <span>You saved:</span>
+                  <span class="money">{{ total_saving | money }}</span>
                 {% endif %}
 
                 {% comment %} BOGO SALE Message {% endcomment %}
@@ -249,9 +249,9 @@
                   {% comment %} Bogo Item Counter Messages {% endcomment %}
 
                   {% if free_count > 1%}
-                    <span class="cart-message-bogo">Ya Mon! You Scored {{ free_count }} FREE pairs!</span>
+                    <span class="cart-message-bogo">Boom! You Scored {{ free_count }} FREE pairs!</span>
                   {% elsif free_count == 1%}
-                    <span class="cart-message-bogo">Ya Mon! You Scored a FREE pair!</span>
+                    <span class="cart-message-bogo">Boom! You Scored a FREE pair!</span>
                   {% endif %}
 
 
