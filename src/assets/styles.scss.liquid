@@ -13232,8 +13232,21 @@ button.btn.recomatic-add-to-cart:focus{
 //    Mega Menu
 // ------------------------------------------------------------------------------------------
 
-.dropdown_column ul.dropdown_title {
-    display: none;
+// fourth columns
+.dropdown_column {
+  ul.dropdown_title{
+    border-bottom: solid 1px #d0d0d0;
+    max-width: 8rem;
+  }
+
+  ul.dropdown_title li > a {
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  ul li > a {
+    font-weight: normal;
+  }
 }
 
 // Capitalize under image captions
@@ -13671,9 +13684,11 @@ svg.contact__sticker-img {
 }
 
 
-// -------------------------------------------
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 // ------- Shop by Frame New Page
-// -------------------------------------------
+// ----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 .page-shop-by-frame,
 .page-shop-by-frame-new{
   .collection_banner{
@@ -13721,7 +13736,7 @@ a.shop-frame__btn{
 
 // Make snow goggles smaller
 .shop-frame__shape.shop-frame__shape--snow-goggles {
-    padding: 1rem;
+    padding: 1rem 4rem;
 
     a.shop-frame__link{
       padding: 0 1rem;
