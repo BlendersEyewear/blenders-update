@@ -11740,6 +11740,8 @@ $headerDesktopLargeUp: 1280px;
     min-height: unset;
     padding: 0.875rem;
     line-height: 1;
+    margin: 1rem 0 1.5rem;
+    transition: all .15s ease-in-out;
   }
 
   button.notify-toggle:focus,
@@ -11801,6 +11803,11 @@ $headerDesktopLargeUp: 1280px;
   .notify_form{
     .action_button{
       background: linear-gradient(-180deg, #757575, #101010);
+    }
+
+    .action_button:hover,
+    .action_button:focus {
+      background: linear-gradient(-180deg, #949494, #252525);
     }
   }
 }
@@ -12178,7 +12185,7 @@ p.modal_price {
   }
   
   .product-accordion__arrow--open{
-    transform: rotate(-90deg);
+    transform: rotate(90deg);
   }
   
   // Accordion body/content - add margin-top to the first child
@@ -14561,6 +14568,13 @@ div.product-icons{
     margin-bottom: 0;
   }
 
+  .mobile-logo{
+    display: block;
+    margin: 1.5rem 0 1.25rem;
+    max-width: 12rem !important;
+    padding: 0;
+  }
+
   .footer_credits{
     @include flexbox();
     @include justify-content(space-between);
@@ -14772,9 +14786,29 @@ div.product-icons{
   }
 }
 
+// =========================================================================
+//  ------- Search Page
+// =========================================================================
+.search{
+  .container.content{
+    padding: 2rem 1rem 8rem;
+  }
+}
+
+@include respond-to('small'){
+  .search{
+    .container.content{
+      padding: 0 1rem 6rem;
+    }
+
+    .search_page {
+      padding: 4rem 0 8rem;
+    }
+  }
+}
 
 // ======================================================================================
-//  ------- Header
+//  ------- Header 
 // ======================================================================================
 .top_bar .menu a,
 .top_bar .menu a span,
@@ -14789,8 +14823,10 @@ div.product-icons{
     font-weight: normal;
   }
 
-  .mega-menu .dropdown_column p:focus,
-  .mega-menu .dropdown_column p:hover{
-    color: {{ settings.nav_color_hover }};
+  .mega-menu .dropdown_column:focus,
+  .mega-menu .dropdown_column:hover{
+    p{
+      color: {{ settings.nav_color_hover }};
+    }
   }
 }

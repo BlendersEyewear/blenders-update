@@ -321,28 +321,28 @@ const floatingLabels = function(){
 }
 
 // 
-const backInStock = function(formDiv){
-  console.log('BIS loaded')
-  let id = $(formDiv).data('product-id');
-  let variant = $(formDiv).data('product-variant-id');
+// const backInStock = function(formDiv){
+//   console.log('BIS loaded')
+//   let id = $(formDiv).data('product-id');
+//   let variant = $(formDiv).data('product-variant-id');
   
-  console.log(id);
+//   console.log(id);
 
-  let form = $(formDiv).find('form');
+//   let form = $(formDiv).find('form');
 
-  console.log(form);
+//   console.log(form);
 
-  $(form).on('submit', function(e){
-    let email = $(e.target).find('.notify_email').val();
-    console.log('submitted');
-    console.log(email);
-    BIS.create(email, variant, id)
-      .then(function(response) {
-        response.status == 'OK' ? (console.log(resp.msg)) : (console.log(resp.status));
-      });
-  });
+//   $(form).on('submit', function(e){
+//     let email = $(e.target).find('.notify_email').val();
+//     console.log('submitted');
+//     console.log(email);
+//     BIS.create(email, variant, id)
+//       .then(function(response) {
+//         response.status == 'OK' ? (console.log(resp.msg)) : (console.log(resp.status));
+//       });
+//   });
 
-}
+// }
 
 
 const soldOutNotifyToggle = function(){
@@ -362,20 +362,15 @@ const soldOutNotifyToggle = function(){
     // If form is visible
     if($(notifyForm).is(":visible")){
       // change button cursor back to default;
-      $(toggleBtn).css({
-          'cursor': 'default',
-          'background': 'white',
-          'color': 'black'
-        });
-      $(toggleBtn).animate({'font-size': '0.875rem', 'padding': '0.5rem'}, 250);
-      $(toggleBtn).text('Notify Me');
-      $(toggleBtn).attr('disabled', 'disabled');
+      $(toggleBtn).hide();
+      // $(toggleBtn).animate({'font-size': '0.875rem', 'padding': '0.5rem'}, 250);
+      // $(toggleBtn).attr('disabled', 'disabled');
 
       // enter floating label
       floatingLabels();
 
       // Load Back in Stock
-      backInStock(notifyForm);
+      // backInStock(notifyForm); //unloaded to put back in the actual sections
 
     }
 
@@ -413,15 +408,6 @@ const sizeGuideMobileToggle = function(){
       console.log(arrow);
     });
   }
-}
-
-const reSizeRelatedProductsTitle = function(){
-  const recomaticContainer = $('.recomatic-container--cart');
-
-  const title = $(recomaticContainer).find('.related-product__title').find('.title');
-
-  $(title).css('font-size', '18px');
-
 }
 
 
@@ -655,7 +641,6 @@ const customProductPage = function(){
 //--------- Cartt Page ------------------
 //------------------------------------------------
 const cartPageScripts = function(){
-
 }
 
 //------------------------------------------------

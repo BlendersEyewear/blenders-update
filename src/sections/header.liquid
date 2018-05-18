@@ -24,6 +24,12 @@
       {% endif %}
     </a>
 
+    {% comment %} Search icon {% endcomment %}
+    {% if section.settings.search_enabled %}
+    <!-- search is enabled -->
+      <a href="/search" class="icon-search dropdown_link" title="{{ 'general.search.title' | t | escape }}" data-dropdown-rel="search"></a>
+    {% endif %}
+
     {% if section.settings.show_cart %}
       <div class="cart_container">
         <a href="/cart" class="{% if section.settings.cart_icon == "cart" %}icon-cart{% else %}icon-bag{% endif %} mini_cart dropdown_link" title="{{ 'layout.general.cart' | t | escape }}" data-no-instant> <span class="cart_count">{{ cart.item_count }}</span></a>
@@ -75,11 +81,11 @@
           </li>
         {% endif %}
 
-        {% if section.settings.search_enabled %}
+        {% comment %} {% if section.settings.search_enabled %}
           <li class="mobile-search">
             <a href="/search" data-no-instant><span class="icon-search"></span></a>
           </li>
-        {% endif %}
+        {% endif %} {% endcomment %}
       </ul>
 
     </div>
@@ -150,7 +156,6 @@
                       {% endif %}
 
                       {% comment %} Add Sale / Before Price - Edited by Adam - 2/9/18 {% endcomment %}
-                      <!-- TESTT -->
                       <strong class="right price">
                         <span class="money">{{ item.variant.price | money }}</span>
                         <span class="was_price">
@@ -179,8 +184,18 @@
               </ul>
               <hr />
               <ul>
+              {% comment %} Backup of old markup {% endcomment %}
+              {% comment %}
                 <li class="cart_subtotal js-cart_subtotal">
                   <span class="right">
+                    <span class="money">{{ cart.total_price | money }}</span>
+                  </span>
+                  <span>{{ 'layout.general.subtotal' | t }}</span>
+                </li>
+              {% endcomment %}
+
+                <li class="cart_subtotal">
+                  <span class="right js-cart_subtotal">
                     <span class="money">{{ cart.total_price | money }}</span>
                   </span>
                   <span>{{ 'layout.general.subtotal' | t }}</span>
