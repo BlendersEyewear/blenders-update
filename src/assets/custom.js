@@ -511,8 +511,28 @@ const comingSoonPageScripts = function(){
   // run through every product
 
   console.log('coming soon script loaded');
-  // Remove notify me label
-  // Change Waitlist button to waitlist
+
+  let product = $('.column .product-wrap');
+
+  $(product).each(function(){
+
+    let title = $(this).find('.title');
+
+    let form = $(this).find('#contact_form');
+    let label = $(form).find('label');
+    let button = $(form).find('.action_button');
+    let btnText = $(button).attr('value');
+
+    console.log(label);
+
+    // Remove notify me label
+    $(label).remove();
+
+    // Check if on mobile
+    // Change Waitlist button to waitlist
+
+
+  });
 }
 
 //------------------------------------------------
@@ -626,7 +646,7 @@ const customProductPage = function(){
 
 
 //------------------------------------------------
-//--------- Cartt Page ------------------
+//--------- Cartt\ Page ------------------
 //------------------------------------------------
 const cartPageScripts = function(){
 }
@@ -673,7 +693,7 @@ document.addEventListener("DOMContentLoaded", function() {
   body.classList.contains('index') ? frontPageScripts() : '';
 
   // Product Page -------------
-  // Create accordions on Mobile -- // Create Tabs on Desktop // ----
+  // Create accordions on Mobile -- // Create Tabs on Desktop // ------
   body.classList.contains('product') ? productPageScripts() : '';
 
   // Custom Product Page -------------
@@ -686,7 +706,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Coming Soon Page -------------
   // Run custom collection page scripts if on the coming soon page.
-  body.classList.contains('collection-coming-soon') ? collectionPageScripts() : '';
+  body.classList.contains('collection-coming-soon') ? console.log('coming soon') : '';
 
 
   // Cart Page -------------
