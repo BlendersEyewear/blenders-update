@@ -14525,6 +14525,18 @@ div.product-icons{
 //  ------- Coming Soon Page / Coming Soon Collection
 // ======================================================================================
 .collection-coming-soon{
+
+  // Notfiy me Button
+  .action_button{
+    background: linear-gradient(-180deg, #757575, #101010) !important;
+  }
+
+  .action_button:hover,
+  .action_button:focus{
+    background: linear-gradient(-180deg, #949494, #252525) !important;
+  }
+
+
   .notify-form--collection{
     padding: 0 2rem;
   }
@@ -14608,6 +14620,8 @@ div.product-icons{
 
 @include respond-to('medium'){
   .footer{
+    border-top: none;
+
     .footer_credits{
       @include flex-flow(row wrap);
     }
@@ -14626,6 +14640,11 @@ div.product-icons{
 
     .payment_methods{
       @include order(-1);
+    }
+
+    .footer-social-icons--mobile ul{
+      padding: 0.5rem 0 1rem;
+      margin: 0 auto;
     }
   }
 }

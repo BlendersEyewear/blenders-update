@@ -320,30 +320,6 @@ const floatingLabels = function(){
   });
 }
 
-// 
-// const backInStock = function(formDiv){
-//   console.log('BIS loaded')
-//   let id = $(formDiv).data('product-id');
-//   let variant = $(formDiv).data('product-variant-id');
-  
-//   console.log(id);
-
-//   let form = $(formDiv).find('form');
-
-//   console.log(form);
-
-//   $(form).on('submit', function(e){
-//     let email = $(e.target).find('.notify_email').val();
-//     console.log('submitted');
-//     console.log(email);
-//     BIS.create(email, variant, id)
-//       .then(function(response) {
-//         response.status == 'OK' ? (console.log(resp.msg)) : (console.log(resp.status));
-//       });
-//   });
-
-// }
-
 
 const soldOutNotifyToggle = function(){
   console.log('sold out script working');
@@ -527,6 +503,18 @@ const collectionPageScripts = function(){
   }
 }
 
+
+//------------------------------------------------
+//------------- Coming Soon Page --------------------
+//------------------------------------------------
+const comingSoonPageScripts = function(){
+  // run through every product
+
+  console.log('coming soon script loaded');
+  // Remove notify me label
+  // Change Waitlist button to waitlist
+}
+
 //------------------------------------------------
 //--------- Custom Product Page ------------------
 //------------------------------------------------
@@ -695,6 +683,11 @@ document.addEventListener("DOMContentLoaded", function() {
   // Collection Page -------------
   // Run custom collection page scripts if on a collection page, or coming soon page.
   body.classList.contains('collection') || body.classList.contains('collection-coming-soon') ? collectionPageScripts() : '';
+
+  // Coming Soon Page -------------
+  // Run custom collection page scripts if on the coming soon page.
+  body.classList.contains('collection-coming-soon') ? collectionPageScripts() : '';
+
 
   // Cart Page -------------
   // Run Cart page scripts on the cart page
