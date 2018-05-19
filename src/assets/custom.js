@@ -518,7 +518,7 @@ const comingSoonPageScripts = function(){
 
     let title = $(this).find('.title');
 
-    let form = $(this).find('#contact_form');
+    let form = $(this).find('.notify_form');
     let label = $(form).find('label');
     let button = $(form).find('.action_button');
     let btnText = $(button).attr('value');
@@ -529,6 +529,9 @@ const comingSoonPageScripts = function(){
     $(label).remove();
 
     // Check if on mobile
+    if(window.innerWidth <= tabletSize){
+      console.log('mobile!!!')
+    }
     // Change Waitlist button to waitlist
 
 
@@ -706,7 +709,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Coming Soon Page -------------
   // Run custom collection page scripts if on the coming soon page.
-  body.classList.contains('collection-coming-soon') ? console.log('coming soon') : '';
+  body.classList.contains('collection-coming-soon') ? comingSoonPageScripts() : '';
 
 
   // Cart Page -------------

@@ -13099,7 +13099,7 @@ button.btn.recomatic-add-to-cart:focus{
     margin: .5rem auto;
     display: block;
     font-weight: 600;
-    width: fit-content;
+    width: 100%;
     opacity: 0;
     transition: opacity .15s ease-in-out;
   }
@@ -13111,12 +13111,11 @@ button.btn.recomatic-add-to-cart:focus{
   }
   
   span.yotpo-stars {
-    padding: 0 0 1rem !important;
-    display: block;
+    padding: 0 0 0 0.25rem !important;
   }
   
   .product .yotpo .text-m {
-    // padding: .25rem 0 !important;
+    padding: 0 0 0 .25rem !important;
     letter-spacing: .05em;
     // display: block;
   }
@@ -13174,6 +13173,13 @@ button.btn.recomatic-add-to-cart:focus{
     a.empty-cart-keep-shopping:focus
     a.empty-cart-keep-shopping:hover{
       box-shadow: none;
+    }
+
+    // Yotpo stars 
+    // stack
+    span.yotpo-stars {
+      padding: 0 0 1rem !important;
+      display: block;
     }
   }
 
