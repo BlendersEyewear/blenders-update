@@ -5,7 +5,7 @@
     <h3 class="center">Check out Today's Top Styles</h3>
 
     {% comment %} Top 4 Best Selling Items {% endcomment %}
-    <div class="empty-cart-product-container">
+    <div class="container empty-cart-product-container">
         {% assign best_sellers = collections.empty-cart-recomendations.products %}
 
         {% comment %} Loop through the first 4 products in 'top selects' {% endcomment %}
@@ -16,9 +16,10 @@
             {% comment %} if sold out, skip {% endcomment %}
             {% if product.available %}
 
-                <div class="product">
-                    <div class="image__container">
-                        <a href="{{product.url}}" class="product-img_link">
+            <div class="product-wrap">
+                <div class="relative product_image swap-{{ settings.collection_secondary_image }}">
+                    <a href="{{product.url}}" class="product-img_link">
+                        <div class="image__container">
                             <img  src="{{ product.feature_image | product_img_url: '200x' }}"
                                 alt="{{ product.title | escape }}"
                                 class="lazyload {{ settings.image_loading_style }} product__img"
@@ -32,8 +33,17 @@
                                             {{ product.featured_image | product_img_url: '900x' }} 800w,
                                             {{ product.featured_image | product_img_url: '1000x' }} 900w"
                                 />
-                        </a>
-                    </div>
+                        </div>
+
+                        {% if settings.collection_secondary_image != blank %}
+                            <div class="image__container">
+                            <img src="{% if product.images[1] != blank %}{{ product.images[1] | product_img_url: '900x' }}{% else %}{{ product.featured_image | product_img_url: '900x' }}{% endif %}"
+                            class="secondary lazyload"
+                            alt="{{ alt_text | escape }}"
+                            />
+                            </div>
+                        {% endif %}
+                    </a>
 
                     <form action="/cart/add">
                         <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
@@ -45,9 +55,29 @@
                     <h4 class="center product__title">
                         <a href="{{product.url}}" class="product__title-img_link">{{ product.title }}</a>
                     </h4>
-                    {% if product.metafields.custom_fields["product_subtitle"] != blank %}
-                        <p class="center product__subtitle">{{ product.metafields.custom_fields["product_subtitle"] }}</p>
-                    {% endif %}
+
+                    {% comment %} Custom Fields subtitle {% endcomment %}
+                    {% for collection in product.collections %}
+                        {% if collection.handle == 'a-series'
+                            or collection.handle == 'cardiff' or collection.handle == 'east-village'
+                            or collection.handle == 'h-series' or collection.handle == 'frontpage'
+                            or collection.handle == 'l-series' or collection.handle == 'm-class'
+                            or collection.handle == 'millenia' or collection.handle == 'north-park-blenders-eyewear'
+                            or collection.handle == 'providence' or collection.handle == 'roxie-1' or collection.handle == 'canyon'
+                            or collection.handle == 'test-collection' %}
+
+                            {% comment %} Check if polarized {% endcomment %}
+                            {% assign polarized = product.metafields.custom_fields["polarized"] %}                
+
+                            <p class="center product__subtitle">
+                            {% if product.metafields.custom_fields["polarized"] == 1 %}
+                                <span class="metafield__category metafield__category--polarized">Polarized</span>
+                            {% endif %}
+                            <span class="metafield__category">{{collection.title}}</span>
+                            </p>
+                        {% endif %}
+                    {% endfor %}
+
                     <p class="center price product__price">{{product.price | money }}</p>
 
                     {% comment %} Yotpo {% endcomment %}
@@ -66,11 +96,10 @@
                     </div>
 
                 </div>
-            
-            <!-- {{ forloop.index0}} -->
+            </div>
+
             {% endif %}
 
-            <!-- {{ forloop.length}} -->
         {% endfor %}
     </div>
 

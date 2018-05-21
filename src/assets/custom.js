@@ -386,6 +386,26 @@ const sizeGuideMobileToggle = function(){
   }
 }
 
+// Stop Hover Thumbnail Change
+
+const stopThumbnailHover = function(){
+  console.log('stopping hover states!');
+  let product = $('.product-wrap');
+
+  // Loop through all products
+  $(product).each(function(){
+    let image = $(this).find('.product_image')
+    let imglink = $(this).find('a');
+
+    console.log(image)
+    // Remove 'swap-true' class
+    $(image).removeClass('swap-true');
+
+    // Remove second image
+    $(imglink).find('.image__container').first().next().remove();
+  });
+};
+
 
 // resize the section headers on product pages
 const resizeHeadings = function(){
@@ -472,34 +492,9 @@ const productPageScripts = function(){
 const collectionPageScripts = function(){
   console.log('collect page scripts lodaded');
 
-  // Stop Hover
-  let stophover = function(){
-    console.log('stopping hover states!');
-    let product = $('.product-wrap');
-
-    // Loop through all products
-    $(product).each(function(){
-      let image = $(this).find('.product_image')
-      let imglink = $(this).find('a');
-
-      console.log(image)
-      // Remove 'swap-true' class
-      $(image).removeClass('swap-true');
-
-      // Remove second image
-      $(imglink).find('.image__container').first().next().remove();
-      console.log($(imglink).find('.image__container').first().next());
-    });
-
-    
-    // Display none on second image
-
-  }
-
-
   // Check for mobiel, then call the function
   if (window.innerWidth <= phoneSize){
-    stophover();
+    stopThumbnailHover();
   }
 }
 
@@ -649,9 +644,17 @@ const customProductPage = function(){
 
 
 //------------------------------------------------
-//--------- Cartt\ Page ------------------
+//--------- Cart\ Page ------------------
 //------------------------------------------------
 const cartPageScripts = function(){
+
+  // Empty Cart Scripts
+  if($('.empty-cart').length){
+    if(window.innerWidth <= tabletSize){
+      stopThumbnailHover();
+    }
+  }
+  // Disable hover thumbnail change on mobile
 }
 
 //------------------------------------------------

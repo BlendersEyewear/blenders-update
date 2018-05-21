@@ -13067,6 +13067,10 @@ button.btn.recomatic-add-to-cart:focus{
 
 .empty-cart{
 
+  .product-wrap{
+    width: 380px;
+  }
+
   .product {
     padding: 10px;
     @include flex(1);
@@ -13083,6 +13087,12 @@ button.btn.recomatic-add-to-cart:focus{
     line-height: 1.25;
     opacity: 0.75;
     margin: 0 0 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .metafield__category--polarized:after{
+    content: '|';
+    margin: 0 0.125rem 0 0.25rem;
   }
   
   .product__price {
@@ -13102,6 +13112,10 @@ button.btn.recomatic-add-to-cart:focus{
     width: 100%;
     opacity: 0;
     transition: opacity .15s ease-in-out;
+  }
+
+  .toggle-images .product__btn{
+    opacity: 1.0
   }
   
   .yotpo {
@@ -13128,23 +13142,6 @@ button.btn.recomatic-add-to-cart:focus{
   }
 }
 
-
-.empty-cart-or{
-  text-transform: uppercase;
-  margin: 1rem auto 3rem;
-}
-
-.empty-cart-or:before,
-.empty-cart-or:after {
-    content: '';
-    display: inline-block;
-    height: 1px;
-    width: 28px;
-    background: black;
-    margin: 0 6px;
-    transform: translateY(-4px);
-}
-
 .empty-cart a.empty-cart-keep-shopping{
   height: auto;
   min-height: auto;
@@ -13169,12 +13166,20 @@ button.btn.recomatic-add-to-cart:focus{
 
 // Mobile Styles for Cart page
 @include respond-to('medium'){
+
   .empty-cart{
     a.empty-cart-keep-shopping:focus
     a.empty-cart-keep-shopping:hover{
       box-shadow: none;
     }
 
+    .product-wrap{
+      max-width: calc(50% - 0.5rem);
+    }
+
+    .empty-cart-product-container{
+      padding: 20px 10px;
+    }
     // Yotpo stars 
     // stack
     span.yotpo-stars {
@@ -14775,22 +14780,23 @@ div.product-icons{
     @include flexbox();
     @include align-items(stretch);
     @include justify-content(center);
-    max-width: calc(25% - 0.75rem);
-    @include flex(25%);
-    margin: 0 1rem 0 0;
-    min-height: 15rem;
+    max-width: calc(50% - 0.75rem);
+    @include flex(50%);
+    margin: 0 1rem 1rem 0;
+    min-height: 22rem;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
   }
 
 
+  .join-the-team__div:nth-of-type(2),
   .join-the-team__div:nth-of-type(4){
-    margin: 0;
+    margin: 0 0 1rem;
   }
 
   .join-the-team__link{
-    background: rgba(30, 116, 185, 0.76);
+    background: rgba(30, 116, 185, 0.56);
     display: block;
     width: 100%;
     padding: 1rem 0.75rem;
@@ -14806,18 +14812,15 @@ div.product-icons{
     max-width: 80%;
     text-align: center;
     font-weight: 600;
-    color: white;
+    color: black;
+    background: white;
     text-transform: uppercase;
-    padding: 0.5rem 0.75rem;
+    padding: 0.625rem 0.75rem;
     margin: 0;
+    line-height: 1;
+    min-width: 12rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: all .15s ease-in-out;
-  }
-
-  .join-the-team__link:hover,
-  .join-the-team__link:focus{
-    .join-the-team__title{
-      box-shadow: inset 0 0 0 2px white;
-    }
   }
 }
 
@@ -14890,4 +14893,18 @@ div.product-icons{
       color: {{ settings.nav_color_hover }};
     }
   }
+}
+
+// Make stickey header logo bigger on Desktop
+.sticky_nav .main_nav{
+  // Logo Link
+  div.logo > a {
+    padding-top: 25px;
+  }
+
+  div.logo img{
+    width: auto !important;
+    max-width: 220px;
+  }
+  // Logo image
 }
