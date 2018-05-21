@@ -21,6 +21,8 @@
 {% comment %} Custom Built Grid by Adam - 4/5/18 {% endcomment %}
 <div class="container shop-frame__container">
 
+
+
     {% comment %} K Series {% endcomment %}
     {%  if collections['frontpage'] %}
         {%  assign col = collections['frontpage'] %}
@@ -327,6 +329,7 @@
 
 {
   "name": "Page",
+  "max_blocks": 16,
   "settings": [
         {
             "type": "image_picker",
@@ -340,6 +343,17 @@
         }
   ],
   "blocks": [
+      {
+      "type": "filter_by_collection",
+      "name": "Collection list",
+      "settings": [
+          {
+              "id": "collection",
+              "type": "collection",
+              "label": "Collection"
+          }
+      ]
+    }
   ]
 }
 

@@ -143,12 +143,11 @@
               {% comment %} Check if Polarized - Check for custom field category {% endcomment %}
 
               {% comment %} Size Guide - Don't show on Accessories {% endcomment %}
-              {% unless product.type =='Soft Pouches' %}
                 {% if settings.size_chart != blank %}
-                  <a href="#size-chart" class="size_chart" data-remodal-target="size-chart" data-no-instant>{{ 'products.product.size_chart' | t }} <span class="icon-right-arrow"></span></a>
+                  {% unless product.type =='Soft Pouches' %}
+                    <a href="#size-chart" class="size_chart" data-remodal-target="size-chart" data-no-instant>{{ 'products.product.size_chart' | t }} <span class="icon-right-arrow"></span></a>
+                  {% endunless %}
                 {% endif %}
-
-              {% endunless %}
             </div>
           {% endunless %}
 
@@ -227,8 +226,6 @@
 
           {% endif %}
 
-          {% comment %} <div class="feature_divider"></div> {% endcomment %}
-
           {% if section.settings.product_description_position == "top" %}
             {% if product.description != blank %}
              <div class="description" itemprop="description">
@@ -251,8 +248,11 @@
           <div class="below-title-section">
             {% if settings.size_chart != blank %}
 
-              <button class="size_chart size_chart--mobile">{{ 'products.product.size_chart' | t }} <img src="https://cdn.shopify.com/s/files/1/0148/9585/files/icon-arrow-right.svg?1448602857142359948" class="size_chart__arrow" alt=""></button>
-              {% include 'size-chart-slide' %}
+              {% comment %} Dont show on Soft Pouches or Gift Cards {% endcomment %}
+              {% unless product.type == 'Soft Pouches' or product.type == 'Gift Card'%}
+                <button class="size_chart size_chart--mobile">{{ 'products.product.size_chart' | t }} <img src="https://cdn.shopify.com/s/files/1/0148/9585/files/icon-arrow-right.svg?1448602857142359948" class="size_chart__arrow" alt=""></button>
+                {% include 'size-chart-slide' %}
+              {% endunless %}
 
             {% endif %}
           </div>

@@ -11495,6 +11495,7 @@ $headerDesktopLargeUp: 1280px;
     min-height: auto;
     line-height: 1;
     margin: 1rem auto 0;
+    font-size: 1.125rem;
 
   }
 
@@ -11830,7 +11831,9 @@ $headerDesktopLargeUp: 1280px;
 
       // Metafields / custom fields / polarized custom field / category .custom field
     .product-details__metafields{
-      margin: 0 0 1.25rem;
+      margin: 0 0 0.5rem;
+      font-size: 0.75rem;
+      line-height: 1;
     }
 
       a.size_chart{
@@ -12081,6 +12084,12 @@ p.modal_price {
 // Product form ----------------
 .product_section .product_form{
   margin-bottom: 2rem;
+}
+
+@include respond-to('medium'){
+  .product_section .product_form{
+    margin-bottom: 1rem;
+  }
 }
 
 // Yatpo Change font to Proxima Nova
@@ -12340,12 +12349,18 @@ p.modal_price {
 
 // Mobile Styles
 @include respond-to('medium'){
-  .product{    
+  .product{
+
+    // Product title
+    .product_name{
+      margin: 15px 0 5px !important;
+    }
+
     // center custom fields
     .custom-field--value {
       text-align: center;
       line-height: 1;
-      margin: 0 0 1rem;
+      margin: 0 0 0.5rem;
     }
     
     a.size_chart{
@@ -12354,6 +12369,14 @@ p.modal_price {
     
     .yotpo.bottomLine{
       padding: 0 !important;
+    }
+
+    // recomatic
+    .related-products__title{
+      padding: 0 10px;
+    }
+    .related-products__title .title{
+      font-size: 24px;
     }
   }
 }
@@ -13728,14 +13751,16 @@ a.shop-frame__btn{
   margin: .5rem auto 0;
   line-height: 1;
   font-weight: 600;
+  font-size: 1rem;
   text-transform: uppercase;
-  padding: .5rem 1.5rem;
-  max-width: max-content;
+  padding: 13px 20px;
   transition: all .15s ease-in-out;
   letter-spacing: .05em;
   opacity: 1;
   min-height: unset;
   height: auto;
+  transition: opacity .15s ease-in-out;
+  opacity: 0;
 }
 
 .center.shop-frame__title {
@@ -13743,6 +13768,13 @@ a.shop-frame__btn{
     font-weight: 600;
     line-height: 1;
     margin: 0 0 1rem;
+}
+
+.shop-frame__shape:hover,
+.shop-frame__shape:focus{
+  a.shop-frame__btn{
+    opacity: 1;
+  }
 }
 
 // Make snow goggles smaller
@@ -13760,6 +13792,10 @@ a.shop-frame__btn{
     max-width: 50%;
     @include flex(0 0 50%);
     margin: 0 0 1rem;
+  }
+
+  a.shop-frame__btn{
+    opacity: 1;
   }
 }
 
@@ -14618,7 +14654,7 @@ div.product-icons{
 
 
 // ------------------------------------------------------------------------------------------
-//   Footer
+//   Footer / footer navigation
 // ------------------------------------------------------------------------------------------
 
 .footer{
@@ -14693,7 +14729,7 @@ div.product-icons{
     }
 
     li a {
-      font-weight: 600;
+      // font-weight: 600;
       font-size: 1rem;
       letter-spacing: .05em;
     }
@@ -14796,7 +14832,7 @@ div.product-icons{
   }
 
   .join-the-team__link{
-    background: rgba(30, 116, 185, 0.56);
+    background: rgba(30, 116, 185, 0.25);
     display: block;
     width: 100%;
     padding: 1rem 0.75rem;
@@ -14842,10 +14878,7 @@ div.product-icons{
       width: 100%;
       flex: 100%;
       margin: 0 0 1rem;
-    }
-
-    .join-the-team__title{
-      box-shadow: inset 0 0 0 2px white;
+      min-height: calc(100vw * 0.63);
     }
   }
 }
@@ -14880,6 +14913,11 @@ div.product-icons{
 .top_bar .menu select, {
   font-weight: normal;
 } 
+
+// Bold cartcount
+.top_bar .cart_count{
+  font-weight: 600 !important;
+}
 
 // Unbold all sunblink in menu - desktop and mobile
 .main_nav{
