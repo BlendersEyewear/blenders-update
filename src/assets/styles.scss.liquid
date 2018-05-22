@@ -14592,13 +14592,25 @@ div.product-icons{
 // ======================================================================================
 .collection-coming-soon{
 
-
   .notify_form{
     position: relative;
+    width: calc(100% - 2.5rem);
+    margin: 0 auto;
 
     .BIS_response{
       position: absolute;
-      bottom: -2rem;
+      bottom: -2.5rem;
+      line-height: 1;
+      width: 100%;
+
+      span.ok{
+        color: #86da86;
+        font-style: italic;
+      }
+
+      span.error{
+        color: #e81e1e;
+      }
     }
   }
 
@@ -14620,11 +14632,6 @@ div.product-icons{
   input.action_button.waitlist_button{
     background: linear-gradient(-180deg, #757575, #101010)
   }
-
-  input.action_button.waitlist_button:hover,
-  input.action_button.waitlist_button:focus{
-
-  }
 }
 
 @include respond-to('medium'){
@@ -14639,10 +14646,13 @@ div.product-icons{
     // Notify BIS form
     .notify_form{
       position: relative;
+      width: 100%;
   
       .BIS_response{
-        position: static;
-        bottom: -2rem;
+        bottom: -3.25rem;
+        font-size: 0.75rem;
+        font-weight: normal;
+        line-height: 1.25;
       }
     }
     

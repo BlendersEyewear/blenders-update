@@ -516,9 +516,7 @@ const comingSoonPageScripts = function(){
     let form = $(this).find('.notify_form');
     let label = $(form).find('label');
     let button = $(form).find('.action_button');
-    let btnText = $(button).attr('value');
-
-    console.log(label);
+    let btnText = $(button);
 
     // Remove notify me label
     $(label).remove();
@@ -526,8 +524,9 @@ const comingSoonPageScripts = function(){
     // Check if on mobile
     if(window.innerWidth <= tabletSize){
       console.log('mobile!!!')
+      // Change Waitlist button text to waitlist
+      $(btnText).attr('value', 'Waitlist');
     }
-    // Change Waitlist button to waitlist
 
 
   });
