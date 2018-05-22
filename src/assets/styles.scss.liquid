@@ -13778,16 +13778,23 @@ a.shop-frame__btn{
 }
 
 // Make snow goggles smaller
-.shop-frame__shape.shop-frame__shape--snow-goggles {
-    padding: 1rem 4rem;
+// .shop-frame__shape.shop-frame__shape--snow-goggles {
+//     padding: 1rem 4rem;
 
-    a.shop-frame__link{
-      padding: 0 1rem;
-    }
-}
+//     a.shop-frame__link{
+//       padding: 0 1rem;
+//     }
+// }
 
 // mobile Styles
 @include respond-to('small'){
+  .page-shop-by-frame,
+  .page-shop-by-frame-new{
+    .collection_banner{
+      margin-bottom: 0;
+    }
+  }
+
   .shop-frame__shape{
     max-width: 50%;
     @include flex(0 0 50%);
