@@ -26,6 +26,13 @@ const exists = (el) => {
 }
 
 
+const debugging = () =>{
+  let debuggingMode = true;
+
+  debuggingMode = true ? console.log('debugging mode is on') : console.log('debugging mode is off');
+}
+
+
 // CORE Functions
 // ====================================================================
 
@@ -523,8 +530,9 @@ const comingSoonPageScripts = function(){
 
     // Check if on mobile
     if(window.innerWidth <= tabletSize){
-      console.log('mobile!!!')
+      // console.log('mobile!!!')
       // Change Waitlist button text to waitlist
+      // console.log($(btnText).attr('value'));
       $(btnText).attr('value', 'Waitlist');
     }
 
@@ -689,6 +697,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   console.log("custom js loaded");
   console.log(`Don't be a 🐐.`);
+  debugging();
 
   let screenSize = window.innerWidth;
 

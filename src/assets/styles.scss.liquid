@@ -11434,6 +11434,11 @@ $headerDesktopLargeUp: 1280px;
         }
     }
 
+    // Remove bottom margin from third featured section
+    .custom-front-page-figure:nth-of-type(3){
+      margin-bottom: 0 !important;
+    }
+
     // Moving Images on specific promos in mobile
     // Image 1
     figure.custom-front-page-figure--1{
@@ -11464,7 +11469,7 @@ $headerDesktopLargeUp: 1280px;
     // Make the sections stack on mobile
     .feature-section.custom-front-page-figure{
       max-width: unset !important;
-      margin-bottom: 1rem;
+      margin-bottom: 10px;
     }
 
     // Title
@@ -14843,7 +14848,7 @@ div.product-icons{
     @include align-items(stretch);
     @include justify-content(flex-start);
     @include flex-flow(row wrap);
-    margin: 2rem auto 4rem;
+    margin: 2rem auto;
   }
 
   .join-the-team__div {
@@ -14905,7 +14910,7 @@ div.product-icons{
     }
 
     .join-the-team__container{
-      margin: 1rem auto 2rem;
+      margin: 1rem auto 0;
     }
 
     .join-the-team__div{
@@ -14980,4 +14985,29 @@ div.product-icons{
     max-width: 220px;
   }
   // Logo image
+}
+
+
+
+// ======================================================================================
+//  ------- Article Page / Blog Post page / Blog single post page 
+// ======================================================================================
+@include respond-to('medium'){
+  .article{
+    .banner.page_banner{
+      margin-top: 0;
+    }
+
+    .banner .caption{
+      margin: 1rem 0 0 !important;
+
+      .headline{
+        margin: 0;
+      }
+    }
+
+    .container{
+      padding: 15px 0;
+    }
+  }
 }
