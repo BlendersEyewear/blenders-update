@@ -11247,13 +11247,18 @@ $headerDesktopLargeUp: 1280px;
       padding: 10px 0 0;
     }
 
+    // Hide containers tagged with 'hide on mobile'
+    .featured-promotions-section .hide-on-mobile{
+      display: none;
+    }
+
     .custom-front-page-styles-container:nth-of-type(2){
       padding: 0;
     }
 
-    // Remove padding below last featured promotion on mobile
-    #shopify-section-footer{
-      margin-top: -40px;
+    // remove ghost padding from 460 widget
+    .logo-bar-section.container {
+      padding: 0;
     }
   }
   .custom-front-page-styles-div.custom-front-page-styles-div--2{
@@ -11833,7 +11838,7 @@ $headerDesktopLargeUp: 1280px;
     .product-details__metafields{
       margin: 0 0 0.5rem;
       font-size: 0.75rem;
-      line-height: 1;
+      line-height: 1rem;
     }
 
       a.size_chart{
@@ -13322,7 +13327,7 @@ button.btn.recomatic-add-to-cart:focus{
     .product-details__metafields{
       font-size: .75rem;
       letter-spacing: .05em;
-      line-height: 1;
+      line-height: 1rem;
       color: #7d7d7d;
       padding: 0;
       margin: 0 0 0.75rem;
@@ -13388,6 +13393,13 @@ button.btn.recomatic-add-to-cart:focus{
       .title{
         font-size: 18px;
         line-height: 28px;
+      }
+    }
+
+    // Reduce space underneath 'add to cart' button
+    .product-list .thumbnail{
+      .product-info__caption{
+        margin-top: 12px;
       }
     }
   }
@@ -14724,8 +14736,14 @@ div.product-icons{
   }
 }
 
-// Make mobile footer links bold
 @include respond-to('small'){
+  
+  // Remove top padding from footer
+  .footer {
+    padding-top: 5px;
+  }
+
+  // Make mobile footer links bold
   .footer_menu h6 {
     font-weight: 600;
     letter-spacing: .05em;

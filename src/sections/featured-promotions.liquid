@@ -9,7 +9,7 @@
 {% assign title_on_image = section.settings.promo_text_on_image_enabled %}
 
 {% if section.blocks.size > 0 %}
-  <div class="container promotions-grid-{{ featured_promos_grid }} {% if section.settings.custom_styling == true %}custom-front-page-styles-container{% endif %}">
+  <div class="container promotions-grid-{{ featured_promos_grid }}{% if section.settings.custom_styling == true %} custom-front-page-styles-container{% endif %}{% if section.settings.hide_on_mobile == true %} hide-on-mobile{% endif %}">
     <div  class="js-featured-promotions featured-promotions promo-per-row-{{ featured_promos_per_row }} clearfix {% if section.settings.custom_styling == true %}custom-front-page-styles-div custom-front-page-styles-div--{{ featured_promos_per_row }}{% endif %}"
           data-promo-animation="{{ section.settings.featured_links_animation }}">
 
@@ -33,7 +33,6 @@
                     {% capture i %}{% cycle "1", "2", "3", "4", "5", "6" %}{% endcapture %}
                     {{ 'collection-' | append: i | placeholder_svg_tag: 'placeholder-svg placeholder-svg--promotions' }}
                   {% endif %}
-                {% if block.settings.text != blank or block.settings.button_label != blank or block.settings.title != blank and title_on_image != blank %}
 
                   <figcaption class="feature-overlay">
                     <a {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}class="link-promo"></a>
@@ -54,9 +53,6 @@
                         </div>
                       </div>
                   </figcaption>
-                {% elsif block.settings.link != blank %}
-                  <a {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}class="link-promo"></a>
-                {% endif %}
               </div>
             {% if title_on_image == blank %}
               {% if block.settings.title != blank %}
@@ -156,6 +152,12 @@
       "type": "checkbox",
       "id": "custom_styling",
       "label": "Custom Blenders Styling?",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Hide on Mobile?",
       "default": false
     }
   ],
