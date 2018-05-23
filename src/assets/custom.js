@@ -26,10 +26,12 @@ const exists = (el) => {
 }
 
 
-const debugging = () =>{
-  let debuggingMode = false;
+const debugging = (log) =>{
+  let debuggingMode = true;
 
-  debuggingMode = true ? console.log('debugging mode is on') : console.log('debugging mode is off');
+  if (debuggingMode){
+    console.log(log);
+  } 
 }
 
 
@@ -63,7 +65,7 @@ const tabfunc = () => {
   typeof(desc) != null ? makeTabsWork() : '';
 
   let makeTabsWork = () => {
-    console.log('description div is present')
+    debugging('description div is working')
   }
 }
 
@@ -73,7 +75,7 @@ const PouchUpsell = () => {
 
   // Master Container
   let upsellContainer = document.querySelector('.mobile-upsell');
-  console.log(upsellContainer);
+  debugging(upsellContainer);
 
   // Get pouch containers
   let pouchContainers = document.querySelectorAll('.mobile-upsell-container');
@@ -82,7 +84,8 @@ const PouchUpsell = () => {
   // Reload on Add to Cart
   let clickWaitReload = (item) => {
     item.addEventListener('click', () =>{
-      console.log('clicked!');
+      debugging('clicked!');
+
       setTimeout(() => {
         location.reload();
       }, 750);
@@ -91,7 +94,7 @@ const PouchUpsell = () => {
 
   // Remove ' SOFT POUCH' from the Title
   let removeTitle = () => {
-    console.log('pouch upsell scripts loaded');
+    debugging('pouch upsell scripts loaded');
 
     // Loop through all the products in the pouch containers
     for(let container of pouchContainers){
@@ -145,7 +148,7 @@ const shippingReturnData =
 const productTabs = function(){
   // Check if on product page
   if($("body").hasClass("product") && window.innerWidth <= tabletSize){
-    console.log('productTabs (accordions) working');
+    debugging('productTabs (accordions) working');
 
     // Unwrap god awful Div Soup from Product descriptions
     let h5 = $('.product_section').find('.description').find('h5');
@@ -180,13 +183,12 @@ const productTabs = function(){
     $(shippingContent).wrap('<div class="product-accordion__body"></div>');
 
 
-    // console.log(shippingContent);
+    // debugging(shippingContent);
 
 
     function productTabToggle(){
       // hide the accordion content
       $('.product-accordion__body').hide();
-      // $(shippingContent).hide();
 
       // click function
       $(accordTitle).click(function(){
@@ -215,7 +217,7 @@ const productTabs = function(){
 const productTabsDesktop = function(){
   // Only work on vanilla Product Pages and window is bigger than tablet
   if (window.screen.width > tabletSize){
-    console.log('product Tabs Desktop Working');
+    debugging('product Tabs Desktop Working');
 
     let productDesc = $('.product_section').find('.description');
     let header = $('.product_section').find('.description').find('h5')
@@ -328,7 +330,7 @@ const floatingLabels = function(){
 
 
 const soldOutNotifyToggle = function(){
-  console.log('sold out script working');
+  debugging('sold out script working');
 
   let toggleBtn = $('#notifyToggle');
 
@@ -368,7 +370,7 @@ const soldOutNotifyToggle = function(){
 
 
 const sizeGuideMobileToggle = function(){
-  // console.log('size guide mobile toggle loaded');
+  debugging('size guide mobile toggle loaded');
 
   let container = $('.below-title-section');
 
@@ -387,7 +389,6 @@ const sizeGuideMobileToggle = function(){
 
       $(content).slideToggle(250);
       $(arrow).toggleClass('size_chart__arrow--open');
-      console.log(arrow);
     });
   }
 }
@@ -395,7 +396,7 @@ const sizeGuideMobileToggle = function(){
 // Stop Hover Thumbnail Change
 
 const stopThumbnailHover = function(){
-  console.log('stopping hover states!');
+  debugging('stopping hover states!');
   let product = $('.product-wrap');
 
   // Loop through all products
@@ -403,7 +404,6 @@ const stopThumbnailHover = function(){
     let image = $(this).find('.product_image')
     let imglink = $(this).find('a');
 
-    // console.log(image)
     // Remove 'swap-true' class
     $(image).removeClass('swap-true');
 
@@ -450,7 +450,7 @@ const aboveBtnLabels = function(){
 //------------- Front Page --------------------
 //------------------------------------------------
 const frontPageScripts = function(){
-  console.log('front page scripts loaded');
+  debugging('front page scripts loaded');
   aboveBtnLabels();
 }
 
@@ -459,7 +459,7 @@ const frontPageScripts = function(){
 //------------- Product Page --------------------
 //------------------------------------------------
 const productPageScripts = function(){
-  console.log('product page script loaded');
+  debugging('product page script loaded');
 
   // Sold out Notification
   soldOutNotifyToggle();
@@ -496,7 +496,7 @@ const productPageScripts = function(){
 //------------- Collection Page --------------------
 //------------------------------------------------
 const collectionPageScripts = function(){
-  console.log('collect page scripts lodaded');
+  debugging('collection page scripts lodaded');
 
   // Check for mobiel, then call the function
   if (window.innerWidth <= phoneSize){
@@ -511,7 +511,7 @@ const collectionPageScripts = function(){
 const comingSoonPageScripts = function(){
   // run through every product
 
-  console.log('coming soon script loaded');
+  debugging('coming soon script loaded');
 
   let product = $('.column .product-wrap');
 
@@ -529,9 +529,9 @@ const comingSoonPageScripts = function(){
 
     // Check if on mobile
     if(window.innerWidth <= tabletSize){
-      // console.log('mobile!!!')
+      // debugging('mobile!!!')
       // Change Waitlist button text to waitlist
-      // console.log($(btnText).attr('value'));
+      // debugging($(btnText).attr('value'));
       $(btnText).attr('value', 'Waitlist');
     }
 
@@ -545,7 +545,7 @@ const comingSoonPageScripts = function(){
 const customProductPage = function(){
 
   // Check if custom product template -----------
-    console.log('custom product page script loaded ');
+    debugging('custom product page script loaded ');
 
     // Sold Out notify Toggle
     soldOutNotifyToggle();
@@ -606,7 +606,7 @@ const customProductPage = function(){
 
     // Check for window width of tablet or smaller
     if($(window).width() <= tabletSize){
-      console.log('Time to go MoBile! ⋋( ºΘº)⋌');
+      debugging('Time to go MoBile! ⋋( ºΘº)⋌');
 
       // Create sliding images from lifestyle images on mobile - // Check that its on tablet or smaller
       // Detach of lifestyle images
@@ -663,40 +663,14 @@ const cartPageScripts = function(){
   // Disable hover thumbnail change on mobile
 }
 
-//------------------------------------------------
-//--------- Login Page ------------------
-//------------------------------------------------
-const loginPageScripts = function(){
-
-  let iframe = $('#one-click-social-login-buttons-1');
-
-  console.log(iframe);
-  
-  console.log('Login Page Scripts loaded');
-  
-  // Check for desktop size
-  if(window.innerWidth >= tabletSize){
-    let button = $(iframe).find('.button-container');
-
-    console.log('first load', button);
-
-    setTimeout( function(){
-      console.log('doing this after .7s');
-      console.log($(button).length);
-      console.log(iframe);
-      
-    }, 700);
-  }
-}
 
 //------------------------------------------------
 //  Doc Ready
 //------------------------------------------------
 document.addEventListener("DOMContentLoaded", function() {
 
-  console.log("custom js loaded");
+  debugging('custom JS loaded');
   console.log(`Don't be a 🐐.`);
-  debugging();
 
   let screenSize = window.innerWidth;
 
@@ -729,11 +703,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Back in Stock 
   // Run back in stock app to make sure data goes to back in stock app | only work on coming soon page, product, and custom product page
-
-  
-  // Login Page -------------
-  // Run Login page scripts if on login page.
-  // body.classList.contains('customers-login') ? loginPageScripts() : '';
 
   // Mobile only Scripts
   screenSize <= tabletSize ? (PouchUpsell()) : '';

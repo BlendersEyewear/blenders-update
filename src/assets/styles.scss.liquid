@@ -13522,9 +13522,9 @@ button.btn.recomatic-add-to-cart:focus{
 
 
 select#sort-by {
-    letter-spacing: .05em;
-    color: #7f7f7f;
-    font-size: 0.825rem;
+    letter-spacing: .025em;
+    color: #949494;
+    font-size: 1rem;
     font-weight: 600;
 }
 
@@ -15079,11 +15079,15 @@ div.product-icons{
   // Logo Link
   div.logo > a {
     padding-top: 25px;
+    max-width: 220px;
   }
 
-  div.logo img{
-    width: auto !important;
-    max-width: 220px;
+  div.logo{
+    
+    img{
+      width: auto !important;
+      max-width: 100%;
+    }
   }
   
   // Make sticky cart icon bigger
@@ -15118,7 +15122,29 @@ div.product-icons{
     }
 
     .container{
-      padding: 15px 0;
+      padding: 15px 0 0;
+
+      .section.clearfix{
+        margin-bottom: 0;
+      }
+
+      .author_share_wrap{
+        padding-bottom: 0;
+        margin: 0;
+      }
+
+      .social_buttons {
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .footer{
+      margin-top: -15px;
+    }
+
+    .footer .container{
+      padding: 0;
     }
   }
 }

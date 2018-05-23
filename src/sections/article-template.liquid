@@ -131,7 +131,8 @@
         <div class="clear" id="comments"></div>
         <br class="clear" />
 
-    	<script src="/tools/disqus/disqus_code.php?n=Blenders&id=blog-{{ article.id }}&url={{ canonical_url | url_param_escape }}"></script>
+      {% comment %} Disabled Disqus {% endcomment %}
+    	{% comment %} <script src="/tools/disqus/disqus_code.php?n=Blenders&id=blog-{{ article.id }}&url={{ canonical_url | url_param_escape }}"></script> {% endcomment %}
      
     {% comment %}
         {% if settings.disqus_enabled %}
