@@ -27,8 +27,8 @@ const exists = (el) => {
 
 
 const debugging = (log) =>{
-  let debuggingMode = true;
 
+  let debuggingMode = true;
   if (debuggingMode){
     console.log(log);
   } 
@@ -94,6 +94,7 @@ const PouchUpsell = () => {
 
   // Remove ' SOFT POUCH' from the Title
   let removeTitle = () => {
+
     debugging('pouch upsell scripts loaded');
 
     // Loop through all the products in the pouch containers
@@ -428,8 +429,6 @@ const resizeHeadings = function(){
   }
 }
 
-
-
 // Above Button Labels for Custom Featured Promotions
 const aboveBtnLabels = function(){
   let title = $(".custom-front-page-styles-div--2 .feature-section.section-1.promo-1 h2.title.title-below, .custom-front-page-styles-div--2 .feature-section.section-2.promo-2 h2.title.title-below");
@@ -444,6 +443,28 @@ const aboveBtnLabels = function(){
 
 
   });
+}
+
+
+// Remove 460feed Titles on empty 460 containers
+const remove460Titles = function(){
+  debugging('remove 460 title script loaded');
+
+  let fsContainer = $('#fs-product');
+
+  let fscontent = $(fsContainer).find('.fs-has-links');
+
+  // Check if 460 container has post
+  console.log(fscontent);
+  if( !$(fscontent).length ){
+    debugging('460 does NOT have content');
+    // $(fsContainer).remove();
+
+    // add bottom margin to main content (on desktop only)
+    if(window.innerWidth > tabletSize){
+      $('.container.main.content').css('margin-bottom', '2rem');
+    }
+  }
 }
 
 //------------------------------------------------
@@ -463,6 +484,9 @@ const productPageScripts = function(){
 
   // Sold out Notification
   soldOutNotifyToggle();
+
+  // 460 feed title
+  remove460Titles();
 
   // Check for product type
   let productType = $('.product-area')
