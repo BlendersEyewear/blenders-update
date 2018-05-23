@@ -1,13 +1,6 @@
 <div class="product-details product-details--coming-soon">
   <span class="title" itemprop="name">{{ product.title }}</span>
 
-  {% comment %} Add Custom Fields / Show Custom Category & Polarized / If not category / Show subtitle {% endcomment %}
-  {% unless template contains 'cart' %}
-    {% if product.metafields.custom_fields["product_subtitle"] != blank %}
-        <p class="center product-details__metafields">{{ product.metafields.custom_fields["product_subtitle"] }}</p>
-    {% endif %}
-  {% endunless %}
-
 
 <span class="price">
     {% if product.available %}

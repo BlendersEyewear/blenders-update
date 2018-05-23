@@ -41,11 +41,8 @@
       <link href="//fonts.googleapis.com/css?family=.|{% if settings.logo_font contains 'Google' %}{{ settings.logo_font | replace: 'Google_', '' | replace: "'", "" }}:light,normal,bold|{% endif %}{% if settings.headline_font contains 'Google' %}{{ settings.headline_font | replace: 'Google_', '' | replace: "'", "" }}:light,normal,bold|{% endif %}{% if settings.nav_font contains 'Google' %}{{ settings.nav_font | replace: 'Google_', '' | replace: "'", "" }}:light,normal,bold|{% endif %}{% if settings.slideshow_subtitle_font contains 'Google' %}{{ settings.slideshow_subtitle_font | replace: 'Google_', '' | replace: "'", "" }}:light,normal,bold|{% endif %}{% if settings.regular_font contains 'Google' %}{{ settings.regular_font | replace: 'Google_', '' | replace: "'", "" }}:light,normal,bold{% endif %}" rel="stylesheet" type="text/css" />
     {% endif %}
 
-	{% comment %} Added by Adam - 2/7/2018{% endcomment %}    
     <!-- typekit fonts -->
     <link rel="stylesheet" href="https://use.typekit.net/pcu3zqp.css">
-
-	{% comment %} updated - 2/13/2018 {% endcomment %}
     
     <!-- Stylesheets for Turbo 3.0.1 -->
     {{ 'styles.scss.css' | asset_url | stylesheet_tag }}
@@ -118,7 +115,7 @@ window['friendbuy'].push(['widget', "cF0-hXa"]);
       
 </script>
 
-    <!-- Disables pinch zoom for apple devices -->
+    {% comment %}Disables pinch zoom for apple devices{% endcomment %}
     <script>
       $(function () {
   if (!(/iPad|iPhone|iPod/.test(navigator.userAgent))) return
