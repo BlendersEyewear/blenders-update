@@ -12751,6 +12751,19 @@ button.btn.recomatic-add-to-cart:focus{
       margin: 0 20% 0 0 !important;
     }
   }
+
+
+  // Mobile update area
+  .mobile-upsell{
+    @include flexbox();
+    @include justify-content(flex-start);
+    @include flex-flow(row wrap);
+    @include align-items(flex-start);
+
+    p.pouch-upsell{
+      @include flex(100%);
+    }
+  }
 }
 
 // Subtotal Area ------
@@ -13134,7 +13147,7 @@ button.btn.recomatic-add-to-cart:focus{
     height: auto;
     min-height: auto;
     line-height: 1;
-    padding: 11px 32px;
+    padding: 11px 20px;
     margin: .5rem auto;
     display: block;
     font-weight: 600;
@@ -13389,6 +13402,28 @@ button.btn.recomatic-add-to-cart:focus{
 @include respond-to('medium'){
 
   .collection, .collection-coming-soon{
+
+    // Collection page flexbox product list flexbox 
+    .custom-product-list-container {
+      @include flexbox();
+      @include justify-content(flex-start);
+      @include align-items(flex-start);
+      @include flex-flow(row wrap);
+    }
+    
+    .thumbnail {
+        max-width: calc(50% - 0.5rem);
+        flex: 50%;
+        @include flex(50%);
+        margin: 0 1rem 0 0 !important;
+        box-sizing: border-box;
+    }
+    
+    .thumbnail.odd {
+        margin: 0 !important;
+    }
+    
+
     .product-details{
       // Product Info - Title
       .title{
@@ -15057,7 +15092,13 @@ div.product-icons{
   }
 }
 
-
+// Make header responsive on smaller iphone screens (SE, 5s)
+@media only screen and (max-width: 359px){
+  #header .top_bar a.mobile_logo > img {
+    margin-top: 9px;
+    max-width: 140px;
+  }
+}
 
 // ======================================================================================
 //  ------- Article Page / Blog Post page / Blog single post page 

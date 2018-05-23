@@ -18,17 +18,21 @@
         {% assign shippingThreshold = 4000 %}
         {% assign amountUntilFreeShipping = shippingThreshold | minus: cart.total_price | money %}
 
-        {% if cart.total_price >= shippingThreshold %}
+        {% if cart.item_count > 0 and cart.total_price >= shippingThreshold %}
 
           <div class="shipping-notice shipping-notice--free"><span class="highlight">BOOM. You scored FREE Shipping!</span><br>All orders over $40 ship Free.</div>
 
-        {% elsif cart.total_price > 0%}
+        {% elsif cart.item_count > 0 and cart.total_price > 0 %}
 
           <div class="shipping-notice shipping-notice--until-amount">
             Add <span class="highlight-more">{{ amountUntilFreeShipping }}</span> to get FREE Shipping!<br>
             All orders over $40 ship Free.
           </div>
 
+        {% elsif cart.item_count == 0 %}
+          <div class="shipping-notice shipping-notice--empty">
+            All orders over $40 ship Free.
+          </div>
         {% else %}
           <div class="shipping-notice shipping-notice--empty">
             Add more items to get FREE Shipping!<br>
@@ -116,30 +120,42 @@
             </div>
 
             <div class="seven columns omega cart_content_info">
+              <!-- {{ item.product.type }} -->
               <h3>
                 <a href="{{ item.url }}">{{ item.product.title }}</a>
               </h3>
 
               {% comment %} Add Custom Fields / Show Custom Category & Polarized / If not category / Show subtitle {% endcomment %}
-              {% for collection in item.product.collections %}
-                {% if collection.handle == 'a-series'
-                    or collection.handle == 'cardiff' or collection.handle == 'east-village'
-                    or collection.handle == 'h-series' or collection.handle == 'frontpage'
-                    or collection.handle == 'l-series' or collection.handle == 'm-class'
-                    or collection.handle == 'millenia' or collection.handle == 'north-park-blenders-eyewear'
-                    or collection.handle == 'providence' or collection.handle == 'roxie-1' or collection.handle == 'canyon'
-                    or collection.handle == 'test-collection' %}
+              {%if item.product.type == 'Sunglasses' %}
+                {% comment %} Show Custom Fields for sunglasses {% endcomment %}
+                {% for collection in item.product.collections %}
+                  {% if collection.handle == 'a-series'
+                      or collection.handle == 'cardiff' or collection.handle == 'east-village'
+                      or collection.handle == 'h-series' or collection.handle == 'frontpage'
+                      or collection.handle == 'l-series' or collection.handle == 'm-class'
+                      or collection.handle == 'millenia' or collection.handle == 'north-park-blenders-eyewear'
+                      or collection.handle == 'providence' or collection.handle == 'roxie-1' or collection.handle == 'canyon'
+                      or collection.handle == 'test-collection' %}
 
-                    {% comment %} Check if polarized {% endcomment %}
-                    {% assign polarized = item.product.metafields.custom_fields["polarized"] %}               
-                    <p class="cart-product__metafields">
-                      {% if polarized == 1 %}
-                        <span class="metafield--polarized">Polarized</span>
-                      {% endif %}
-                      <span class="metafield">{{collection.title}}</span>
-                    </p>
-                {% endif %}
-              {% endfor %}
+                      {% comment %} Check if polarized {% endcomment %}
+                      {% assign polarized = item.product.metafields.custom_fields["polarized"] %}               
+                      <p class="cart-product__metafields">
+                        {% if polarized == 1 %}
+                          <span class="metafield--polarized">Polarized</span>
+                        {% endif %}
+                        <span class="metafield">{{collection.title}}</span>
+                      </p>
+                  {% endif %}
+                {% endfor %}
+
+              {% else %}
+
+                {% comment %} Show product type for everything else {% endcomment %}
+                <p class="cart-product__metafields">
+                  <span class="metafields">{{ item.product.type }}</span>
+                </p>
+
+              {% endif %}
 
               {% unless item.product.has_only_default_variant or item.variant.title contains "Title" %}
                 <p class="meta">
