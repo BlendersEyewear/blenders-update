@@ -27,7 +27,7 @@ const exists = (el) => {
 
 
 const debugging = () =>{
-  let debuggingMode = true;
+  let debuggingMode = false;
 
   debuggingMode = true ? console.log('debugging mode is on') : console.log('debugging mode is off');
 }
@@ -136,7 +136,6 @@ const shippingTest = "<ul><li>hi there!!! This is a test string!</li></ul>";
 const shippingReturnData =
 "<ul>" +
 "<li>Free Shipping on U.S. Orders over $40.</li>" +
-"<li>Free International Shipping on ALL Orders over $70.</li>" +
 "<li>Returns within 45 days of Purchase.</li>" +
 "<li>Orders typically ship 1-2 business days after purchase.</li>" +
 "<li>Orders placed on weekends will ship out on Monday/Tuesday.</li>" +
@@ -404,7 +403,7 @@ const stopThumbnailHover = function(){
     let image = $(this).find('.product_image')
     let imglink = $(this).find('a');
 
-    console.log(image)
+    // console.log(image)
     // Remove 'swap-true' class
     $(image).removeClass('swap-true');
 
