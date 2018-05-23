@@ -169,7 +169,8 @@
 
 
           {% if collection_handles contains 'coming-soon' %}
-            <p class="modal_price">{{ 'collections.general.coming_soon' | t }}</p>
+            <button id="notifyToggle" class="notify-toggle">Email When Available</button>
+            {% include 'product-notify-me' %}
           {% else %}
             <p class="modal_price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
               <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
